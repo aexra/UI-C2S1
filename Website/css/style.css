@@ -1,12 +1,12 @@
 .vertical-display {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 .header {
 	display: flex;
 	flex-direction: row;
 	height: 6vh;
-	width: 100vw;
 	background: #262931;
 	align-items: center;
 
@@ -62,7 +62,6 @@
 	flex-direction: row;
 	justify-content: center;
 	height: 94vh;
-	widows: 100vw;
 	background: url("../resources/welcome-page/artwork/bk.png");
 }
 .welcome .text-container {
@@ -119,4 +118,21 @@
 }
 .welcome .buttons-container button#gotocatalog {
 
+}
+
+
+footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 10vh;
+	background: #22262a;
+	color: #5f6b76;
+	font-size: 16px;
+	font-family: 'Rubik', sans-serif;
+}
+footer a {
+	text-decoration: none;
+	color: #5f6b76;
 }
