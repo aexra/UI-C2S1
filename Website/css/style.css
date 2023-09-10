@@ -147,6 +147,29 @@
 	border-radius: 12px;
 	color: lightgray;
 	box-shadow: 0px 0px 20px black;
+	text-align: center;
+	align-items: center;
+}
+.info .info-block h1 {
+	font-size: 48px;
+	font-family: 'Outfit', sans-serif;
+}
+.info .info-block h2 {
+	font-size: 28;
+	width: 70%;
+	line-height: 40px;
+}
+.info .info-block h2 a.inner-link {
+	text-decoration: none;
+	color: #abc7f2;
+}
+.info .info-block h2 a.outer-link {
+	color: palevioletred;
+}
+.info .row-icons {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
 }
 
 footer {
