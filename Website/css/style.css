@@ -133,6 +133,20 @@
 .info {
 	height: 100vh;
 	background: #18181b;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.info .info-block {
+	display: flex;
+	flex-direction: column;
+	height: 70%;
+	width: 70%;
+	background: #262931;
+	border-radius: 12px;
+	color: lightgray;
+	box-shadow: 0px 0px 20px black;
 }
 
 footer {
