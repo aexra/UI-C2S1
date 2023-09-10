@@ -1,2 +1,2 @@
-# University_Web_Project_PC
+# WEBSITE
 Мой вебсайт для первой лабораторной работы по UI
