@@ -61,10 +61,6 @@
 	background: lightgray;
 	color: black;
 }
-/*.header-pane#git {
-	margin-left: auto; 
-	margin-right: 0;
-}*/
 .welcome {
 	display: flex;
 	flex-direction: row;
