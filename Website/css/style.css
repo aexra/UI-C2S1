@@ -103,13 +103,13 @@
 	border: 0px;
 }
 .welcome .buttons-container button:hover {
-	background: url("../resources/welcome-page/artwork/bbh4px.png") no-repeat;
+	background: url("../resources/welcome-page/artwork/bbh4px-not-solid.png") no-repeat;
 	background-size: contain;
 	border-style: solid;
 	border: 0px;
 }
 .welcome .buttons-container button:active {
-	background: url("../resources/welcome-page/artwork/bbp4px.png") no-repeat;
+	background: url("../resources/welcome-page/artwork/bbp4px-not-solid.png") no-repeat;
 	background-size: contain;
 	border-style: solid;
 	border: 0px;
