@@ -1,3 +1,17 @@
+.column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+}
 .vertical-display {
 	display: flex;
 	flex-direction: column;
@@ -179,13 +193,59 @@
 .info .row-icons img {
 	height: 100px;
 }
-.about-me {
-	height: 100vh;
-	background: #18181b;
+.parallaxed-section {
+	width: 100%;
+/*	height: 70vh;*/
+}
+.parallax {
+	background-image: url(https://d1yn1kh78jj1rr.cloudfront.net/image/thumbnail/rDtN98Qoishumwih/minecraftpaper-02-091815-727_thumb.jpg);
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+.parallax .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+    z-index: 2;
+}
+.parallax-content {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	margin: 2%;
+	width: 100%;
+	text-align: center;
 	align-items: center;
+	z-index: 3;
+	padding-bottom: 50px;
+}
+.parallax .parallax-content h1 {
+	color: #ffffff;
+    font-size: 60px;
+    font-family: 'Outfit', sans-serif;
+}
+.parallax .parallax-content h2 {
+	color: lightgray;
+	font-size: 28;
+	width: 70%;
+	line-height: 40px;
+
+}
+.parallax .parallax-content h2 a.inner-link {
+	text-decoration: none;
+	color: #abc7f2;
+}
+.parallax .parallax-content h2 a.outer-link {
+	color: palevioletred;
+}
+.parallax#about-me {
+	background-image: url("../resources/welcome-page/artwork/main-bgs/hello.jpeg");
+}
+.parallax#github {
+	background-image: url(../resources/welcome-page/artwork/main-bgs/github.jpeg);
 }
 footer {
 	display: flex;
