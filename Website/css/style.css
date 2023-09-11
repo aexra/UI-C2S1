@@ -262,6 +262,91 @@
 .parallax#contact-me {
 		background-image: url(../resources/welcome-page/artwork/main-bgs/contacts.jpg);
 }
+.projects-swiper {
+	height: 45vh;
+	width: 90%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	/*TEMPO*/
+/*	border: 3px solid red;*/
+}
+.projects-container {
+	display: flex;
+	flex-direction: row;
+	gap: 50px;
+	justify-content: center;
+	overflow: hidden;
+	height: 100%;
+	width: 95%;
+	align-items: center;
+
+	/*TEMPO*/
+/*	border: 2px solid blue;*/
+}
+.project-card {
+	height: 100%;
+	width: 40vh;
+	margin: 10px;
+	padding: 10p 0 10px 0;
+	background: #434957;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	border-radius: 25px;
+	box-shadow: 0px 0px 20px black;
+	/*TEMPO*/
+/*	border: 1px solid white;*/
+}
+.project-card-image-content {
+	height: 50%;
+	width: 100%;
+}
+.project-card-image-content img.project-img {
+	height: 100%;
+	width: 100%;
+	object-fit: fill;
+	border-radius: 25px;
+	box-shadow: 0 0 20px black;
+}
+.project-card-text-content {
+	height: 50%;
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	margin: 5%;
+}
+span.title {
+	font-family: 'Outfit', sans-serif;
+	font-size: 28px;
+	color: #FFF;
+}
+p.description {
+	font-family: 'Outfit', sans-serif;
+	font-size: 18px;
+	color: #FFF;
+}
+a.view-repo-btn {
+	font-family: 'Rubik', sans-serif;
+	font-size: 18px;
+	background: transparent;
+	text-decoration: none;
+	color: #abc7f2;
+	border-radius: 10px;
+	transition: all 0.3s ease;
+	width: 30%;
+	padding: 5px 5px 5px 5px;
+	align-self: center;
+}
+a.view-repo-btn:last-of-type {
+	margin-top: auto;
+}
+a.view-repo-btn:hover {
+	background: #abc7ff;
+	color: black;
+}
 img.mid-icon {
 	height: 75px;
 }
