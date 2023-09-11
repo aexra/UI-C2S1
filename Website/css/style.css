@@ -170,6 +170,7 @@
 }
 .info .info-block h2 {
 	font-size: 28;
+	font-family: 'Outfit', sans-serif;
 	width: 70%;
 	line-height: 40px;
 }
@@ -232,6 +233,7 @@
 .parallax .parallax-content h2 {
 	color: lightgray;
 	font-size: 28;
+	font-family: 'Outfit', sans-serif;
 	width: 70%;
 	line-height: 40px;
 	margin: 0px;
