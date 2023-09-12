@@ -101,9 +101,13 @@
 	top: calc(50% - 14%);
 	left: 15%;
 }
-.welcome .buttons-container button {
+.welcome .buttons-container form {
 	height: 30%;
 	width: 80%;
+}
+.welcome .buttons-container form button {
+	height: 100%;
+	width: 100%;
 	margin: 5px;
 	color: #FFF;
 	font-family: 'Outfit', sans-serif;
@@ -115,22 +119,22 @@
 	border-style: solid;
 	border: 0px;
 }
-.welcome .buttons-container button:hover {
+.welcome .buttons-container form button:hover {
 	background: url("../resources/welcome-page/artwork/bbh4px-not-solid.png") no-repeat;
 	background-size: contain;
 	border-style: solid;
 	border: 0px;
 }
-.welcome .buttons-container button:active {
+.welcome .buttons-container form button:active {
 	background: url("../resources/welcome-page/artwork/bbp4px-not-solid.png") no-repeat;
 	background-size: contain;
 	border-style: solid;
 	border: 0px;
 }
-.welcome .buttons-container button#gotomain {
+.welcome .buttons-container form button#gotomain {
 
 }
-.welcome .buttons-container button#gotocatalog {
+.welcome .buttons-container form button#gotocatalog {
 
 }
 .separator {
