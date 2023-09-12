@@ -381,8 +381,9 @@ img.mid-icon {
 }
 footer {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
+	text-align: center;
 	align-items: center;
 	height: 10vh;
 	background: #22262a;
@@ -393,4 +394,7 @@ footer {
 footer a {
 	text-decoration: none;
 	color: #5f6b76;
+}
+footer span#copyright {
+	font-size: 12px;
 }
