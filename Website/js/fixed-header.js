@@ -34,5 +34,6 @@ function myFunction() {
     var scale = d / preh * 100;
     preheader.style.backgroundSize = `${scale+100}% ${scale+100}%`;
     if (!(scale < 70)) prehtit.style.fontSize = `${default_prehtit_size / 100 * (scale)}px`;
+    else prehtit.style.fontSize = `${default_prehtit_size / 100 * 70}px`;
   }
 }
