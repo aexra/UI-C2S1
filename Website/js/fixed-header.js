@@ -37,7 +37,7 @@ function myFunction() {
   }
 
   // hidden part of header
-  if (window.pageYOffset > lastPagePos && d <= 0)
+  if (window.pageYOffset > lastPagePos && d <= -10)
   {
     header.classList.add("hidden");
   } else {
