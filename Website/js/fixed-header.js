@@ -45,3 +45,7 @@ function myFunction() {
   }
   lastPagePos = window.pageYOffset;
 }
+
+window.onload = function() {
+  window.scroll(0, preh);
+}
