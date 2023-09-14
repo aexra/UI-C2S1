@@ -121,6 +121,20 @@
 .content h1 {
   font-size: 90;
 }
+.content .namesection {
+  display: flex;
+  width: 100%;
+  height: 52vh;
+  background: url("../resources/main-page/artwork/bk.jpg") no-repeat;
+  background-size: 100% auto;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Rubik', sans-serif;
+  font-size: 36px;
+  color: #FFF;
+
+}
 
 .material-symbols-rounded {
   font-variation-settings:
