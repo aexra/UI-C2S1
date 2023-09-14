@@ -11,12 +11,11 @@ var header = document.getElementById("header");
 var h = header.offsetHeight;
 var headertop = header.offsetTop;
 
-// var sfh = document.getElementById("sfh");
-// var lastSfhPos = sfh.offsetTop;
-
 var content = document.getElementsByClassName("content")[0];
 
+lastPagePos = window.pageYOffset;
 function myFunction() {
+
   // stick the header
   if (window.pageYOffset > headertop) {
     content.style.paddingTop = h;
@@ -26,7 +25,7 @@ function myFunction() {
     header.classList.remove("sticky");
   }
   
-  // resize preheader bk
+  // resize preheader font (aexra Inc.)
   var d = preh - window.pageYOffset;
   if (d <= 0) {
     // preheader.style.backgroundSize = "100px 100px";
@@ -36,4 +35,13 @@ function myFunction() {
     if (!(scale < 70)) prehtit.style.fontSize = `${default_prehtit_size / 100 * (scale)}px`;
     else prehtit.style.fontSize = `${default_prehtit_size / 100 * 70}px`;
   }
+
+  // hidden part of header
+  if (window.pageYOffset > lastPagePos && d <= 0)
+  {
+    header.classList.add("hidden");
+  } else {
+    header.classList.remove("hidden");
+  }
+  lastPagePos = window.pageYOffset;
 }
