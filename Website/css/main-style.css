@@ -57,15 +57,19 @@
   font-family: 'Rubik', sans-serif;
   font-size: 28px;
   color: #909090;
+  transition: all 0.1s ease;
+}
+.semi-fixed-header a:hover {
+  color: #f3f3f3;
 }
 .semi-fixed-header a img {
   height: 70%;
   object-fit: scale-down;
 }
-.semi-fixed-header a svg {
-  color: #797979;
-  background: black;
+.semi-fixed-header a img:hover {
+  content: url("../resources/main-page/artwork/ico-gray-hov.png");
 }
+
 .fixed-header {
   display: flex;
   flex-direction: row;
