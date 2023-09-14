@@ -32,6 +32,8 @@
 .semi-fixed-header {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  padding: 0 10px 0 10px;
 
   height: 40px;
 
@@ -45,19 +47,16 @@
 
 /*  border: 2px solid blue;*/
 }
-.hidden {
-  transform: translateY(-40px);
-}
 .fixed-header {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  padding: 0 10px 0 10px;
 
   height: 60px;
 
   font-size: 16px;
   font-family: 'Rubik', sans-serif;
-
-  justify-content: center;
 
   background: rgba(230, 230, 230, 255);
 /*  border: 2px solid green;*/
@@ -66,6 +65,9 @@
   position: fixed;
   top: 0;
   width: 100%
+}
+.hidden {
+  transform: translateY(-40px);
 }
 .content {
   display: flex;
