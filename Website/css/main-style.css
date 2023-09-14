@@ -5,16 +5,24 @@
   align-items: center;
   height: 20vh;
   width: 100%;
-  background-image: url("../resources/welcome-page/artwork/bk.png");
-  background-size: 200% 200%; 
+  background-image: url("../resources/main-page/artwork/preheader-bk.png");
+/*  background-size: 200% 200%;*/
+  background-size: 100% cover;
   background-repeat: no-repeat;
   background-position: center center;
+}
+.preheader-space .mask {
+  position: absolute;
+  height: 20vh;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
 }
 .preheader-space h1 {
   color: #FFF;
   text-align: center;
   font-size: 80;
   font-family: 'Outfit', sans-serif;
+  z-index: 10;
 }
 .header {
   display: flex;

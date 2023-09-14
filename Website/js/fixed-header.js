@@ -29,10 +29,10 @@ function myFunction() {
   // resize preheader bk
   var d = preh - window.pageYOffset;
   if (d <= 0) {
-    preheader.style.backgroundSize = "100px 100px";
+    // preheader.style.backgroundSize = "100px 100px";
   } else {
     var scale = d / preh * 100;
-    preheader.style.backgroundSize = `${scale+100}% ${scale+100}%`;
+    // preheader.style.backgroundSize = `${scale+100}% ${scale+100}%`;
     if (!(scale < 70)) prehtit.style.fontSize = `${default_prehtit_size / 100 * (scale)}px`;
     else prehtit.style.fontSize = `${default_prehtit_size / 100 * 70}px`;
   }
