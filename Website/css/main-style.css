@@ -88,7 +88,7 @@
 .fixed-header span {
   font-size: 32px;
   transition: all 0.3s ease;
-  width: 65px;
+  width: 40px;
   text-align: center;
 }
 .fixed-header span:hover {
@@ -140,8 +140,28 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
   z-index: 1;
+  height: 0px;
 /*  margin-top: 10px;*/
   border-radius: 10px;
+/*  padding-right: 10px;*/
+}
+.dropcontent .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+/*  margin: 5px;*/
+}
+.dropcontent .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+/*  margin: 5px;*/
 }
 .dropcontent a {
   float: none;
@@ -152,6 +172,9 @@
   text-align: left;
   border-radius: 10px;
   margin: 5px;
+  white-space: nowrap;
+
+/*  transition: all 0.1s ease;*/
 }
 .dropcontent a:hover {
   background: red;
@@ -160,8 +183,9 @@
 .dropbtn:hover {
   color: red;
 }
-.fixed-header .dropdown:hover .dropcontent {
+.dropdown:hover .dropcontent {
   display: block;
+  height: auto;
 }
 .sticky {
   position: fixed;
@@ -203,3 +227,6 @@
   'opsz' 24
 }
 
+.material-symbols-rounded#side-panel {
+  cursor: pointer;
+}
