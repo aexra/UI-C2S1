@@ -140,10 +140,7 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
   z-index: 1;
-  height: 0px;
-/*  margin-top: 10px;*/
   border-radius: 10px;
-/*  padding-right: 10px;*/
 }
 .dropcontent .row {
   display: flex;
@@ -152,7 +149,6 @@
   align-content: center;
   height: 100%;
   width: 100%;
-/*  margin: 5px;*/
 }
 .dropcontent .column {
   display: flex;
@@ -161,7 +157,6 @@
   align-content: center;
   height: 100%;
   width: 100%;
-/*  margin: 5px;*/
 }
 .dropcontent a {
   float: none;
@@ -173,8 +168,6 @@
   border-radius: 10px;
   margin: 5px;
   white-space: nowrap;
-
-/*  transition: all 0.1s ease;*/
 }
 .dropcontent a:hover {
   background: red;
@@ -185,7 +178,6 @@
 }
 .dropdown:hover .dropcontent {
   display: block;
-  height: auto;
 }
 .sticky {
   position: fixed;
