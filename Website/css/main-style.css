@@ -196,10 +196,22 @@
 .content h1 {
   font-size: 90;
 }
-.content .namesection {
+.content section {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
   width: 100%;
+  margin: 50px;
+}
+.content section span.section-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 36px;
+  color: black;
+}
+.content section#namesection {
   height: 52vh;
+  margin: 0;
   background: url("../resources/main-page/artwork/bk.jpg") no-repeat;
   background-size: 100% auto;
   align-items: center;
@@ -208,7 +220,39 @@
   font-family: 'Rubik', sans-serif;
   font-size: 36px;
   color: #FFF;
+}
+.content section .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
 
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: #eaeaea;
+
+  min-height: 200px;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+
+}
+
+.offer-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 400px;
+  min-height: 600px;
+
+/* TEMPO */
+  background: #0f0f0f;
 }
 
 .material-symbols-rounded {
