@@ -322,6 +322,7 @@ footer {
   font-size: 20px;
   text-align: center;
   width: 95%;
+  overflow: hidden;
 }
 
 .offer-card:hover .content {
