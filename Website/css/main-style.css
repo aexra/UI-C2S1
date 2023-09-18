@@ -233,47 +233,21 @@
   gap: 50px;
 }
 
-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: #eaeaea;
-
-  min-height: 200px;
-
-  font-family: 'Outfit', sans-serif;
-  font-size: 18px;
-
-}
-
 .offer-card {
   display: flex;
   flex-direction: column;
-
   justify-content: end;
 
   width: 400px;
   height: 400px;
 
-/* TEMPO */
   background: #FFF;
-  /*background: url("../resources/main-page/artwork/deal-bg.png") no-repeat;
-  background-size: contain;*/
-
-
   color: white;
-
-  overflow: hidden;
-
   box-shadow: 0px 8px 8px black;
 
+  overflow: hidden;
   transition: all 0.3s ease;
-
-/*  border: 3px solid rgba(255, 0, 0, 0.3);*/
 }
-
 .offer-card > img {
   position: absolute;
 /*  object-fit: cover;*/
@@ -284,7 +258,6 @@ footer {
 
   z-index: 1;
 }
-
 .offer-card > a.link {
   position: absolute;
   height: 400px;
@@ -295,7 +268,6 @@ footer {
   background-size: 400px 400px;
   z-index: 3;
 }
-
 .offer-card > .content {
   display: flex;
   z-index: 2;
@@ -307,7 +279,6 @@ footer {
 /*  background: rgba(255, 0, 0, 0.8);*/
   background: rgba(0, 0, 0, 0.9);
 }
-
 .offer-card > .content > span {
   font-family: 'Outfit', sans-serif;
   font-size: 28px;
@@ -319,7 +290,6 @@ footer {
   background: red;
   overflow: hidden;
 }
-
 .offer-card > .content > p {
   font-family: 'Outfit', sans-serif;
   font-size: 20px;
@@ -327,12 +297,29 @@ footer {
   width: 95%;
   overflow: hidden;
 }
-
+.offer-card > .sale {
+  position: absolute;
+  height: 25px;
+  width: 70px;
+  top: 20px;
+  z-index: 3;
+  line-height: 25px;
+  text-align: right;
+  background: yellow;
+  font-family: 'Rubik', sans-serif;
+  font-size: 20px;
+  color: black;
+  transition: all 0.3s ease;
+  left: -70px;
+}
 .offer-card:hover .content {
   transform: translateY(0px);
 }
 .offer-card:hover a.link {
   background: rgba(0, 0, 0, 0);
+}
+.offer-card:hover .sale {
+  left: 0;
 }
 .offer-card:hover {
   transform: translateY(-10px);
@@ -346,7 +333,6 @@ footer {
   'GRAD' 0,
   'opsz' 24
 }
-
 .material-symbols-rounded#side-panel {
   cursor: pointer;
 }
@@ -399,7 +385,21 @@ footer {
 #sidebar li a {
   color: #FFF;
 }
-
 #sidebar-btn:hover #sidebar {
   left: 0;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: #eaeaea;
+
+  min-height: 200px;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+
 }
