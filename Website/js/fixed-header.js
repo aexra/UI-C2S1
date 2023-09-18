@@ -13,6 +13,8 @@ var headertop = header.offsetTop;
 
 var content = document.getElementsByClassName("content")[0];
 
+var sidebar = document.getElementById("sidebar");
+
 lastPagePos = window.pageYOffset;
 function myFunction() {
 
@@ -40,8 +42,10 @@ function myFunction() {
   if (window.pageYOffset > lastPagePos && d <= -10)
   {
     header.classList.add("hidden");
+    sidebar.classList.add("hidden-fix");
   } else {
     header.classList.remove("hidden");
+    sidebar.classList.remove("hidden-fix");
   }
   lastPagePos = window.pageYOffset;
 }
