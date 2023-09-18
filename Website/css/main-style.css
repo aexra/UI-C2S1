@@ -28,6 +28,7 @@
   flex-direction: column;
   transition: all 0.3s ease;
 /*  border: 3px solid red;*/
+  z-index: 50;
 }
 .semi-fixed-header {
   display: flex;
