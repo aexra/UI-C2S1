@@ -346,6 +346,7 @@
   left: -270px;
   top: 0;
   z-index: 51;
+  transition: all 0.3s ease;
 }
 #sidebar .title {
   color: #f2f2f2;
