@@ -248,11 +248,43 @@ footer {
   display: flex;
   flex-direction: column;
 
+  justify-content: end;
+
   min-width: 400px;
   min-height: 600px;
 
 /* TEMPO */
   background: #0f0f0f;
+
+  color: white;
+
+  overflow: hidden;
+}
+
+.offer-card > img {
+  position: absolute;
+/*  object-fit: cover;*/
+  object-fit: fill;
+/*  overflow: hidden;*/
+  height: 600px;
+  width: 400px;
+
+  z-index: 1;
+}
+
+.offer-card:hover .content {
+  transform: translateY(0px);
+}
+
+.offer-card > .content {
+  display: flex;
+  z-index: 2;
+
+  transform: translateY(200px);
+  transition: all 0.3s ease;
+
+  height: 240px;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .material-symbols-rounded {
