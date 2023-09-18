@@ -86,13 +86,13 @@
   background: #FFF;
 /*  border: 2px solid green;*/
 }
-.fixed-header span {
+#sidebar-btn span {
   font-size: 32px;
   transition: all 0.3s ease;
   width: 40px;
   text-align: center;
 }
-.fixed-header span:hover {
+#sidebar-btn:hover span {
   font-size: 40px;
   color: red;
 }
@@ -346,4 +346,57 @@ footer {
 
 .material-symbols-rounded#side-panel {
   cursor: pointer;
+}
+
+#sidebar {
+  position: fixed;
+  height: 100%;
+  width: 270px;
+  background: #404040;
+  overflow: hidden;
+  left: -270px;
+  top: 0;
+  z-index: 51;
+}
+#sidebar .title {
+  color: #f2f2f2;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 65px;
+  background: black;
+  text-align: center;
+  font-family: 'Rubik', sans-serif;
+  border-bottom: 1px solid white;
+}
+#sidebar .list-items {
+  position: relative;
+  background: #0f0f0f;
+  height: 100%;
+  width: 100%;
+  list-style: none;
+  padding-inline-start: 0;
+  margin: 0;
+}
+#sidebar .list-items li {
+  line-height: 50px;
+  transition: all 0.3s ease;
+}
+#sidebar .list-items li:hover {
+  box-shadow: 0 0 10px 3px #222;
+}
+#sidebar .list-items li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Outfit', sans-serif;
+  display: block;
+  text-align: center;
+}
+#sidebar li a {
+  color: #FFF;
+}
+
+#sidebar-btn:hover #sidebar {
+  left: 0;
 }
