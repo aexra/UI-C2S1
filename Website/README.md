@@ -18,10 +18,10 @@
 Dropdown effect
 https://github.com/aexra/UI-C2S1/assets/121866384/8a689bdd-561b-4c08-b00f-d87c672ebe82
 
-Hidable header
+Animated sidebar
 https://github.com/aexra/UI-C2S1/assets/121866384/7a8cb7c6-8f7a-4b93-baf1-76b9a0bd581f
 
-Animated sidebar
+Hidable header
 https://github.com/aexra/UI-C2S1/assets/121866384/641a5fce-807d-422a-904e-b6c4fc1df860
 
 Animated comp-part card
