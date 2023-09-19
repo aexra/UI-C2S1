@@ -211,50 +211,79 @@
   transition: all 0.3s ease;
 }
 .news-card > .image-container {
+  display: flex;
+
   height: 185px;
   width: 100%;
 
   background: darkred;
+
+  /* THIS PART IS KINDA FOR FUN (text on bg) */
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  color: #f3f3f3;
+  
+  justify-content: center;
+  align-items: center;
 }
 .news-card > .image-container > img {
+  position: absolute;
+  height: 185px;
+  width: 350px;
   object-fit: cover;
 }
 .news-card > .text-container {
   height: 415px;
   width: 100%;
 
+  font-family: 'Outfit', sans-serif;
+
   background: #f3f3f3;
 }
 .news-card > .text-container > .news-publisher-and-date {
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 18px;
+  line-height: 18px;
   margin: 20px;
 }
-.news-card > .text-container span.publisher {
+.news-card > .text-container > .news-publisher-and-date > span.publisher {
   width: 100%;
   color: darkred;
   text-align: left;
 }
-.news-card > .text-container span.date {
-  width: 100%;
+.news-card > .text-container > .news-publisher-and-date > span.date {
+  width: auto%;
   color: black;
   text-align: right;
 }
-.news-card > .text-container span.title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 24px;
-  color: black;
-  line-height: 24px;
-
+.news-card > .text-container > span.title {
   display: block;
+
+  font-size: 22px;
+  color: black;
+  line-height: 27px;
+
   text-align: left;
 
   margin: 20px;
   width: auto;
 }
+.news-card > .text-container > p.content {
+  display: block;
 
+  font-size: 20px;
+  color: black;
+  line-height: 25px;
+
+  text-align: left;
+
+  margin: 20px;
+}
 .news-card:hover {
   transform: translateY(-10px);
   box-shadow: 0px 16px 16px black;
+}
+.news-card > a.link {
+  position: absolute;
+  height: 600px;
+  width: 400px;
 }
