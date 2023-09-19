@@ -229,7 +229,7 @@
   font-family: 'Outfit', sans-serif;
   font-size: 16px;
   line-height: 16px;
-  margin: 10px;
+  margin: 20px;
 }
 .news-card > .text-container span.publisher {
   width: 100%;
@@ -240,6 +240,18 @@
   width: 100%;
   color: black;
   text-align: right;
+}
+.news-card > .text-container span.title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  color: black;
+  line-height: 24px;
+
+  display: block;
+  text-align: left;
+
+  margin: 20px;
+  width: auto;
 }
 
 .news-card:hover {
