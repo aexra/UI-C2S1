@@ -23,6 +23,7 @@
   font-family: 'Outfit', sans-serif;
   z-index: 10;
 }
+
 .header {
   display: flex;
   flex-direction: column;
@@ -30,6 +31,7 @@
 /*  border: 3px solid red;*/
   z-index: 50;
 }
+
 .semi-fixed-header {
   display: flex;
   flex-direction: row;
@@ -121,6 +123,7 @@
 .fixed-header a img#header-logotext {
   padding-right: 40px;
 }
+
 .dropdown {
   float: left;
   overflow: hidden;
@@ -180,6 +183,7 @@
 .dropdown:hover .dropcontent {
   display: block;
 }
+
 .sticky {
   position: fixed;
   top: 0;
@@ -191,11 +195,11 @@
 .hidden-fix {
   transform: translateY(40px);
 }
+
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 .content h1 {
   font-size: 90;
@@ -206,7 +210,7 @@
   align-items: center;
   gap: 50px;
   width: 100%;
-  margin: 50px;
+  margin: 20px;
 }
 .content section span.section-title {
   font-family: 'Rubik', sans-serif;
@@ -216,7 +220,7 @@
 .content section#namesection {
   height: 52vh;
   margin: 0;
-  background: url("../resources/main-page/artwork/bk.jpg") no-repeat;
+  background: url("../resources/main-page/artwork/bluebk.jpg") no-repeat;
   background-size: 100% auto;
   align-items: center;
   justify-content: center;
@@ -231,6 +235,25 @@
   justify-content: center;
   align-items: center;
   gap: 50px;
+}
+.content section .show-more {
+  font-family: "Rubik", sans-serif;
+  font-size: 28px;
+  text-decoration: none;
+  color: black;
+
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 5px;
+
+  background: transparent;
+
+  transition: all 0.1s ease;
+}
+.content section .show-more:hover {
+  color: #fff;
+  border: 2px solid transparent;
+  background: red;
 }
 
 .offer-card {
@@ -324,6 +347,52 @@
 .offer-card:hover {
   transform: translateY(-10px);
   box-shadow: 0px 16px 16px black;
+}
+
+.content > section.parallax {
+  background-image: url(https://d1yn1kh78jj1rr.cloudfront.net/image/thumbnail/rDtN98Qoishumwih/minecraftpaper-02-091815-727_thumb.jpg);
+  background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.content > section.parallax > .mask {
+  position: absolute;
+  background: rgba(0,0,0,.3);
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.content > section.parallax > .parallax-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 50px;
+
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  
+  overflow: hidden;
+  z-index: 3;
+}
+
+.content > section#news {
+
+  background-image: url("../resources/main-page/artwork/redbk1.jpg");
+}
+.content > section#news span {
+  color: #fff;
+}
+.content > section#news .show-more {
+  color: #fff;
+  border: 2px solid #fff;
+}
+.content > section#news .show-more:hover {
+  color: black;
+  background: #fff;
 }
 
 .material-symbols-rounded {
