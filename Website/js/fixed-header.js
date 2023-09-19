@@ -39,7 +39,7 @@ function myFunction() {
   }
 
   // hidden part of header
-  if (window.pageYOffset > lastPagePos && d <= -10)
+  if (window.pageYOffset > lastPagePos && d <= -20)
   {
     header.classList.add("hidden");
     sidebar.classList.add("hidden-fix");
