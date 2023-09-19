@@ -28,5 +28,5 @@ Animated comp-part card
 https://github.com/aexra/UI-C2S1/assets/121866384/c5feab36-38d5-4d5b-bcdf-7d44168fe0f8
 
 Animated news card
-https://github.com/aexra/UI-C2S1/assets/121866384/beaef6ed-80fb-4cbb-9d7b-f5e614073ed6
+https://github.com/aexra/UI-C2S1/assets/121866384/a7ed37cb-fb96-40c1-861d-13f9e7a10230
 
