@@ -1,4 +1,4 @@
-.content section {
+.content > section {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -8,14 +8,14 @@
 	width: 100%;
 }
 
-.content section#Profile {
+.content > section#Profile {
 	flex-direction: row;
 	gap: 30px;
 	background: url(../resources/profile-page/bg.png);
 	background-position: center top;
 	background-size: 200% auto;
 }
-.content section#Profile > .profile-rounded-section {
+.content > section#Profile > .profile-rounded-section {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -30,7 +30,7 @@
 
 	box-shadow: 0 0 20px black;
 }
-.content section#Profile > .buttons-rounded-section {
+.content > section#Profile > .buttons-rounded-section {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -47,14 +47,96 @@
 
 /*	box-shadow: 0 0 20px black;*/
 }
-.content section#Profile > .buttons-rounded-section button {
+.content > section#Profile > .buttons-rounded-section button {
 	height: 60px;
 	width: 80%;
 
 	font-family: 'Rubik', sans-serif;
 	font-size: 24px;
 	line-height: 100%;
+	color: #fff;
+
+	background: #262931;
+
+	border: 0;
+	border-radius: 20px;
+
+	box-shadow: 0 0 10px black;
+
+	transition: all 0.1s ease;
 }
+.content > section#Profile > .buttons-rounded-section button:hover {
+	color: black;
+	background: #abc7ff;
+}
+.content > section#Profile > .buttons-rounded-section button#delete-account-btn {
+	color: #d54f49;
+}
+.content > section#Profile > .buttons-rounded-section button#delete-account-btn:hover {
+	color: #fff;
+	background: #d54f49;
+}
+.content > section#Profile > .buttons-rounded-section button#disable-email-spam-btn:hover {
+	background: lightseagreen;
+}
+.content > section#Profile > .profile-rounded-section > .left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	height: 100%;
+	width: 60%;
+}
+.content > section#Profile > .profile-rounded-section > .left > .image-content {
+	position: relative;
+	z-index: 1;
+	border-radius: 50%;
+	margin: 40px;
+}
+.content > section#Profile > .profile-rounded-section > .left img#avatar {
+	border-radius: 50%;
+	height: 300px;
+
+	box-shadow: 0 0 20px black;
+
+
+}
+.content > section#Profile > .profile-rounded-section > .left .mask {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+
+	top: 0;
+	left: 0;
+	height: 300px;
+	width: 300px;
+
+	border-radius: 50%;
+
+	background: rgba(0,0,0,.7);
+
+	font-size: 36px;
+	font-family: 'Rubik', sans-serif;
+	color: lightgray;
+	text-align: center;
+	line-height: auto;
+
+	opacity: 0;
+	transition: all 0.3s ease;
+	z-index: 2;
+}
+.content > section#Profile > .profile-rounded-section > .left > .image-content:hover #avatar-mask {
+	opacity: 1;
+}
+.content > section#Profile > .profile-rounded-section > .right {
+	display: flex;
+	flex-direction: column;
+
+	height: 100%;
+	width: 100%;
+}
+
 
 footer {
 	background: #22262a;
