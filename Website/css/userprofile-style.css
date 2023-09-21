@@ -21,7 +21,7 @@
 	justify-content: center;
 	align-items: center;
 
-	height: 70%;
+	height: 49%;
 	width: 60%;
 
 	background: #262931;
@@ -83,6 +83,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 
 	height: 100%;
 	width: 60%;
@@ -132,28 +133,60 @@
 .content > section#Profile > .profile-rounded-section > .right {
 	display: flex;
 	flex-direction: column;
-	padding-top: 250px;
 
 	height: 100%;
 	width: 100%;
 }
-.content > section#Profile > .profile-rounded-section > .right > .value-box {
+.content > section#Profile > .profile-rounded-section > .right > .pairs-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 20px;
+
+	height: 100%;
+	width: 100%;
+} 
+.content > section#Profile > .profile-rounded-section > .right .value-box {
 	display: flex;
 	flex-direction: row;
+	gap: 30px;
 
 	font-family: 'Outfit', sans-serif;
-	font-size: 24px;
+	font-size: 26px;
+	line-height: 45px;
 	text-align: left;
 
 	width: 100%;
 }
 .value-box > .key {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
 	height: 100%;
 	width: 60%;
+
+	color: rgba(255,255,255,.6);
+
+	border-right: 2px solid lightgray;
 }
 .value-box > .value {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
 	height: 100%;
 	width: 100%;
+
+	margin-right: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+
+	color: #fff;
+
+	background: #18181b;
+	border-radius: 10px;
+	box-shadow: 0 0 5px black;
 }
 
 footer {
