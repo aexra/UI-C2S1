@@ -8,16 +8,10 @@
 	width: 100%;
 }
 .content section#Profile {
-/*	background: url("../resources/main-page/artwork/bluebk.jpg");*/
+	flex-direction: row;
+	gap: 30px;
 	background: #18181b;
 	background-size: 100% auto;
-}
-.content section#Profile .mask {
-	position: absolute;
-	z-index: 1;
-	height: 79vh;
-	width: 100%;
-	background: rgba(0,0,0,.6);
 }
 .content section#Profile .profile-rounded-section {
 	display: flex;
@@ -26,13 +20,32 @@
 	align-items: center;
 
 	height: 70%;
-	width: 90%;
+	width: 60%;
 
 	background: #262931;
 
 	border-radius: 20px;
 
 	box-shadow: 0 0 20px black;
+}
+.content section#Profile .buttons-rounded-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
-	z-index: 2;
+	gap: 30px;
+
+	height: 70%;
+	width: 30%;
+
+/*	background: #262931;w*/
+
+	border-radius: 20px;
+
+/*	box-shadow: 0 0 20px black;*/
+}
+footer {
+	background: #22262a;
+	color: #5f6b76;
 }
