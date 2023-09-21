@@ -4,16 +4,18 @@
 	justify-content: center;
 	align-items: center;
 
-	height: 79vh;
+	height: 91vh;
 	width: 100%;
 }
+
 .content section#Profile {
 	flex-direction: row;
 	gap: 30px;
-	background: #18181b;
-	background-size: 100% auto;
+	background: url(../resources/profile-page/bg.png);
+	background-position: center top;
+	background-size: 200% auto;
 }
-.content section#Profile .profile-rounded-section {
+.content section#Profile > .profile-rounded-section {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -28,7 +30,7 @@
 
 	box-shadow: 0 0 20px black;
 }
-.content section#Profile .buttons-rounded-section {
+.content section#Profile > .buttons-rounded-section {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -45,6 +47,15 @@
 
 /*	box-shadow: 0 0 20px black;*/
 }
+.content section#Profile > .buttons-rounded-section button {
+	height: 60px;
+	width: 80%;
+
+	font-family: 'Rubik', sans-serif;
+	font-size: 24px;
+	line-height: 100%;
+}
+
 footer {
 	background: #22262a;
 	color: #5f6b76;
