@@ -1,0 +1,15 @@
+.content section {
+	height: 79vh;
+	width: 100%;
+}
+.content section#Profile {
+	background: url("../resources/main-page/artwork/bluebk.jpg");
+	background-size: 100% auto;
+}
+.content section#Profile .mask {
+	position: relative;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,.6);
+}
