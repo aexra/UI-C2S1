@@ -1,15 +1,38 @@
 .content section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
 	height: 79vh;
 	width: 100%;
 }
 .content section#Profile {
-	background: url("../resources/main-page/artwork/bluebk.jpg");
+/*	background: url("../resources/main-page/artwork/bluebk.jpg");*/
+	background: #18181b;
 	background-size: 100% auto;
 }
 .content section#Profile .mask {
-	position: relative;
-	top: 0;
-	height: 100%;
+	position: absolute;
+	z-index: 1;
+	height: 79vh;
 	width: 100%;
 	background: rgba(0,0,0,.6);
+}
+.content section#Profile .profile-rounded-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	height: 70%;
+	width: 90%;
+
+	background: #262931;
+
+	border-radius: 20px;
+
+	box-shadow: 0 0 20px black;
+
+	z-index: 2;
 }
