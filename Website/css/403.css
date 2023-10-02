@@ -1,0 +1,44 @@
+.content h1 {
+  font-size: 90;
+}
+.content section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
+  margin-top: 40px;
+}
+.content section span.section-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 36px;
+  color: black;
+}
+
+.error-panel {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  background: gray;
+  width: 78vw;
+  height: 71vh;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}
+.error-panel > p.text {
+  font-size: 40px;
+  font-family: 'Outfit', sans-serif;
+  text-align: center;
+  color: #FFF;
+}
+.error-panel > span.adm {
+  margin-top: auto;
+  margin-bottom: 5vh;
+
+  font-size: 28px;
+  font-family: 'Rubik', sans-serif;
+  color: #FFF;
+}
