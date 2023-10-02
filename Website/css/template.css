@@ -86,7 +86,8 @@
   font-family: 'Rubik', sans-serif;
 
   background: #FFF;
-/*  border: 2px solid green;*/
+
+  box-shadow: 0 0 10px black;
 }
 #sidebar-btn span {
   font-size: 32px;

@@ -22,17 +22,29 @@
   justify-content: center;
   align-items: center;
 
-  background: gray;
   width: 78vw;
   height: 71vh;
   margin-bottom: 30px;
   border-radius: 20px;
+
+  background-image: url(../resources/404/bk.png);
+  background-size: 100% auto;
+
+  box-shadow: 0 0 20px black;
 }
 .error-panel > p.text {
+  align-items: center;
   font-size: 40px;
   font-family: 'Outfit', sans-serif;
   text-align: center;
-  color: #FFF;
+  color: #202020;
+  height: 10vh;
+  padding: 10px;
+
+  border: 2px solid #202020;
+  border-radius: 10px;
+
+  background: #FFF;
 }
 .error-panel > span.adm {
   margin-top: auto;
