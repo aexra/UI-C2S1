@@ -1,0 +1,37 @@
+.content > section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	height: calc(100vh - 200px);
+	width: 100%;
+}
+
+.content > section#Author {
+	flex-direction: row;
+	gap: 30px;
+	background: url(../resources/profile-page/bg.png);
+	background-position: center top;
+	background-size: 200% auto;
+}
+.content > section#Author > .rounded-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	height: 76%;
+	width: 88%;
+
+	background: #262931;
+
+	border-radius: 20px;
+
+	box-shadow: 0 0 20px black;
+}
+
+footer {
+	background: #22262a;
+	color: #5f6b76;
+}
