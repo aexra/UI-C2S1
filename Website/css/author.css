@@ -62,10 +62,10 @@ span#title {
 	width: 40vw;
 }
 .info-container > .small-info-panel#left {
-	
+	box-shadow: 0 0 4px black;
 }
 .info-container > .small-info-panel#right {
-	
+	background: none;
 }
 .more-container {
 	display: flex;
