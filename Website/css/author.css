@@ -17,18 +17,61 @@
 }
 .content > section#Author > .rounded-section {
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: top;
 	align-items: center;
 
 	height: 80%;
 	width: 92%;
+
+	font-family: 'Outfit', sans-serif;
 
 	background: #262931;
 
 	border-radius: 20px;
 
 	box-shadow: 0 0 20px black;
+}
+span#title {
+	font-size: 80px;
+	color: #fff;
+	text-align: center;
+}
+.info-container {
+
+}
+.info-container > .left {
+
+}
+.info-container > .right {
+	
+}
+.more-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: auto;
+	padding: 20px;
+}
+.more-container > span.tip {
+	color: #fff;
+	font-size: 22px;
+}
+.more-container > span > a {
+	color: red;
+	text-decoration: none;
+	font-size: 22px;
+
+	border-radius: 10px;
+
+	transition: all 0.15s ease;
+
+	padding: 2px 5px 2px 5px;
+}
+.more-container > span > a:hover {
+	background: red;
+	color: #fff;
 }
 
 footer {
