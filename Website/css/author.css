@@ -63,6 +63,43 @@ span#title {
 }
 .info-container > .small-info-panel#left {
 	box-shadow: 0 0 4px black;
+	justify-content: center;
+}
+.info-container > .small-info-panel#left > .avatar-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding: 10px;
+}
+.info-container > .small-info-panel#left > .avatar-wrapper > img#vkAvatar {
+	border-radius: 50%;
+	height: 150px;
+
+	box-shadow: 0 0 20px black;
+}
+.info-container > .small-info-panel#left > .text-wrapper {
+	justify-content: center;
+	align-items: center;
+
+	padding: 20px;
+	
+	text-align: center;
+	color: #d3d3d3;
+	font-size: 28px;
+	font-family: 'Rubik', sans-serif;
+}
+.info-container > .small-info-panel#left > .osu-wrapper {
+	justify-content: center;
+	align-items: center;
+
+	border-top: 2px solid #868686;
+
+	padding: 20px;
+	
+	text-align: center;
+	color: #d3d3d3;
+	font-size: 28px;
+	font-family: 'Rubik', sans-serif;
 }
 .info-container > .small-info-panel#right {
 	background: none;

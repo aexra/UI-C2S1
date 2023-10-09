@@ -1,0 +1,35 @@
+blue {
+	color: #1f62ae;
+}
+gold {
+	color: #f7ba00;
+}
+ltblue {
+	color: #347dc6;
+}
+pink {
+	color: #f0c2d5;
+}
+red {
+	color: red;
+}
+pink {
+	color: pink;
+}
+black {
+	color: #000;
+}
+gray {
+	color: gray;
+}
+dkgreen {
+	color: darkgreen;
+}
+ired {
+	color: indianred;
+}
+ultpink {
+	text-decoration: underline;
+	text-decoration-color: #a7545b;
+	font-style: italic;
+}
