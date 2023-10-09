@@ -71,11 +71,23 @@ span#title {
 	justify-content: center;
 	padding: 10px;
 }
+.info-container > .small-info-panel#left > .avatar-wrapper > img#dstu-logo {
+	border-radius: 50%;
+	height: 170px;
+
+	position: absolute;
+
+/*	box-shadow: 0 0 20px black;*/
+
+	z-index: 1;
+}
 .info-container > .small-info-panel#left > .avatar-wrapper > img#vkAvatar {
 	border-radius: 50%;
 	height: 150px;
 
 	box-shadow: 0 0 20px black;
+
+	z-index: 2;
 }
 .info-container > .small-info-panel#left > .text-wrapper {
 	justify-content: center;
