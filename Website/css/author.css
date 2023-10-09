@@ -150,7 +150,15 @@ span#title {
 	color: #fff;
 }
 .info-container > .small-info-panel#right > .row#icons {
-	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 20px;
+}
+.info-container > .small-info-panel#right > .row#icons > img {
+	height: 60px;
 }
 .more-container {
 	display: flex;
