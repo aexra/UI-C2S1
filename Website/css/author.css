@@ -115,6 +115,42 @@ span#title {
 }
 .info-container > .small-info-panel#right {
 	background: none;
+
+	justify-content: center;
+
+	text-align: center;
+	font-family: 'Rubik', sans-serif;
+}
+.info-container > .small-info-panel#right > span#title {
+	font-size: 36px;
+	color: #fff;
+
+	margin: 0;
+}
+.info-container > .small-info-panel#right > p {
+	font-size: 24px;
+	color: #d3d3d3;
+}
+.info-container > .small-info-panel#right > p > a {
+	color: red;
+	text-decoration: none;
+	font-family: 'Outfit', sans-serif;
+
+	border-radius: 10px;
+	padding: 2px 5px 2px 5px;
+
+	transition: all 0.15s ease;
+}
+.info-container > .small-info-panel#right > p > a:hover {
+	background: red;
+	color: #fff;
+}
+.info-container > .small-info-panel#right > span#subtitle {
+	font-size: 28px;
+	color: #fff;
+}
+.info-container > .small-info-panel#right > .row#icons {
+	
 }
 .more-container {
 	display: flex;
