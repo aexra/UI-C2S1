@@ -1,0 +1,97 @@
+.content > section#catalog {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+
+	height: auto;
+	width: 100%;
+}
+
+.content > section#catalog > div#filterbar {
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	align-items: center;
+	gap: 20px;
+
+	background: #18181a;
+
+	width: 15vw;
+	padding-bottom: 20px;
+}
+.content > section#catalog > div#filterbar > span#title {
+	font-size: 36px;
+	font-family: 'Outfit', sans-serif;
+	color: #f3f3f3;
+	text-align: center;
+	padding: 10px 20px 10px 20px;
+
+	width: 100%;
+
+	border-bottom: 2px solid #303030;
+
+	box-shadow: 0 0 18px black;
+}
+.content > section#catalog > div#filterbar > .option {
+	display: flex;
+	flex-direction: row;
+
+	align-items: center;
+
+	background: #262932;
+	border: 2px solid #818286;
+	border-radius: 15px;
+
+	width: 240px;
+
+	box-shadow: 0 0 4px black;
+}
+.content > section#catalog > div#filterbar > .option > span {
+	font-size: 24px;
+	font-family: 'Outfit', sans-serif;
+	color: #f3f3f3;
+	padding: 5px 15px 5px 15px;
+}
+.content > section#catalog > div#filterbar > .option > .outer-circle {
+	height: 30px;
+	width: 30px;
+	margin-left: auto;
+	margin-right: 5px;
+
+	border: 2px solid #818286;
+	border-radius: 90px;
+
+	background: #262932;
+	cursor: pointer;
+
+	transition: all 0.3s ease;
+}
+.content > section#catalog > div#filterbar > .option > .outer-circle:hover {
+	background: #818286;
+	scale: 0.9;
+}
+.content > section#catalog > div#filterbar > .option > .outer-circle > .inner-circle {
+	
+}
+
+.content > section#catalog > div#items {
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	align-items: center;
+	gap: 40px;
+
+	width: 85vw;
+
+	color: #fff;
+
+	background: url(../resources/profile-page/bg.png);
+	background-position: center top;
+	background-size: 200% auto;
+}
+
+footer {
+	background: #22262a;
+	color: #5f6b76;
+}
