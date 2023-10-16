@@ -124,6 +124,15 @@
 
 	box-shadow: 0 0 8px black;
 }
+.content > section#catalog > div#items > .item > .info > .image-container > span.price {
+	position: absolute;
+	top: 200px;
+	font-family: 'Outfit', sans-serif;
+	font-size: 22px;
+	background: yellow;
+	color: black;
+	padding: 3px 10px 3px 10px;
+}
 .content > section#catalog > div#items > .item > .info > .props-container {
 	margin-right: 40px;
 	display: flex;
