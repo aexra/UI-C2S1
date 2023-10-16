@@ -166,11 +166,12 @@
 
 	border-radius: 15px;
 }
-.content > section#catalog > div#items > .item >  button.more {
+.content > section#catalog > div#items > .item >  img.more {
 	position: relative;
 	bottom: -20px;
 	left: calc(100% / 2);
 	width: 50px;
+	height: 30px;
 }
 .content > section#catalog > div#items > .item >  button.addtocart {
 	position: absolute;

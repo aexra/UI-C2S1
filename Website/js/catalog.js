@@ -24,3 +24,9 @@ function onCircleClicked(e) {
 	// включим нужный
 	enable(e.target);
 }
+
+let arrowRotation = 1;
+function onArrowClicked(arrow) {
+	arrow.style.transform = `scaleY(${arrowRotation *= -1})`;
+	console.log("aaaaaaaaaaaaaaaa");
+}
