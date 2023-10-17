@@ -12,6 +12,7 @@ class ICatalogItem {
 
 	addProp(key, value) {
 		this.properties.set(key, value);
+		return this;
 	}
 }
 
@@ -43,5 +44,11 @@ class Case extends ICatalogItem {
 
 
 const graphicCards = [
-	new GraphicCard("ProArt Geforce RTX 4080", "$9999 USD", "../resources/catalog/videocards/1.png")
+	new GraphicCard("ProArt GeForce RTX 4080", "$9999 USD", "../resources/catalog/videocards/1.png")
+		.addProp("Model", "ProArt GeForce RTX 4080")
+		.addProp("Fans", "3")
+		.addProp("Architecture", "NVIDIA Ada Lovelace")
+		.addProp("Techprocess", "20нм")
+		.addProp("Frequency", "2640 МГц"),
+
 ];
