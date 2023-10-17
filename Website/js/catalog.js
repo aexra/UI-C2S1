@@ -40,27 +40,13 @@ function update() {
 								<img src="${graphicCards[0].thumbnailPath}" alt="">\
 							</div>\
 							<div class="props-container">`;
-	itemsHTML += '				<div class="keyValuePair">\
-									<span class="key">Property 1</span>\
-									<span class="value">Value 1</span>\
-								</div>\
-								<div class="keyValuePair">\
-									<span class="key">Property 2</span>\
-									<span class="value">Value 2</span>\
-								</div>\
-								<div class="keyValuePair">\
-									<span class="key">Property 3</span>\
-									<span class="value">Value 3</span>\
-								</div>\
-								<div class="keyValuePair">\
-									<span class="key">Property 4</span>\
-									<span class="value">Value 4</span>\
-								</div>\
-								<div class="keyValuePair">\
-									<span class="key">Property 5</span>\
-									<span class="value">Value 5</span>\
-								</div>\
-							</div>\
+	for (let [key, value] of graphicCards[0].properties) {
+		itemsHTML += `			<div class="keyValuePair">\
+									<span class="key">${key}</span>\
+									<span class="value">${value}</span>\
+								</div>`;
+	}
+	itemsHTML += '			</div>\
 						</div>\
 						<img class="more" onclick="onArrowClicked(this)" src="../resources/catalog/arrow.png">\
 						<button class="addtocart">Add to cart</button>\
