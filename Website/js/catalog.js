@@ -23,6 +23,8 @@ function onCircleClicked(e) {
 	}
 	// включим нужный
 	enable(e.target);
+
+	update();
 }
 
 let arrowRotation = 1;
@@ -31,12 +33,36 @@ function onArrowClicked(arrow) {
 	console.log("aaaaaaaaaaaaaaaa");
 }
 
+function getTargetedCategory() {
+	for (let [key, value] of flags) {
+		if (value == true) return key;
+	}
+	return null;
+}
+
+function getTargetedBD() {
+	let category = getTargetedCategory();
+	console.log(category.id);
+	if (category == null) return null;
+
+
+	switch(category.id) {
+	case "motherboards":
+		return motherboards;
+	case "graphicCards":
+		return graphicCards;
+
+	}
+}
+
 const items = document.getElementById("items");
 function update() {
 	var itemsHTML = "";
-	let target = graphicCards;
+	let target = getTargetedBD();
 
-	for (var card of graphicCards)
+	if (target == null) return;
+
+	for (var card of target)
 	{
 		itemsHTML += `<div class="item">\
 						<div class="info">\

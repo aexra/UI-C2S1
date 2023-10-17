@@ -43,6 +43,7 @@ class Case extends ICatalogItem {
 
 
 
+const motherboards = [];
 const graphicCards = [
 	new GraphicCard("ProArt GeForce RTX 4080", "$914 USD", "../resources/catalog/videocards/1.png")
 		.addProp("Model", "ProArt GeForce RTX 4080")
@@ -61,5 +62,10 @@ const graphicCards = [
 		.addProp("Tensors", "-1")
 		.addProp("Release", "1980")
 		.addProp("Techprocess", "50 nm")
-		.addProp("Frequency", "10 Hz"),
-];
+		.addProp("Frequency", "10 Hz")];
+const rams = [];
+const storages = [];
+const coolings = [];
+const cpus = [];
+const audiocards = [];
+const cases = [];
