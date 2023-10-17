@@ -167,6 +167,12 @@
 
 	width: auto;
 }
+.content > section#catalog > div#items > .item > .info > .props-container > .keyValuePair:hover span.key {
+	color: #d2d2d4;
+}
+.content > section#catalog > div#items > .item > .info > .props-container > .keyValuePair:hover span.value {
+	box-shadow: 0 0 8px black;
+}
 .content > section#catalog > div#items > .item > .info > .props-container > .keyValuePair > span {
 	font-size: 28px;
 	font-family: 'Outfit', sans-serif;
@@ -178,6 +184,8 @@
 	border-right: 2px solid #5e5f64;
 
 	width: 140px;
+
+	transition: all 0.3s ease;
 }
 .content > section#catalog > div#items > .item > .info > .props-container > .keyValuePair > span.value {
 	color: #d2d2d4;
@@ -193,9 +201,6 @@
 	border-radius: 15px;
 
 	transition: all 0.3s ease;
-}
-.content > section#catalog > div#items > .item > .info > .props-container > .keyValuePair > span.value:hover {
-	box-shadow: 0 0 8px black;
 }
 .content > section#catalog > div#items > .item >  img.more {
 	position: relative;
