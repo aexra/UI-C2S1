@@ -108,6 +108,11 @@
 	height: 40vh;
 
 	box-shadow: 0 0 16px black;
+
+	transition: all 0.3s ease;
+}
+.content > section#catalog > div#items > .item:hover {
+	box-shadow: 0 0 32px black;
 }
 .content > section#catalog > div#items > .item > .info {
 	display: flex;
@@ -125,6 +130,8 @@
 	border-radius: 15px;
 
 	box-shadow: 0 0 8px black;
+
+	transition: all 0.3s ease;
 }
 .content > section#catalog > div#items > .item > .info > .image-container > span.price {
 	position: relative;
@@ -134,6 +141,14 @@
 	background: yellow;
 	color: black;
 	padding: 3px 10px 3px 10px;
+
+	transition: all 0.3s ease;
+}
+.content > section#catalog > div#items > .item > .info > .image-container:hover span.price {
+	background: indianred;
+}
+.content > section#catalog > div#items > .item > .info > .image-container:hover img {
+	box-shadow: 0 0 16px black;
 }
 .content > section#catalog > div#items > .item > .info > .props-container {
 	margin-right: 40px;
@@ -176,6 +191,11 @@
 	background-attachment: fixed;
 
 	border-radius: 15px;
+
+	transition: all 0.3s ease;
+}
+.content > section#catalog > div#items > .item > .info > .props-container > .keyValuePair > span.value:hover {
+	box-shadow: 0 0 8px black;
 }
 .content > section#catalog > div#items > .item >  img.more {
 	position: relative;

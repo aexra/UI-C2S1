@@ -56,4 +56,10 @@ const graphicCards = [
 		.addProp("Release", "2018")
 		.addProp("Techprocess", "12 nm")
 		.addProp("Frequency", "1635 MHz"),
+	new GraphicCard("GeForce RTX 2080 Cyberpunk Edition", "тыща на авито", "../resources/catalog/videocards/0.png")
+		.addProp("Model", "Гигабайт чё-то там да")
+		.addProp("Tensors", "-1")
+		.addProp("Release", "1980")
+		.addProp("Techprocess", "50 nm")
+		.addProp("Frequency", "10 Hz"),
 ];
