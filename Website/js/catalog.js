@@ -33,24 +33,31 @@ function onArrowClicked(arrow) {
 
 const items = document.getElementById("items");
 function update() {
-	var itemsHTML = `<div class="item">\
+	var itemsHTML = "";
+	let target = graphicCards;
+
+	for (var card of graphicCards)
+	{
+		itemsHTML += `<div class="item">\
 						<div class="info">\
 							<div class="image-container">\
-								<span class="price">${graphicCards[0].price}</span>\
-								<img src="${graphicCards[0].thumbnailPath}" alt="">\
+								<span class="price">${card.price}</span>\
+								<img src="${card.thumbnailPath}" alt="">\
 							</div>\
 							<div class="props-container">`;
-	for (let [key, value] of graphicCards[0].properties) {
-		itemsHTML += `			<div class="keyValuePair">\
+		for (let [key, value] of card.properties) {
+			itemsHTML += `		<div class="keyValuePair">\
 									<span class="key">${key}</span>\
 									<span class="value">${value}</span>\
 								</div>`;
-	}
-	itemsHTML += '			</div>\
+		}
+		itemsHTML += '		</div>\
 						</div>\
 						<img class="more" onclick="onArrowClicked(this)" src="../resources/catalog/arrow.png">\
 						<button class="addtocart">Add to cart</button>\
 					</div>';
+	}
+
 	items.innerHTML = itemsHTML;
 }
 
