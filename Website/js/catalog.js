@@ -20,6 +20,7 @@ function enable(target) {
 function onCircleClicked(e) {
 	// выключим все кроме него
 	for (let i = 0; i < circles.length; i++) {
+		if (circles[i].id == e.target.id) continue; 
 		disable(circles[i]);
 	}
 	// включим или выключим нужный
