@@ -2,18 +2,19 @@ const circles = document.getElementsByClassName("outer-circle");
 
 var flags = new Map();
 for (let i = 0; i < circles.length; i++) {
-	flags.set(circles[i], false);
+	flags.set(circles[i].id, false);
+	// flags[circles[i]] = false;
 	circles[i].onclick = onCircleClicked;
 }
 
 function disable(target) {
 	target.style.backgroundColor = "#262932";
-	flags[target] = false;
+	flags[target.id] = false;
 }
 
 function enable(target) {
 	target.style.backgroundColor = "#fff";
-	flags[target] = true;
+	flags[target.id] = true;
 }
 
 function onCircleClicked(e) {
@@ -27,38 +28,50 @@ function onCircleClicked(e) {
 	update();
 }
 
-let arrowRotation = 1;
 function onArrowClicked(arrow) {
-	arrow.style.transform = `scaleY(${arrowRotation *= -1})`;
-	console.log("aaaaaaaaaaaaaaaa");
+	arrow.style.transform = `scaleY(${-1})`;
 }
 
 function getTargetedCategory() {
-	for (let [key, value] of flags) {
-		if (value == true) return key;
+	for (let id of flags.keys()) {
+		if (flags[id] == true) return id;
 	}
 	return null;
 }
 
 function getTargetedBD() {
 	let category = getTargetedCategory();
-	console.log(category.id);
 	if (category == null) return null;
 
 
-	switch(category.id) {
+	switch(category) {
 	case "motherboards":
 		return motherboards;
 	case "graphicCards":
 		return graphicCards;
-
+	case "rams":
+		return rams;
+	case "storages":
+		return storages;
+	case "coolings":
+		return coolings;
+	case "cpus":
+		return cpus;
+	case "audioCards":
+		return audioCards;
+	case "cases":
+		return cases;
+	default:
+		return null;
 	}
 }
 
 const items = document.getElementById("items");
 function update() {
+	// console.log(flags);
 	var itemsHTML = "";
 	let target = getTargetedBD();
+	// console.log(target);
 
 	if (target == null) return;
 
