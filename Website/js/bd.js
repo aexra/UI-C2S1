@@ -71,7 +71,12 @@ const graphicCards = [
 		.addProp("Frequency", "10 Hz")];
 const rams = [];
 const storages = [];
-const coolings = [];
+const coolings = [
+	new CoolingSystem("", "БЕСЦЕННО", "../resources/catalog/cooling/water/0.jpg")
+		.addProp("Модель", "УЛЬТРА МЕГА СУПЕР ОВЕРПАВЕР AquaCool 9999")
+		.addProp("Подсветка", "ARGB на водяной основе")
+		.addProp("Сокет", "Любой если поместится")
+		.addProp("Материал", "Вода")];
 const cpus = [];
 const audioCards = [];
 const cases = [];
