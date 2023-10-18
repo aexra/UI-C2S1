@@ -243,3 +243,9 @@ footer {
 	background: #22262a;
 	color: #5f6b76;
 }
+
+
+
+.upend {
+	transform: scaleY(-1);
+}

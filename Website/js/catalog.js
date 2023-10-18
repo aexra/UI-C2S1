@@ -36,7 +36,7 @@ function onCircleClicked(e) {
 }
 
 function onArrowClicked(arrow) {
-	arrow.style.transform = `scaleY(${-1})`;
+	arrow.classList.toggle("upend");
 }
 
 function getTargetedCategory() {
@@ -76,14 +76,11 @@ function getTargetedBD() {
 const collections = [motherboards, graphicCards, rams, storages, coolings, cpus, audioCards, cases];
 const items = document.getElementById("items");
 function update() {
-	// console.log(flags);
 	var itemsHTML = "";
 	let target = getTargetedBD();
-	// console.log(target);
 
 	if (target == null)
 	{
-		console.log("added all");
 		for (let collection of collections)
 		{
 			for (let item of collection)
@@ -102,8 +99,7 @@ function update() {
 	items.innerHTML = itemsHTML;
 }
 
-function getItemHTML(item)
-{
+function getItemHTML(item) {
 	itemHTML = `<div class="item">\
 						<div class="info">\
 							<div class="image-container">\
