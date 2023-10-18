@@ -66,6 +66,7 @@ function getTargetedBD() {
 	}
 }
 
+const collections = [motherboards, graphicCards, rams, storages, coolings, cpus, audioCards, cases];
 const items = document.getElementById("items");
 function update() {
 	// console.log(flags);
@@ -73,31 +74,48 @@ function update() {
 	let target = getTargetedBD();
 	// console.log(target);
 
-	if (target == null) return;
-
-	for (var card of target)
+	if (target == null)
 	{
-		itemsHTML += `<div class="item">\
-						<div class="info">\
-							<div class="image-container">\
-								<span class="price">${card.price}</span>\
-								<img src="${card.thumbnailPath}" alt="">\
-							</div>\
-							<div class="props-container">`;
-		for (let [key, value] of card.properties) {
-			itemsHTML += `		<div class="keyValuePair">\
-									<span class="key">${key}</span>\
-									<span class="value">${value}</span>\
-								</div>`;
+		console.log("added all");
+		for (let collection of collections)
+		{
+			for (let item of collection)
+			{
+				itemsHTML += getItemHTML(item);
+			}
 		}
-		itemsHTML += '		</div>\
-						</div>\
-						<img class="more" onclick="onArrowClicked(this)" src="../resources/catalog/arrow.png">\
-						<button class="addtocart">Add to cart</button>\
-					</div>';
+	}
+	else {
+		for (var item of target)
+		{
+			itemsHTML += getItemHTML(item);
+		}
 	}
 
 	items.innerHTML = itemsHTML;
+}
+
+function getItemHTML(item)
+{
+	itemHTML = `<div class="item">\
+						<div class="info">\
+							<div class="image-container">\
+								<span class="price">${item.price}</span>\
+								<img src="${item.thumbnailPath}" alt="">\
+							</div>\
+							<div class="props-container">`;
+	for (let [key, value] of item.properties) {
+		itemHTML += `		<div class="keyValuePair">\
+								<span class="key">${key}</span>\
+								<span class="value">${value}</span>\
+							</div>`;
+	}
+	itemHTML += '		</div>\
+					</div>\
+					<img class="more" onclick="onArrowClicked(this)" src="../resources/catalog/arrow.png">\
+					<button class="addtocart">Add to cart</button>\
+				</div>';
+	return itemHTML;
 }
 
 window.onload = update();

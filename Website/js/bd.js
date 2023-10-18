@@ -67,5 +67,5 @@ const rams = [];
 const storages = [];
 const coolings = [];
 const cpus = [];
-const audiocards = [];
+const audioCards = [];
 const cases = [];
