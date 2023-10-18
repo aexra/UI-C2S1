@@ -6,6 +6,8 @@
 
 	height: auto;
 	width: 100%;
+
+	z-index: -1;
 }
 
 .content > section#catalog > div#filterbar {
@@ -19,13 +21,17 @@
 
 	width: 15vw;
 	padding-bottom: 20px;
+
+	box-shadow: 10px 0 10px -5px black;
+
+	z-index: 1;
 }
 .content > section#catalog > div#filterbar > span#title {
 	font-size: 36px;
 	font-family: 'Outfit', sans-serif;
 	color: #f3f3f3;
 	text-align: center;
-	padding: 10px 20px 10px 20px;
+	padding: 10px 0 10px 0;
 
 	width: 100%;
 
