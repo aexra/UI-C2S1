@@ -121,6 +121,7 @@
 }
 .content > section#catalog > div#items > .item > .info > .image-container {
 	margin-left: 20px;
+	position: relative;
 }
 .content > section#catalog > div#items > .item > .info > .image-container > img {
 	height: 30vh;
@@ -143,6 +144,25 @@
 	padding: 3px 10px 3px 10px;
 
 	transition: all 0.3s ease;
+}
+.content > section#catalog > div#items > .item > .info > .image-container > span.name {
+	background: red;
+
+	color: white;
+	font-family: 'Outfit', sans-serif;
+	font-size: 26px;
+
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+
+	text-align: center;
+	overflow: hidden;
+
+	border-radius: 0 0 15px 15px;
+
+	padding: 5px 0 5px 0;
 }
 .content > section#catalog > div#items > .item > .info > .image-container:hover span.price {
 	background: indianred;

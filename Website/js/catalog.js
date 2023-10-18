@@ -104,6 +104,7 @@ function getItemHTML(item) {
 						<div class="info">\
 							<div class="image-container">\
 								<span class="price">${item.price}</span>\
+								<span class="name">${item.name}</span>\
 								<img src="${item.thumbnailPath}" alt="">\
 							</div>\
 							<div class="props-container">`;

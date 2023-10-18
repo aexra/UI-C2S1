@@ -57,13 +57,13 @@ const graphicCards = [
 		.addProp("Architecture", "NVIDIA Ada Lovelace")
 		.addProp("Techprocess", "8 nm")
 		.addProp("Frequency", "2640 MHz"),
-	new GraphicCard("GeForce RTX 2080 Cyberpunk Edition", "not available in your region", "../resources/catalog/videocards/2.jpg")
+	new GraphicCard("GeForce RTX 2080 Cyberpunk", "not available in your region", "../resources/catalog/videocards/2.jpg")
 		.addProp("Model", "GeForce RTX 2080 Cyberpunk Edition")
 		.addProp("Tensors", "230")
 		.addProp("Release", "2018")
 		.addProp("Techprocess", "12 nm")
 		.addProp("Frequency", "1635 MHz"),
-	new GraphicCard("GeForce RTX 2080 Cyberpunk Edition", "тыща на авито", "../resources/catalog/videocards/0.png")
+	new GraphicCard("GeForce GTX 640", "тыща на авито", "../resources/catalog/videocards/0.png")
 		.addProp("Model", "Гигабайт чё-то там да")
 		.addProp("Tensors", "-1")
 		.addProp("Release", "1980")
@@ -72,7 +72,7 @@ const graphicCards = [
 const rams = [];
 const storages = [];
 const coolings = [
-	new CoolingSystem("", "БЕСЦЕННО", "../resources/catalog/cooling/water/0.jpg")
+	new CoolingSystem("AquaCool 9999", "БЕСЦЕННО", "../resources/catalog/cooling/water/0.jpg")
 		.addProp("Модель", "УЛЬТРА МЕГА СУПЕР ОВЕРПАВЕР AquaCool 9999")
 		.addProp("Подсветка", "ARGB на водяной основе")
 		.addProp("Сокет", "Любой если поместится")
