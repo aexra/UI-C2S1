@@ -186,6 +186,22 @@
 
   transition: all 0.1s ease;
 }
+.dropbtn {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.dropbtn > img.dropbtn-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 4px;
+
+  object-fit: scale-down;
+
+  transition: all 0.5s ease;
+}
 .dropcontent {
   display: none;
   position: absolute;
@@ -229,6 +245,11 @@
 .dropbtn:hover a,
 .dropbtn:hover {
   color: red;
+}
+.dropbtn:hover img.dropbtn-arrow {
+  transform: scaleY(-1);
+  margin-top: 2px;
+  filter: invert(23%) sepia(97%) saturate(6658%) hue-rotate(356deg) brightness(99%) contrast(116%);
 }
 .dropdown:hover .dropcontent {
   display: block;
