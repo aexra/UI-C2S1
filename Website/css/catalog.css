@@ -121,6 +121,7 @@
 }
 .content > section#catalog > div#items > .item > .info > .image-container {
 	margin-left: 20px;
+	margin-top: 30px;
 	position: relative;
 }
 .content > section#catalog > div#items > .item > .info > .image-container > img {
@@ -135,13 +136,16 @@
 	transition: all 0.3s ease;
 }
 .content > section#catalog > div#items > .item > .info > .image-container > span.price {
-	position: relative;
-	top: 60px;
+	position: absolute;
+	top: 30px;
 	font-family: 'Outfit', sans-serif;
 	font-size: 22px;
 	background: yellow;
 	color: black;
 	padding: 3px 10px 3px 10px;
+
+	transform-origin: left center;
+	transform: scaleX(0);
 
 	transition: all 0.3s ease;
 }
@@ -165,7 +169,7 @@
 	padding: 5px 0 5px 0;
 }
 .content > section#catalog > div#items > .item > .info > .image-container:hover span.price {
-	background: indianred;
+	transform: scaleX(1.0);
 }
 .content > section#catalog > div#items > .item > .info > .image-container:hover img {
 	box-shadow: 0 0 16px black;
