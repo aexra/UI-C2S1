@@ -22,9 +22,15 @@ function onCircleClicked(e) {
 	for (let i = 0; i < circles.length; i++) {
 		disable(circles[i]);
 	}
-	// включим нужный
-	enable(e.target);
-
+	// включим или выключим нужный
+	if (flags[e.target.id] == true)
+	{
+		disable(e.target);
+	}
+	else
+	{
+		enable(e.target);
+	}
 	update();
 }
 

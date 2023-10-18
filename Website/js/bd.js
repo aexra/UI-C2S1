@@ -43,7 +43,13 @@ class Case extends ICatalogItem {
 
 
 
-const motherboards = [];
+const motherboards = [
+	new MotherBoard("GIGABYTE Z390 AORUS ELITE", "$312 USD", "../resources/catalog/motherboards/0.jpeg")
+		.addProp("Model", "GIGABYTE Z390 AORUS ELITE")
+		.addProp("Formfactor", "Standart-ATX")
+		.addProp("Socket", "LGA 1151-v2")
+		.addProp("Chipset", "Intel Z390")
+		.addProp("Frequency", "2666 MHz")];
 const graphicCards = [
 	new GraphicCard("ProArt GeForce RTX 4080", "$914 USD", "../resources/catalog/videocards/1.png")
 		.addProp("Model", "ProArt GeForce RTX 4080")
