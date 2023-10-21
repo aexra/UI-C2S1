@@ -44,8 +44,6 @@ body {
 	
 	min-width: 100vw;
 	min-height: 12vh;
-
-	top: calc(50vh);
 }
 #main-menu > .main-menu-button {
 	height: 100%;
