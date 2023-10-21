@@ -19,7 +19,7 @@ body {
 	background: #303841;
 	
 	min-width: 100vw;
-	min-height: 10vh;
+	min-height: 12vh;
 }
 #main-menu > .main-menu-button {
 	height: 100%;
@@ -64,7 +64,7 @@ body {
 	z-index: 3;
 }
 #main-menu > .main-menu-icon > .mask {
-	
+
 }
 #main-menu > .main-menu-icon > img {
 	position: absolute;
