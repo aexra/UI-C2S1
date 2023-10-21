@@ -149,28 +149,28 @@ body {
 	font-family: 'Rubik', 'Outfit', sans-serif;
 	color: #fff;
 }
-#main-menu > .main-menu-icon {
+#main-menu > #main-menu-icon {
 	position: relative;
 	height: 100%;
-	width: 160px;
+	width: 140px;
 	z-index: 3;
 }
-#main-menu > .main-menu-icon > .mask {
+#main-menu > #main-menu-icon > .mask {
 	position: absolute;
-	left: -50px;
+	left: -60px;
 	top: -70;
 	width: 256px;
 	height: 256px;
 	z-index: 2;
 }
-#main-menu > .main-menu-icon > img {
+#main-menu > #main-menu-icon > img {
 	position: absolute;
-	left: -50px;
+	left: -60px;
 	top: -70;
 	z-index: 1;
 
 	transition: all 0.2s ease;
 }
-#main-menu > .main-menu-icon:hover img {
+#main-menu > #main-menu-icon:hover img {
 	scale: 1.1;
 }
