@@ -1,4 +1,6 @@
 body {
+	position: relative;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -8,6 +10,28 @@ body {
 
 	background: url("../resources/main-bg.jpg");
 	background-size: 100% 100%;
+}
+
+.header {
+	position: absolute;
+	top: 0;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
+
+	height: 50px;
+	width: 100vw;
+
+	background: #303841;
+
+	transition: all 0.2s ease;
+
+	z-index: 4;
+}
+.hidden {
+	height: 0;
 }
 
 #main-menu {
@@ -20,6 +44,8 @@ body {
 	
 	min-width: 100vw;
 	min-height: 12vh;
+
+	top: calc(50vh);
 }
 #main-menu > .main-menu-button {
 	height: 100%;
