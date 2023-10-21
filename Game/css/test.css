@@ -101,8 +101,14 @@ body {
 #main-menu > .main-menu-button:hover img {
 	transform: rotate(-180deg);
 }
+#main-menu > .main-menu-button#play:hover img {
+	transform: rotate(90deg);
+}
 #main-menu > .main-menu-button#play {
 	background: #6644cc;
+}
+#main-menu > .main-menu-button#play > .content-wrapper > img {
+	rotate: -90deg;
 }
 #main-menu > .main-menu-button#options {
 	background: #515151;
