@@ -108,6 +108,9 @@ body {
 	height: 100%;
 	width: 100%;
 }
+.header > .right-container > button#info-btn > img {
+	rotate: 180deg;
+}
 
 #main-menu {
 	display: flex;
