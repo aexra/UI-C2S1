@@ -1,6 +1,7 @@
 const main_menu = document.getElementById("main-menu");
 const menu_mask = document.getElementById("menu-darken-mask");
 const info_popup = document.getElementById("about-project-page");
+const scores_popup = document.getElementById("scores-page");
 const header = document.getElementsByClassName("header")[0];
 
 var hover = new Audio("../resources/main/music/hover.ogg");
@@ -21,6 +22,10 @@ window.onload = function() {
 	document.getElementById("info-btn").onclick = (e) => {
 		click.play();
 		toggleInfoPopup();
+	};
+
+	document.getElementById("scores").onclick = (e) => {
+		toggleScoresPopup();
 	};
 
 	for (let btn of document.getElementsByClassName("main-menu-button")) {
@@ -68,9 +73,11 @@ function menuBrightnessOut() {
 function closeAllPopups() {
 	closeLevels();
 	closeInfoPopup();
+	closeScoresPopup();
 }
 
 function onPopupOpened() {
+	closeAllPopups();
 	menuBrightnessIn();
 }
 function onPopupClosed() {
@@ -91,6 +98,23 @@ function toggleInfoPopup() {
 	}
 	else {
 		openInfoPopup();
+	}
+}
+
+function openScoresPopup() {
+	onPopupOpened();
+	scores_popup.classList.add("page-visible");
+}
+function closeScoresPopup() {
+	onPopupClosed();
+	scores_popup.classList.remove("page-visible");
+}
+function toggleScoresPopup() {
+	if (scores_popup.classList.contains("page-visible")) {
+		closeScoresPopup();
+	}
+	else {
+		openScoresPopup();
 	}
 }
 
