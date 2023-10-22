@@ -1,4 +1,6 @@
 const main_menu = document.getElementById("main-menu");
+const menu_mask = document.getElementById("menu-darken-mask");
+const info_popup = document.getElementById("about-project-page");
 
 var hover = new Audio("../resources/main/music/hover.ogg");
 hover.volume = 0.2;
@@ -12,13 +14,12 @@ click.volume = 0.1;
 window.onload = function() {
 	document.getElementById("menu-darken-mask").onclick = (e) => {
 		hover_extra.play();
-		closeLevels();
 		closeAllPopups();
 	};
 
 	document.getElementById("info-btn").onclick = (e) => {
 		click.play();
-		toggleMenuBrightness();
+		toggleInfoPopup();
 	};
 
 	for (let btn of document.getElementsByClassName("main-menu-button")) {
@@ -39,12 +40,14 @@ window.onload = function() {
 }
 
 function onPlayClicked() {
+	openLevels();
+}
+function openLevels() {
 	document.getElementById("lvl1").classList.toggle("w0");
 	document.getElementById("lvl2").classList.toggle("w0");
 	document.getElementById("lvl3").classList.toggle("w0");
 	document.getElementById("lvl4").classList.toggle("w0");
 }
-
 function closeLevels() {
 	document.getElementById("lvl1").classList.add("w0");
 	document.getElementById("lvl2").classList.add("w0");
@@ -52,10 +55,38 @@ function closeLevels() {
 	document.getElementById("lvl4").classList.add("w0");
 }
 
-function toggleMenuBrightness() {
-	document.getElementById("menu-darken-mask").classList.toggle("darkened");
+function menuBrightnessIn() {
+	menu_mask.classList.add("darkened");
+}
+function menuBrightnessOut() {
+	menu_mask.classList.remove("darkened");
 }
 
 function closeAllPopups() {
+	closeLevels();
+	closeInfoPopup();
+}
 
+function onPopupOpened() {
+	menuBrightnessIn();
+}
+function onPopupClosed() {
+	menuBrightnessOut();
+}
+
+function openInfoPopup() {
+	onPopupOpened();
+	info_popup.classList.add("page-visible");
+}
+function closeInfoPopup() {
+	onPopupClosed();
+	info_popup.classList.remove("page-visible");
+}
+function toggleInfoPopup() {
+	if (info_popup.classList.contains("page-visible")) {
+		closeInfoPopup();
+	}
+	else {
+		openInfoPopup();
+	}
 }

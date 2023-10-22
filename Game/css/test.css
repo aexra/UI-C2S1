@@ -10,6 +10,8 @@ body {
 
 	background: url("../resources/main/artwork/main-bg.jpg");
 	background-size: 100% 100%;
+
+	overflow-y: hidden;
 }
 
 .mask {
@@ -248,4 +250,22 @@ body {
 }
 #main-menu > #main-menu-icon:hover img {
 	scale: 1.1;
+}
+
+.page {
+	position: absolute;
+	top: 100%;
+
+	width: 60vw;
+	height: 100%;
+
+	background: #303841;
+
+	box-shadow: 0 0 30px black;
+
+	transition: all 0.3s ease;
+	z-index: 5;
+}
+.page-visible {
+	top: 0;
 }
