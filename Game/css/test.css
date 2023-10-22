@@ -119,6 +119,15 @@ body {
 #main-menu > .main-menu-button#quit {
 	background: #ff6ba3;
 }
+#main-menu > .main-menu-button#lvl1 {
+	background: lightgreen;
+}
+#main-menu > .main-menu-button#lvl2 {
+	background: aqua;
+}
+#main-menu > .main-menu-button#lvl3 {
+	background: darkred;
+}
 #main-menu > .main-menu-button > .content-wrapper {
 	position: relative;
 
@@ -158,6 +167,12 @@ body {
 }
 #main-menu > .w0 > .content-wrapper > span {
 	width: 0;
+}
+#main-menu > .lvlbtn {
+	height: 90%;
+}
+#main-menu > .lvlbtn > .content-wrapper > span {
+	margin-bottom: 5px;
 }
 #main-menu > #main-menu-icon {
 	position: relative;
