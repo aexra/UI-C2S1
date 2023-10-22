@@ -93,3 +93,12 @@ function toggleInfoPopup() {
 		openInfoPopup();
 	}
 }
+
+
+function onLevelClicked(args) {
+	saveDifficulty(args);
+	window.open("../html/game.html")
+}
+function saveDifficulty(args) {
+	sessionStorage.setItem("diff", args.id);
+}
