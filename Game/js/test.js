@@ -15,3 +15,7 @@ window.onload = function() {
 		hover_extra.play();
 	}
 }
+
+function onPlayClicked() {
+	console.log("Play");
+}
