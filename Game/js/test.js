@@ -17,5 +17,7 @@ window.onload = function() {
 }
 
 function onPlayClicked() {
-	console.log("Play");
+	document.getElementById("lvl1").classList.toggle("w0");
+	document.getElementById("lvl2").classList.toggle("w0");
+	document.getElementById("lvl3").classList.toggle("w0");
 }

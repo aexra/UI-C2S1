@@ -149,6 +149,16 @@ body {
 	font-family: 'Rubik', 'Outfit', sans-serif;
 	color: #fff;
 }
+#main-menu > .w0 {
+	width: 0;
+	padding: 0;
+}
+#main-menu > .w0 > .content-wrapper > img {
+	width: 0;
+}
+#main-menu > .w0 > .content-wrapper > span {
+	width: 0;
+}
 #main-menu > #main-menu-icon {
 	position: relative;
 	height: 100%;
