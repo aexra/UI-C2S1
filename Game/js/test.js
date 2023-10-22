@@ -1,3 +1,5 @@
+const main_menu = document.getElementById("main-menu");
+
 var hover = new Audio("../resources/main/music/hover.ogg");
 hover.volume = 0.2;
 
@@ -8,10 +10,15 @@ var click = new Audio("../resources/main/music/click.ogg");
 click.volume = 0.1;
 
 window.onload = function() {
+	document.getElementById("info-btn").onclick = (e) => {
+		click.play();
+		toggleMenuBrightness();
+	};
+
 	for (let btn of document.getElementsByClassName("main-menu-button")) {
 		btn.onmouseenter = (e) => {
 			hover.play();
-		}
+		};
 		btn.addEventListener("click", (e) => {
 			click.play();
 		});
@@ -30,4 +37,8 @@ function onPlayClicked() {
 	document.getElementById("lvl2").classList.toggle("w0");
 	document.getElementById("lvl3").classList.toggle("w0");
 	document.getElementById("lvl4").classList.toggle("w0");
+}
+
+function toggleMenuBrightness() {
+	document.getElementById("menu-darken-mask").classList.toggle("darkened");
 }
