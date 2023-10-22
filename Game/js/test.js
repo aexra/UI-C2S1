@@ -13,6 +13,7 @@ window.onload = function() {
 	document.getElementById("menu-darken-mask").onclick = (e) => {
 		hover_extra.play();
 		closeLevels();
+		closeAllPopups();
 	};
 
 	document.getElementById("info-btn").onclick = (e) => {
@@ -53,4 +54,8 @@ function closeLevels() {
 
 function toggleMenuBrightness() {
 	document.getElementById("menu-darken-mask").classList.toggle("darkened");
+}
+
+function closeAllPopups() {
+
 }
