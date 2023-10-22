@@ -10,6 +10,11 @@ var click = new Audio("../resources/main/music/click.ogg");
 click.volume = 0.1;
 
 window.onload = function() {
+	document.getElementById("menu-darken-mask").onclick = (e) => {
+		hover_extra.play();
+		closeLevels();
+	};
+
 	document.getElementById("info-btn").onclick = (e) => {
 		click.play();
 		toggleMenuBrightness();
@@ -37,6 +42,13 @@ function onPlayClicked() {
 	document.getElementById("lvl2").classList.toggle("w0");
 	document.getElementById("lvl3").classList.toggle("w0");
 	document.getElementById("lvl4").classList.toggle("w0");
+}
+
+function closeLevels() {
+	document.getElementById("lvl1").classList.add("w0");
+	document.getElementById("lvl2").classList.add("w0");
+	document.getElementById("lvl3").classList.add("w0");
+	document.getElementById("lvl4").classList.add("w0");
 }
 
 function toggleMenuBrightness() {
