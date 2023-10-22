@@ -20,6 +20,9 @@ window.onload = function() {
 	document.getElementById("main-menu-icon").onmouseenter = (e) => {
 		hover_extra.play();
 	}
+	document.getElementById("main-menu-icon").addEventListener("click", (e) => {
+		click.play();
+	});
 }
 
 function onPlayClicked() {
