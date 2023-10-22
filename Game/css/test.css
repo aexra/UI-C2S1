@@ -108,7 +108,11 @@ body {
 
 	transition: all 0.2s ease;
 
-	z-index: 4;
+	z-index: 6;
+}
+.toggled {
+	background: #141414;
+	box-shadow: 0 0 10px black;
 }
 .header:hover {
 	box-shadow: 0 0 30px black;
@@ -134,7 +138,7 @@ body {
 	font-family: 'Rubik', sans-serif;
 	font-size: 28px;
 	color: #fff;
-	background: #191919;
+	background: transparent;
 
 	transition: all 0.2s ease;
 }

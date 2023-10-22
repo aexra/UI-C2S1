@@ -1,6 +1,7 @@
 const main_menu = document.getElementById("main-menu");
 const menu_mask = document.getElementById("menu-darken-mask");
 const info_popup = document.getElementById("about-project-page");
+const header = document.getElementsByClassName("header")[0];
 
 var hover = new Audio("../resources/main/music/hover.ogg");
 hover.volume = 0.2;
@@ -57,9 +58,11 @@ function closeLevels() {
 
 function menuBrightnessIn() {
 	menu_mask.classList.add("darkened");
+	header.classList.add("toggled");
 }
 function menuBrightnessOut() {
 	menu_mask.classList.remove("darkened");
+	header.classList.remove("toggled");
 }
 
 function closeAllPopups() {
