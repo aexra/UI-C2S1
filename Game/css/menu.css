@@ -154,8 +154,7 @@ body {
 	rotate: 180deg;
 }
 
-#main-menu {
-	display: flex;
+#main-menu {	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
@@ -301,8 +300,6 @@ body {
 	
 	overflow-y: auto;
 
-	font-size: 90px; font-family: 'Outfit'; color: #fff;
-	
 	background: #2e2c35;
 
 	box-shadow: 0 0 30px black;
