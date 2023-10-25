@@ -336,3 +336,32 @@ body {
 	width: 100%;	
 	margin: 0;
 }
+.page > .container > table {
+	width: 100%;
+
+	font-family: 'Outfit', 'Rubik', sans-serif;
+	font-size: 20px;
+	color: #fefefe;
+}
+.page > .container > table,
+.page > .container > table tr,
+.page > .container > table tr th, 
+.page > .container > table tr td {
+	border-bottom: 1px solid #fefefe;
+	border-collapse: collapse;
+}
+.page > .container > table tr {
+
+}
+/*.page > .container > table tr:nth-child(odd) {background-color: #202020;}*/
+/*.page > .container > table tr td:nth-child(1) {text-align: right;}*/
+.page > .container > table tr:hover {
+	background: #404040;
+}
+.page > .container > table tr th {
+	background: hotpink;
+	text-align: left;
+}
+.page > .container > table  tr  td {
+	
+}
