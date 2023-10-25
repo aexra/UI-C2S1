@@ -347,7 +347,7 @@ body {
 .page > .container > table tr,
 .page > .container > table tr th, 
 .page > .container > table tr td {
-	border-bottom: 1px solid #fefefe;
+/*	border-bottom: 1px solid #fefefe;*/
 	border-collapse: collapse;
 }
 .page > .container > table tr {
