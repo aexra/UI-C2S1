@@ -14,6 +14,23 @@ body {
 
 	left: calc(100% / 2 - 100px);
 	top: 0;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+#level-banner > img {
+	height: 30px;
+	width: 30px;
+
+	filter: brightness(0) saturate(100%) invert(100%) sepia(2%) saturate(7%) hue-rotate(336deg) brightness(104%) contrast(104%);
+}
+#level-banner > span {
+	color: white;
+	font-size: 16px;
+	font-family: 'Outfit', 'Rubik', sans-serif;
 }
 .level-banner-corner {
 	height: 40px;
