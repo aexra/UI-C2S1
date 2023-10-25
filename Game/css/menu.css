@@ -22,7 +22,7 @@ body {
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
   height: 10px;
-  width: 10px;
+  width: 2px;
 }
 *::-webkit-scrollbar-track {
   border-radius: 5px;
@@ -292,10 +292,6 @@ body {
 }
 
 .page {
-	display: flex;
-	flex-direction: column;
-	align-items: start;
-	justify-content: left;
 	padding: 0 40px 0 40px;
 
 	position: absolute;
@@ -315,7 +311,15 @@ body {
 	top: 50px;
 	box-shadow: 0 0 30px black;
 }
-.page > h1 {
+.page > .container {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: left;
+
+	margin-bottom: 30px;
+}
+.page > .container > h1 {
 	font-size: 36px;
 	font-family: 'Outfit', 'Rubik', sans-serif;
 	color: hotpink;
@@ -323,4 +327,12 @@ body {
 	width: 100%;
 
 	border-bottom: 1px solid #fefefe;
+}
+.page > .container > p {
+	font-size: 20px;
+	font-family: 'Outfit', 'Rubik', sans-serif;
+	color: #fefefe;
+
+	width: 100%;	
+	margin: 0;
 }
