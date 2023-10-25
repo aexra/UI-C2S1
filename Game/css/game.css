@@ -19,13 +19,9 @@ body {
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: 20px;
-}
-#level-banner > img {
-	height: 30px;
-	width: 30px;
+	gap: 50px;
 
-	filter: brightness(0) saturate(100%) invert(100%) sepia(2%) saturate(7%) hue-rotate(336deg) brightness(104%) contrast(104%);
+	box-shadow: 0 0 30px black;
 }
 #level-banner > span {
 	color: white;
@@ -34,18 +30,36 @@ body {
 }
 .level-banner-corner {
 	height: 40px;
-	width: 40px;
+	width: 70px;
 
 	position: absolute;
 	top: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	box-shadow: 0 0 30px black;
 }
 .level-banner-corner#left {
-	left: calc(100% / 2 - 100px - 40px + 20px);
+	left: calc(100% / 2 - 100px - 70px + 35px);
 	transform: skewX(15deg);
 }
-.level-banner-corner#right {
-	left: calc(100% / 2 + 100px - 20px);
+.level-banner-corner#left > img {
 	transform: skewX(-15deg);
+}
+.level-banner-corner#right {
+	left: calc(100% / 2 + 100px - 35px);
+	transform: skewX(-15deg);
+}
+.level-banner-corner#right > img {
+	transform: skewX(15deg);
+}
+.level-banner-corner > img {
+	height: 30px;
+	width: 30px;
+
+	filter: brightness(0) saturate(100%) invert(100%) sepia(2%) saturate(7%) hue-rotate(336deg) brightness(104%) contrast(104%);
 }
 .lvl1 {
 	background: #8ADE2E;
