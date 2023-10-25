@@ -308,16 +308,19 @@ body {
 
 	background: #2e2c35;
 
-	box-shadow: 0 0 30px black;
-
 	transition: all 0.3s ease;
 	z-index: 5;
 }
 .page-visible {
 	top: 50px;
+	box-shadow: 0 0 30px black;
 }
 .page > h1 {
-	font-size: 48px;
+	font-size: 36px;
 	font-family: 'Outfit', 'Rubik', sans-serif;
 	color: hotpink;
+
+	width: 100%;
+
+	border-bottom: 1px solid #fefefe;
 }
