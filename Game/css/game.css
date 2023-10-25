@@ -1,0 +1,44 @@
+body {
+	height: 100vh;
+	width: 100vw;
+
+	position: relative;
+}
+
+
+#level-banner {
+	height: 40px;
+	width: 200px;
+
+	position: absolute;
+
+	left: calc(100% / 2 - 100px);
+	top: 0;
+}
+.level-banner-corner {
+	height: 40px;
+	width: 40px;
+
+	position: absolute;
+	top: 0;
+}
+.level-banner-corner#left {
+	left: calc(100% / 2 - 100px - 40px + 20px);
+	transform: skewX(15deg);
+}
+.level-banner-corner#right {
+	left: calc(100% / 2 + 100px - 20px);
+	transform: skewX(-15deg);
+}
+.lvl1 {
+	background: #8ADE2E;
+}
+.lvl2 {
+	background: #3636FF;
+}
+.lvl3 {
+	background: darkred;
+}
+.lvl4 {
+	background: black;
+}
