@@ -9,34 +9,35 @@ export class Player {
 
         this.direction = 0;
         this.speed = 0;
-        this.maxSpeed = 10;
-        this.loseSpeed = 0.5;
+        this.velocity = 0;
+
+        this.maxSpeed = 14;
+        this.loseSpeed = 0.4;
+        this.acceleration = 0.6;
     }
     update(input) {
         let left = input.includes("a");
         let right = input.includes("d");
+        
         this.direction = 0;
         if (left) this.direction--;
         if (right) this.direction++;
 
-        if (this.direction === 0 && this.speed != 0) {
-            let dir = this.speed / Math.abs(this.speed);
-
-            if (dir < 0) {
-                this.speed += Math.min(-this.speed, this.loseSpeed);
-            }
-            else {
-                this.speed -= Math.min(this.speed, this.loseSpeed);
-            }
+        // рассчитываем скорость
+        if (this.direction !== 0) {
+            this.speed += Math.min(this.acceleration, this.maxSpeed-this.speed);
+            this.velocity = this.speed * this.direction;
         }
         else {
-            this.speed = this.direction * this.maxSpeed;
+            this.speed -= Math.min(this.loseSpeed, this.speed);
+            this.velocity = this.velocity > 0? this.speed : -this.speed;
         }
 
-        if (this.speed < 0) {
-            this.x = Math.max(0, this.x + this.speed);
+        // применяем перемещение
+        if (this.velocity < 0) {
+            this.x = Math.max(0, this.x - this.speed);
         }
-        else if (this.speed > 0) {
+        else if (this.velocity > 0) {
             this.x = Math.min(this.game.width - this.width, this.x + this.speed);
         }
     }
