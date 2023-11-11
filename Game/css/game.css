@@ -13,6 +13,9 @@ body {
 	transform: translateX(-50%);
 }
 
+.game-resource {
+	display: none;
+}
 
 #level-banner {
 	height: 40px;

@@ -1,3 +1,5 @@
+import { Player } from "./player.js";
+
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
 
@@ -6,21 +8,32 @@ window.addEventListener("load", (e) => {
 	const canvas = document.getElementById("canvas1");
 	const ctx = canvas.getContext("2d");
 
-	canvas.width = document.body.offsetWidth - 10;
+	canvas.width = document.body.offsetWidth;
 	canvas.height = document.body.offsetHeight - 50;
 
 	class Game {
 		constructor(width, height) {
 			this.width = width;
 			this.height = height;
+			this.player = new Player(this);
 		}
 		update() {
-
+			this.player.update();
 		}
-		draw() {
-			
+		draw(context) {
+			context.clearRect(0, 0, this.width, this.height);
+			this.player.draw(context);
 		}
 	}
+
+	const game = new Game(canvas.width, canvas.height);
+
+	function animate() {
+		game.update();
+		game.draw(ctx);
+		requestAnimationFrame(animate);
+	}
+	animate();
 });
 
 function setLevelBanner(level) {
