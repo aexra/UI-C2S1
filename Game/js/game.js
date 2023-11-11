@@ -1,6 +1,13 @@
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
+
 	setLevelBanner(level);
+
+	const canvas = document.getElementById("canvas1");
+	const ctx = canvas.getContext("2d");
+
+	canvas.width = document.body.offsetWidth - 10;
+	canvas.height = document.body.offsetHeight - 50;
 });
 
 function setLevelBanner(level) {

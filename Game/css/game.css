@@ -5,6 +5,14 @@ body {
 	position: relative;
 }
 
+#canvas1 {
+	/* border: 5px solid black; */
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
 
 #level-banner {
 	height: 40px;
@@ -22,6 +30,8 @@ body {
 	gap: 50px;
 
 	box-shadow: 0 0 30px black;
+
+	z-index: 10;
 }
 #level-banner > span {
 	color: white;
@@ -40,6 +50,8 @@ body {
 	align-items: center;
 
 	box-shadow: 0 0 30px black;
+
+	z-index: 10;
 }
 .level-banner-corner#left {
 	left: calc(100% / 2 - 100px - 70px + 35px);
