@@ -1,4 +1,5 @@
 import { Player } from "./player.js";
+import { InputHandler } from "./input.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -16,9 +17,10 @@ window.addEventListener("load", (e) => {
 			this.width = width;
 			this.height = height;
 			this.player = new Player(this);
+			this.input = new InputHandler();
 		}
 		update() {
-			this.player.update();
+			this.player.update(this.input.keys);
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.width, this.height);
