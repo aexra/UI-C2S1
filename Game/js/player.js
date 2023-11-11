@@ -7,23 +7,38 @@ export class Player {
         this.y = 100;
         this.image = document.getElementById("player");
 
+        this.direction = 0;
         this.speed = 0;
-        this.maxSpeed = 4;
+        this.maxSpeed = 10;
+        this.loseSpeed = 0.4;
     }
     update(input) {
-        if (! (input.includes("d") || input.includes("a"))) {
-            this.speed = 0;
+        let left = input.includes("a");
+        let right = input.includes("d");
+        this.direction = 0;
+        if (left) this.direction--;
+        if (right) this.direction++;
+
+        if (this.direction === 0 && this.speed != 0) {
+            let dir = this.speed / Math.abs(this.speed);
+
+            if (dir < 0) {
+                this.speed += Math.min(-this.speed, this.loseSpeed);
+            }
+            else {
+                this.speed -= Math.min(this.speed, this.loseSpeed);
+            }
         }
         else {
-            if (input.includes("d")) {
-                this.speed = this.maxSpeed;
-            }
-            if (input.includes("a")) {
-                this.speed = Math.max(-this.maxSpeed, this.speed - this.maxSpeed);;
-            }
+            this.speed = this.direction * this.maxSpeed;
         }
 
-        this.x += this.speed;
+        if (this.speed < 0) {
+            this.x = Math.max(0, this.x + this.speed);
+        }
+        else if (this.speed > 0) {
+            this.x = Math.min(this.game.width - this.width, this.x + this.speed);
+        }
     }
     draw(context) {
         context.drawImage(this.image, 0, 0, 100, 120, this.x, this.y, this.width, this.height);
