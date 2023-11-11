@@ -8,6 +8,19 @@ window.addEventListener("load", (e) => {
 
 	canvas.width = document.body.offsetWidth - 10;
 	canvas.height = document.body.offsetHeight - 50;
+
+	class Game {
+		constructor(width, height) {
+			this.width = width;
+			this.height = height;
+		}
+		update() {
+
+		}
+		draw() {
+			
+		}
+	}
 });
 
 function setLevelBanner(level) {
