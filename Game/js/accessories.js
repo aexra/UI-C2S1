@@ -12,6 +12,7 @@ class Wings {
         this.maxFrame = 3;
         this.frame = 2;
         this.soaringFrame = 2;
+        this.standingFrame = 2;
 
         // свойства крыльев
         this.lift = 0.2;
@@ -32,15 +33,12 @@ class Wings {
             this.player.velocityY -= this.lift;
             this.player.velocityY = Math.max(this.player.velocityY, this.maxVelocityY);
         } else {
-            if (this.player.isGrounded()) this.frame = 2;
+            if (this.player.isGrounded()) this.frame = this.standingFrame;
             else this.frame = this.soaringFrame;
         }
     }
     draw(context) {
-        // context.save();
-        // context.rotate(30*Math.PI/180);
-        context.drawImage(this.image, 0, this.frame * 60, this.width, this.height, this.player.x, this.player.y, this.width, this.height);
-        // context.restore();
+        context.drawImage(this.image, 0, this.frame * 60, this.width, this.height, this.player.rotation * this.player.x, this.player.y, this.player.rotation * this.width, this.height);
     }
 }
 
@@ -49,6 +47,7 @@ export class NebulaWings extends Wings {
         super(player);
         this.image = document.getElementById("nebulaWings");
         this.soaringFrame = 1;
+        this.standingFrame = 2;
     }
 }
 
@@ -57,6 +56,7 @@ export class SteampunkWings extends Wings {
         super(player);
         this.image = document.getElementById("steampunkWings");
         this.soaringFrame = 3;
+        this.standingFrame = 2;
     }
 }
 
@@ -64,6 +64,7 @@ export class FlameWings extends Wings {
     constructor(player) {
         super(player);
         this.image = document.getElementById("flameWings");
-        this.soaringFrame = 3;
+        this.soaringFrame = 2;
+        this.standingFrame = 1;
     }
 }

@@ -20,7 +20,10 @@ export class Player {
         this.gravity = 0.1;
         this.velocityY = 0;
 
-        this.accessories = [new accessories.FlameWings(this)];
+        this.accessories = [new accessories.SteampunkWings(this)];
+
+        this.rotation = 1;
+        this.isPlayerSpriteFlipped = false;
     }
     update(input, deltaTime) {
         let left = input.includes("a");
@@ -65,6 +68,8 @@ export class Player {
             this.x = Math.min(this.game.width - this.width, this.x + this.speed);
         }
 
+        this.rotation = this.direction === 0? this.rotation : this.direction;
+
         // применяем перемещение по Y
         if (this.y + this.velocityY + this.height < this.game.height) this.y += this.velocityY;
         else this.y = this.game.height - this.height;
@@ -74,13 +79,31 @@ export class Player {
         }
     }
     draw(context) {
+        context.save();
+
+        context.scale(this.rotation, 1);
+
         // отрисовка аксессуаров
         for (let acc of this.accessories) {
             acc.draw(context);
         }
 
+        context.restore();
+
         // отрисовка игрока
-        // context.drawImage(this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.isPlayerSpriteFlipped) {
+            context.save();
+            context.scale(-this.rotation, 1);
+            context.drawImage(this.image, 0, 0, this.width, this.height, -this.rotation * this.x, this.y, -this.rotation * this.width, this.height);
+            context.restore();
+        }
+        else {
+            context.save();
+            context.scale(this.rotation, 1);
+            context.drawImage(this.image, 0, 0, this.width, this.height, this.rotation * this.x, this.y, this.rotation * this.width, this.height);
+            context.restore();
+        }
+        
     }
     translate(x, y) {
         this.x += x;
