@@ -21,6 +21,7 @@ window.addEventListener("load", (e) => {
 		}
 		update(deltaTime) {
 			this.player.update(this.input.keys, deltaTime);
+			console.log(this.input.keys);
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.width, this.height);
