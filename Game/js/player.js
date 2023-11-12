@@ -13,14 +13,14 @@ export class Player {
         this.speed = 0;
         this.velocity = 0;
 
-        this.maxSpeed = 14;
+        this.maxSpeed = 10;
         this.loseSpeed = 0.4;
         this.acceleration = 0.2;
 
         this.gravity = 0.1;
         this.velocityY = 0;
 
-        this.accessories = [new accessories.NebulaWings(this)];
+        this.accessories = [new accessories.FlameWings(this)];
     }
     update(input, deltaTime) {
         let left = input.includes("a");
