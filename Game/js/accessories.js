@@ -30,7 +30,13 @@ class Wings {
             this.player.velocityY -= this.lift;
         } else {
             if (this.player.isGrounded()) this.frame = 2;
-            else this.frame = 1;
+            else {
+                if (this.frame != 1) {
+                    if (this.frame < this.maxFrame) this.frame++;
+                    else this.frame = 0;
+                }
+                else this.frame = 1;
+            }
         }
     }
     draw(context) {
