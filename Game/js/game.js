@@ -19,8 +19,8 @@ window.addEventListener("load", (e) => {
 			this.player = new Player(this);
 			this.input = new InputHandler();
 		}
-		update() {
-			this.player.update(this.input.keys);
+		update(deltaTime) {
+			this.player.update(this.input.keys, deltaTime);
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.width, this.height);
@@ -29,13 +29,16 @@ window.addEventListener("load", (e) => {
 	}
 
 	const game = new Game(canvas.width, canvas.height);
+	let lastTime = 0;
 
-	function animate() {
-		game.update();
+	function animate(timeStamp) {
+		const deltaTime = timeStamp - lastTime;
+		lastTime = timeStamp;
+		game.update(deltaTime);
 		game.draw(ctx);
 		requestAnimationFrame(animate);
 	}
-	animate();
+	animate(0);
 });
 
 function setLevelBanner(level) {
