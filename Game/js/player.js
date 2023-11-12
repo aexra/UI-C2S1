@@ -13,7 +13,7 @@ export class Player {
 
         this.maxSpeed = 14;
         this.loseSpeed = 0.4;
-        this.acceleration = 0.6;
+        this.acceleration = 0.4;
     }
     update(input) {
         let left = input.includes("a");
