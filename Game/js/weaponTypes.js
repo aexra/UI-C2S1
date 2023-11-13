@@ -32,6 +32,9 @@ export class MeleeWeapon extends Weapon {
         context.drawImage(this.image, 0, -this.height);
         context.translate(-this.player.x, -this.player.y);
     }
+    recalc_params() {
+        this.attackRotationAnimationFrequency = this.attackRotationAnimationAngle * this.baseSpeed * this.speedMultiplier / this.baseCastDuration / 1000;
+    }
 }
 
 export class RangedWeapon extends Weapon {
