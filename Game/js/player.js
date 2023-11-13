@@ -19,6 +19,7 @@ export class Player {
         this.acceleration = 0.2;
 
         this.gravity = 0.1;
+        this.gravityMultiplier = 1;
         this.velocityY = 0;
 
         this.accessories = [new accessories.NebulaWings(this)];
@@ -61,7 +62,7 @@ export class Player {
         if (this.isGrounded() && this.velocityY > 0) {
             this.velocityY = 0;
         } else {
-            this.velocityY += this.gravity;
+            this.velocityY += this.gravity * this.gravityMultiplier;
         }
 
         // применяем перемещение по X

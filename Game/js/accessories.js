@@ -19,6 +19,7 @@ class Wings {
         this.maxVelocityY = -10;
     }
     update(input, deltaTime) {
+        // при зажатом пробеле
         if (input.includes(" ")) {
             // анимация
             if (this.frameTimer > this.frameInterval) {
@@ -35,6 +36,14 @@ class Wings {
         } else {
             if (this.player.isGrounded()) this.frame = this.standingFrame;
             else this.frame = this.soaringFrame;
+        }
+
+        // при зажатом S
+        if (input.includes("s") || input.includes("ы")) {
+            this.player.gravityMultiplier = 2.4;
+        }
+        else {
+            this.player.gravityMultiplier = 1;
         }
     }
     draw(context) {
