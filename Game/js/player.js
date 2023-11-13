@@ -1,4 +1,5 @@
 import * as accessories from "./accessories.js";
+import * as weapons from "./weapons.js"
 
 export class Player {
     constructor(game) {
@@ -20,10 +21,13 @@ export class Player {
         this.gravity = 0.1;
         this.velocityY = 0;
 
-        this.accessories = [new accessories.SteampunkWings(this)];
+        this.accessories = [new accessories.NebulaWings(this)];
 
         this.rotation = 1;
         this.isPlayerSpriteFlipped = false;
+
+        this.inventory = [new weapons.TerraBlade(this)];
+        this.selectedItem = this.inventory[0];
     }
     update(input, deltaTime) {
         let left = input.includes("a");
@@ -74,6 +78,10 @@ export class Player {
         if (this.y + this.velocityY + this.height < this.game.height) this.y += this.velocityY;
         else this.y = this.game.height - this.height;
 
+        if (this.selectedItem !== null) {
+            this.selectedItem.update(input, deltaTime);
+        }
+
         for (let acc of this.accessories) {
             acc.update(input, deltaTime);
         }
@@ -88,6 +96,11 @@ export class Player {
             acc.draw(context);
         }
 
+        // отрисовка выбранного предмета
+        if (this.selectedItem !== null) {
+            this.selectedItem.draw(context);
+        }
+
         context.restore();
 
         // отрисовка игрока
@@ -100,7 +113,7 @@ export class Player {
         else {
             context.save();
             context.scale(this.rotation, 1);
-            context.drawImage(this.image, 0, 0, this.width, this.height, this.rotation * this.x, this.y, this.rotation * this.width, this.height);
+            // context.drawImage(this.image, 0, 0, this.width, this.height, this.rotation * this.x, this.y, this.rotation * this.width, this.height);
             context.restore();
         }
         
