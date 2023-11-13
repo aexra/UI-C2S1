@@ -10,6 +10,8 @@ export class MeleeWeapon extends Weapon {
         this.attackRotationAnimationAngle = 110;
         this.attackRotationAnimationFrequency = this.attackRotationAnimationAngle * this.baseSpeed * this.speedMultiplier / this.baseCastDuration / 1000;
         this.attackProgress = 0;
+
+        this.recalc_params();
     }
     update(input, deltaTime) {
         if (input.includes("lmb")) {

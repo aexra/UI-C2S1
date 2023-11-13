@@ -10,11 +10,16 @@ export class Weapon {
         this.width = 46;
         this.height = 54;
         this.drawDistance = this.player.width / 2;
+
+        this.recalc_params();
     }
     update(input, deltaTime) {
 
     }
     draw(context) {
         context.drawImage(this.image, 0, 0, this.width, this.height, this.player.rotation * (this.player.x + (this.player.rotation > 0? this.drawDistance : 0)), this.player.y, this.player.rotation * this.width, this.height);
+    }
+    recalc_params() {
+
     }
 }
