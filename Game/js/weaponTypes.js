@@ -8,7 +8,7 @@ export class MeleeWeapon extends Weapon {
 
         // анимация атаки
         const attackRotationAnimationAngle = 90;
-        this.attackRotationAnimationFrequency = attackRotationAnimationAngle / this.baseSpeed / 1000;
+        this.attackRotationAnimationFrequency = attackRotationAnimationAngle * this.baseSpeed / this.baseCastDuration / 1000;
         this.attackProgress = 0;
     }
     update(input, deltaTime) {
