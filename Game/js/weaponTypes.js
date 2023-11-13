@@ -7,8 +7,8 @@ export class MeleeWeapon extends Weapon {
         this.range = 50;
 
         // анимация атаки
-        const attackRotationAnimationAngle = 90;
-        this.attackRotationAnimationFrequency = attackRotationAnimationAngle * this.baseSpeed / this.baseCastDuration / 1000;
+        this.attackRotationAnimationAngle = 90;
+        this.attackRotationAnimationFrequency = this.attackRotationAnimationAngle * this.baseSpeed * this.speedMultiplier / this.baseCastDuration / 1000;
         this.attackProgress = 0;
     }
     update(input, deltaTime) {
@@ -18,7 +18,7 @@ export class MeleeWeapon extends Weapon {
             }
         }
         if (this.attackProgress !== 0) {
-            if (this.attackProgress >= attackRotationAnimationAngle) {
+            if (this.attackProgress >= this.attackRotationAnimationAngle) {
                 console.log("ATTACK FINISHED");
                 this.attackProgress = 0;
             }

@@ -2,7 +2,9 @@ export class Weapon {
     constructor(player) {
         this.player = player;
         this.baseDamage = 1;
+        this.damageMultiplier = 1;
         this.baseSpeed = 1;
+        this.speedMultiplier = 1;
         this.baseCastDuration = 1;
         this.image = document.getElementById("terraBlade");
         this.width = 46;
