@@ -7,7 +7,7 @@ export class MeleeWeapon extends Weapon {
         this.range = 50;
 
         // анимация атаки
-        this.attackRotationAnimationAngle = 90;
+        this.attackRotationAnimationAngle = 110;
         this.attackRotationAnimationFrequency = this.attackRotationAnimationAngle * this.baseSpeed * this.speedMultiplier / this.baseCastDuration / 1000;
         this.attackProgress = 0;
     }
@@ -25,6 +25,12 @@ export class MeleeWeapon extends Weapon {
                 this.attackProgress += this.attackRotationAnimationFrequency * deltaTime;
             }
         }
+    }
+    draw(context) {
+        context.translate(this.player.x + this.drawDistance, this.player.y + this.height);
+        context.rotate(this.attackProgress * Math.PI / 180);
+        context.drawImage(this.image, 0, -this.height);
+        context.translate(-this.player.x, -this.player.y);
     }
 }
 
