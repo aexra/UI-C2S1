@@ -114,7 +114,11 @@ export class Player {
         else {
             context.save();
             context.scale(this.rotation, 1);
+            // это игрок
             // context.drawImage(this.image, 0, 0, this.width, this.height, this.rotation * this.x, this.y, this.rotation * this.width, this.height);
+            
+            // это квадрат 2х2 в центре игрока для дебага
+            // context.fillRect(this.rotation * this.x + this.rotation * this.width / 2, this.y + this.height / 2, 2, 2);
             context.restore();
         }
         

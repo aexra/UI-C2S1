@@ -2,7 +2,7 @@ class Wings {
     constructor(player) {
         this.player = player;
         this.image = document.getElementById("flameWings");
-        this.width = 108;
+        this.width = 100;
         this.height = 60;
 
         // анимация
