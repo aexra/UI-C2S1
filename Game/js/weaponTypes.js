@@ -19,11 +19,9 @@ export class MeleeWeapon extends Weapon {
         }
         if (this.attackProgress !== 0) {
             if (this.attackProgress >= this.attackRotationAnimationAngle) {
-                console.log("ATTACK FINISHED");
                 this.attackProgress = 0;
             }
             else {
-                console.log(this.attackProgress);
                 this.attackProgress += this.attackRotationAnimationFrequency * deltaTime;
             }
         }
