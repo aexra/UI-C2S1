@@ -45,6 +45,10 @@ export class MeleeWeapon extends Weapon {
     recalc_params() {
         this.attackRotationAnimationFrequency = this.attackRotationAnimationAngle * this.baseSpeed * this.speedMultiplier / this.baseCastDuration / 1000;
     }
+    onFire() {
+        let meleeSound = new Audio("../resources/game/weapons/melee/melee.wav");
+        meleeSound.play();
+    }
 }
 
 export class RangedWeapon extends Weapon {

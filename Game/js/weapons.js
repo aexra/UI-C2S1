@@ -14,6 +14,12 @@ export class TerraBlade extends MeleeWeapon {
     }
     onFire(input, deltaTime) {
         this.player.game.projectiles.push(new projectiles.TerraBeam(this, input.mpx, input.mpy));
+        let meleeSound = new Audio("../resources/game/weapons/melee/melee.wav");
+        meleeSound.volume = 0.01;
+        meleeSound.play();
+        let sound = new Audio("../resources/game/weapons/melee/terrablade/terrablade.wav");
+        sound.volume = 0.05;
+        sound.play();
     }
 }
 
