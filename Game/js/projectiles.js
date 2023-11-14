@@ -5,12 +5,23 @@ export class TerraBeam extends Projectile {
         super(weapon, ix, iy);
 
         this.image = document.getElementById("terraBeam");
+        this.width = 100;
+        this.height = 200;
+
+        this.lifeTime = 1000;
     }
     update(input, deltaTime) {
-
+        this.lifeTime -= deltaTime;
+        if (this.lifeTime < 0) {
+            this.weapon.player.game.projectiles.splice(this.weapon.player.game.projectiles.indexOf(this), 1);
+            delete this;
+        }
     }
     draw(context) {
-        context.drawImage(this.image, 0, 0);
-        // console.log(this.ix, this.iy);
+        context.translate(this.x, this.y);
+        context.rotate(this.rotationRad);
+        context.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
+        context.rotate(-this.rotationRad);
+        context.translate(-this.x, -this.y);
     }
 }

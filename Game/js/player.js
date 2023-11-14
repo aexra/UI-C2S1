@@ -119,6 +119,8 @@ export class Player {
             
             // это квадрат 2х2 в центре игрока для дебага
             // context.fillRect(this.rotation * this.x + this.rotation * this.width / 2, this.y + this.height / 2, 2, 2);
+            // это квадрат 4х4 в точке игрока для дебага
+            context.fillRect(this.rotation * this.x, this.y, 4, 4);
             context.restore();
         }
         

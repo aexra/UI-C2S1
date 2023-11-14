@@ -21,7 +21,7 @@ export class InputHandler {
         document.getElementById("canvas1").addEventListener("mouseup", (e) => {
             this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
         });
-        document.getElementById("canvas1").addEventListener("mouseover", (e) => {
+        document.getElementById("canvas1").addEventListener("mousemove", (e) => {
             this.mpx = e.clientX;
             this.mpy = e.clientY;
         });
