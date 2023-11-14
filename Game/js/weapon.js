@@ -22,4 +22,7 @@ export class Weapon {
     recalc_params() {
 
     }
+    onFire(input, deltaTime) {
+
+    }
 }

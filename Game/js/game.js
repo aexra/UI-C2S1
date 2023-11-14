@@ -18,13 +18,23 @@ window.addEventListener("load", (e) => {
 			this.height = height;
 			this.player = new Player(this);
 			this.input = new InputHandler();
+			this.projectiles = [];
 		}
 		update(deltaTime) {
 			this.player.update(this.input.keys, deltaTime);
+			
+			for (let projectile of this.projectiles) {
+				projectile.update(this.input.keys, deltaTime);
+			}
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.width, this.height);
+
 			this.player.draw(context);
+
+			for (let projectile of this.projectiles) {
+				projectile.draw(context);
+			}
 		}
 	}
 
