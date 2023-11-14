@@ -27,7 +27,7 @@ export class Player {
         this.rotation = 1;
         this.isPlayerSpriteFlipped = false;
 
-        this.inventory = [new weapons.TerraBlade(this)];
+        this.inventory = [new weapons.ExoBlade(this)];
         this.selectedItem = this.inventory[0];
     }
     update(input, deltaTime) {

@@ -16,3 +16,17 @@ export class TerraBlade extends MeleeWeapon {
         this.player.game.projectiles.push(new projectiles.TerraBeam(this, input.mpx, input.mpy));
     }
 }
+
+export class ExoBlade extends MeleeWeapon {
+    constructor(player) {
+        super(player);
+
+        this.image = document.getElementById("exoBlade");
+        this.speedMultiplier = 8;
+
+        this.recalc_params();
+    }
+    onFire(input, deltaTime) {
+        this.player.game.projectiles.push(new projectiles.ExoBeam(this, input.mpx, input.mpy));
+    }
+}

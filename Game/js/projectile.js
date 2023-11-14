@@ -17,9 +17,10 @@ export class Projectile {
         this.iy = iy;
         this.spawnRadius = 100;
 
-        this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x)) + (this.ix < this.x? Math.PI : 0);
-        this.x += this.spawnRadius * Math.cos(this.rotationRad);
-        this.y += this.spawnRadius * Math.sin(this.rotationRad);
+        this.initialAngleRad = -Math.atan((this.y - this.iy) / (this.ix - this.x)) + (this.ix < this.x? Math.PI : 0);
+        this.rotationAngleRad = this.initialAngleRad;
+        this.x += this.spawnRadius * Math.cos(this.initialAngleRad);
+        this.y += this.spawnRadius * Math.sin(this.initialAngleRad);
     }
     update(input, deltaTime) {
 
