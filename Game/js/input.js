@@ -25,5 +25,8 @@ export class InputHandler {
             this.mpx = e.clientX;
             this.mpy = e.clientY;
         });
+        document.body.addEventListener("mouseup", (e) => {
+            this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
+        });
     }
 }

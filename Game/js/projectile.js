@@ -11,8 +11,8 @@ export class Projectile {
         this.image;
         this.width;
         this.height;
-        this.x = weapon.player.x + weapon.player.width;
-        this.y = weapon.player.y;
+        this.x = weapon.player.x + weapon.player.width / 2;
+        this.y = weapon.player.y + weapon.player.height / 2;
         this.ix = ix;
         this.iy = iy;
         this.flipX = this.ix < this.x;
