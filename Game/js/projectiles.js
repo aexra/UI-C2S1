@@ -5,28 +5,38 @@ export class TerraBeam extends Projectile {
         super(weapon, ix, iy);
 
         this.image = document.getElementById("terraBeam");
-        this.width = 100;
-        this.height = 200;
+        this.width = 150;
+        this.height = 300;
 
         this.baseSpeed = 16;
+        this.speed = this.baseSpeed * this.speedMultiplier;
+        // this.acceleration = -0.02;
+        
+        this.maxLifeTime = 1000;
+        this.acceleration = -this.speed/this.maxLifeTime * 1.2;
 
-        this.lifeTime = 1000;
+        this.lifeTime = this.maxLifeTime;
+        this.alpha = 1;
     }
     update(input, deltaTime) {
         this.lifeTime -= deltaTime;
+        this.alpha -=  1 / this.maxLifeTime * deltaTime;
         if (this.lifeTime < 0) {
             this.weapon.player.game.projectiles.splice(this.weapon.player.game.projectiles.indexOf(this), 1);
             delete this;
         }
 
         // рассчитываем перемещение
-        this.x += this.baseSpeed * this.speedMultiplier * Math.cos(this.initialAngleRad);
-        this.y += this.baseSpeed * this.speedMultiplier * Math.sin(this.initialAngleRad);
+        this.speed = Math.max(this.speed + this.acceleration * deltaTime, 0);
+        this.x += this.speed * Math.cos(this.initialAngleRad);
+        this.y += this.speed * Math.sin(this.initialAngleRad);
     }
     draw(context) {
         context.translate(this.x, this.y);
         context.rotate(this.rotationAngleRad);
+        context.globalAlpha = this.alpha;
         context.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
+        context.globalAlpha = 1;
         context.rotate(-this.rotationAngleRad);
         context.translate(-this.x, -this.y);
     }
