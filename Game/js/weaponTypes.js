@@ -33,7 +33,7 @@ export class MeleeWeapon extends Weapon {
         if (this.player.rotation > 0) {
             context.translate(this.player.x + this.drawDistance, this.player.y + this.height);
             context.rotate(this.attackProgress * Math.PI / 180);
-            context.drawImage(this.image, 0, -this.height);
+            context.drawImage(this.image, 0, -this.height, this.width, this.height);
             context.translate(-this.player.x, -this.player.y);
         } else {
             context.translate(-this.player.x-this.drawDistance, this.player.y + this.height);
