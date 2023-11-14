@@ -16,7 +16,25 @@ export class Projectile {
         this.ix = ix;
         this.iy = iy;
         this.flipX = this.ix < this.x;
-        this.rotationRad = (this.flipX? (Math.atan(Math.abs(this.y - this.iy), this.x - this.ix)) : (Math.atan(Math.abs(this.iy - this.y), this.ix - this.x))) * (this.iy - this.y);
+        // this.rotationRad = (this.flipX? (Math.atan(Math.abs(this.y - this.iy), this.x - this.ix)) : (Math.atan(Math.abs(this.iy - this.y), this.ix - this.x)));
+        
+        if (!this.flipX) {
+            if (this.iy > this.y) {
+                // четвертая четверть
+                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x));
+            } else {
+                // первая четверть
+                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x));
+            }
+        } else {
+            if (this.iy > this.y) {
+                // третья четверть
+                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x))  + Math.PI;
+            } else {
+                // вторая четверть
+                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x)) + Math.PI;
+            }
+        }
     }
     update(input, deltaTime) {
 
