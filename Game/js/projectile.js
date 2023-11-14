@@ -15,27 +15,9 @@ export class Projectile {
         this.y = weapon.player.y + weapon.player.height / 2;
         this.ix = ix;
         this.iy = iy;
-        this.flipX = this.ix < this.x;
         this.spawnRadius = 100;
-        
-        if (!this.flipX) {
-            if (this.iy > this.y) {
-                // четвертая четверть
-                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x));
-            } else {
-                // первая четверть
-                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x));
-            }
-        } else {
-            if (this.iy > this.y) {
-                // третья четверть
-                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x))  + Math.PI;
-            } else {
-                // вторая четверть
-                this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x)) + Math.PI;
-            }
-        }
 
+        this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x)) + (this.ix < this.x? Math.PI : 0);
         this.x += this.spawnRadius * Math.cos(this.rotationRad);
         this.y += this.spawnRadius * Math.sin(this.rotationRad);
     }
