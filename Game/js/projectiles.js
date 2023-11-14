@@ -8,6 +8,8 @@ export class TerraBeam extends Projectile {
         this.width = 100;
         this.height = 200;
 
+        this.baseSpeed = 8;
+
         this.lifeTime = 1000;
     }
     update(input, deltaTime) {
@@ -16,6 +18,10 @@ export class TerraBeam extends Projectile {
             this.weapon.player.game.projectiles.splice(this.weapon.player.game.projectiles.indexOf(this), 1);
             delete this;
         }
+
+        // рассчитываем перемещение
+        this.x += this.baseSpeed * this.speedMultiplier * Math.cos(this.rotationRad);
+        this.y += this.baseSpeed * this.speedMultiplier * Math.sin(this.rotationRad);
     }
     draw(context) {
         context.translate(this.x, this.y);
