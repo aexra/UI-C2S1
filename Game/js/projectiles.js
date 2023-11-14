@@ -37,14 +37,20 @@ export class ExoBeam extends Projectile {
         super(weapon, ix, iy);
 
         this.image = document.getElementById("exoBeam");
-        this.width = 80;
-        this.height = 50;
-
-        this.baseSpeed = 16;
+        this.slashImage = document.getElementById("exoBeamSlash");
+        this.slashMaxWidth = 300;
+        this.slashHeight = 30;
+        this.width = 120;
+        this.height = 120;
+        this.baseSpeed = 30;
 
         this.lifeTime = 1000;
 
-        this.rotationAngleRad += 30 * Math.PI / 180;
+        this.rotationAngleRad += 45 * Math.PI / 180;
+
+        this.spawnSlashRadius = 90;
+        this.xslash = (this.x) + this.spawnSlashRadius * Math.cos(this.initialAngleRad);
+        this.yslash = (this.y) +  this.spawnSlashRadius * Math.sin(this.initialAngleRad);
     }
     update(input, deltaTime) {
         this.lifeTime -= deltaTime;
@@ -56,8 +62,16 @@ export class ExoBeam extends Projectile {
         // рассчитываем перемещение
         this.x += this.baseSpeed * this.speedMultiplier * Math.cos(this.initialAngleRad);
         this.y += this.baseSpeed * this.speedMultiplier * Math.sin(this.initialAngleRad);
+        this.xslash += this.baseSpeed * this.speedMultiplier * Math.cos(this.initialAngleRad);
+        this.yslash += this.baseSpeed * this.speedMultiplier * Math.sin(this.initialAngleRad);
     }
     draw(context) {
+        context.translate(this.xslash, this.yslash);
+        context.rotate(this.rotationAngleRad - 45 * Math.PI / 180);
+        context.drawImage(this.slashImage, -1.5*this.slashMaxWidth, -this.slashHeight / 2, this.slashMaxWidth, this.slashHeight);
+        context.rotate(-(this.rotationAngleRad - 45 * Math.PI / 180));
+        context.translate(-this.xslash, -this.yslash);
+
         context.translate(this.x, this.y);
         context.rotate(this.rotationAngleRad);
         context.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);

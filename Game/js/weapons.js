@@ -22,7 +22,7 @@ export class ExoBlade extends MeleeWeapon {
         super(player);
 
         this.image = document.getElementById("exoBlade");
-        this.speedMultiplier = 8;
+        this.speedMultiplier = 4;
 
         this.width = 80;
         this.height = 80;
