@@ -20,7 +20,7 @@ class Wings {
     }
     update(input, deltaTime) {
         // при зажатом пробеле
-        if (input.includes(" ")) {
+        if (input.keys.includes(" ")) {
             // анимация
             if (this.frameTimer > this.frameInterval) {
                 this.frameTimer = 0;
@@ -39,7 +39,7 @@ class Wings {
         }
 
         // при зажатом S
-        if (input.includes("s") || input.includes("ы")) {
+        if (input.keys.includes("s") || input.keys.includes("ы")) {
             this.player.gravityMultiplier = 2.4;
         }
         else {

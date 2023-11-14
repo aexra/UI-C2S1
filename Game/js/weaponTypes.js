@@ -14,7 +14,7 @@ export class MeleeWeapon extends Weapon {
         this.recalc_params();
     }
     update(input, deltaTime) {
-        if (input.includes("lmb")) {
+        if (input.keys.includes("lmb")) {
             if (this.attackProgress === 0) {
                 this.attackProgress += this.attackRotationAnimationFrequency * deltaTime;
                 this.onFire(input, deltaTime);

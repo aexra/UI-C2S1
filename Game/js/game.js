@@ -21,10 +21,10 @@ window.addEventListener("load", (e) => {
 			this.projectiles = [];
 		}
 		update(deltaTime) {
-			this.player.update(this.input.keys, deltaTime);
+			this.player.update(this.input, deltaTime);
 			
 			for (let projectile of this.projectiles) {
-				projectile.update(this.input.keys, deltaTime);
+				projectile.update(this.input, deltaTime);
 			}
 		}
 		draw(context) {

@@ -10,6 +10,7 @@ export class TerraBeam extends Projectile {
 
     }
     draw(context) {
-        context.drawImage(this.image, this.weapon, 0);
+        context.drawImage(this.image, 0, 0);
+        // console.log(this.ix, this.iy);
     }
 }

@@ -31,8 +31,8 @@ export class Player {
         this.selectedItem = this.inventory[0];
     }
     update(input, deltaTime) {
-        let left = input.includes("a");
-        let right = input.includes("d");
+        let left = input.keys.includes("a");
+        let right = input.keys.includes("d");
         
         this.direction = 0;
         if (left) this.direction--;

@@ -12,7 +12,7 @@ export class TerraBlade extends MeleeWeapon {
 
         this.recalc_params();
     }
-    onFire() {
-        this.player.game.projectiles.push(new projectiles.TerraBeam(this));
+    onFire(input, deltaTime) {
+        this.player.game.projectiles.push(new projectiles.TerraBeam(this, input.mpx, input.mpy));
     }
 }

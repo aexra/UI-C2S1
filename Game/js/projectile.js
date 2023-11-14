@@ -11,6 +11,8 @@ export class Projectile {
         this.image;
         this.x;
         this.y;
+        this.ix = ix;
+        this.iy = iy;
     }
     update(input, deltaTime) {
 
