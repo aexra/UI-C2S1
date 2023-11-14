@@ -8,7 +8,7 @@ export class TerraBeam extends Projectile {
         this.width = 100;
         this.height = 200;
 
-        this.baseSpeed = 8;
+        this.baseSpeed = 16;
 
         this.lifeTime = 1000;
     }
