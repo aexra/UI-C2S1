@@ -27,7 +27,7 @@ export class Player {
         this.rotation = 1;
         this.isPlayerSpriteFlipped = false;
 
-        this.inventory = [new weapons.ExoBlade(this)];
+        this.inventory = [new weapons.TerraBlade(this)];
         this.selectedItem = this.inventory[0];
     }
     update(input, deltaTime) {
@@ -120,7 +120,7 @@ export class Player {
             // это квадрат 2х2 в центре игрока для дебага
             // context.fillRect(this.rotation * this.x + this.rotation * this.width / 2, this.y + this.height / 2, 2, 2);
             // это квадрат 4х4 в точке игрока для дебага
-            context.fillRect(this.rotation * this.x, this.y, 4, 4);
+            // context.fillRect(this.rotation * this.x, this.y, 4, 4);
             context.restore();
         }
         
