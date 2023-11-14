@@ -16,7 +16,7 @@ export class Projectile {
         this.ix = ix;
         this.iy = iy;
         this.flipX = this.ix < this.x;
-        // this.rotationRad = (this.flipX? (Math.atan(Math.abs(this.y - this.iy), this.x - this.ix)) : (Math.atan(Math.abs(this.iy - this.y), this.ix - this.x)));
+        this.spawnRadius = 100;
         
         if (!this.flipX) {
             if (this.iy > this.y) {
@@ -35,6 +35,9 @@ export class Projectile {
                 this.rotationRad = -Math.atan((this.y - this.iy) / (this.ix - this.x)) + Math.PI;
             }
         }
+
+        this.x += this.spawnRadius * Math.cos(this.rotationRad);
+        this.y += this.spawnRadius * Math.sin(this.rotationRad);
     }
     update(input, deltaTime) {
 
