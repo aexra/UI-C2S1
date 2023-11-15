@@ -120,6 +120,19 @@ export class Player {
             // context.fillRect(this.rotation * this.x + this.rotation * this.size.x / 2, this.y + this.size.y / 2, 2, 2);
             // это квадрат 4х4 в точке игрока для дебага
             // context.fillRect(this.rotation * this.x, this.y, 4, 4);
+
+            // это границы игрока
+            context.fillStyle = 'rgba(140, 0, 0, 0.2)';
+            context.translate(this.rotation * this.position.x, this.position.y);
+            context.fillRect(0, 0, this.rotation * this.size.x, this.size.y);
+            context.translate(this.rotation * -this.position.x, -this.position.y);
+
+            // это границы "камеры"
+            context.fillStyle = 'rgba(0, 0, 140, 0.2)';
+            context.translate(this.rotation * this.position.x, this.position.y);
+            context.fillRect(this.rotation * -this.game.map.borderSize.x / 2 + this.rotation * this.size.x / 2, -this.game.map.borderSize.y / 2 + this.size.y / 2, this.rotation * this.game.map.borderSize.x, this.game.map.borderSize.y);
+            context.translate(this.rotation * -this.position.x, -this.position.y);
+
             context.restore();
         }
         
