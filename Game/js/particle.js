@@ -18,9 +18,11 @@ export class Particle {
         if (this.lifeTimer >= this.lifeTime) {
             this.emitter.deleteParticle(this);
         }
-        console.log("imalive!");
     }
     draw(c) {
-
+        c.save();
+        c.filStyle = 'rgba(255, 255, 255, 1)';
+        c.fillRect(this.emitter.position.x, this.emitter.position.y, 10, 10);
+        c.restore();
     }
 }

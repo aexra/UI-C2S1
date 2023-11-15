@@ -21,8 +21,6 @@ export class ParticleEmitter {
         this.interval = 1000 / this.frequency;
         this.timer = 0;
 
-        this.position = origin.position;
-
         this.emitting = false;
     }
     emit() {
@@ -49,6 +47,7 @@ export class ParticleEmitter {
         for (let particle of this.particles) {
             particle.draw(c);
         }
+        // c.fillRect(this.position.x, this.position.y, 50, 50);
     }
     createParticle() {
         this.particles.push(new Particle(this, this.particleSize, this.particleColor, this.particleVelocity, this.particleGravityModifier, Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, this.filter));

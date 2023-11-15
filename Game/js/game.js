@@ -54,8 +54,8 @@ window.addEventListener("load", (e) => {
 				emitter.draw(context);
 			}
 		}
-		createParticleEmitter(origin, d, f, t, r, dir, ps, pc, pv, pg, filter) {
-			var pe = new ParticleEmitter(origin, d, f, t, r, dir, ps, pc, pv, pg, filter);
+		createParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter) {
+			var pe = new ParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter);
 			this.particleEmitters.push(pe);
 			return pe;
 		}
