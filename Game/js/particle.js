@@ -2,27 +2,32 @@ import { Vec2 } from "./vec2.js";
 import { Vec4 } from "./vec4.js";
 
 export class Particle {
-    constructor(emitter, size, color, velocity, gravity, lifeTime, filter) {
+    constructor(emitter, position, size, color, velocity, gravity, lifeTime, filter) {
         this.emitter = emitter;
+        this.position = position;
         this.size = size;
         this.color = color;
         this.velocity = velocity;
-        this.gravity = gravity;
+        this.gravityModifier = gravity;
         this.lifeTime = lifeTime;
         this.filter = filter;
 
         this.lifeTimer = 0;
+        this.gravity = 9.8;
     }
     update(deltaTime) {
         this.lifeTimer += deltaTime;
         if (this.lifeTimer >= this.lifeTime) {
             this.emitter.deleteParticle(this);
         }
+        
+        this.position.x += this.velocity.x;
     }
     draw(c) {
         c.save();
-        c.filStyle = 'rgba(255, 255, 255, 1)';
-        c.fillRect(this.emitter.position.x, this.emitter.position.y, 10, 10);
+        c.fillStyle = `rgba(${this.color.x}, ${this.color.y}, ${this.color.z}, ${this.color.alpha})`;
+        c.filter = this.filter;
+        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         c.restore();
     }
 }

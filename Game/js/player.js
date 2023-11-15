@@ -33,7 +33,11 @@ export class Player {
         this.inventory = [new weapons.TerraBlade(this)];
         this.selectedItem = this.inventory[0];
 
-        this.game.createParticleEmitter(new Vec2(100, 100)).emit();
+        var pe = this.game.createParticleEmitter(new Vec2(100, 100));
+        pe.particleVelocity = new Vec2(4, 4);
+        pe.particleSize = new Vec2(10, 10);
+        pe.setFrequency(20);
+        pe.emit();
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");

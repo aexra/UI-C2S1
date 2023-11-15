@@ -35,7 +35,6 @@ export class ParticleEmitter {
             if (this.emitting && this.timer > this.interval) {
                 this.timer = 0;
                 this.createParticle();
-                this.stop();
             }
         }
         
@@ -50,9 +49,22 @@ export class ParticleEmitter {
         // c.fillRect(this.position.x, this.position.y, 50, 50);
     }
     createParticle() {
-        this.particles.push(new Particle(this, this.particleSize, this.particleColor, this.particleVelocity, this.particleGravityModifier, Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, this.filter));
+        this.particles.push(new Particle(
+            this, 
+            new Vec2(this.position.x, this.position.y), 
+            this.particleSize, 
+            this.particleColor, 
+            this.particleVelocity, 
+            this.particleGravityModifier, 
+            Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, 
+            this.filter
+        ));
     }
     deleteParticle(particle) {
         this.particles.splice(this.particles.indexOf(particle), 1);
+    }
+    setFrequency(f) {
+        this.frequency = f;
+        this.interval = 1000 / f; 
     }
 }
