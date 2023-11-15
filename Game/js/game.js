@@ -21,6 +21,7 @@ window.addEventListener("load", (e) => {
 			this.player = new Player(this);
 			this.input = new InputHandler(this);
 			this.projectiles = [];
+			this.particleEmitters = [];
 			this.map = new Map(new Vec2(this.width, this.height), this);
 			this.canvasTranslation = new Vec2();
 		}
