@@ -96,75 +96,36 @@ export class Player {
         for (let acc of this.accessories) {
             acc.update(input, deltaTime);
         }
-
-        this.camerabox = {
-            position: {
-                x: this.position.x,
-                y: this.position.y,
-            },
-            size: {
-                x: this.game.canvasSize.x,
-                y: this.game.canvasSize.y,
-            },
-        }
     }
-    draw(context) {
-        context.save();
-        context.scale(this.rotation, 1);
+    draw(c) {
+        // перемещение камеры
+
+
+        c.save();
+        c.scale(this.rotation, 1);
         // это квадрат 2х2 в центре игрока для дебага
         // context.fillRect(this.rotation * this.x + this.rotation * this.size.x / 2, this.y + this.size.y / 2, 2, 2);
         // это квадрат 4х4 в точке игрока для дебага
         // context.fillRect(this.rotation * this.x, this.y, 4, 4);
 
         // это границы игрока
-        context.fillStyle = 'rgba(140, 0, 0, 0.2)';
-        context.translate(this.rotation * this.position.x, this.position.y);
-        context.fillRect(0, 0, this.rotation * this.size.x, this.size.y);
-        context.translate(this.rotation * -this.position.x, -this.position.y);
+        this.drawPlayerBorders(c);
 
-        // это границы "камеры"
-        context.fillStyle = 'rgba(0, 0, 140, 0.2)';
-        context.translate(this.rotation * this.position.x, this.position.y);
-        context.fillRect(
-            -this.rotation * (this.camerabox.size.x / 2 - this.size.x / 2),
-            - (this.camerabox.size.y / 2 - this.size.y / 2),
-            this.rotation * this.camerabox.size.x,
-            this.camerabox.size.y
-        );
-        context.translate(this.rotation * -this.position.x, -this.position.y);
+        c.restore();
 
-        context.restore();
-
-        context.save();
-
-        context.scale(this.rotation, 1);
+        c.save();
+        c.scale(this.rotation, 1);
 
         // отрисовка аксессуаров
-        for (let acc of this.accessories) {
-            acc.draw(context);
-        }
+        this.drawAccessories(c);
 
         // отрисовка выбранного предмета
-        if (this.selectedItem !== null) {
-            this.selectedItem.draw(context);
-        }
-
-        context.restore();
+        this.drawSelected(c);
+        
+        c.restore();
 
         // отрисовка игрока
-        if (this.isPlayerSpriteFlipped) {
-            context.save();
-            context.scale(-this.rotation, 1);
-            context.drawImage(this.image, 0, 0, this.size.x, this.size.y, -this.rotation * this.x, this.y, -this.rotation * this.size.x, this.size.y);
-            context.restore();
-        }
-        else {
-            context.save();
-            context.scale(this.rotation, 1);
-            // context.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.x, this.y, this.rotation * this.size.x, this.size.y);
-            context.restore();
-        }
-        
+        // this.drawCharacter(c);
     }
     translate(x, y) {
         this.position.x += x;
@@ -176,5 +137,35 @@ export class Player {
     }
     isGrounded() {
         return Math.abs((this.position.y + this.size.y) - this.game.size.y) <= 1;
+    }
+    drawAccessories(c) {
+        for (let acc of this.accessories) {
+            acc.draw(c);
+        }
+    }
+    drawSelected(c) {
+        if (this.selectedItem !== null) {
+            this.selectedItem.draw(c);
+        }
+    }
+    drawPlayerBorders(c) {
+        c.fillStyle = 'rgba(140, 0, 0, 0.2)';
+        c.translate(this.rotation * this.position.x, this.position.y);
+        c.fillRect(0, 0, this.rotation * this.size.x, this.size.y);
+        c.translate(this.rotation * -this.position.x, -this.position.y);
+    }
+    drawCharacter(c) {
+        if (this.isPlayerSpriteFlipped) {
+            c.save();
+            c.scale(-this.rotation, 1);
+            c.drawImage(this.image, 0, 0, this.size.x, this.size.y, -this.rotation * this.position.x, this.position.y, -this.rotation * this.size.x, this.size.y);
+            c.restore();
+        }
+        else {
+            c.save();
+            c.scale(this.rotation, 1);
+            c.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.position.x, this.position.y, this.rotation * this.size.x, this.size.y);
+            c.restore();
+        }
     }
 }

@@ -33,7 +33,7 @@ window.addEventListener("load", (e) => {
 			this.map.update(this.input, deltaTime);
 		}
 		draw(context) {
-			context.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
+			context.clearRect(0, 0, this.size.x, this.size.y);
 
 			this.map.draw(context);
 
@@ -45,7 +45,7 @@ window.addEventListener("load", (e) => {
 		}
 	}
 
-	const game = new Game(new Vec2(canvas.width, canvas.height), new Vec2(canvas.width, canvas.height));
+	const game = new Game(new Vec2(10000, canvas.height), new Vec2(canvas.width, canvas.height));
 	let lastTime = 0;
 
 	function animate(timeStamp) {
