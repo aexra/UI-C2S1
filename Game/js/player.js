@@ -28,6 +28,17 @@ export class Player {
 
         this.inventory = [new weapons.TerraBlade(this)];
         this.selectedItem = this.inventory[0];
+
+        this.camerabox = {
+            position: {
+                x: this.position.x,
+                y: this.position.y,
+            },
+            size: {
+                x: 200,
+                y: 200,
+            },
+        }
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
@@ -85,8 +96,40 @@ export class Player {
         for (let acc of this.accessories) {
             acc.update(input, deltaTime);
         }
+
+        this.camerabox = {
+            position: {
+                x: this.position.x,
+                y: this.position.y,
+            },
+            size: {
+                x: 200,
+                y: 200,
+            },
+        }
     }
     draw(context) {
+        context.save();
+        context.scale(this.rotation, 1);
+        // это квадрат 2х2 в центре игрока для дебага
+        // context.fillRect(this.rotation * this.x + this.rotation * this.size.x / 2, this.y + this.size.y / 2, 2, 2);
+        // это квадрат 4х4 в точке игрока для дебага
+        // context.fillRect(this.rotation * this.x, this.y, 4, 4);
+
+        // это границы игрока
+        context.fillStyle = 'rgba(140, 0, 0, 0.2)';
+        context.translate(this.rotation * this.position.x, this.position.y);
+        context.fillRect(0, 0, this.rotation * this.size.x, this.size.y);
+        context.translate(this.rotation * -this.position.x, -this.position.y);
+
+        // это границы "камеры"
+        context.fillStyle = 'rgba(0, 0, 140, 0.2)';
+        context.translate(this.rotation * this.position.x, this.position.y);
+        context.fillRect(this.rotation * -this.game.map.borderSize.x / 2 + this.rotation * this.size.x / 2, -this.game.map.borderSize.y / 2 + this.size.y / 2, this.rotation * this.game.map.borderSize.x, this.game.map.borderSize.y);
+        context.translate(this.rotation * -this.position.x, -this.position.y);
+
+        context.restore();
+
         context.save();
 
         context.scale(this.rotation, 1);
@@ -113,26 +156,7 @@ export class Player {
         else {
             context.save();
             context.scale(this.rotation, 1);
-            // это игрок
             // context.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.x, this.y, this.rotation * this.size.x, this.size.y);
-            
-            // это квадрат 2х2 в центре игрока для дебага
-            // context.fillRect(this.rotation * this.x + this.rotation * this.size.x / 2, this.y + this.size.y / 2, 2, 2);
-            // это квадрат 4х4 в точке игрока для дебага
-            // context.fillRect(this.rotation * this.x, this.y, 4, 4);
-
-            // это границы игрока
-            context.fillStyle = 'rgba(140, 0, 0, 0.2)';
-            context.translate(this.rotation * this.position.x, this.position.y);
-            context.fillRect(0, 0, this.rotation * this.size.x, this.size.y);
-            context.translate(this.rotation * -this.position.x, -this.position.y);
-
-            // это границы "камеры"
-            context.fillStyle = 'rgba(0, 0, 140, 0.2)';
-            context.translate(this.rotation * this.position.x, this.position.y);
-            context.fillRect(this.rotation * -this.game.map.borderSize.x / 2 + this.rotation * this.size.x / 2, -this.game.map.borderSize.y / 2 + this.size.y / 2, this.rotation * this.game.map.borderSize.x, this.game.map.borderSize.y);
-            context.translate(this.rotation * -this.position.x, -this.position.y);
-
             context.restore();
         }
         
