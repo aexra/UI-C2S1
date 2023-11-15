@@ -13,7 +13,7 @@ export class ParticleEmitter {
         this.direction = dir || new Vec2(0, 1);
         this.particleSize = ps || new Vec2(1, 1);
         this.particleColor = pc || new Vec4(255, 255, 255, 1);
-        this.particleVelocity = pv || new Vec2(0, 0);  // два значения - рандом из
+        this.particleInitialSpeed = pv || new Vec2(0, 0);  // два значения - рандом из
         this.particleGravityModifier = pg || 1;
         this.filter = filter || 'none';
 
@@ -49,12 +49,17 @@ export class ParticleEmitter {
         // c.fillRect(this.position.x, this.position.y, 50, 50);
     }
     createParticle() {
+        var calculatedDirection = this.direction;
+        var boost = Random.randi(this.particleInitialSpeed.x, this.particleInitialSpeed.y);
+        var dx = calculatedDirection.x * Math.cos(this.radius) * boost;
+        var dy = - calculatedDirection.y * Math.sin(this.radius) * boost;
+        
         this.particles.push(new Particle(
             this, 
             new Vec2(this.position.x, this.position.y), 
             this.particleSize.copy(), 
             this.particleColor.copy(), 
-            Random.randi(this.particleVelocity.x, this.particleVelocity.y),
+            new Vec2(dx, dy),
             this.particleGravityModifier, 
             Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, 
             this.filter
