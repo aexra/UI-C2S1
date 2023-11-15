@@ -69,7 +69,7 @@ export class Player {
         console.log(this.velocityY);
         // применяем перемещение по X
         if (this.velocity < 0) {
-            input.mpx += this.position.x - Math.max(0, this.position.x - this.speed);
+            input.mpx += -(this.position.x - Math.max(0, this.position.x - this.speed));
             this.position.x = Math.max(0, this.position.x - this.speed);
         }
         else if (this.velocity > 0) {
