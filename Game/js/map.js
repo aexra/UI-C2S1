@@ -21,8 +21,8 @@ export class Map {
         // c.translate(-this.borderSize.x / 2, -this.borderSize.y / 2);
         // c.scale(this.scale, this.scale);
         // c.drawImage(this.background, this.position.x, this.position.y);
-        c.drawImage(this.background, 0, 0, 7000, 4000);
-        c.fillRect(0, 40900, 41000, 100);
+        c.drawImage(this.background, 0, 0, this.game.canvasSize.x, this.game.canvasSize.y);
+        c.fillRect(0, 2900, 3000, 100);
         c.restore();
     }
 }

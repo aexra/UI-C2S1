@@ -2,7 +2,7 @@ import * as accessories from "./accessories.js";
 import * as weapons from "./weapons.js"
 import { Vec2 } from "./vec2.js";
 
-const cringeFloor = 40900;
+const cringeFloor = 2900;
 
 export class Player {
     constructor(game) {
@@ -66,7 +66,7 @@ export class Player {
         // рассчитываем скорость по Y
         if (this.velocityY < this.maxVY * this.gravityMultiplier) this.velocityY += this.gravity * this.gravityMultiplier;
         if (this.velocityY > 0) this.velocityY = Math.min(this.maxVY * this.gravityMultiplier, this.velocityY);
-        console.log(this.velocityY);
+
         // применяем перемещение по X
         if (this.velocity < 0) {
             input.mpx += -(this.position.x - Math.max(0, this.position.x - this.speed));
@@ -172,7 +172,23 @@ export class Player {
     }
     translateCamera(c) {
         c.setTransform(1,0,0,1,0,0);
-        this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / 2), - (this.position.y - this.camera.size.y / 2));
+        this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / 2 + this.size.x / 2), - (this.position.y - this.camera.size.y / 2 + this.size.y / 2));
+        var al = - this.game.canvasTranslated.x;
+        var ar = - this.game.canvasTranslated.x + this.camera.size.x - this.game.size.x;
+        var bt = - this.game.canvasTranslated.y;
+        var bb =  - this.game.canvasTranslated.y + this.camera.size.y - this.game.size.y;
+        if (al < 0) {
+            this.game.canvasTranslated.x += al;
+        }
+        else if (ar > 0) {
+            this.game.canvasTranslated.x += ar;
+        }
+        if (bt < 0) {
+            this.game.canvasTranslated.y += bt;
+        }
+        else if (bb > 0) {
+            this.game.canvasTranslated.y += bb;
+        }
         c.translate(this.game.canvasTranslated.x, this.game.canvasTranslated.y);
     }
     checkIncomingFloorCollision() {
