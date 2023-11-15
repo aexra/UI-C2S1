@@ -76,7 +76,7 @@ export class Player {
         this.rotation = this.direction === 0? this.rotation : this.direction;
 
         // применяем перемещение по Y
-        if (!this.checkFloorCollision()) 
+        if (!this.checkIncomingFloorCollision()) 
         {
             this.position.y += this.velocityY;
         } else {
@@ -94,7 +94,7 @@ export class Player {
     }
     draw(c) {
         // перемещение камеры
-        // this.translateCamera(c);
+        this.translateCamera(c);
         // console.log(this.game.canvasSize);
 
         c.save();
@@ -132,7 +132,7 @@ export class Player {
     }
     isGrounded() {
         // return Math.abs((this.position.y + this.size.y) - this.game.size.y) <= 1;
-        return this.position.y + this.size.y > 954;
+        return this.position.y + this.size.y >= 954;
     }
     drawAccessories(c) {
         for (let acc of this.accessories) {
@@ -168,11 +168,10 @@ export class Player {
         c.setTransform(1,0,0,1,0,0);
         c.translate(- (this.position.x - this.camera.size.x / 2), - (this.position.y - this.camera.size.y / 2));
     }
-    checkFloorCollision() {
+    checkIncomingFloorCollision() {
         if (
-            this.isGrounded() ||
-            // this.position.y + this.velocityY + this.size.y <= this.game.size.y ||
-            this.position.y + this.velocityY + this.size.y > 954
+            this.position.y + this.velocityY + this.size.y >= this.game.size.y ||
+            this.position.y + this.velocityY + this.size.y >= 954
         ) return true; 
         return false;
     }
