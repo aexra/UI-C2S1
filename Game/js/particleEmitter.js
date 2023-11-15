@@ -4,12 +4,12 @@ import { Particle } from "./particle.js";
 import { Random } from "./misc.js";
 
 export class ParticleEmitter {
-    constructor(position, d, f, t, r, dir, ps, pc, pv, pv2, pg, filter) {
+    constructor(position, d, f, t, a, dir, ps, pc, pv, pg, filter) {
         this.position = position;
         this.d = d || new Vec2();
         this.frequency = f || 2;
         this.lifeTime = t || new Vec2(0.1, 1);
-        this.radius = r || 90;
+        this.angle = a || 90;
         this.direction = dir || new Vec2(0, 1);
         this.particleSize = ps || new Vec2(1, 1);
         this.particleColor = pc || new Vec4(255, 255, 255, 1);
@@ -49,17 +49,19 @@ export class ParticleEmitter {
         // c.fillRect(this.position.x, this.position.y, 50, 50);
     }
     createParticle() {
-        var calculatedDirection = this.direction;
+        var randomAngle = Random.randi(-this.angle / 2, this.angle / 2) + this.angle / 2;
+        var currentAngle = Math.atan(this.direction.y, this.direction.x);
+        var angle = (randomAngle * Math.PI / 180) + currentAngle;
         var boost = Random.randi(this.particleInitialSpeed.x, this.particleInitialSpeed.y);
-        var dx = calculatedDirection.x * Math.cos(this.radius) * boost;
-        var dy = - calculatedDirection.y * Math.sin(this.radius) * boost;
+        
+        var velocity = new Vec2(boost * Math.cos(angle), boost * Math.sin(angle));
         
         this.particles.push(new Particle(
             this, 
             new Vec2(this.position.x, this.position.y), 
             this.particleSize.copy(), 
             this.particleColor.copy(), 
-            new Vec2(dx, dy),
+            velocity,
             this.particleGravityModifier, 
             Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, 
             this.filter
