@@ -18,9 +18,10 @@ export class Map {
     }
     draw(c) {
         c.save()
-        c.translate(-this.borderSize.x / 2, -this.borderSize.y / 2);
+        // c.translate(-this.borderSize.x / 2, -this.borderSize.y / 2);
         // c.scale(this.scale, this.scale);
-        c.drawImage(this.background, this.position.x, this.position.y);
+        // c.drawImage(this.background, this.position.x, this.position.y);
+        c.drawImage(this.background, 0, 0);
         c.restore();
     }
 }
