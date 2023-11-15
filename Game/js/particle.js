@@ -13,7 +13,7 @@ export class Particle {
         this.filter = filter;
 
         this.lifeTimer = 0;
-        this.gravity = 9.8;
+        this.gravity = 9.8 / 1000;
     }
     update(deltaTime) {
         this.lifeTimer += deltaTime;
@@ -21,7 +21,10 @@ export class Particle {
             this.emitter.deleteParticle(this);
         }
         
+        this.velocity.y += this.gravity;
+        
         this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
     }
     draw(c) {
         c.save();

@@ -52,9 +52,9 @@ export class ParticleEmitter {
         this.particles.push(new Particle(
             this, 
             new Vec2(this.position.x, this.position.y), 
-            this.particleSize, 
-            this.particleColor, 
-            this.particleVelocity, 
+            this.particleSize.copy(), 
+            this.particleColor.copy(), 
+            this.particleVelocity.copy(), 
             this.particleGravityModifier, 
             Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, 
             this.filter

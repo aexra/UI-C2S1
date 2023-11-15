@@ -1,6 +1,7 @@
 import * as accessories from "./accessories.js";
 import * as weapons from "./weapons.js"
 import { Vec2 } from "./vec2.js";
+import { Random } from "./misc.js";
 
 export class Player {
     constructor(game) {
@@ -34,7 +35,7 @@ export class Player {
         this.selectedItem = this.inventory[0];
 
         var pe = this.game.createParticleEmitter(new Vec2(100, 100));
-        pe.particleVelocity = new Vec2(4, 4);
+        pe.particleVelocity = new Vec2(Random.randi(1, 5), Random.randi(-5, 5));
         pe.particleSize = new Vec2(10, 10);
         pe.setFrequency(20);
         pe.emit();

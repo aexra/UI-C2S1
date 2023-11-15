@@ -5,4 +5,7 @@ export class Vec4 {
         this.z = z || 0;
         this.alpha = alpha || 0;
     }
+    copy() {
+        return new Vec4(this.x, this.y, this.z, this.alpha);
+    }
 }
