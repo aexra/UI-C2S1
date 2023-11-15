@@ -31,4 +31,7 @@ export class ParticleEmitter {
     draw(c) {
 
     }
+    createParticle() {
+        
+    }
 }
