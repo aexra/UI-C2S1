@@ -23,7 +23,7 @@ window.addEventListener("load", (e) => {
 			this.projectiles = [];
 			this.particleEmitters = [];
 			this.input = new InputHandler(this);
-			this.map = new Map(new Vec2(this.width, this.height), this);
+			this.map = new Map(new Vec2(this.size.x, this.size.y), this);
 			this.player = new Player(this);
 		}
 		update(deltaTime) {
