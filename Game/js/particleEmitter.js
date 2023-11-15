@@ -32,7 +32,7 @@ export class ParticleEmitter {
     }
     update(deltaTime) {
         this.timer += deltaTime;
-        if (this.timer > this.interval) {
+        if (this.emitting && this.timer > this.interval) {
             this.timer = 0;
             this.createParticle();
         }
@@ -41,10 +41,6 @@ export class ParticleEmitter {
         for (let particle of this.particles) {
             particle.draw(c);
         }
-        c.save();
-        c.fillStyle = 'rgba(255, 255, 255, 1)';
-        c.fillRect(50, 50, 50, 50);
-        c.restore();
     }
     createParticle() {
         this.particles.push(new Particle(this.particleSize, this.particleColor, this.particleVelocity, this.particleGravityModifier, this.filter));

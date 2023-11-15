@@ -35,7 +35,7 @@ export class Player {
 
         this.game.createParticleEmitter(
             new Vec2(100, 100)
-        );
+        ).emit();
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
