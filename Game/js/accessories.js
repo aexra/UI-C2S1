@@ -41,7 +41,7 @@ class Wings {
 
         // при зажатом S
         if (input.keys.includes("s") || input.keys.includes("ы")) {
-            this.player.gravityMultiplier = 2.4;
+            this.player.gravityMultiplier = 1.4;
         }
         else {
             this.player.gravityMultiplier = 1;

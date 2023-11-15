@@ -65,8 +65,8 @@ export class Player {
 
         // рассчитываем скорость по Y
         if (this.velocityY < this.maxVY * this.gravityMultiplier) this.velocityY += this.gravity * this.gravityMultiplier;
-        if (this.velocityY > 0) this.velocityY = Math.min(this.maxVY, this.velocityY);
-
+        if (this.velocityY > 0) this.velocityY = Math.min(this.maxVY * this.gravityMultiplier, this.velocityY);
+        console.log(this.velocityY);
         // применяем перемещение по X
         if (this.velocity < 0) {
             input.mpx += this.position.x - Math.max(0, this.position.x - this.speed);
