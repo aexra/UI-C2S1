@@ -28,17 +28,17 @@ export class TerraBeam extends Projectile {
 
         // рассчитываем перемещение
         this.speed = Math.max(this.speed + this.acceleration * deltaTime, 0);
-        this.x += this.speed * Math.cos(this.initialAngleRad);
-        this.y += this.speed * Math.sin(this.initialAngleRad);
+        this.position.x += this.speed * Math.cos(this.initialAngleRad);
+        this.position.y += this.speed * Math.sin(this.initialAngleRad);
     }
     draw(context) {
-        context.translate(this.x, this.y);
+        context.translate(this.position.x, this.position.y);
         context.rotate(this.rotationAngleRad);
         context.globalAlpha = this.alpha;
         context.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
         context.globalAlpha = 1;
         context.rotate(-this.rotationAngleRad);
-        context.translate(-this.x, -this.y);
+        context.translate(-this.position.x, -this.position.y);
     }
 }
 
@@ -59,8 +59,8 @@ export class ExoBeam extends Projectile {
         this.rotationAngleRad += 45 * Math.PI / 180;
 
         this.spawnSlashRadius = 90;
-        this.xslash = (this.x) + this.spawnSlashRadius * Math.cos(this.initialAngleRad);
-        this.yslash = (this.y) +  this.spawnSlashRadius * Math.sin(this.initialAngleRad);
+        this.xslash = (this.position.x) + this.spawnSlashRadius * Math.cos(this.initialAngleRad);
+        this.yslash = (this.position.y) +  this.spawnSlashRadius * Math.sin(this.initialAngleRad);
     }
     update(input, deltaTime) {
         this.lifeTime -= deltaTime;
@@ -70,8 +70,8 @@ export class ExoBeam extends Projectile {
         }
 
         // рассчитываем перемещение
-        this.x += this.baseSpeed * this.speedMultiplier * Math.cos(this.initialAngleRad);
-        this.y += this.baseSpeed * this.speedMultiplier * Math.sin(this.initialAngleRad);
+        this.position.x += this.baseSpeed * this.speedMultiplier * Math.cos(this.initialAngleRad);
+        this.position.y += this.baseSpeed * this.speedMultiplier * Math.sin(this.initialAngleRad);
         this.xslash += this.baseSpeed * this.speedMultiplier * Math.cos(this.initialAngleRad);
         this.yslash += this.baseSpeed * this.speedMultiplier * Math.sin(this.initialAngleRad);
     }
@@ -82,10 +82,10 @@ export class ExoBeam extends Projectile {
         context.rotate(-(this.rotationAngleRad - 45 * Math.PI / 180));
         context.translate(-this.xslash, -this.yslash);
 
-        context.translate(this.x, this.y);
+        context.translate(this.position.x, this.position.y);
         context.rotate(this.rotationAngleRad);
         context.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
         context.rotate(-this.rotationAngleRad);
-        context.translate(-this.x, -this.y);
+        context.translate(-this.position.x, -this.position.y);
     }
 }

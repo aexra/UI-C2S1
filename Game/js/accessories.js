@@ -47,7 +47,7 @@ class Wings {
         }
     }
     draw(context) {
-        context.drawImage(this.image, 0, this.frame * 60, this.width, this.height, this.player.rotation * this.player.x, this.player.y, this.player.rotation * this.width, this.height);
+        context.drawImage(this.image, 0, this.frame * 60, this.width, this.height, this.player.rotation * this.player.position.x, this.player.position.y, this.player.rotation * this.width, this.height);
     }
 }
 

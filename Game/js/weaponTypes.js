@@ -31,15 +31,15 @@ export class MeleeWeapon extends Weapon {
     }
     draw(context) {
         if (this.player.rotation > 0) {
-            context.translate(this.player.x + this.drawDistance, this.player.y + this.height);
+            context.translate(this.player.position.x + this.drawDistance, this.player.position.y + this.height);
             context.rotate(this.attackProgress * Math.PI / 180);
             context.drawImage(this.image, 0, -this.height, this.width, this.height);
-            context.translate(-this.player.x, -this.player.y);
+            context.translate(-this.player.position.x, -this.player.position.y);
         } else {
-            context.translate(-this.player.x-this.drawDistance, this.player.y + this.height);
+            context.translate(-this.player.position.x-this.drawDistance, this.player.position.y + this.height);
             context.rotate(this.attackProgress * Math.PI / 180);
             context.drawImage(this.image, this.drawDistance, -this.height, -this.width, this.height);
-            context.translate(-this.player.x, -this.player.y);
+            context.translate(-this.player.position.x, -this.player.position.y);
         }
     }
     recalc_params() {

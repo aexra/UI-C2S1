@@ -21,7 +21,7 @@ window.addEventListener("load", (e) => {
 			this.player = new Player(this);
 			this.input = new InputHandler();
 			this.projectiles = [];
-			this.map = new Map(new Vec2(this.width, this.height));
+			this.map = new Map(new Vec2(this.width, this.height), this);
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);
@@ -29,6 +29,8 @@ window.addEventListener("load", (e) => {
 			for (let projectile of this.projectiles) {
 				projectile.update(this.input, deltaTime);
 			}
+
+			this.map.update(this.input, deltaTime);
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.width, this.height);

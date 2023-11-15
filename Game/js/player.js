@@ -1,13 +1,13 @@
 import * as accessories from "./accessories.js";
 import * as weapons from "./weapons.js"
+import { Vec2 } from "./vec2.js";
 
 export class Player {
     constructor(game) {
         this.game = game;
         this.width = 100;
         this.height = 120;
-        this.x = 0;
-        this.y = 800;
+        this.position = new Vec2(0, 0);
         this.image = document.getElementById("player");
 
         this.direction = 0;
@@ -67,17 +67,17 @@ export class Player {
 
         // применяем перемещение по X
         if (this.velocity < 0) {
-            this.x = Math.max(0, this.x - this.speed);
+            this.position.x = Math.max(0, this.position.x - this.speed);
         }
         else if (this.velocity > 0) {
-            this.x = Math.min(this.game.width - this.width, this.x + this.speed);
+            this.position.x = Math.min(this.game.width - this.width, this.position.x + this.speed);
         }
 
         this.rotation = this.direction === 0? this.rotation : this.direction;
 
         // применяем перемещение по Y
-        if (this.y + this.velocityY + this.height < this.game.height) this.y += this.velocityY;
-        else this.y = this.game.height - this.height;
+        if (this.position.y + this.velocityY + this.height < this.game.height) this.position.y += this.velocityY;
+        else this.position.y = this.game.height - this.height;
 
         if (this.selectedItem !== null) {
             this.selectedItem.update(input, deltaTime);
@@ -126,14 +126,14 @@ export class Player {
         
     }
     translate(x, y) {
-        this.x += x;
-        this.y += y;
+        this.position.x += x;
+        this.position.y += y;
     }
     translateTo(x, y) {
-        this.x = x;
-        this.y = y;
+        this.position.x = x;
+        this.position.x = y;
     }
     isGrounded() {
-        return Math.abs((this.y + this.height) - this.game.height) <= 1;
+        return Math.abs((this.position.y + this.height) - this.game.height) <= 1;
     }
 }

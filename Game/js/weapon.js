@@ -17,7 +17,7 @@ export class Weapon {
 
     }
     draw(context) {
-        context.drawImage(this.image, 0, 0, this.width, this.height, this.player.rotation * (this.player.x + (this.player.rotation > 0? this.drawDistance : 0)), this.player.y, this.player.rotation * this.width, this.height);
+        context.drawImage(this.image, 0, 0, this.width, this.height, this.player.rotation * (this.player.position.x + (this.player.rotation > 0? this.drawDistance : 0)), this.player.position.y, this.player.rotation * this.width, this.height);
     }
     recalc_params() {
 
