@@ -1,5 +1,7 @@
 import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
+import { Map } from "./map.js"
+import { Vec2 } from "./vec2.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -19,6 +21,7 @@ window.addEventListener("load", (e) => {
 			this.player = new Player(this);
 			this.input = new InputHandler();
 			this.projectiles = [];
+			this.map = new Map(new Vec2(this.width, this.height));
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);
@@ -29,6 +32,8 @@ window.addEventListener("load", (e) => {
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.width, this.height);
+
+			this.map.draw(context);
 
 			this.player.draw(context);
 
