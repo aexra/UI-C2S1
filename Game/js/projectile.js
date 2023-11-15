@@ -11,9 +11,8 @@ export class Projectile {
         this.damageMultiplier = 1;
 
         this.image;
-        this.width;
-        this.height;
-        this.position = new Vec2(weapon.player.position.x + weapon.player.width / 2, weapon.player.position.y + weapon.player.height / 2);
+        this.size = new Vec2();
+        this.position = new Vec2(weapon.player.position.x + weapon.player.size.x / 2, weapon.player.position.y + weapon.player.size.y / 2);
         this.initialpos = new Vec2(ix, iy);
         this.spawnRadius = 100;
 

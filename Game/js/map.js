@@ -7,6 +7,7 @@ export class Map {
 
         this.scale = 4;
         this.position = new Vec2(0, 0);
+        this.borderSize = new Vec2(500, 500);
 
         this.background = new Image();
         this.background.src = "../resources/main/artwork/main-bg.jpg";
@@ -16,6 +17,9 @@ export class Map {
         this.position.y = this.game.player.position.y;
     }
     draw(c) {
+        c.save()
+        c.scale(this.scale, this.scale);
         c.drawImage(this.background, this.position.x, this.position.y);
+        c.restore();
     }
 }

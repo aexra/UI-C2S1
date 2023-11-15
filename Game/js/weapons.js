@@ -1,5 +1,6 @@
 import { MeleeWeapon, RangedWeapon, MagicWeapon, SummonerWeapon } from "./weaponTypes.js"
 import * as projectiles from "./projectiles.js"
+import { Vec2 } from "./vec2.js";
 
 // MELEE WEAPONS
 
@@ -30,8 +31,7 @@ export class ExoBlade extends MeleeWeapon {
         this.image = document.getElementById("exoBlade");
         this.speedMultiplier = 4;
 
-        this.width = 80;
-        this.height = 80;
+        this.size = new Vec2(80, 80);
 
         this.recalc_params();
     }

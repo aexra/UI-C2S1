@@ -1,12 +1,12 @@
 import { Projectile } from "./projectile.js"
+import { Vec2 } from "./vec2.js";
 
 export class TerraBeam extends Projectile {
     constructor(weapon, ix, iy) {
         super(weapon, ix, iy);
 
         this.image = document.getElementById("terraBeam");
-        this.width = 150;
-        this.height = 300;
+        this.size = new Vec2(150, 300);
 
         this.baseSpeed = 16;
         this.speed = this.baseSpeed * this.speedMultiplier;
@@ -35,7 +35,7 @@ export class TerraBeam extends Projectile {
         context.translate(this.position.x, this.position.y);
         context.rotate(this.rotationAngleRad);
         context.globalAlpha = this.alpha;
-        context.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
+        context.drawImage(this.image, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
         context.globalAlpha = 1;
         context.rotate(-this.rotationAngleRad);
         context.translate(-this.position.x, -this.position.y);
@@ -48,10 +48,8 @@ export class ExoBeam extends Projectile {
 
         this.image = document.getElementById("exoBeam");
         this.slashImage = document.getElementById("exoBeamSlash");
-        this.slashMaxWidth = 300;
-        this.slashHeight = 30;
-        this.width = 120;
-        this.height = 120;
+        this.slashSize = new Vec2(300, 30);
+        this.size = new Vec2(120, 120);
         this.baseSpeed = 30;
 
         this.lifeTime = 1000;
@@ -78,13 +76,13 @@ export class ExoBeam extends Projectile {
     draw(context) {
         context.translate(this.xslash, this.yslash);
         context.rotate(this.rotationAngleRad - 45 * Math.PI / 180);
-        context.drawImage(this.slashImage, -1.5*this.slashMaxWidth, -this.slashHeight / 2, this.slashMaxWidth, this.slashHeight);
+        context.drawImage(this.slashImage, -1.5*this.slashMaxWidth, -this.slashSize.y / 2, this.slashMaxWidth, this.slashSize.y);
         context.rotate(-(this.rotationAngleRad - 45 * Math.PI / 180));
         context.translate(-this.xslash, -this.yslash);
 
         context.translate(this.position.x, this.position.y);
         context.rotate(this.rotationAngleRad);
-        context.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
+        context.drawImage(this.image, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
         context.rotate(-this.rotationAngleRad);
         context.translate(-this.position.x, -this.position.y);
     }

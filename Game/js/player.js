@@ -5,8 +5,7 @@ import { Vec2 } from "./vec2.js";
 export class Player {
     constructor(game) {
         this.game = game;
-        this.width = 100;
-        this.height = 120;
+        this.size = new Vec2(100, 120);
         this.position = new Vec2(0, 0);
         this.image = document.getElementById("player");
 
@@ -70,14 +69,14 @@ export class Player {
             this.position.x = Math.max(0, this.position.x - this.speed);
         }
         else if (this.velocity > 0) {
-            this.position.x = Math.min(this.game.width - this.width, this.position.x + this.speed);
+            this.position.x = Math.min(this.game.size.x - this.size.x, this.position.x + this.speed);
         }
 
         this.rotation = this.direction === 0? this.rotation : this.direction;
 
         // применяем перемещение по Y
-        if (this.position.y + this.velocityY + this.height < this.game.height) this.position.y += this.velocityY;
-        else this.position.y = this.game.height - this.height;
+        if (this.position.y + this.velocityY + this.size.y < this.game.size.y) this.position.y += this.velocityY;
+        else this.position.y = this.game.size.y - this.size.y;
 
         if (this.selectedItem !== null) {
             this.selectedItem.update(input, deltaTime);
@@ -108,17 +107,17 @@ export class Player {
         if (this.isPlayerSpriteFlipped) {
             context.save();
             context.scale(-this.rotation, 1);
-            context.drawImage(this.image, 0, 0, this.width, this.height, -this.rotation * this.x, this.y, -this.rotation * this.width, this.height);
+            context.drawImage(this.image, 0, 0, this.size.x, this.size.y, -this.rotation * this.x, this.y, -this.rotation * this.size.x, this.size.y);
             context.restore();
         }
         else {
             context.save();
             context.scale(this.rotation, 1);
             // это игрок
-            // context.drawImage(this.image, 0, 0, this.width, this.height, this.rotation * this.x, this.y, this.rotation * this.width, this.height);
+            // context.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.x, this.y, this.rotation * this.size.x, this.size.y);
             
             // это квадрат 2х2 в центре игрока для дебага
-            // context.fillRect(this.rotation * this.x + this.rotation * this.width / 2, this.y + this.height / 2, 2, 2);
+            // context.fillRect(this.rotation * this.x + this.rotation * this.size.x / 2, this.y + this.size.y / 2, 2, 2);
             // это квадрат 4х4 в точке игрока для дебага
             // context.fillRect(this.rotation * this.x, this.y, 4, 4);
             context.restore();
@@ -134,6 +133,6 @@ export class Player {
         this.position.x = y;
     }
     isGrounded() {
-        return Math.abs((this.position.y + this.height) - this.game.height) <= 1;
+        return Math.abs((this.position.y + this.size.y) - this.game.size.y) <= 1;
     }
 }

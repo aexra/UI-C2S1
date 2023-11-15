@@ -1,9 +1,10 @@
+import { Vec2 } from "./vec2.js";
+
 class Wings {
     constructor(player) {
         this.player = player;
         this.image = document.getElementById("flameWings");
-        this.width = 100;
-        this.height = 60;
+        this.size = new Vec2(100, 60);
 
         // анимация
         this.fps = 10;
@@ -47,7 +48,7 @@ class Wings {
         }
     }
     draw(context) {
-        context.drawImage(this.image, 0, this.frame * 60, this.width, this.height, this.player.rotation * this.player.position.x, this.player.position.y, this.player.rotation * this.width, this.height);
+        context.drawImage(this.image, 0, this.frame * 60, this.size.x, this.size.y, this.player.rotation * this.player.position.x, this.player.position.y, this.player.rotation * this.size.x, this.size.y);
     }
 }
 

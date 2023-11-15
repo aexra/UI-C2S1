@@ -15,9 +15,9 @@ window.addEventListener("load", (e) => {
 	canvas.height = document.body.offsetHeight - 50;
 
 	class Game {
-		constructor(width, height) {
-			this.width = width;
-			this.height = height;
+		constructor(size, canvasSize) {
+			this.size = size;
+			this.canvasSize = canvasSize;
 			this.player = new Player(this);
 			this.input = new InputHandler();
 			this.projectiles = [];
@@ -33,7 +33,7 @@ window.addEventListener("load", (e) => {
 			this.map.update(this.input, deltaTime);
 		}
 		draw(context) {
-			context.clearRect(0, 0, this.width, this.height);
+			context.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
 
 			this.map.draw(context);
 
@@ -45,7 +45,7 @@ window.addEventListener("load", (e) => {
 		}
 	}
 
-	const game = new Game(canvas.width, canvas.height);
+	const game = new Game(new Vec2(5000, canvas.height), new Vec2(canvas.width, canvas.height));
 	let lastTime = 0;
 
 	function animate(timeStamp) {
