@@ -12,7 +12,7 @@ export class ParticleEmitter {
         this.direction = dir || new Vec2(0, 1);
         this.particleSize = ps || new Vec2(1, 1);
         this.particleColor = pc || new Vec4(255, 255, 255, 1);
-        this.particleVelocity = pv || new Vector2(0, 0);
+        this.particleVelocity = pv || new Vec2(0, 0);
         this.particleGravityModifier = pg || 1;
         this.filter = filter || 'none';
 
@@ -41,6 +41,10 @@ export class ParticleEmitter {
         for (let particle of this.particles) {
             particle.draw(c);
         }
+        c.save();
+        c.fillStyle = 'rgba(255, 255, 255, 1)';
+        c.fillRect(50, 50, 50, 50);
+        c.restore();
     }
     createParticle() {
         this.particles.push(new Particle(this.particleSize, this.particleColor, this.particleVelocity, this.particleGravityModifier, this.filter));

@@ -2,8 +2,6 @@ import * as accessories from "./accessories.js";
 import * as weapons from "./weapons.js"
 import { Vec2 } from "./vec2.js";
 
-const cringeFloor = 2900;
-
 export class Player {
     constructor(game) {
         this.game = game;
@@ -34,6 +32,10 @@ export class Player {
 
         this.inventory = [new weapons.TerraBlade(this)];
         this.selectedItem = this.inventory[0];
+
+        this.game.createParticleEmitter(
+            new Vec2(100, 100)
+        );
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
@@ -138,7 +140,7 @@ export class Player {
     }
     isGrounded() {
         // return Math.abs((this.position.y + this.size.y) - this.game.size.y) <= 1;
-        return this.position.y + this.size.y >= cringeFloor;
+        return this.position.y + this.size.y >= this.game.size.y;
     }
     drawAccessories(c) {
         for (let acc of this.accessories) {
@@ -194,11 +196,11 @@ export class Player {
     checkIncomingFloorCollision() {
         if (
             this.position.y + this.velocityY + this.size.y >= this.game.size.y ||
-            this.position.y + this.velocityY + this.size.y >= cringeFloor
+            this.position.y + this.velocityY + this.size.y >= this.game.size.y
         ) return true; 
         return false;
     }
     getNearestFloorCoordinate() {
-        return cringeFloor - this.size.y;
+        return this.game.size.y - this.size.y;
     }
 }

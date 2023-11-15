@@ -19,12 +19,12 @@ window.addEventListener("load", (e) => {
 		constructor(size, canvasSize) {
 			this.size = size;
 			this.canvasSize = canvasSize;
-			this.player = new Player(this);
-			this.input = new InputHandler(this);
+			this.canvasTranslation = new Vec2();
 			this.projectiles = [];
 			this.particleEmitters = [];
+			this.input = new InputHandler(this);
 			this.map = new Map(new Vec2(this.width, this.height), this);
-			this.canvasTranslation = new Vec2();
+			this.player = new Player(this);
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);
@@ -61,7 +61,7 @@ window.addEventListener("load", (e) => {
 		}
 	}
 
-	const game = new Game(new Vec2(3000, 3000), new Vec2(canvas.width, canvas.height));
+	const game = new Game(new Vec2(canvas.width, canvas.height), new Vec2(canvas.width, canvas.height));
 	let lastTime = 0;
 
 	function animate(timeStamp) {
