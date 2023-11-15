@@ -35,7 +35,8 @@ export class Player {
         this.selectedItem = this.inventory[0];
 
         var pe = this.game.createParticleEmitter(new Vec2(100, 100));
-        pe.particleVelocity = new Vec2(Random.randi(1, 5), Random.randi(-5, 5));
+        pe.particleVelocity = new Vec2(1, 4);
+        pe.particleGravityModifier = 4;
         pe.particleSize = new Vec2(10, 10);
         pe.setFrequency(20);
         pe.emit();

@@ -21,7 +21,7 @@ export class Particle {
             this.emitter.deleteParticle(this);
         }
         
-        this.velocity.y += this.gravity;
+        this.velocity.y += this.gravity * this.gravityModifier;
         
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
