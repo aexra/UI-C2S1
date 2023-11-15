@@ -25,7 +25,7 @@ export class Player {
         this.gravity = 0.1;
         this.gravityMultiplier = 1;
         this.velocityY = 0;
-        this.maxVY = 8;
+        this.maxVY = 10;
 
         this.accessories = [new accessories.NebulaWings(this)];
 
@@ -64,14 +64,16 @@ export class Player {
         }
 
         // рассчитываем скорость по Y
-        this.velocityY += this.gravity * this.gravityMultiplier;
+        if (this.velocityY < this.maxVY * this.gravityMultiplier) this.velocityY += this.gravity * this.gravityMultiplier;
         if (this.velocityY > 0) this.velocityY = Math.min(this.maxVY, this.velocityY);
 
         // применяем перемещение по X
         if (this.velocity < 0) {
+            input.mpx += this.position.x - Math.max(0, this.position.x - this.speed);
             this.position.x = Math.max(0, this.position.x - this.speed);
         }
         else if (this.velocity > 0) {
+            input.mpx += this.position.x - Math.max(0, this.position.x - this.speed);
             this.position.x = Math.min(this.game.size.x - this.size.x, this.position.x + this.speed);
         }
 
@@ -81,7 +83,9 @@ export class Player {
         if (!this.checkIncomingFloorCollision()) 
         {
             this.position.y += this.velocityY;
+            input.mpy += this.velocityY;
         } else {
+            input.mpy += this.getNearestFloorCoordinate() - this.position.y
             this.position.y = this.getNearestFloorCoordinate();
             this.velocityY = 0;
         }
