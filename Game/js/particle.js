@@ -2,7 +2,7 @@ import { Vec2 } from "./vec2.js";
 import { Vec4 } from "./vec4.js";
 
 export class Particle {
-    constructor(emitter, position, size, color, velocity, gravity, lifeTime, filter) {
+    constructor(emitter, position, size, color, velocity, gravity, lifeTime, acceleration, filter) {
         this.emitter = emitter;
         this.position = position;
         this.size = size;
@@ -10,6 +10,7 @@ export class Particle {
         this.velocity = velocity;
         this.gravityModifier = gravity;
         this.lifeTime = lifeTime;
+        this.acceleration = acceleration;
         this.filter = filter;
 
         this.lifeTimer = 0;
@@ -22,6 +23,13 @@ export class Particle {
         }
         
         this.velocity.y += this.gravity * this.gravityModifier;
+
+        this.velocity.x += this.acceleration.x;
+        this.velocity.y += this.acceleration.y;
+
+        if (this.velocity.x * (this.velocity.x + this.acceleration.x) < 0) {
+            this.velocity = new Vec2(0, 0);
+        }
         
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;

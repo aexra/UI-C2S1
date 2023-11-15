@@ -35,13 +35,14 @@ export class Player {
         this.selectedItem = this.inventory[0];
 
         var pe = this.game.createParticleEmitter(new Vec2(100, 100));
-        pe.particleInitialSpeed = new Vec2(1, 4);
+        pe.particleInitialSpeed = new Vec2(1, 10);
 
-        pe.particleGravityModifier = 4;
+        pe.particleGravityModifier = 10;
         pe.particleSize = new Vec2(10, 10);
-        pe.direction = new Vec2(0, -1);
+        pe.direction = new Vec2(1, 0);
         pe.angle = 30;
-        pe.setFrequency(20);
+        pe.lifeTime = 5;
+        pe.setFrequency(50);
         pe.emit();
     }
     update(input, deltaTime) {

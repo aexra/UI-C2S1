@@ -4,7 +4,7 @@ import { Particle } from "./particle.js";
 import { Random } from "./misc.js";
 
 export class ParticleEmitter {
-    constructor(position, d, f, t, a, dir, ps, pc, pv, pg, filter) {
+    constructor(position, d, f, t, a, dir, ps, pc, pv, pg, acc, filter) {
         this.position = position;
         this.d = d || new Vec2();
         this.frequency = f || 2;
@@ -15,6 +15,7 @@ export class ParticleEmitter {
         this.particleColor = pc || new Vec4(255, 255, 255, 1);
         this.particleInitialSpeed = pv || new Vec2(0, 0);  // два значения - рандом из
         this.particleGravityModifier = pg || 1;
+        this.acceleration = acc || 0;
         this.filter = filter || 'none';
 
         this.particles = [];
@@ -55,6 +56,7 @@ export class ParticleEmitter {
         var boost = Random.randi(this.particleInitialSpeed.x, this.particleInitialSpeed.y);
 
         var velocity = new Vec2(boost * Math.cos(angle), boost * Math.sin(angle));
+        this.acceleration = new Vec2(this.acceleration *= Math.cos(angle), this.acceleration *= Math.sin(angle));
         
         this.particles.push(new Particle(
             this, 
@@ -64,6 +66,7 @@ export class ParticleEmitter {
             velocity,
             this.particleGravityModifier, 
             Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, 
+            this.acceleration,
             this.filter
         ));
     }
