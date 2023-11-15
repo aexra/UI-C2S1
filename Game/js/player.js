@@ -2,7 +2,7 @@ import * as accessories from "./accessories.js";
 import * as weapons from "./weapons.js"
 import { Vec2 } from "./vec2.js";
 
-const cringeFloor = 3800;
+const cringeFloor = 40900;
 
 export class Player {
     constructor(game) {

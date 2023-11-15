@@ -46,7 +46,7 @@ window.addEventListener("load", (e) => {
 		}
 	}
 
-	const game = new Game(new Vec2(7000, 4000), new Vec2(canvas.width, canvas.height));
+	const game = new Game(new Vec2(41000, 41000), new Vec2(canvas.width, canvas.height));
 	let lastTime = 0;
 
 	function animate(timeStamp) {

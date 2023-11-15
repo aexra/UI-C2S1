@@ -22,6 +22,7 @@ export class Map {
         // c.scale(this.scale, this.scale);
         // c.drawImage(this.background, this.position.x, this.position.y);
         c.drawImage(this.background, 0, 0, 7000, 4000);
+        c.fillRect(0, 40900, 41000, 100);
         c.restore();
     }
 }
