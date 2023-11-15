@@ -22,6 +22,7 @@ window.addEventListener("load", (e) => {
 			this.input = new InputHandler();
 			this.projectiles = [];
 			this.map = new Map(new Vec2(this.width, this.height), this);
+			this.canvasTranslation = new Vec2();
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);

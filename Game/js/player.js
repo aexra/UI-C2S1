@@ -166,7 +166,8 @@ export class Player {
     }
     translateCamera(c) {
         c.setTransform(1,0,0,1,0,0);
-        c.translate(- (this.position.x - this.camera.size.x / 2), - (this.position.y - this.camera.size.y / 2));
+        this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / 2), - (this.position.y - this.camera.size.y / 2));
+        c.translate(this.game.canvasTranslated.x, this.game.canvasTranslated.y);
     }
     checkIncomingFloorCollision() {
         if (
