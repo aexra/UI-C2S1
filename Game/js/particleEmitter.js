@@ -1,11 +1,12 @@
 import { Vec2 } from "./vec2.js";
 import { Vec4 } from "./vec4.js";
+import { Particle } from "./particle.js";
 
 export class ParticleEmitter {
-    constructor(origin, d, f, t, r, dir, ps, pc, pv, pg, filter) {
-        this.origin = origin;
+    constructor(position, d, f, t, r, dir, ps, pc, pv, pg, filter) {
+        this.position = position;
         this.d = d || new Vec2();
-        this.frequency = f || 0.5 * 1000;
+        this.frequency = f || 2;
         this.lifeTime = t || new Vec2(0.1, 1);
         this.radius = r || 90;
         this.direction = dir || new Vec2(0, 1);
@@ -14,6 +15,10 @@ export class ParticleEmitter {
         this.particleVelocity = pv || new Vector2(0, 0);
         this.particleGravityModifier = pg || 1;
         this.filter = filter || 'none';
+
+        this.particles = [];
+        this.interval = 1000 / this.frequency;
+        this.timer = 0;
 
         this.position = origin.position;
 
@@ -26,12 +31,18 @@ export class ParticleEmitter {
         this.emitting = false;
     }
     update(deltaTime) {
-
+        this.timer += deltaTime;
+        if (this.timer > this.interval) {
+            this.timer = 0;
+            this.createParticle();
+        }
     }
     draw(c) {
-
+        for (let particle of this.particles) {
+            particle.draw(c);
+        }
     }
     createParticle() {
-        
+        this.particles.push(new Particle(this.particleSize, this.particleColor, this.particleVelocity, this.particleGravityModifier, this.filter));
     }
 }

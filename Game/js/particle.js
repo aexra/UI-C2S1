@@ -1,5 +1,5 @@
-import { Vec2 } from "./vec2";
-import { Vec4 } from "./vec4";
+import { Vec2 } from "./vec2.js";
+import { Vec4 } from "./vec4.js";
 
 export class Particle {
     constructor(size, color, velocity, gravity, filter) {
@@ -13,6 +13,6 @@ export class Particle {
         
     }
     draw(c) {
-        
+
     }
 }
