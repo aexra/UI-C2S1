@@ -1,8 +1,9 @@
 export class InputHandler {
-    constructor() {
+    constructor(game) {
         this.keys = [];
         this.mpx = null;
         this.mpy = null;
+        this.game = game;
 
         window.addEventListener("keydown", (e) => {
             let key = e.key === 'ф'? 'a' : e.key === 'в'? 'd' : e.key;
@@ -22,8 +23,8 @@ export class InputHandler {
             this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
         });
         document.getElementById("canvas1").addEventListener("mousemove", (e) => {
-            this.mpx = e.clientX;
-            this.mpy = e.clientY;
+            this.mpx = e.clientX - game.canvasTranslated.x;
+            this.mpy = e.clientY - game.canvasTranslated.y;
         });
         document.body.addEventListener("mouseup", (e) => {
             this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
