@@ -39,7 +39,7 @@ export class Player {
 
         pe.particleGravityModifier = 4;
         pe.particleSize = new Vec2(10, 10);
-        pe.direction = new Vec2(-1, 0);
+        pe.direction = new Vec2(0, -1);
         pe.angle = 30;
         pe.setFrequency(20);
         pe.emit();

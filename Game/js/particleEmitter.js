@@ -49,11 +49,11 @@ export class ParticleEmitter {
         // c.fillRect(this.position.x, this.position.y, 50, 50);
     }
     createParticle() {
-        var randomAngle = Random.randi(-this.angle / 2, this.angle / 2) + this.angle / 2;
-        var currentAngle = Math.atan(this.direction.y, this.direction.x);
+        var randomAngle = Random.randi(-this.angle / 2, this.angle / 2);
+        var currentAngle = Math.atan(this.direction.y / this.direction.x);
         var angle = (randomAngle * Math.PI / 180) + currentAngle;
         var boost = Random.randi(this.particleInitialSpeed.x, this.particleInitialSpeed.y);
-        
+
         var velocity = new Vec2(boost * Math.cos(angle), boost * Math.sin(angle));
         
         this.particles.push(new Particle(
