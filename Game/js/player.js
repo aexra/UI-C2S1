@@ -103,8 +103,8 @@ export class Player {
                 y: this.position.y,
             },
             size: {
-                x: 200,
-                y: 200,
+                x: this.game.canvasSize.x,
+                y: this.game.canvasSize.y,
             },
         }
     }
@@ -125,7 +125,12 @@ export class Player {
         // это границы "камеры"
         context.fillStyle = 'rgba(0, 0, 140, 0.2)';
         context.translate(this.rotation * this.position.x, this.position.y);
-        context.fillRect(this.rotation * -this.game.map.borderSize.x / 2 + this.rotation * this.size.x / 2, -this.game.map.borderSize.y / 2 + this.size.y / 2, this.rotation * this.game.map.borderSize.x, this.game.map.borderSize.y);
+        context.fillRect(
+            -this.rotation * (this.camerabox.size.x / 2 - this.size.x / 2),
+            - (this.camerabox.size.y / 2 - this.size.y / 2),
+            this.rotation * this.camerabox.size.x,
+            this.camerabox.size.y
+        );
         context.translate(this.rotation * -this.position.x, -this.position.y);
 
         context.restore();
