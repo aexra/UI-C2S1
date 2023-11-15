@@ -38,7 +38,7 @@ export class Player {
         pe.particleInitialSpeed = new Vec2(1, 10);
 
         pe.particleGravityModifier = 10;
-        pe.particleSize = new Vec2(10, 10);
+        pe.particleSize = new Vec2(2, 2);
         pe.direction = new Vec2(1, 0);
         pe.angle = 30;
         pe.lifeTime = 5;
