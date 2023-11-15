@@ -8,6 +8,9 @@ export class Player {
         this.size = new Vec2(100, 120);
         this.position = new Vec2(0, 0);
         this.image = document.getElementById("player");
+        this.camera = {
+            size: game.canvasSize,
+        };
 
         this.direction = 0;
         this.speed = 0;
@@ -20,6 +23,7 @@ export class Player {
         this.gravity = 0.1;
         this.gravityMultiplier = 1;
         this.velocityY = 0;
+        this.maxVY = 8;
 
         this.accessories = [new accessories.NebulaWings(this)];
 
@@ -28,22 +32,11 @@ export class Player {
 
         this.inventory = [new weapons.TerraBlade(this)];
         this.selectedItem = this.inventory[0];
-
-        this.camerabox = {
-            position: {
-                x: this.position.x,
-                y: this.position.y,
-            },
-            size: {
-                x: 200,
-                y: 200,
-            },
-        }
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
         let right = input.keys.includes("d");
-        
+
         this.direction = 0;
         if (left) this.direction--;
         if (right) this.direction++;
@@ -69,11 +62,8 @@ export class Player {
         }
 
         // рассчитываем скорость по Y
-        if (this.isGrounded() && this.velocityY > 0) {
-            this.velocityY = 0;
-        } else {
-            this.velocityY += this.gravity * this.gravityMultiplier;
-        }
+        this.velocityY += this.gravity * this.gravityMultiplier;
+        if (this.velocityY > 0) this.velocityY = Math.min(this.maxVY, this.velocityY);
 
         // применяем перемещение по X
         if (this.velocity < 0) {
@@ -86,8 +76,13 @@ export class Player {
         this.rotation = this.direction === 0? this.rotation : this.direction;
 
         // применяем перемещение по Y
-        if (this.position.y + this.velocityY + this.size.y < this.game.size.y) this.position.y += this.velocityY;
-        else this.position.y = this.game.size.y - this.size.y;
+        if (!this.checkFloorCollision()) 
+        {
+            this.position.y += this.velocityY;
+        } else {
+            this.position.y = this.getNearestFloorCoordinate();
+            this.velocityY = 0;
+        }
 
         if (this.selectedItem !== null) {
             this.selectedItem.update(input, deltaTime);
@@ -99,7 +94,8 @@ export class Player {
     }
     draw(c) {
         // перемещение камеры
-
+        // this.translateCamera(c);
+        // console.log(this.game.canvasSize);
 
         c.save();
         c.scale(this.rotation, 1);
@@ -110,7 +106,6 @@ export class Player {
 
         // это границы игрока
         this.drawPlayerBorders(c);
-
         c.restore();
 
         c.save();
@@ -136,7 +131,8 @@ export class Player {
         this.position.x = y;
     }
     isGrounded() {
-        return Math.abs((this.position.y + this.size.y) - this.game.size.y) <= 1;
+        // return Math.abs((this.position.y + this.size.y) - this.game.size.y) <= 1;
+        return this.position.y + this.size.y > 954;
     }
     drawAccessories(c) {
         for (let acc of this.accessories) {
@@ -167,5 +163,20 @@ export class Player {
             c.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.position.x, this.position.y, this.rotation * this.size.x, this.size.y);
             c.restore();
         }
+    }
+    translateCamera(c) {
+        c.setTransform(1,0,0,1,0,0);
+        c.translate(- (this.position.x - this.camera.size.x / 2), - (this.position.y - this.camera.size.y / 2));
+    }
+    checkFloorCollision() {
+        if (
+            this.isGrounded() ||
+            // this.position.y + this.velocityY + this.size.y <= this.game.size.y ||
+            this.position.y + this.velocityY + this.size.y > 954
+        ) return true; 
+        return false;
+    }
+    getNearestFloorCoordinate() {
+        return 954 - this.size.y;
     }
 }
