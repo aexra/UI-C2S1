@@ -35,7 +35,11 @@ export class TerraBeam extends Projectile {
         context.translate(this.position.x, this.position.y);
         context.rotate(this.rotationAngleRad);
         context.globalAlpha = this.alpha;
+        // context.drawImage(this.image, -this.size.x / 2 - 5, -this.size.y / 2 - 15, this.size.x + 10, this.size.y + 30);
+        context.drawImage(this.image, -this.size.x / 2 - 5, -this.size.y / 2 - 5, this.size.x + 10, this.size.y + 10);
+        context.filter = 'brightness(0) saturate(100%) invert(88%) sepia(95%) saturate(5463%) hue-rotate(32deg) brightness(109%) contrast(105%)';
         context.drawImage(this.image, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        context.filter = 'none';
         context.globalAlpha = 1;
         context.rotate(-this.rotationAngleRad);
         context.translate(-this.position.x, -this.position.y);
