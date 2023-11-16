@@ -15,9 +15,16 @@ export class Particle {
 
         this.lifeTimer = 0;
         this.gravity = 9.8 / 1000;
+        this.startFadingTime = lifeTime * 0.3;
+        this.alpha = color.alpha;
+        this.dropAlpha = this.alpha / this.startFadingTime;
     }
     update(deltaTime) {
         this.lifeTimer += deltaTime;
+
+        if (this.lifeTimer >= this.startFadingTime) {
+            this.alpha -= this.dropAlpha * deltaTime;
+        }
         if (this.lifeTimer >= this.lifeTime) {
             this.emitter.deleteParticle(this);
         }
@@ -36,7 +43,7 @@ export class Particle {
     }
     draw(c) {
         c.save();
-        c.fillStyle = `rgba(${this.color.x}, ${this.color.y}, ${this.color.z}, ${this.color.alpha})`;
+        c.fillStyle = `rgba(${this.color.x}, ${this.color.y}, ${this.color.z}, ${this.alpha})`;
         c.filter = this.filter;
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         c.restore();

@@ -2,6 +2,7 @@ import * as accessories from "./accessories.js";
 import * as weapons from "./weapons.js"
 import { Vec2 } from "./vec2.js";
 import { Random } from "./misc.js";
+import { Vec4 } from "./vec4.js";
 
 export class Player {
     constructor(game) {
@@ -35,14 +36,15 @@ export class Player {
         this.selectedItem = this.inventory[0];
 
         var pe = this.game.createParticleEmitter(new Vec2(100, 100));
-        pe.particleInitialSpeed = new Vec2(1, 10);
+        pe.particleInitialSpeed = new Vec2(1, 1);
 
-        pe.particleGravityModifier = 10;
-        pe.particleSize = new Vec2(2, 2);
+        pe.particleGravityModifier = 0;
+        pe.particleSize = new Vec2(4, 4);
         pe.direction = new Vec2(1, 0);
-        pe.angle = 30;
-        pe.lifeTime = 5;
-        pe.setFrequency(50);
+        pe.angle = 0;
+        pe.lifeTime = new Vec2(1, 2);
+        pe.particleColor = new Vec4(0, 255, 0, 1);
+        pe.setFrequency(5);
         pe.emit();
     }
     update(input, deltaTime) {
