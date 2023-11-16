@@ -26,10 +26,12 @@ export class Map {
         this.position.y = -this.game.cameraPos.y;
     }
     draw(c) {
-        c.save()
+        c.save();
 
         // draw background
         this.drawBackground(c);
+        
+        c.restore();
     }
     drawBackground(c) {
         for (var layer of this.layers) {
