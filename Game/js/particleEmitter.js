@@ -22,6 +22,11 @@ export class ParticleEmitter {
         // filter будет изменять его цвет
         this.shape = null;
 
+        // если shape представляет не одно изображение, а тайлсет, то это анимация
+        this.nframes = 1;
+        this.frameSize = new Vec2();
+        this.fps = 0;
+
         this.particles = [];
         this.interval = 1000 / this.frequency;
         this.timer = 0;
@@ -62,17 +67,18 @@ export class ParticleEmitter {
         var velocity = new Vec2(boost * Math.cos(angle), boost * Math.sin(angle));
         this.acceleration = new Vec2(this.acceleration *= Math.cos(angle), this.acceleration *= Math.sin(angle));
         
-        this.particles.push(new Particle(
-            this, 
-            new Vec2(this.position.x, this.position.y), 
-            this.particleSize.copy(), 
-            this.particleColor.copy(), 
-            velocity,
-            this.particleGravityModifier, 
-            Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000, 
-            this.acceleration,
-            this.filter
-        ));
+        var particle = new Particle();
+        particle.emitter = this;
+        particle.position = this.position.copy();
+        particle.size = this.particleSize.copy(); 
+        particle.color = this.particleColor.copy();
+        particle.velocity = velocity; 
+        particle.gravityMod = this.particleGravityModifier;
+        particle.lifeTime = Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000;
+        particle.acceleration = this.acceleration.copy();
+        particle.filter = this.filter;
+        particle.shape = this.shape;
+        this.particles.push(particle);
     }
     deleteParticle(particle) {
         this.particles.splice(this.particles.indexOf(particle), 1);

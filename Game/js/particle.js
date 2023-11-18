@@ -2,22 +2,22 @@ import { Vec2 } from "./vec2.js";
 import { Vec4 } from "./vec4.js";
 
 export class Particle {
-    constructor(emitter, position, size, color, velocity, gravity, lifeTime, acceleration, filter, shape) {
-        this.emitter = emitter;
-        this.position = position;
-        this.size = size;
-        this.color = color;
-        this.velocity = velocity;
-        this.gravityModifier = gravity;
-        this.lifeTime = lifeTime;
-        this.acceleration = acceleration;
-        this.filter = filter;
-        this.shape = shape || null;
+    constructor() {
+        this.emitter = null;
+        this.position = new Vec2();
+        this.size = new Vec2();
+        this.color = new Vec4();
+        this.velocity = new Vec2();
+        this.gravityMod = 1;
+        this.lifeTime = 0;
+        this.acceleration = new Vec2();
+        this.filter = 'none';
+        this.shape = null;
 
         this.lifeTimer = 0;
         this.gravity = 9.8 / 1000;
-        this.startFadingTime = lifeTime * 0.3;
-        this.alpha = color.alpha;
+        this.startFadingTime = this.lifeTime? this.lifeTime * 0.3 : 0;
+        this.alpha = this.color? this.color.alpha : 1;
         this.dropAlpha = this.alpha / this.startFadingTime;
     }
     update(deltaTime) {
@@ -30,7 +30,7 @@ export class Particle {
             this.emitter.deleteParticle(this);
         }
         
-        this.velocity.y += this.gravity * this.gravityModifier;
+        this.velocity.y += this.gravity * this.gravityMod;
 
         this.velocity.x += this.acceleration.x;
         this.velocity.y += this.acceleration.y;
@@ -41,6 +41,8 @@ export class Particle {
         
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
+
+        console.log(this.position.x, this.position.y);
     }
     draw(c) {
         c.save();
@@ -49,7 +51,7 @@ export class Particle {
         if (this.shape === null) {
             c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         } else {
-            c.drawImage(shape, this.position.x, this.position.y, this.size.x, this.size.y);
+            c.drawImage(this.shape, this.position.x, this.position.y, this.size.x, this.size.y);
         }
         c.restore();
     }

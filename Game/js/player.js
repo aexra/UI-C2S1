@@ -38,13 +38,14 @@ export class Player {
         var pe = this.game.createParticleEmitter();
         pe.position = new Vec2(100 + game.canvasSize.x, 100 + game.canvasSize.y);
         pe.particleInitialSpeed = new Vec2(1, 1);
-
+        pe.shape = document.getElementById("terrabladeParticle")
         pe.particleGravityModifier = 0;
-        pe.particleSize = new Vec2(4, 4);
+        pe.particleSize = new Vec2(10, 10);
         pe.direction = new Vec2(1, 0);
         pe.angle = 0;
         pe.lifeTime = new Vec2(1, 2);
         pe.particleColor = new Vec4(0, 255, 0, 1);
+        pe.filter = "brightness(0) saturate(100%) invert(87%) sepia(81%) saturate(2883%) hue-rotate(33deg) brightness(109%) contrast(106%)";
         pe.setFrequency(5);
         pe.emit();
     }
