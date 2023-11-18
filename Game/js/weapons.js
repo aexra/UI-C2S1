@@ -14,17 +14,10 @@ export class TerraBlade extends MeleeWeapon {
         this.recalc_params();
     }
     draw(c) {
-        if (this.player.rotation > 0) {
-            c.translate(this.player.position.x + this.drawDistance, this.player.position.y + this.size.y);
-            c.rotate(this.attackProgress * Math.PI / 180);
-            c.drawImage(this.image, 0, -this.size.y, this.size.x, this.size.y);
-            c.translate(-this.player.position.x, -this.player.position.y);
-        } else {
-            c.translate(-this.player.position.x-this.drawDistance, this.player.position.y + this.size.y);
-            c.rotate(this.attackProgress * Math.PI / 180);
-            c.drawImage(this.image, this.drawDistance, -this.size.y, -this.size.x, this.size.y);
-            c.translate(-this.player.position.x, -this.player.position.y);
-        }
+        c.translate(this.player.rotation * (this.player.position.x + this.drawDistance), this.player.position.y - this.player.size.y / 6 + this.size.y);
+        c.rotate(this.attackProgress * Math.PI / 180);
+        c.drawImage(this.image, 0, -this.size.y, this.size.x, this.size.y);
+        c.translate(-this.player.rotation * (this.player.position.x + this.drawDistance), -(this.player.position.y - this.player.size.y / 6  + this.size.y));
     }
     onFire(input, deltaTime) {
         this.player.game.projectiles.push(new projectiles.TerraBeam(this, input.mpx, input.mpy));
