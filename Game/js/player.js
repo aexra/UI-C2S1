@@ -111,7 +111,7 @@ export class Player {
         // context.fillRect(this.rotation * this.x, this.y, 4, 4);
 
         // это границы игрока
-        this.drawPlayerBorders(c);
+        // this.drawPlayerBorders(c);
         c.restore();
 
         c.save();
