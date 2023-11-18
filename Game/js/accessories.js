@@ -47,8 +47,10 @@ class Wings {
             this.player.gravityMultiplier = 1;
         }
     }
-    draw(context) {
-        context.drawImage(this.image, 0, this.frame * 60, this.size.x, this.size.y, this.player.rotation * this.player.position.x, this.player.position.y, this.player.rotation * this.size.x, this.size.y);
+    draw(c) {
+        c.translate(this.player.rotation * (this.player.position.x + (this.player.size.x - this.size.x) / 2), this.player.position.y);
+        c.drawImage(this.image, 0, this.frame * 60, this.size.x, this.size.y, 0, 0, this.player.rotation * this.size.x, this.size.y);
+        c.translate(-this.player.rotation * (this.player.position.x + (this.player.size.x - this.size.x) / 2), -this.player.position.y);
     }
 }
 
