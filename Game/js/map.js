@@ -22,6 +22,9 @@ export class Map {
         // c.scale(this.scale, this.scale);
         // c.drawImage(this.background, this.position.x, this.position.y);
         c.drawImage(this.background, 0, 0, this.game.canvasSize.x, this.game.canvasSize.y);
+        c.drawImage(this.background, this.game.canvasSize.x, 0, this.game.canvasSize.x, this.game.canvasSize.y);
+        c.drawImage(this.background, 0, this.game.canvasSize.y, this.game.canvasSize.x, this.game.canvasSize.y);
+        c.drawImage(this.background, this.game.canvasSize.x, this.game.canvasSize.y, this.game.canvasSize.x, this.game.canvasSize.y);
         c.fillStyle = 'rgba(0, 0, 0, 0.4)';
         c.fillRect(0, 0, this.size.x, this.size.y);
         c.restore();
