@@ -1,5 +1,7 @@
+import { ParticleEmitter } from "./particleEmitter.js";
 import { Projectile } from "./projectile.js"
 import { Vec2 } from "./vec2.js";
+import { Random } from "./misc.js";
 
 export class TerraBeam extends Projectile {
     constructor(weapon, ix, iy) {
@@ -17,19 +19,53 @@ export class TerraBeam extends Projectile {
 
         this.lifeTime = this.maxLifeTime;
         this.alpha = 1;
+
+        // эффекты
+        this.pes = [];
+        for (var i = 0; i < 3; i++) {
+            var pe = this.weapon.player.game.createParticleEmitter();
+            this.pes.push(pe);
+
+            pe.setFrequency(10);
+            pe.lifeTime = new Vec2(0, 1);
+            pe.particleSize = new Vec2(10, 10);
+            pe.shape = document.getElementById("terrabladeParticle");
+            pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+            pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+            pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+            pe.angle = 90;
+            pe.position = this.position.copy().translate(new Vec2(Random.randi(-75, 75), Random.randi(-150, 150)));
+            pe.emit();
+        }
     }
     update(input, deltaTime) {
         this.lifeTime -= deltaTime;
         this.alpha -=  1 / this.maxLifeTime * deltaTime;
+
+        for (let pe of this.pes) {
+            pe.color.alpha = this.alpha;
+        }
+
         if (this.lifeTime < 0) {
+            for (let pe of this.pes) {
+                this.weapon.player.game.deleteParticleEmitter(pe);
+            }
             this.weapon.player.game.projectiles.splice(this.weapon.player.game.projectiles.indexOf(this), 1);
             delete this;
         }
+
+        var delta = this.position.copy();
 
         // рассчитываем перемещение
         this.speed = Math.max(this.speed + this.acceleration * deltaTime, 0);
         this.position.x += this.speed * Math.cos(this.initialAngleRad);
         this.position.y += this.speed * Math.sin(this.initialAngleRad);
+
+        delta = Vec2.minus(this.position, delta);
+
+        for (let pe of this.pes) {
+            pe.position.translate(delta);
+        }
     }
     draw(context) {
         context.translate(this.position.x, this.position.y);

@@ -6,4 +6,17 @@ export class Vec2 {
     copy() {
         return new Vec2(this.x, this.y);
     }
+    translate(by) {
+        this.x += by.x;
+        this.y += by.y;
+        return this;
+    }
+    translateTo(to) {
+        this.x = to.x;
+        this.y = to.y;
+        return this;
+    }
+    static minus(left, right) {
+        return new Vec2(left.x - right.x, left.y - right.y);
+    }
 }

@@ -2,17 +2,18 @@ import { Vec2 } from "./vec2.js";
 import { Vec4 } from "./vec4.js";
 import { Particle } from "./particle.js";
 import { Random } from "./misc.js";
+import { GameObject } from "./gameObject.js";
 
-export class ParticleEmitter {
+export class ParticleEmitter extends GameObject {
     constructor() {
-        this.position = new Vec2();
+        super();
         this.d = new Vec2();
         this.frequency = 2;
         this.lifeTime = new Vec2(0.1, 1);
         this.angle = 90;
         this.direction = new Vec2(0, 1);
         this.particleSize = new Vec2(1, 1);
-        this.particleColor = new Vec4(255, 255, 255, 1);
+        this.color = new Vec4(255, 255, 255, 1);
         this.particleInitialSpeed = new Vec2(0, 0);  // два значения - рандом из
         this.particleGravityModifier = 1;
         this.acceleration = 0;
@@ -78,7 +79,7 @@ export class ParticleEmitter {
         particle.velocity = velocity; 
         particle.gravityMod = this.particleGravityModifier;
         particle.setLifeTime(Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000);
-        particle.setColor(this.particleColor.copy());
+        particle.setColor(this.color.copy());
         particle.acceleration = this.acceleration.copy();
         particle.filter = this.filter;
         particle.shape = this.shape;

@@ -59,6 +59,9 @@ window.addEventListener("load", (e) => {
 			this.particleEmitters.push(pe);
 			return pe;
 		}
+		deleteParticleEmitter(emitter) {
+			this.particleEmitters.splice(this.particleEmitters.indexOf(emitter), 1);
+		}
 	}
 
 	const game = new Game(new Vec2(2 *canvas.width, 2 * canvas.height), new Vec2(canvas.width, canvas.height));

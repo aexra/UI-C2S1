@@ -46,7 +46,6 @@ export class Particle {
         if (this.lifeTimer >= this.lifeTime) {
             this.emitter.deleteParticle(this);
         }
-        console.log(this.alpha)
         
         this.velocity.y += this.gravity * this.gravityMod;
 
