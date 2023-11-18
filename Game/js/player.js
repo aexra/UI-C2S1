@@ -36,7 +36,7 @@ export class Player {
         this.selectedItem = this.inventory[0];
 
         var pe = this.game.createParticleEmitter();
-        pe.position = new Vec2(100, 100);
+        pe.position = new Vec2(100 + game.canvasSize.x, 100 + game.canvasSize.y);
         pe.particleInitialSpeed = new Vec2(1, 1);
 
         pe.particleGravityModifier = 0;
