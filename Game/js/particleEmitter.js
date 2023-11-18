@@ -4,19 +4,19 @@ import { Particle } from "./particle.js";
 import { Random } from "./misc.js";
 
 export class ParticleEmitter {
-    constructor(position, d, f, t, a, dir, ps, pc, pv, pg, acc, filter) {
-        this.position = position;
-        this.d = d || new Vec2();
-        this.frequency = f || 2;
-        this.lifeTime = t || new Vec2(0.1, 1);
-        this.angle = a || 90;
-        this.direction = dir || new Vec2(0, 1);
-        this.particleSize = ps || new Vec2(1, 1);
-        this.particleColor = pc || new Vec4(255, 255, 255, 1);
-        this.particleInitialSpeed = pv || new Vec2(0, 0);  // два значения - рандом из
-        this.particleGravityModifier = pg || 1;
-        this.acceleration = acc || 0;
-        this.filter = filter || 'none';
+    constructor() {
+        this.position = new Vec2();
+        this.d = new Vec2();
+        this.frequency = 2;
+        this.lifeTime = new Vec2(0.1, 1);
+        this.angle = 90;
+        this.direction = new Vec2(0, 1);
+        this.particleSize = new Vec2(1, 1);
+        this.particleColor = new Vec4(255, 255, 255, 1);
+        this.particleInitialSpeed = new Vec2(0, 0);  // два значения - рандом из
+        this.particleGravityModifier = 1;
+        this.acceleration = 0;
+        this.filter = 'none';
 
         this.particles = [];
         this.interval = 1000 / this.frequency;

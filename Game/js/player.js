@@ -35,7 +35,8 @@ export class Player {
         this.inventory = [new weapons.TerraBlade(this)];
         this.selectedItem = this.inventory[0];
 
-        var pe = this.game.createParticleEmitter(new Vec2(100, 100));
+        var pe = this.game.createParticleEmitter();
+        pe.position = new Vec2(100, 100);
         pe.particleInitialSpeed = new Vec2(1, 1);
 
         pe.particleGravityModifier = 0;
