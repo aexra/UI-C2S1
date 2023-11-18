@@ -18,6 +18,8 @@ export class Particle {
         this.frameSize = new Vec2();
         this.fps = 0;
         this.frameInterval = 1000 / this.fps;
+        this.frameTimer = 0;
+        this.frame = 0;
 
         this.lifeTimer = 0;
         this.gravity = 9.8 / 1000;
@@ -27,13 +29,22 @@ export class Particle {
     }
     update(deltaTime) {
         this.lifeTimer += deltaTime;
+        this.frameTimer += deltaTime;
+
+        // animation
+        if (this.frameTimer >= this.frameInterval) {
+            this.frameTimer = 0;
+            this.frame = this.nframes - 1 == this.frame? 0 : this.frame + 1;
+        }
 
         if (this.lifeTimer >= this.startFadingTime) {
             this.alpha -= this.dropAlpha * deltaTime;
+            this.alpha = Math.max(this.alpha, 0);
         }
         if (this.lifeTimer >= this.lifeTime) {
             this.emitter.deleteParticle(this);
         }
+        console.log(this.alpha)
         
         this.velocity.y += this.gravity * this.gravityMod;
 
@@ -51,22 +62,26 @@ export class Particle {
         c.save();
         c.fillStyle = `rgba(${this.color.x}, ${this.color.y}, ${this.color.z}, ${this.alpha})`;
         c.filter = this.filter;
+        c.globalAlpha = this.alpha;
         if (this.shape === null) {
             c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         } else {
-            // if (frames)
-            c.drawImage(this.shape, this.position.x, this.position.y, this.size.x, this.size.y);
+            if (this.nframes !== 1) {
+                c.drawImage(this.shape, 0, this.frameSize.y * this.frame, this.frameSize.x, this.frameSize.y, this.position.x, this.position.y, this.size.x, this.size.y);
+            } else {
+                c.drawImage(this.shape, this.position.x, this.position.y, this.size.x, this.size.y);
+            }
         }
         c.restore();
     }
     setLifeTime(lt) {
         this.lifeTime = lt;
-        this.startFadingTime = this.lifeTime? this.lifeTime * 0.3 : 0;
+        this.startFadingTime = lt * 0.3;
     }
     setColor(col) {
         this.color = col;
         this.alpha = col.alpha;
-        this.dropAlpha = this.alpha / this.startFadingTime;
+        this.dropAlpha = this.alpha / (this.lifeTime - this.startFadingTime);
     }
     setFrames(n, size, fps) {
         this.nframes = n;

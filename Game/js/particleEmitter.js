@@ -45,6 +45,7 @@ export class ParticleEmitter {
             if (this.emitting && this.timer > this.interval) {
                 this.timer = 0;
                 this.createParticle();
+                this.stop();
             }
         }
         
@@ -87,5 +88,10 @@ export class ParticleEmitter {
     setFrequency(f) {
         this.frequency = f;
         this.interval = 1000 / f; 
+    }
+    setFrames(n, size, fps) {
+        this.nframes = n;
+        this.frameSize = size;
+        this.fps = fps;
     }
 }
