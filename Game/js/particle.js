@@ -2,7 +2,7 @@ import { Vec2 } from "./vec2.js";
 import { Vec4 } from "./vec4.js";
 
 export class Particle {
-    constructor(emitter, position, size, color, velocity, gravity, lifeTime, acceleration, filter) {
+    constructor(emitter, position, size, color, velocity, gravity, lifeTime, acceleration, filter, shape) {
         this.emitter = emitter;
         this.position = position;
         this.size = size;
@@ -12,6 +12,7 @@ export class Particle {
         this.lifeTime = lifeTime;
         this.acceleration = acceleration;
         this.filter = filter;
+        this.shape = shape || null;
 
         this.lifeTimer = 0;
         this.gravity = 9.8 / 1000;
@@ -45,7 +46,11 @@ export class Particle {
         c.save();
         c.fillStyle = `rgba(${this.color.x}, ${this.color.y}, ${this.color.z}, ${this.alpha})`;
         c.filter = this.filter;
-        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        if (this.shape === null) {
+            c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        } else {
+            c.drawImage(shape, this.position.x, this.position.y, this.size.x, this.size.y);
+        }
         c.restore();
     }
 }

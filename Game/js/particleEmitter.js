@@ -18,6 +18,10 @@ export class ParticleEmitter {
         this.acceleration = 0;
         this.filter = 'none';
 
+        // это любое изображение, которое будет использовано в качестве частицы
+        // filter будет изменять его цвет
+        this.shape = null;
+
         this.particles = [];
         this.interval = 1000 / this.frequency;
         this.timer = 0;
