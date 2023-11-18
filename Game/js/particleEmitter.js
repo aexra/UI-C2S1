@@ -27,6 +27,9 @@ export class ParticleEmitter {
         this.frameSize = new Vec2();
         this.fps = 0;
 
+        // если shape это изображение, но нужны только определенные тайлы
+        this.frames = [];
+
         this.particles = [];
         this.interval = 1000 / this.frequency;
         this.timer = 0;
@@ -45,7 +48,7 @@ export class ParticleEmitter {
             if (this.emitting && this.timer > this.interval) {
                 this.timer = 0;
                 this.createParticle();
-                this.stop();
+                // this.stop();
             }
         }
         
@@ -80,6 +83,7 @@ export class ParticleEmitter {
         particle.filter = this.filter;
         particle.shape = this.shape;
         particle.setFrames(this.nframes, this.frameSize, this.fps);
+        if (this.frames.length !== 0) particle.setFrameCrop(this.frames[Random.randi(0, this.frames.length - 1)]);
         this.particles.push(particle);
     }
     deleteParticle(particle) {
@@ -93,5 +97,8 @@ export class ParticleEmitter {
         this.nframes = n;
         this.frameSize = size;
         this.fps = fps;
+    }
+    addFrameCrop(cp, cs) {
+        this.frames.push([cp, cs]);
     }
 }

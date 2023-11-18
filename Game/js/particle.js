@@ -20,6 +20,8 @@ export class Particle {
         this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0;
         this.frame = 0;
+        this.frameCropPos;
+        this.frameCropSize;
 
         this.lifeTimer = 0;
         this.gravity = 9.8 / 1000;
@@ -69,7 +71,11 @@ export class Particle {
             if (this.nframes !== 1) {
                 c.drawImage(this.shape, 0, this.frameSize.y * this.frame, this.frameSize.x, this.frameSize.y, this.position.x, this.position.y, this.size.x, this.size.y);
             } else {
-                c.drawImage(this.shape, this.position.x, this.position.y, this.size.x, this.size.y);
+                if (this.frameCropPos !== null) {
+                    c.drawImage(this.shape, this.frameCropPos.x, this.frameCropPos.y, this.frameCropSize.x, this.frameCropSize.y, this.position.x, this.position.y, this.size.x, this.size.y);
+                } else {
+                    c.drawImage(this.shape, this.position.x, this.position.y, this.size.x, this.size.y);
+                }
             }
         }
         c.restore();
@@ -88,5 +94,9 @@ export class Particle {
         this.frameSize = size;
         this.fps = fps;
         this.frameInterval = 1000 / this.fps;
+    }
+    setFrameCrop(info) {
+        this.frameCropPos = info[0];
+        this.frameCropSize = info[1];
     }
 }
