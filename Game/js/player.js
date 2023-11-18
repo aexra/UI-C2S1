@@ -126,7 +126,9 @@ export class Player {
         c.restore();
 
         // отрисовка игрока
+        c.save();
         this.drawCharacter(c);
+        c.restore();
     }
     translate(x, y) {
         this.position.x += x;
@@ -157,21 +159,10 @@ export class Player {
         c.translate(this.rotation * -this.position.x, -this.position.y);
     }
     drawCharacter(c) {
-        // if (this.isPlayerSpriteFlipped) {
-        //     c.save();
-        //     c.scale(-this.rotation, 1);
-        //     c.drawImage(this.image, 0, 0, this.size.x, this.size.y, -this.rotation * this.position.x, this.position.y, -this.rotation * this.size.x, this.size.y);
-        //     c.restore();
-        // }
-        // else {
-        //     c.save();
-        //     c.scale(this.rotation, 1);
-        //     c.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.position.x, this.position.y, this.rotation * this.size.x, this.size.y);
-        //     c.restore();
-        // }
-        c.translate(this.position.x, this.position.y);
-        c.drawImage(this.image, 0, 0);
-        c.translate(-this.position.x, -this.position.y);
+        c.scale(this.rotation, 1);
+        c.translate(this.rotation * this.position.x, this.position.y);
+        c.drawImage(this.image, 0, 0, this.rotation * this.size.x, this.size.y);
+        c.translate(-this.rotation * this.position.x, -this.position.y);
     }
     translateCamera(c) {
         c.setTransform(1,0,0,1,0,0);
