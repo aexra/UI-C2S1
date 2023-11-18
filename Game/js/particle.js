@@ -14,6 +14,11 @@ export class Particle {
         this.filter = 'none';
         this.shape = null;
 
+        this.nframes = 1;
+        this.frameSize = new Vec2();
+        this.fps = 0;
+        this.frameInterval = 1000 / this.fps;
+
         this.lifeTimer = 0;
         this.gravity = 9.8 / 1000;
         this.startFadingTime = this.lifeTime? this.lifeTime * 0.3 : 0;
@@ -41,8 +46,6 @@ export class Particle {
         
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
-
-        console.log(this.position.x, this.position.y);
     }
     draw(c) {
         c.save();
@@ -51,8 +54,24 @@ export class Particle {
         if (this.shape === null) {
             c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         } else {
+            // if (frames)
             c.drawImage(this.shape, this.position.x, this.position.y, this.size.x, this.size.y);
         }
         c.restore();
+    }
+    setLifeTime(lt) {
+        this.lifeTime = lt;
+        this.startFadingTime = this.lifeTime? this.lifeTime * 0.3 : 0;
+    }
+    setColor(col) {
+        this.color = col;
+        this.alpha = col.alpha;
+        this.dropAlpha = this.alpha / this.startFadingTime;
+    }
+    setFrames(n, size, fps) {
+        this.nframes = n;
+        this.frameSize = size;
+        this.fps = fps;
+        this.frameInterval = 1000 / this.fps;
     }
 }

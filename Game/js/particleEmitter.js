@@ -71,13 +71,14 @@ export class ParticleEmitter {
         particle.emitter = this;
         particle.position = this.position.copy();
         particle.size = this.particleSize.copy(); 
-        particle.color = this.particleColor.copy();
         particle.velocity = velocity; 
         particle.gravityMod = this.particleGravityModifier;
-        particle.lifeTime = Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000;
+        particle.setLifeTime(Random.randf(this.lifeTime.x, this.lifeTime.y, 2) * 1000);
+        particle.setColor(this.particleColor.copy());
         particle.acceleration = this.acceleration.copy();
         particle.filter = this.filter;
         particle.shape = this.shape;
+        particle.setFrames(this.nframes, this.frameSize, this.fps);
         this.particles.push(particle);
     }
     deleteParticle(particle) {
