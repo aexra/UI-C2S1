@@ -7,7 +7,7 @@ import { Vec4 } from "./vec4.js";
 export class Player {
     constructor(game) {
         this.game = game;
-        this.size = new Vec2(100, 120);
+        this.size = new Vec2(36, 54);
         this.position = new Vec2(1500, 2700);
         this.image = document.getElementById("player");
         this.camera = {
@@ -126,7 +126,7 @@ export class Player {
         c.restore();
 
         // отрисовка игрока
-        // this.drawCharacter(c);
+        this.drawCharacter(c);
     }
     translate(x, y) {
         this.position.x += x;
@@ -157,18 +157,21 @@ export class Player {
         c.translate(this.rotation * -this.position.x, -this.position.y);
     }
     drawCharacter(c) {
-        if (this.isPlayerSpriteFlipped) {
-            c.save();
-            c.scale(-this.rotation, 1);
-            c.drawImage(this.image, 0, 0, this.size.x, this.size.y, -this.rotation * this.position.x, this.position.y, -this.rotation * this.size.x, this.size.y);
-            c.restore();
-        }
-        else {
-            c.save();
-            c.scale(this.rotation, 1);
-            c.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.position.x, this.position.y, this.rotation * this.size.x, this.size.y);
-            c.restore();
-        }
+        // if (this.isPlayerSpriteFlipped) {
+        //     c.save();
+        //     c.scale(-this.rotation, 1);
+        //     c.drawImage(this.image, 0, 0, this.size.x, this.size.y, -this.rotation * this.position.x, this.position.y, -this.rotation * this.size.x, this.size.y);
+        //     c.restore();
+        // }
+        // else {
+        //     c.save();
+        //     c.scale(this.rotation, 1);
+        //     c.drawImage(this.image, 0, 0, this.size.x, this.size.y, this.rotation * this.position.x, this.position.y, this.rotation * this.size.x, this.size.y);
+        //     c.restore();
+        // }
+        c.translate(this.position.x, this.position.y);
+        c.drawImage(this.image, 0, 0);
+        c.translate(-this.position.x, -this.position.y);
     }
     translateCamera(c) {
         c.setTransform(1,0,0,1,0,0);
