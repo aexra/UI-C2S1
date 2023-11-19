@@ -15,7 +15,7 @@ export class TerraBlade extends MeleeWeapon {
     }
     draw(c) {
         c.translate(this.player.rotation * (this.player.position.x + this.drawDistance), this.player.position.y - this.player.size.y / 6 + this.size.y);
-        c.rotate(this.attackProgress * Math.PI / 180);
+        c.rotate((this.attackProgress === 0?  this.attackProgress : this.attackProgress - 90) * Math.PI / 180);
         c.drawImage(this.image, 0, -this.size.y, this.size.x, this.size.y);
         c.translate(-this.player.rotation * (this.player.position.x + this.drawDistance), -(this.player.position.y - this.player.size.y / 6  + this.size.y));
     }

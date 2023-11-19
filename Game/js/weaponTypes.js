@@ -7,7 +7,7 @@ export class MeleeWeapon extends Weapon {
         this.range = 50;
 
         // анимация атаки
-        this.attackRotationAnimationAngle = 110;
+        this.attackRotationAnimationAngle = 150;
         this.attackRotationAnimationFrequency = this.attackRotationAnimationAngle * this.baseSpeed * this.speedMultiplier / this.baseCastDuration / 1000;
         this.attackProgress = 0;
 
