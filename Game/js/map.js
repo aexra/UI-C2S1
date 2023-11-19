@@ -18,6 +18,7 @@ export class Map {
         this.undergroundY = this.skyHeight + this.imgSize.y;
         this.undergroundHeight = this.game.size.y - this.undergroundY;
         this.undergroundColor = new Vec4(40, 71, 111, 1);
+        this.nimages = Math.ceil(this.game.size.x / this.imgSize.x);
     }
     update(input, deltaTime) {
         this.position.x = this.game.player.position.x;
@@ -34,7 +35,9 @@ export class Map {
         c.fillRect(0, 0, this.game.size.x, this.skyHeight);
 
         // draw images
-        
+        for (var i = 0; i < this.nimages; i++) {
+            c.drawImage(this.background, this.imgSize.x * i, this.skyHeight);
+        }
 
         // draw underground
         c.fillStyle = `rgba(${this.undergroundColor.x}, ${this.undergroundColor.y}, ${this.undergroundColor.z}, ${this.undergroundColor.alpha})`;
