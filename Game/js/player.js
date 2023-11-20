@@ -184,6 +184,7 @@ export class Player {
             this.game.canvasTranslated.y += bb;
         }
         c.translate(this.game.canvasTranslated.x, this.game.canvasTranslated.y);
+        this.game.cameraPos = this.game.canvasTranslated;
     }
     checkIncomingFloorCollision() {
         if (

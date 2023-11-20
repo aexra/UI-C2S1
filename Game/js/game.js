@@ -25,6 +25,7 @@ window.addEventListener("load", (e) => {
 			this.input = new InputHandler(this);
 			this.map = new Map(new Vec2(this.size.x, this.size.y), this);
 			this.player = new Player(this);
+			this.cameraPos = new Vec2();
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);

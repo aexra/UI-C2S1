@@ -19,4 +19,7 @@ export class Vec2 {
     static minus(left, right) {
         return new Vec2(left.x - right.x, left.y - right.y);
     }
+    static concat(left, right) {
+        return new Vec2(left.x + right.x, left.y + right.y);
+    }
 }
