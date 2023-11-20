@@ -29,6 +29,7 @@ window.addEventListener("load", (e) => {
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);
+			console.log(this.player.position);
 			
 			for (let projectile of this.projectiles) {
 				projectile.update(this.input, deltaTime);

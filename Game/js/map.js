@@ -33,7 +33,7 @@ export class Map {
     }
     drawBackground(c) {
         for (var layer of this.layers) {
-            c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k);
+            c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k, 0.1 * this.size.x + this.game.canvasSize.x, 0.1 * this.size.y + this.game.canvasSize.y);
         }
     }
 }
