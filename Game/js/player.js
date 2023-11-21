@@ -12,6 +12,7 @@ export class Player {
         this.image = document.getElementById("player");
         this.camera = {
             size: game.canvasSize,
+            pos: new Vec2()
         };
 
         this.direction = 0;
@@ -185,6 +186,7 @@ export class Player {
         }
         c.translate(this.game.canvasTranslated.x, this.game.canvasTranslated.y);
         this.game.cameraPos = this.game.canvasTranslated;
+        this.camera.pos = this.game.canvasTranslated;
     }
     checkIncomingFloorCollision() {
         if (
