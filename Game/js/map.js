@@ -3,9 +3,10 @@ import { Vec2 } from "./vec2.js"
 import { Vec4 } from "./vec4.js";
 
 class Layer {
-    constructor(id, k) {
+    constructor(id, k, size) {
         this.img = document.getElementById(id);
         this.k = k;
+        this.size = size;
     }
 }
 
@@ -19,7 +20,8 @@ export class Map {
         this.borderSize = new Vec2(500, 500);
 
         this.layers = [
-            new Layer("hallowBackground1", 0.9)
+            new Layer("space", 1, new Vec2(1920, 1080)),
+            new Layer("stars", 0.995, new Vec2(1920, 1080)),
         ];
 
         this.tileset = {
@@ -59,13 +61,14 @@ export class Map {
         this.drawBackground(c);
 
         // draw foreground walls
-        this.drawPlatforms(c);
+        // this.drawPlatforms(c);
         
         c.restore();
     }
     drawBackground(c) {
         for (var layer of this.layers) {
-            c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k, 0.1 * this.size.x + this.game.canvasSize.x, 0.1 * this.size.y + this.game.canvasSize.y);
+            // c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k, 0.1 * this.size.x + this.game.canvasSize.x, 0.1 * this.size.y + this.game.canvasSize.y);
+            c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k, layer.size.x, layer.size.y);
         }
     }
     drawPlatforms(c) {
