@@ -28,6 +28,8 @@ export class Map {
         this.position = new Vec2(0, 0);
         this.borderSize = new Vec2(500, 500);
 
+        this.heartlanternimg = document.getElementById("heartlantern");
+
         this.layers = [
             new Layer("space", 1, new Vec2(1920, 1080)),
             new Layer("stars", 0.995, new Vec2(1920, 1080)),
@@ -90,8 +92,11 @@ export class Map {
         // draw background
         this.drawBackground(c);
 
-        // draw foreground walls
+        // draw platforms to stay on
         this.drawPlatforms(c);
+
+        // draw lanterns
+        this.drawLanterns(c);
         
         c.restore();
     }
@@ -106,7 +111,7 @@ export class Map {
             c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
         }
     }
-    drawPlatforms(c) {
+    getRenderBorders() {
         var pos = this.game.player.camera.pos.copy();
         var size = this.game.player.camera.size.copy();
         
@@ -121,6 +126,13 @@ export class Map {
             iend.x + this.renderOffset < this.map[0].length? iend.x + this.renderOffset : this.map[0].length - 1,
             iend.y + this.renderOffset < this.map.length? iend.y + this.renderOffset : this.map.length - 1
         );
+
+        return new Vec2(realbegin, realend);
+    }
+    drawPlatforms(c) {
+        var real = this.getRenderBorders();
+        var realbegin = real.x;
+        var realend = real.y;
 
         for (var y = realbegin.y; y < realend.y; y++) {
             for (var x = realbegin.x; x < realend.x; x++) {
@@ -138,6 +150,26 @@ export class Map {
                         sprite.size.x,
                         sprite.size.y,
                     );
+                }
+            }
+        }
+    }
+    drawLanterns(c) {
+        var real = this.getRenderBorders();
+        var realbegin = real.x;
+        var realend = real.y;
+
+        for (var y = realbegin.y; y < realend.y; y++) {
+            for (var x = realbegin.x; x < realend.x; x++) {
+                var tile = this.map[y][x];
+                if (tile === 1) {
+                    if (x % 100 === 0) {
+                        c.drawImage(
+                            this.heartlanternimg,
+                            x * 18 + 2,
+                            y * 18 + 6,
+                        );
+                    }
                 }
             }
         }

@@ -142,8 +142,7 @@ export class Player {
         this.position.x = y;
     }
     isGrounded() {
-        // return Math.abs((this.position.y + this.size.y) - this.game.size.y) <= 1;
-        return this.position.y + this.size.y >= this.game.size.y;
+        return this.getNearestFloorCoordinate() - this.position.y - this.size.y < 1;
     }
     drawAccessories(c) {
         for (let acc of this.accessories) {
