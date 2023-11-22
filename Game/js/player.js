@@ -88,7 +88,7 @@ export class Player {
             this.position.y += this.velocityY;
             input.mpy += this.velocityY;
         } else {
-            input.mpy += this.getNearestFloorCoordinate() - this.position.y;
+            // input.mpy += this.getNearestFloorCoordinate() - this.position.y;
             this.position.y = this.getNearestFloorCoordinate() - this.size.y;
             this.velocityY = 0;
         }
