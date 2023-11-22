@@ -29,6 +29,7 @@ export class Map {
         this.borderSize = new Vec2(500, 500);
 
         this.heartlanternimg = document.getElementById("heartlantern");
+        this.manalanternimg = document.getElementById("manalantern");
 
         this.layers = [
             new Layer("space", 1, new Vec2(1920, 1080)),
@@ -78,7 +79,16 @@ export class Map {
     fillMap() {
         for (var y = 0; y < this.map.length / 100; y++) {
             for (var x = 0; x < this.map[0].length; x++) {
+                // платформа
                 this.map[y * 100][x] = 1;
+                if (x % 100 === 0) {
+                    // лампа-сердце
+                    this.map[y * 100 + 1][x] = 2;
+                }
+                else if (x % 50 === 0) {
+                    // лампа-звезда
+                    this.map[y * 100 + 1][x] = 3;
+                }
             }
         }
     }
@@ -139,6 +149,7 @@ export class Map {
                 var tile = this.map[y][x];
                 if (tile !== 0) {
                     var sprite = this.tileset[tile];
+                    if (!sprite) continue;
                     c.drawImage(
                         sprite.image,
                         sprite.position.x,
@@ -169,9 +180,26 @@ export class Map {
                             x * 18 + 2,
                             y * 18 + 6,
                         );
+                    } else if (x % 50 === 0) {
+                        c.drawImage(
+                            this.manalanternimg,
+                            x * 18 + 2,
+                            y * 18 + 6,
+                        );
                     }
                 }
             }
         }
+    }
+    drawShadowMask(c) {
+        c.save();
+
+        c.fillStyle = 'rgba(0, 0, 0, 0.4)';
+        c.fillRect(0, 0, this.size.x, this.size.y);
+
+        c.restore();
+    }
+    drawLights(c) {
+
     }
 }
