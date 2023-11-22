@@ -4,6 +4,7 @@ import { Vec4 } from "./vec4.js";
 
 class Layer {
     constructor(id, k, size, drawOffset) {
+        this.id = id;
         this.img = document.getElementById(id);
         this.k = k;
         this.size = size;
@@ -69,8 +70,11 @@ export class Map {
     }
     drawBackground(c) {
         for (var layer of this.layers) {
-            // c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k, 0.1 * this.size.x + this.game.canvasSize.x, 0.1 * this.size.y + this.game.canvasSize.y);
             c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
+
+            if (layer.id === "stars") {
+                c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x + layer.size.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
+            }
         }
     }
     drawPlatforms(c) {
