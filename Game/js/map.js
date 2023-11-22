@@ -3,10 +3,11 @@ import { Vec2 } from "./vec2.js"
 import { Vec4 } from "./vec4.js";
 
 class Layer {
-    constructor(id, k, size) {
+    constructor(id, k, size, drawOffset) {
         this.img = document.getElementById(id);
         this.k = k;
         this.size = size;
+        this.drawOffset = drawOffset || new Vec2(0, 0);
     }
 }
 
@@ -22,6 +23,7 @@ export class Map {
         this.layers = [
             new Layer("space", 1, new Vec2(1920, 1080)),
             new Layer("stars", 0.995, new Vec2(1920, 1080)),
+            new Layer("stst", 0.9, new Vec2(8700, 2000), new Vec2(0, 1000)),
         ];
 
         this.tileset = {
@@ -68,7 +70,7 @@ export class Map {
     drawBackground(c) {
         for (var layer of this.layers) {
             // c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k, 0.1 * this.size.x + this.game.canvasSize.x, 0.1 * this.size.y + this.game.canvasSize.y);
-            c.drawImage(layer.img, this.position.x * layer.k, this.position.y * layer.k, layer.size.x, layer.size.y);
+            c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
         }
     }
     drawPlatforms(c) {
