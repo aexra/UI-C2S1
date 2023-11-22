@@ -83,7 +83,7 @@ export class Player {
         this.rotation = this.direction === 0? this.rotation : this.direction;
 
         // применяем перемещение по Y
-        if (!this.checkIncomingFloorCollision()) 
+        if (!this.checkIncomingFloorCollision() || input.keys.includes('s')) 
         {
             this.position.y += this.velocityY;
             input.mpy += this.velocityY;
