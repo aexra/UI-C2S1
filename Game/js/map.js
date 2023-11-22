@@ -2,6 +2,13 @@ import { Sprite } from "./sprite.js";
 import { Vec2 } from "./vec2.js"
 import { Vec4 } from "./vec4.js";
 
+const layers = {
+    0: 2000,
+    1: 34000,
+    2: 40000,
+    3: 72000
+};
+
 class Layer {
     constructor(id, k, size, drawOffset) {
         this.id = id;
@@ -24,8 +31,27 @@ export class Map {
         this.layers = [
             new Layer("space", 1, new Vec2(1920, 1080)),
             new Layer("stars", 0.995, new Vec2(1920, 1080)),
-            new Layer("stst", 0.9, new Vec2(8700, 2000), new Vec2(0, 1000)),
-            new Layer("sky", 0.9, new Vec2(8700, 2000), new Vec2(0, 2990)),
+            // new Layer("stst", 0.9, new Vec2(8700, 2000), new Vec2(0, 1000)),
+
+            // new Layer("sky", 0.9, new Vec2(8700, 3000), new Vec2(0, 2990)),
+
+            // new Layer("mountain", 1, new Vec2(1920, 1080), new Vec2(0, 0)),
+
+            // new Layer("island1", 0.88, new Vec2(344, 308), new Vec2(500, 4300)),
+            // new Layer("island2", 0.88, new Vec2(404, 387), new Vec2(2 * 1000, 4300)),
+            // new Layer("island3", 0.88, new Vec2(352, 274), new Vec2(4 * 1000, 4300)),
+            // new Layer("island1", 0.88, new Vec2(344, 308), new Vec2(7 * 1000, 4300)),
+            // new Layer("island3", 0.88, new Vec2(352, 274), new Vec2(10 * 1000, 4300)),
+            // new Layer("island2", 0.88, new Vec2(404, 387), new Vec2(13 * 1000, 4300)),
+            // new Layer("island1", 0.88, new Vec2(344, 308), new Vec2(16 * 1000, 4300)),
+            // new Layer("island3", 0.88, new Vec2(352, 274), new Vec2(19 * 1000, 4300)),
+            // new Layer("island2", 0.88, new Vec2(404, 387), new Vec2(22 * 1000, 4300)),
+
+            // new Layer("clouds1", 0.9, new Vec2(3840, 1080), new Vec2(0, 3100)),
+            // new Layer("clouds2", 0.9, new Vec2(3840, 1080), new Vec2(3840, 3100)),
+            // new Layer("clouds3", 0.9, new Vec2(3840, 1080), new Vec2(3840 * 2, 3100)),
+            // new Layer("clouds4", 0.9, new Vec2(3840, 1080), new Vec2(3840 * 3, 3100)),
+            // new Layer("clouds5", 0.9, new Vec2(3840, 1080), new Vec2(3840 * 4, 3100)),
         ];
 
         this.tileset = {

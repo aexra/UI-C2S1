@@ -8,7 +8,7 @@ export class Player {
     constructor(game) {
         this.game = game;
         this.size = new Vec2(36, 54);
-        this.position = new Vec2(1500, 2700);
+        this.position = new Vec2(1500, 30000);
         this.image = document.getElementById("player");
         this.camera = {
             size: game.canvasSize,
@@ -35,6 +35,8 @@ export class Player {
 
         this.inventory = [new weapons.TerraBlade(this)];
         this.selectedItem = this.inventory[0];
+
+        this.mapLayer = 0;
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
@@ -197,5 +199,17 @@ export class Player {
     }
     getNearestFloorCoordinate() {
         return this.game.size.y - this.size.y;
+    }
+    getLevelLayer() {
+        if (this.position.y < 20000) {
+            return 0;
+        }
+        if (this.position.y < 34000) {
+            return 1;
+        }
+        if (this.position.y < 40000) {
+            return 2;
+        }
+        return 3;
     }
 }
