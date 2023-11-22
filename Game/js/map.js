@@ -25,6 +25,7 @@ export class Map {
             new Layer("space", 1, new Vec2(1920, 1080)),
             new Layer("stars", 0.995, new Vec2(1920, 1080)),
             new Layer("stst", 0.9, new Vec2(8700, 2000), new Vec2(0, 1000)),
+            new Layer("sky", 0.9, new Vec2(1600, 1200), new Vec2(0, 2990)),
         ];
 
         this.tileset = {
@@ -70,11 +71,13 @@ export class Map {
     }
     drawBackground(c) {
         for (var layer of this.layers) {
-            c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
-
-            if (layer.id === "stars") {
+            if (layer.id == "stars") {
+                c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
                 c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x + layer.size.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
+                continue;
             }
+
+            c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
         }
     }
     drawPlatforms(c) {
