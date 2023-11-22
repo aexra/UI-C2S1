@@ -91,7 +91,7 @@ export class Map {
         this.drawBackground(c);
 
         // draw foreground walls
-        // this.drawPlatforms(c);
+        this.drawPlatforms(c);
         
         c.restore();
     }

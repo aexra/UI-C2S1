@@ -88,8 +88,8 @@ export class Player {
             this.position.y += this.velocityY;
             input.mpy += this.velocityY;
         } else {
-            input.mpy += this.getNearestFloorCoordinate() - this.position.y
-            this.position.y = this.getNearestFloorCoordinate();
+            input.mpy += this.getNearestFloorCoordinate() - this.position.y;
+            this.position.y = this.getNearestFloorCoordinate() - this.size.y;
             this.velocityY = 0;
         }
 
@@ -193,12 +193,13 @@ export class Player {
     checkIncomingFloorCollision() {
         if (
             this.position.y + this.velocityY + this.size.y >= this.game.size.y ||
-            this.position.y + this.velocityY + this.size.y >= this.game.size.y
+            this.position.y + this.velocityY + this.size.y >= this.game.size.y ||
+            this.getNearestFloorCoordinate() - (this.position.y + this.velocityY + this.size.y) < 0
         ) return true; 
         return false;
     }
     getNearestFloorCoordinate() {
-        return this.game.size.y - this.size.y;
+        return Math.ceil((this.position.y + this.size.y) / 1800) * 1800;
     }
     getLevelLayer() {
         if (this.position.y < 20000) {
@@ -212,4 +213,5 @@ export class Player {
         }
         return 3;
     }
+
 }
