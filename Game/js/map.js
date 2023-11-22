@@ -25,7 +25,7 @@ export class Map {
             new Layer("space", 1, new Vec2(1920, 1080)),
             new Layer("stars", 0.995, new Vec2(1920, 1080)),
             new Layer("stst", 0.9, new Vec2(8700, 2000), new Vec2(0, 1000)),
-            new Layer("sky", 0.9, new Vec2(1600, 1200), new Vec2(0, 2990)),
+            new Layer("sky", 0.9, new Vec2(8700, 2000), new Vec2(0, 2990)),
         ];
 
         this.tileset = {
