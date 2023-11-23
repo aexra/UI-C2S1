@@ -8,7 +8,7 @@ export class Player {
     constructor(game) {
         this.game = game;
         this.size = new Vec2(36, 54);
-        this.position = new Vec2(100, 100);
+        this.position = new Vec2(71940, 100);
         this.image = document.getElementById("player");
         this.camera = {
             size: game.canvasSize,
@@ -37,6 +37,9 @@ export class Player {
         this.selectedItem = this.inventory[0];
 
         this.mapLayer = 0;
+
+        this.maxHP = 1000;
+        this.hp = this.maxHP;
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
