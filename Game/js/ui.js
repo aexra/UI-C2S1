@@ -11,7 +11,7 @@ export class UI extends GameObject {
         this.gap = new Vec2(10, 20);
 
         this.lifebar = {
-            size: new Vec2(280, 40),
+            size: new Vec2(260, 30),
             position: new Vec2(this.margin.x + this.size.x - 280, this.margin.y),
         };
         this.minimap = {
@@ -40,20 +40,20 @@ export class UI extends GameObject {
 
         // фон (граница)
         c.fillStyle = 'rgba(185, 151, 59, 1)';
-        c.fillRect(20, 0, 260, 40);
+        c.fillRect(20, 0, this.lifebar.size.x, this.lifebar.size.y);
 
         // фон хп
         var lifeSize = 230 / 10;
         var lifeGap = 22 / 9;
         for (var i = 0; i < 10; i++) {
             c.fillStyle = 'rgba(90, 0, 0, 1)';
-            c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, 32);
+            c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, this.lifebar.size.y - 8);
         }
 
         // хп (макс длина бара - 252)
         for (var i = 0; i < Math.floor(this.game.player.hp / this.game.player.maxHP * 10); i++) {
             c.fillStyle = 'rgba(210, 0, 0, 1)';
-            c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, 32);
+            c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, this.lifebar.size.y - 8);
         }
 
         c.transform(1,0,0.5,1,0,0);
