@@ -43,12 +43,18 @@ export class UI extends GameObject {
         c.fillRect(20, 0, 260, 40);
 
         // фон хп
-        c.fillStyle = 'rgba(90, 0, 0, 1)';
-        c.fillRect(24, 4, 252, 32);
+        var lifeSize = 230 / 10;
+        var lifeGap = 22 / 9;
+        for (var i = 0; i < 10; i++) {
+            c.fillStyle = 'rgba(90, 0, 0, 1)';
+            c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, 32);
+        }
 
         // хп (макс длина бара - 252)
-        c.fillStyle = 'rgba(210, 0, 0, 1)';
-        c.fillRect(24, 4, this.game.player.hp / this.game.player.maxHP * 252, 32);
+        for (var i = 0; i < Math.floor(this.game.player.hp / this.game.player.maxHP * 10); i++) {
+            c.fillStyle = 'rgba(210, 0, 0, 1)';
+            c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, 32);
+        }
 
         c.transform(1,0,0.5,1,0,0);
 
