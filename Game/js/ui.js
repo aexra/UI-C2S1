@@ -28,7 +28,11 @@ export class UI extends GameObject {
     drawMinimap(c) {
         c.save();
 
-        c.fillStyle = "rgba(255, 255, 255, 1)";
+        c.strokeStyle = "rgba(100, 100, 100, 1)";
+        c.lineWidth = 3;
+        c.strokeRect(-this.position.x + this.minimap.position.x, -this.position.y + this.minimap.position.y, this.minimap.size.x, this.minimap.size.y);
+
+        c.fillStyle = "rgba(23, 23, 23, 1)";
         c.fillRect(-this.position.x + this.minimap.position.x, -this.position.y + this.minimap.position.y, this.minimap.size.x, this.minimap.size.y);
 
         c.restore();
