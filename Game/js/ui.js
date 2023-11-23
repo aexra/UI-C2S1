@@ -125,9 +125,21 @@ export class UI extends GameObject {
     drawMinimap(c) {
         c.save();
 
+        // рисуем серый квадрат
         c.fillStyle = "rgba(23, 23, 23, 1)";
         c.fillRect(this.position.x + this.minimap.position.x, -this.position.y + this.minimap.position.y, this.minimap.size.x, this.minimap.size.y);
-        
+
+        // рисуем проджектайлы игрока
+        c.fillStyle = "rgba(0, 220, 0, 1)";
+        for (var i = 0; i < this.game.projectiles.length; i++) {
+            c.fillRect(
+                this.position.x + this.minimap.position.x + this.game.projectiles[i].position.x * this.minimap.scale - 2,
+                -this.position.y + this.minimap.position.y + this.game.projectiles[i].position.y * this.minimap.scale - 2,
+                2, 2
+            );
+        }
+
+        // рисуем белую точку - игрока
         c.fillStyle = "rgba(255, 255, 255, 1)";
         c.fillRect(this.position.x + this.minimap.position.x + this.game.player.position.x * this.minimap.scale - 2, -this.position.y + this.minimap.position.y + this.game.player.position.y * this.minimap.scale - 2, 4, 4);
 

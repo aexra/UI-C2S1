@@ -9,7 +9,7 @@ export class TerraBlade extends MeleeWeapon {
         super(player);
 
         this.image = document.getElementById("terraBlade");
-        this.speedMultiplier = 18;
+        this.speedMultiplier = 8;
 
         this.recalc_params();
     }

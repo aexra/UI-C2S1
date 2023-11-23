@@ -16,6 +16,7 @@ export class TerraBeam extends Projectile {
         
         this.maxLifeTime = 1000;
         this.acceleration = -this.speed/this.maxLifeTime * 1.2;
+        // this.acceleration = 0;
 
         this.lifeTime = this.maxLifeTime;
         this.alpha = 1;
