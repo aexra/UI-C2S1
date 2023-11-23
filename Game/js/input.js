@@ -21,9 +21,9 @@ export class InputHandler {
         document.getElementById("canvas1").addEventListener("mousedown", (e) => {
             this.keys.push(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton");
         });
-        document.getElementById("canvas1").addEventListener("mouseup", (e) => {
-            this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
-        });
+        // document.getElementById("canvas1").addEventListener("mouseup", (e) => {
+        //     this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
+        // });
         document.getElementById("canvas1").addEventListener("mousemove", (e) => {
             this.mpx = e.clientX - game.canvasTranslated.x;
             this.mpy = e.clientY - game.canvasTranslated.y;
