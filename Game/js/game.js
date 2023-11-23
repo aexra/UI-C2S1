@@ -3,6 +3,7 @@ import { InputHandler } from "./input.js";
 import { Map } from "./map.js"
 import { Vec2 } from "./vec2.js";
 import { ParticleEmitter } from "./particleEmitter.js";
+import { UI } from "./ui.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -25,6 +26,7 @@ window.addEventListener("load", (e) => {
 			this.input = new InputHandler(this);
 			this.map = new Map(new Vec2(this.size.x, this.size.y), this);
 			this.player = new Player(this);
+			this.ui = new UI(this);
 			this.cameraPos = new Vec2();
 		}
 		update(deltaTime) {
@@ -41,6 +43,7 @@ window.addEventListener("load", (e) => {
 			}
 
 			this.map.update(this.input, deltaTime);
+			this.ui.update(this.input, deltaTime);
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.size.x, this.size.y);
@@ -58,6 +61,8 @@ window.addEventListener("load", (e) => {
 			}
 
 			// this.map.drawShaders(context);
+
+			this.ui.draw(context);
 		}
 		createParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter) {
 			var pe = new ParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter);
