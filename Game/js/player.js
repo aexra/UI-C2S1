@@ -40,6 +40,7 @@ export class Player {
 
         this.maxHP = 1000;
         this.hp = this.maxHP;
+        this.hp = 200;
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");

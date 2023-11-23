@@ -34,9 +34,23 @@ export class UI extends GameObject {
     }
     drawLifebar(c) {
         c.save();
-        
-        c.fillStyle = 'rgba(160, 0, 0, 1)';
-        c.fillRect(this.position.x + this.lifebar.position.x, -this.position.y + this.lifebar.position.y, 40, 40);
+
+        c.translate(this.position.x + this.lifebar.position.x, -this.position.y + this.lifebar.position.y);
+        c.transform(1,0,-0.5,1,0,0);
+
+        // фон (граница)
+        c.fillStyle = 'rgba(185, 151, 59, 1)';
+        c.fillRect(20, 0, 260, 40);
+
+        // фон хп
+        c.fillStyle = 'rgba(90, 0, 0, 1)';
+        c.fillRect(24, 4, 252, 32);
+
+        // хп (макс длина бара - 252)
+        c.fillStyle = 'rgba(210, 0, 0, 1)';
+        c.fillRect(24, 4, this.game.player.hp / this.game.player.maxHP * 252, 32);
+
+        c.transform(1,0,0.5,1,0,0);
 
         c.restore();
     }
