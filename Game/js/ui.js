@@ -133,15 +133,16 @@ export class UI extends GameObject {
         c.fillStyle = "rgba(0, 220, 0, 1)";
         for (var i = 0; i < this.game.projectiles.length; i++) {
             c.fillRect(
-                this.position.x + this.minimap.position.x + this.game.projectiles[i].position.x * this.minimap.scale - 2,
-                -this.position.y + this.minimap.position.y + this.game.projectiles[i].position.y * this.minimap.scale - 2,
+                this.position.x + this.minimap.position.x + this.game.projectiles[i].position.x * this.minimap.scale - 1,
+                -this.position.y + this.minimap.position.y + this.game.projectiles[i].position.y * this.minimap.scale - 1,
                 2, 2
             );
         }
 
         // рисуем белую точку - игрока
         c.fillStyle = "rgba(255, 255, 255, 1)";
-        c.fillRect(this.position.x + this.minimap.position.x + this.game.player.position.x * this.minimap.scale - 2, -this.position.y + this.minimap.position.y + this.game.player.position.y * this.minimap.scale - 2, 4, 4);
+        c.fillRect(this.position.x + this.minimap.position.x + this.game.player.position.x * this.minimap.scale - 2,
+            -this.position.y + this.minimap.position.y + this.game.player.position.y * this.minimap.scale - 2, 4, 4);
 
         // c.strokeStyle = "rgba(100, 100, 100, 1)";
         // c.lineWidth = 2;
