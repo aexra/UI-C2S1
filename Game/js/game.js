@@ -56,6 +56,8 @@ window.addEventListener("load", (e) => {
 			for (let emitter of this.particleEmitters) {
 				emitter.draw(context);
 			}
+
+			// this.map.drawShaders(context);
 		}
 		createParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter) {
 			var pe = new ParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter);

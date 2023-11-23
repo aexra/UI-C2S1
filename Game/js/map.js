@@ -64,7 +64,7 @@ export class Map {
         this.generateMap();
         this.fillMap();
 
-        this.renderOffset = 10;
+        this.renderOffset = 20;
     }
     generateMap() {
         this.map = [];
@@ -191,15 +191,60 @@ export class Map {
             }
         }
     }
+    drawShaders(c) {
+        var offScreenCanvas = document.createElement('canvas');
+        offScreenCanvas.width = this.game.canvasSize.x;
+        offScreenCanvas.height = this.game.canvasSize.y;
+        var context = offScreenCanvas.getContext("2d");
+
+        this.drawShadowMask(context);
+        this.drawLights(context);
+
+        c.putImageData(context.getImageData(this.game.player.camera.pos.x, this.game.player.camera.pos.y, this.game.canvasSize.x, this.game.canvasSize.y), this.game.player.camera.pos.x, this.game.player.camera.pos.y);
+    }
     drawShadowMask(c) {
         c.save();
 
-        c.fillStyle = 'rgba(0, 0, 0, 0.4)';
+        c.fillStyle = 'rgba(0, 0, 0, 1)';
         c.fillRect(0, 0, this.size.x, this.size.y);
 
         c.restore();
     }
     drawLights(c) {
+        c.save();
+        c.globalCompositeOperation = "lighter";
 
+        var real = this.getRenderBorders();
+        var realbegin = real.x;
+        var realend = real.y;
+
+        for (var y = realbegin.y; y < realend.y; y++) {
+            for (var x = realbegin.x; x < realend.x; x++) {
+                var tile = this.map[y][x];
+
+                if (tile == 2 || tile == 3) {
+                    
+
+                    var lx = x * 18 + 10,
+                        ly = y * 18,
+                        innerRadius = 0,
+                        outerRadius = 360,
+                        radius = 360;
+
+                    var gradient = c.createRadialGradient(lx, ly, innerRadius, lx, ly, outerRadius);
+                    gradient.addColorStop(0, 'rgba(253, 244, 220, 0.2)');
+                    gradient.addColorStop(1, 'rgba(253, 244, 220, 0)');
+
+                    c.beginPath();
+
+                    c.arc(lx, ly, radius, 0, 2 * Math.PI);
+
+                    c.fillStyle = gradient;
+                    c.fill();
+                }
+            }
+        }
+
+        c.restore();
     }
 }
