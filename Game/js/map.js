@@ -102,11 +102,11 @@ export class Map {
         // draw background
         this.drawBackground(c);
 
-        // draw platforms to stay on
-        this.drawPlatforms(c);
-
         // draw lanterns
         this.drawLanterns(c);
+
+        // draw platforms to stay on
+        this.drawPlatforms(c);
         
         c.restore();
     }
@@ -178,7 +178,7 @@ export class Map {
                         c.drawImage(
                             this.heartlanternimg,
                             x * 18 + 2,
-                            y * 18 + 6,
+                            y * 18 + 2,
                         );
                     } else if (x % 50 === 0) {
                         c.drawImage(
