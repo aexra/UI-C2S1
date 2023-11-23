@@ -16,7 +16,8 @@ export class UI extends GameObject {
         };
     }
     update(input, deltaTime) {
-        this.position = this.game.player.camera.pos;
+        // this.position = this.game.player.camera.pos;
+        this.position = this.game.canvasTranslated;
     }
     draw(c) {
         this.drawHotbar(c);

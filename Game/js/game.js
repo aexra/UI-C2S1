@@ -20,7 +20,7 @@ window.addEventListener("load", (e) => {
 		constructor(size, canvasSize) {
 			this.size = size;
 			this.canvasSize = canvasSize;
-			this.canvasTranslation = new Vec2();
+			this.canvasTranslated = new Vec2();
 			this.projectiles = [];
 			this.particleEmitters = [];
 			this.input = new InputHandler(this);
