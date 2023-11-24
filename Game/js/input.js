@@ -1,9 +1,12 @@
+import { Vec2 } from "./vec2.js";
+
 export class InputHandler {
     constructor(game) {
         this.keys = [];
         this.mpx = null;
         this.mpy = null;
         this.game = game;
+        this.lastPlayerToMouseDistance = new Vec2();
 
         window.addEventListener("keydown", (e) => {
             let key = e.key === 'ф'? 'a' : e.key === 'в'? 'd' : e.key === 'ц'? 'w' : e.key === 'ы'? 's' : e.key;

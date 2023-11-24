@@ -28,7 +28,10 @@ export class Player {
         this.velocityY = 0;
         this.maxVY = 10;
 
-        this.accessories = [new accessories.NebulaWings(this)];
+        this.accessories = [
+            new accessories.NebulaWings(this),
+            new accessories.NormalityRelocator(this),
+        ];
 
         this.rotation = 1;
         this.isPlayerSpriteFlipped = false;

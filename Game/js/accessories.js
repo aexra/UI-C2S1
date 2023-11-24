@@ -119,3 +119,61 @@ export class FlameWings extends Wings {
         this.standingFrame = 1;
     }
 }
+
+export class NormalityRelocator {
+    constructor(player) {
+        this.player = player;
+        
+        this.timer = -1;
+        this.timeout = 1000;
+
+        this.emitterTimer = -1;
+        this.emitterTimeout = 50;
+
+        this.pe = player.game.createParticleEmitter();
+        this.pe.setFrequency(500);
+        this.pe.lifeTime = new Vec2(1, 1);
+        this.pe.particleSize = new Vec2(14, 14);
+        this.pe.shape = document.getElementById("relocator");
+        this.pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+        this.pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+        this.pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+        this.pe.angle = 360;
+        this.pe.particleInitialSpeed = new Vec2(2, 2);
+        this.pe.position = this.player.position.copy();
+
+        this.sound = new Audio("../resources/game/accessories/relocator.wav");
+        this.sound.volume = 0.2;
+        this.sound.playbackRate = 1.4;
+    }
+    update(input, deltaTime) {
+        if ((input.keys.includes('f') || input.keys.includes('а')) && this.timer == -1) {
+            var distance = Vec2.minus(new Vec2(input.mpx, input.mpy), this.player.position);
+            this.player.position = new Vec2(input.mpx, input.mpy);
+            input.mpx += distance.x;
+            input.mpy += distance.y;
+            this.timer = 0;
+            this.emitterTimer = 0;
+            this.pe.emit();
+            this.sound.play();
+        }
+        if (this.timer != -1) {
+            this.timer += deltaTime;
+            if (this.timer >= this.timeout) {
+                this.timer = -1;
+            }
+        }
+        if (this.emitterTimer != -1) {
+            this.emitterTimer += deltaTime;
+            if (this.emitterTimer >= this.emitterTimeout) {
+                this.emitterTimer = -1;
+                this.pe.stop();
+            }
+        }
+
+        this.pe.position = Vec2.concat(this.player.position.copy(), new Vec2(15, 30));
+    }
+    draw() {
+
+    }
+}
