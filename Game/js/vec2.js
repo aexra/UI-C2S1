@@ -16,6 +16,10 @@ export class Vec2 {
         this.y = to.y;
         return this;
     }
+    equal(to) {
+        if (this.x == to.x && this.y == to.y) return true;
+        return false;
+    }
     static minus(left, right) {
         return new Vec2(left.x - right.x, left.y - right.y);
     }

@@ -107,10 +107,13 @@ export class Player {
         for (let acc of this.accessories) {
             acc.update(input, deltaTime);
         }
+
+        this.updateCamera();
+        this.translateCamera(this.game.canvasContext);
     }
     draw(c) {
         // перемещение камеры
-        this.translateCamera(c);
+        // this.translateCamera(c);
         // console.log(this.game.canvasSize);
 
         c.save();
@@ -139,6 +142,27 @@ export class Player {
         c.save();
         this.drawCharacter(c);
         c.restore();
+    }
+    updateCamera() {
+        this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / 2 + this.size.x / 2), - (this.position.y - this.camera.size.y / 2 + this.size.y / 2));
+        var al = - this.game.canvasTranslated.x;
+        var ar = - this.game.canvasTranslated.x + this.camera.size.x - this.game.size.x;
+        var bt = - this.game.canvasTranslated.y;
+        var bb =  - this.game.canvasTranslated.y + this.camera.size.y - this.game.size.y;
+        if (al < 0) {
+            this.game.canvasTranslated.x += al;
+        }
+        else if (ar > 0) {
+            this.game.canvasTranslated.x += ar;
+        }
+        if (bt < 0) {
+            this.game.canvasTranslated.y += bt;
+        }
+        else if (bb > 0) {
+            this.game.canvasTranslated.y += bb;
+        }
+        this.game.cameraPos = this.game.canvasTranslated;
+        this.camera.pos = this.game.canvasTranslated;
     }
     translate(x, y) {
         this.position.x += x;
@@ -175,26 +199,7 @@ export class Player {
     }
     translateCamera(c) {
         c.setTransform(1,0,0,1,0,0);
-        this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / 2 + this.size.x / 2), - (this.position.y - this.camera.size.y / 2 + this.size.y / 2));
-        var al = - this.game.canvasTranslated.x;
-        var ar = - this.game.canvasTranslated.x + this.camera.size.x - this.game.size.x;
-        var bt = - this.game.canvasTranslated.y;
-        var bb =  - this.game.canvasTranslated.y + this.camera.size.y - this.game.size.y;
-        if (al < 0) {
-            this.game.canvasTranslated.x += al;
-        }
-        else if (ar > 0) {
-            this.game.canvasTranslated.x += ar;
-        }
-        if (bt < 0) {
-            this.game.canvasTranslated.y += bt;
-        }
-        else if (bb > 0) {
-            this.game.canvasTranslated.y += bb;
-        }
         c.translate(this.game.canvasTranslated.x, this.game.canvasTranslated.y);
-        this.game.cameraPos = this.game.canvasTranslated;
-        this.camera.pos = this.game.canvasTranslated;
     }
     checkIncomingFloorCollision() {
         if (

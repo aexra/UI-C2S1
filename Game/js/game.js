@@ -17,7 +17,7 @@ window.addEventListener("load", (e) => {
 	canvas.height = document.body.offsetHeight - 50;
 
 	class Game {
-		constructor(size, canvasSize) {
+		constructor(size, canvasSize, ctx) {
 			this.size = size;
 			this.canvasSize = canvasSize;
 			this.canvasTranslated = new Vec2();
@@ -28,6 +28,7 @@ window.addEventListener("load", (e) => {
 			this.player = new Player(this);
 			this.ui = new UI(this);
 			this.cameraPos = new Vec2();
+			this.canvasContext = ctx;
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);
@@ -75,7 +76,7 @@ window.addEventListener("load", (e) => {
 		}
 	}
 
-	const game = new Game(new Vec2(72000, 72000), new Vec2(canvas.width, canvas.height));
+	const game = new Game(new Vec2(72000, 72000), new Vec2(canvas.width, canvas.height), ctx);
 	let lastTime = 0;
 
 	function animate(timeStamp) {
