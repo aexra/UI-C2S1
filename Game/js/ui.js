@@ -36,27 +36,6 @@ export class UI extends GameObject {
         c.save();
 
         c.translate(this.position.x + this.lifebar.position.x, -this.position.y + this.lifebar.position.y);
-        // c.transform(1,0,-0.5,1,0,0);
-
-        // фон (граница)
-        // c.fillStyle = 'rgba(185, 151, 59, 1)';
-        // c.fillRect(20, 0, this.lifebar.size.x, this.lifebar.size.y);
-
-        // фон хп
-        // var lifeSize = 230 / 10;
-        // var lifeGap = 22 / 9;
-        // for (var i = 0; i < 10; i++) {
-        //     c.fillStyle = 'rgba(90, 0, 0, 1)';
-        //     c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, this.lifebar.size.y - 8);
-        // }
-
-        // хп (макс длина бара - 252)
-        // for (var i = 0; i < Math.floor(this.game.player.hp / this.game.player.maxHP * 10); i++) {
-        //     c.fillStyle = 'rgba(210, 0, 0, 1)';
-        //     c.fillRect(24 + i * lifeGap + i * lifeSize, 4, lifeSize, this.lifebar.size.y - 8);
-        // }
-
-        // c.transform(1,0,0.5,1,0,0);
 
         c.fillStyle = 'rgba(185, 151, 59, 1)';
         c.beginPath();
@@ -77,17 +56,17 @@ export class UI extends GameObject {
         var lifeSize = 268 / lifeSections - lifeGap + 0.18;
 
         for (var i = 0; i < lifeSections; i++) {
-            c.fillStyle = 'rgba(205, 147, 60, 1)';
+            c.fillStyle = 'rgba(154, 110, 45, 1)';
             c.fillRect(6 + i * lifeSize + i * lifeGap, 7, lifeSize, 13);
 
-            c.strokeStyle = 'rgba(189, 188, 130, 1)';
+            c.strokeStyle = 'rgba(150, 148, 103, 1)';
             c.lineWidth = 3;
             c.beginPath();
             c.moveTo(6 + i * lifeSize + i * lifeGap, 7);
             c.lineTo(6 + i * lifeSize + i * lifeGap + lifeSize, 7);
             c.stroke();
 
-            c.strokeStyle = 'rgba(154, 110, 45, 1)';
+            c.strokeStyle = 'rgba(122, 93, 50, 1)';
             c.lineWidth = 2;
             c.beginPath();
             c.moveTo(6 + i * lifeSize + i * lifeGap, 19);
