@@ -18,6 +18,29 @@ class Wings {
         // свойства крыльев
         this.lift = 0.2;
         this.maxVelocityY = -10;
+
+        // эмиттеры партиклов
+        this.pe1 = player.game.createParticleEmitter();
+        this.pe1.setFrequency(10);
+        this.pe1.lifeTime = new Vec2(1, 1);
+        this.pe1.particleSize = new Vec2(14, 14);
+        this.pe1.shape = document.getElementById("shadowFlame");
+        this.pe1.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+        this.pe1.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+        this.pe1.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+        this.pe1.angle = 90;
+        this.pe1.position = this.player.position.copy();
+
+        this.pe2 = player.game.createParticleEmitter();
+        this.pe2.setFrequency(10);
+        this.pe2.lifeTime = new Vec2(1, 1);
+        this.pe2.particleSize = new Vec2(14, 14);
+        this.pe2.shape = document.getElementById("shadowFlame");
+        this.pe2.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+        this.pe2.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+        this.pe2.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+        this.pe2.angle = 90;
+        this.pe2.position = Vec2.concat(this.player.position.copy(), new Vec2(-10, 10));
     }
     update(input, deltaTime) {
         // при зажатом пробеле
@@ -27,6 +50,9 @@ class Wings {
                 this.frameTimer = 0;
                 if (this.frame < this.maxFrame) this.frame++;
                 else this.frame = 0;
+            // партиклы
+            this.pe1.emit();
+            this.pe2.emit();
             } else {
                 this.frameTimer += deltaTime;
             }
@@ -37,6 +63,10 @@ class Wings {
         } else {
             if (this.player.isGrounded()) this.frame = this.standingFrame;
             else this.frame = this.soaringFrame;
+
+            // партиклы
+            this.pe1.stop();
+            this.pe2.stop();
         }
 
         // при зажатом S
@@ -46,6 +76,15 @@ class Wings {
         else {
             this.player.gravityMultiplier = 1;
         }
+
+        this.pe1.position = new Vec2(
+            (this.player.position.x + (this.player.size.x - this.size.x) / 2) + 20 + (this.player.rotation > 0? 0 : -30) + 40, 
+            this.player.position.y + 20
+        );
+        this.pe2.position = new Vec2(
+            (this.player.position.x + (this.player.size.x - this.size.x) / 2) + 20 + (this.player.rotation > 0? 0 : 60) - 10, 
+            this.player.position.y + 20 + 10
+        );
     }
     draw(c) {
         c.translate(this.player.rotation * (this.player.position.x + (this.player.size.x - this.size.x) / 2), this.player.position.y);
