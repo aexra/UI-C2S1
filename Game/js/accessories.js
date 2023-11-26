@@ -179,13 +179,13 @@ export class NormalityRelocator {
                     this.pathpes.splice(this.pathpes.indexOf(pe), 1);
                 };
                 pe.emit();
+
+                this.pathpes.push(pe);
             }
 
             this.player.position = new Vec2(input.mpx, input.mpy);
             input.mpx += distance.x;
             input.mpy += distance.y;
-
-            console.log(this.pathpes.length);
         }
         if (this.timer != -1) {
             this.timer += deltaTime;
