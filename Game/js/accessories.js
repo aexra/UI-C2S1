@@ -1,4 +1,5 @@
 import { Vec2 } from "./vec2.js";
+import { Random } from "./misc.js";
 
 class Wings {
     constructor(player) {
@@ -142,7 +143,7 @@ export class NormalityRelocator {
         this.pe.particleInitialSpeed = new Vec2(2, 2);
         this.pe.position = this.player.position.copy();
 
-        this.pesgap = 10;
+        this.pesgap = 20;
         this.verticalpesgap = 4;
         this.pathpes = [];
 
@@ -152,7 +153,8 @@ export class NormalityRelocator {
     }
     update(input, deltaTime) {
         if ((input.keys.includes('f') || input.keys.includes('а')) && this.timer == -1) {
-            var distance = Vec2.minus(new Vec2(input.mpx, input.mpy), this.player.position);
+            var playerCenter = Vec2.minus(this.player.position, new Vec2(this.player.size.x / 2, this.player.size.y / 2));
+            var distance = Vec2.minus(new Vec2(input.mpx - this.player.size.x / 2, input.mpy - this.player.size.y / 2), playerCenter);
 
             this.timer = 0;
             this.emitterTimer = 0;
@@ -161,14 +163,16 @@ export class NormalityRelocator {
 
             var diagdist = Math.sqrt(distance.x * distance.x + distance.y * distance.y);
             var angle = Math.atan(distance.y / distance.x);
-            for (var i = 0; i <= Math.ceil(diagdist / this.pesgap) - 5; i++) {
+            for (var i = 0; i <= Math.ceil(diagdist / this.pesgap); i++) {
                 for (var j = 0; j < 4; j++) {
+                    var chanceToEmit = Random.randi(0, 1);
+                    if (chanceToEmit == 0) continue;
+
                     var pepos = new Vec2(
                         Math.cos(angle) * this.pesgap * i * (distance.x > 0? 1 : -1) + j * Math.sin(angle) * this.verticalpesgap * (Math.cos(angle) < 0? 1 : -1), 
                         Math.sin(angle) * this.pesgap * i * (distance.y < 0? 1 : -1) * (Math.sin(angle) < 0? 1 : -1) + j * Math.cos(angle) * this.verticalpesgap
                     );
-                    pepos.add(this.player.position);
-                    pepos.add(new Vec2(this.player.size.x / 2, this.player.size.y / 2));
+                    pepos.add(playerCenter);
 
                     var pe = this.player.game.createParticleEmitter();
                     pe.setFrequency(20);
@@ -193,7 +197,7 @@ export class NormalityRelocator {
                 }
             }
 
-            this.player.position = new Vec2(input.mpx, input.mpy);
+            this.player.position = new Vec2(input.mpx - this.player.size.x / 2, input.mpy - this.player.size.y / 2);
             input.mpx += distance.x;
             input.mpy += distance.y;
         }
