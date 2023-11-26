@@ -178,7 +178,7 @@ export class NormalityRelocator {
                     pe.setFrequency(20);
                     pe.position = pepos;
                     pe.lifeTime = new Vec2(1, 1);
-                    pe.particleSize = new Vec2(10, 10);
+                    pe.particleSize = new Vec2(6, 6);
                     pe.shape = document.getElementById("relocator");
                     pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
                     pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
