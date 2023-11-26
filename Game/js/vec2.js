@@ -16,6 +16,10 @@ export class Vec2 {
         this.y = to.y;
         return this;
     }
+    add(what) {
+        this.x += what.x;
+        this.y += what.y;
+    }
     equal(to) {
         if (this.x == to.x && this.y == to.y) return true;
         return false;

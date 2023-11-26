@@ -142,6 +142,9 @@ export class NormalityRelocator {
         this.pe.particleInitialSpeed = new Vec2(2, 2);
         this.pe.position = this.player.position.copy();
 
+        this.pesgap = 10;
+        this.pathpes = [];
+
         this.sound = new Audio("../resources/game/accessories/relocator.wav");
         this.sound.volume = 0.2;
         this.sound.playbackRate = 1.4;
@@ -149,13 +152,39 @@ export class NormalityRelocator {
     update(input, deltaTime) {
         if ((input.keys.includes('f') || input.keys.includes('а')) && this.timer == -1) {
             var distance = Vec2.minus(new Vec2(input.mpx, input.mpy), this.player.position);
-            this.player.position = new Vec2(input.mpx, input.mpy);
-            input.mpx += distance.x;
-            input.mpy += distance.y;
+
             this.timer = 0;
             this.emitterTimer = 0;
             this.pe.emit();
-            this.sound.play();
+            this.sound.play();  
+
+            var diagdist = Math.sqrt(distance.x * distance.x + distance.y * distance.y);
+            var angle = Math.atan(distance.y / distance.x);
+            for (var i = 0; i <= Math.ceil(diagdist / this.pesgap) - 5; i++) {
+                var pepos = new Vec2(Math.cos(angle) * this.pesgap * i * (distance.x > 0? 1 : -1), Math.sin(angle) * this.pesgap * i);
+                pepos.add(this.player.position);
+
+                var pe = this.player.game.createParticleEmitter();
+                pe.position = pepos;
+                pe.lifeTime = new Vec2(1, 1);
+                pe.particleSize = new Vec2(10, 10);
+                pe.shape = document.getElementById("relocator");
+                pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+                pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+                pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+                pe.onemit = (s) => {
+                    s.stop();
+                };
+                pe.emit();
+
+                this.pathpes.push(pe);
+            }
+
+            this.player.position = new Vec2(input.mpx, input.mpy);
+            input.mpx += distance.x;
+            input.mpy += distance.y;
+
+            console.log(this.pathpes.length);
         }
         if (this.timer != -1) {
             this.timer += deltaTime;

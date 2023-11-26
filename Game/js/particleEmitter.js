@@ -36,6 +36,7 @@ export class ParticleEmitter extends GameObject {
         this.timer = 0;
 
         this.emitting = false;
+        this.onemit = function(s){};
     }
     emit() {
         this.emitting = true;
@@ -49,6 +50,7 @@ export class ParticleEmitter extends GameObject {
             if (this.emitting && this.timer > this.interval) {
                 this.timer = 0;
                 this.createParticle();
+                this.onemit(this);
                 // this.stop();
             }
         }
