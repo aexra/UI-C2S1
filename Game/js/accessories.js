@@ -161,10 +161,11 @@ export class NormalityRelocator {
             var diagdist = Math.sqrt(distance.x * distance.x + distance.y * distance.y);
             var angle = Math.atan(distance.y / distance.x);
             for (var i = 0; i <= Math.ceil(diagdist / this.pesgap) - 5; i++) {
-                var pepos = new Vec2(Math.cos(angle) * this.pesgap * i * (distance.x > 0? 1 : -1), Math.sin(angle) * this.pesgap * i);
+                var pepos = new Vec2(Math.cos(angle) * this.pesgap * i * (distance.x > 0? 1 : -1), Math.sin(angle) * this.pesgap * i * (distance.y < 0? 1 : -1) * (Math.sin(angle) < 0? 1 : -1));
                 pepos.add(this.player.position);
 
                 var pe = this.player.game.createParticleEmitter();
+                pe.setFrequency(20);
                 pe.position = pepos;
                 pe.lifeTime = new Vec2(1, 1);
                 pe.particleSize = new Vec2(10, 10);
