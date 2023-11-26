@@ -143,6 +143,7 @@ export class NormalityRelocator {
         this.pe.position = this.player.position.copy();
 
         this.pesgap = 10;
+        this.verticalpesgap = 4;
         this.pathpes = [];
 
         this.sound = new Audio("../resources/game/accessories/relocator.wav");
@@ -161,28 +162,35 @@ export class NormalityRelocator {
             var diagdist = Math.sqrt(distance.x * distance.x + distance.y * distance.y);
             var angle = Math.atan(distance.y / distance.x);
             for (var i = 0; i <= Math.ceil(diagdist / this.pesgap) - 5; i++) {
-                var pepos = new Vec2(Math.cos(angle) * this.pesgap * i * (distance.x > 0? 1 : -1), Math.sin(angle) * this.pesgap * i * (distance.y < 0? 1 : -1) * (Math.sin(angle) < 0? 1 : -1));
-                pepos.add(this.player.position);
+                for (var j = 0; j < 4; j++) {
+                    var pepos = new Vec2(
+                        Math.cos(angle) * this.pesgap * i * (distance.x > 0? 1 : -1) + j * Math.sin(angle) * this.verticalpesgap * (Math.cos(angle) < 0? 1 : -1), 
+                        Math.sin(angle) * this.pesgap * i * (distance.y < 0? 1 : -1) * (Math.sin(angle) < 0? 1 : -1) + j * Math.cos(angle) * this.verticalpesgap
+                    );
+                    pepos.add(this.player.position);
+                    pepos.add(new Vec2(this.player.size.x / 2, this.player.size.y / 2));
 
-                var pe = this.player.game.createParticleEmitter();
-                pe.setFrequency(20);
-                pe.position = pepos;
-                pe.lifeTime = new Vec2(1, 1);
-                pe.particleSize = new Vec2(10, 10);
-                pe.shape = document.getElementById("relocator");
-                pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
-                pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
-                pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
-                pe.onemit = (s) => {
-                    s.stop();
-                };
-                pe.onParticleLifeCycleEnd = (s) => {
-                    this.player.game.deleteParticleEmitter(s);
-                    this.pathpes.splice(this.pathpes.indexOf(pe), 1);
-                };
-                pe.emit();
+                    var pe = this.player.game.createParticleEmitter();
+                    pe.setFrequency(20);
+                    pe.position = pepos;
+                    pe.lifeTime = new Vec2(1, 1);
+                    pe.particleSize = new Vec2(10, 10);
+                    pe.shape = document.getElementById("relocator");
+                    pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+                    pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+                    pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+                    pe.particleGravityModifier = 0.5;
+                    pe.onemit = (s) => {
+                        s.stop();
+                    };
+                    pe.onParticleLifeCycleEnd = (s) => {
+                        this.player.game.deleteParticleEmitter(s);
+                        this.pathpes.splice(this.pathpes.indexOf(pe), 1);
+                    };
+                    pe.emit();
 
-                this.pathpes.push(pe);
+                    this.pathpes.push(pe);
+                }
             }
 
             this.player.position = new Vec2(input.mpx, input.mpy);
