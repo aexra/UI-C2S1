@@ -37,6 +37,9 @@ export class ParticleEmitter extends GameObject {
 
         this.emitting = false;
         this.onemit = function(s){};
+
+        this.plcTimer = 0;
+        this.onParticleLifeCycleEnd = function(s){};
     }
     emit() {
         this.emitting = true;
@@ -57,6 +60,12 @@ export class ParticleEmitter extends GameObject {
         
         for (let particle of this.particles) {
             particle.update(deltaTime);
+        }
+
+        this.plcTimer += deltaTime;
+        if (this.plcTimer >= this.lifeTime.y * 1000) {
+            this.plcTimer = 0;
+            this.onParticleLifeCycleEnd(this);
         }
     }
     draw(c) {

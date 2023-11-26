@@ -175,6 +175,8 @@ export class NormalityRelocator {
                 pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
                 pe.onemit = (s) => {
                     s.stop();
+                };
+                pe.onParticleLifeCycleEnd = (s) => {
                     this.player.game.deleteParticleEmitter(s);
                     this.pathpes.splice(this.pathpes.indexOf(pe), 1);
                 };
