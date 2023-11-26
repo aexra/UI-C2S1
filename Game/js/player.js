@@ -44,6 +44,8 @@ export class Player {
         this.maxHP = 1000;
         this.hp = this.maxHP;
         this.hp = 720;
+        this.immunityInterval = 1000;
+        this.immunityTimer = 0;
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
@@ -110,6 +112,17 @@ export class Player {
 
         this.updateCamera();
         this.translateCamera(this.game.canvasContext);
+
+        // damage
+        if (this.immunityTimer != 0) {
+            this.immunityTimer += deltaTime;
+            if (this.immunityTimer >= this.immunityInterval) {
+                this.immunityTimer = 0;
+            }
+        }
+        if (input.keys.includes("j") || input.keys.includes("о")) {
+            this.getDamage(50);
+        }
     }
     draw(c) {
         // перемещение камеры
@@ -142,6 +155,17 @@ export class Player {
         c.save();
         this.drawCharacter(c);
         c.restore();
+    }
+    getDamage(amount) {
+        if (this.immunityTimer == 0) {
+            this.immunityTimer = 1;
+            this.hp -= amount;
+
+            this.onHit();
+        }
+    }
+    onHit() {
+        console.log("player got hit, hp: ", this.hp);
     }
     updateCamera() {
         this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / 2 + this.size.x / 2), - (this.position.y - this.camera.size.y / 2 + this.size.y / 2));

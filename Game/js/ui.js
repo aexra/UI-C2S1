@@ -74,7 +74,7 @@ export class UI extends GameObject {
             c.stroke();
         }
 
-        for (var i = 0; i < Math.floor(this.game.player.hp / this.game.player.maxHP * lifeSections); i++) {
+        for (var i = 0; i < Math.ceil(this.game.player.hp / this.game.player.maxHP * lifeSections); i++) {
             c.fillStyle = 'rgba(221, 189, 62, 1)';
             c.fillRect(6 + i * lifeSize + i * lifeGap, 7, lifeSize, 13);
 
