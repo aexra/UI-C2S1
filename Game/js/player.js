@@ -223,6 +223,8 @@ export class Player {
     }
     translateCamera(c) {
         c.setTransform(1,0,0,1,0,0);
+        // если захочу сделать меняемый скейл, это делается здесь
+        // c.scale(0.8, 0.8);
         c.translate(this.game.canvasTranslated.x, this.game.canvasTranslated.y);
     }
     checkIncomingFloorCollision() {
