@@ -21,8 +21,8 @@ export class Player {
         this.velocity = 0;
 
         this.maxSpeed = 10;
-        this.loseSpeed = 0.1;
-        this.acceleration = 0.1;
+        this.loseSpeed = 0.2;
+        this.acceleration = 0.07;
 
         this.gravity = 0.1;
         this.gravityMultiplier = 1;
