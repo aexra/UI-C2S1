@@ -23,22 +23,24 @@ export class UI extends GameObject {
     }
     update(input, deltaTime) {
         this.position = new Vec2(-this.game.canvasTranslated.x, this.game.canvasTranslated.y);
-
         this.size = new Vec2(this.game.canvasSize.x / this.game.player.camera.scale.x - this.margin.x * 2 / this.game.player.camera.scale.x, this.game.canvasSize.y / this.game.player.camera.scale.y - this.margin.y * 2 / this.game.player.camera.scale.y);
+        
+        this.lifebar = {
+            size: new Vec2(280 / this.game.player.camera.scale.x, 26 / this.game.player.camera.scale.y),
+            position: new Vec2(this.margin.x / this.game.player.camera.scale.x + this.size.x - 280 / this.game.player.camera.scale.x, this.margin.y / this.game.player.camera.scale.y),
+        };
         this.minimap = {
             size: new Vec2(280 / this.game.player.camera.scale.x, 280 / this.game.player.camera.scale.y),
-            position: new Vec2(this.margin.x / this.game.player.camera.scale.x + this.size.x - 280 / this.game.player.camera.scale.x, this.margin.y / this.game.player.camera.scale.y + this.lifebar.size.y / this.game.player.camera.scale.y + this.gap.y / this.game.player.camera.scale.y),
+            position: new Vec2(this.margin.x / this.game.player.camera.scale.x + this.size.x - 280 / this.game.player.camera.scale.x, this.margin.y / this.game.player.camera.scale.y + this.lifebar.size.y + this.gap.y / this.game.player.camera.scale.y),
             scale: 280 / this.game.size.x,
             border: document.getElementById("minimap"),
         };
+
     }
     draw(c) {
         this.drawHotbar(c);
         this.drawLifebar(c);
         this.drawMinimap(c);
-
-        // c.fillStyle = "rgba(120, 0, 0, 1)";
-        // c.fillRect(this.position.x, -this.position.y, this.size.x, this.size.y);
     }
     drawHotbar(c) {
 
@@ -50,64 +52,64 @@ export class UI extends GameObject {
 
         c.fillStyle = 'rgba(185, 151, 59, 1)';
         c.beginPath();
-        c.roundRect(0, 0, this.lifebar.size.x, this.lifebar.size.y, 5);
+        c.roundRect(0, 0, this.lifebar.size.x, this.lifebar.size.y, 5 / this.game.player.camera.scale.x);
         c.fill();
 
         c.strokeStyle = 'rgba(0, 0, 0, 0.4)';
-        c.lineWidth = 5;
+        c.lineWidth = 5 / this.game.player.camera.scale.x;
         c.beginPath();
-        c.roundRect(0, 0, this.lifebar.size.x, this.lifebar.size.y, 5);
+        c.roundRect(0, 0, this.lifebar.size.x, this.lifebar.size.y, 5 / this.game.player.camera.scale.x);
         c.stroke();
         
         c.fillStyle = 'rgba(167, 120, 49, 1)';
-        c.fillRect(6, 6, 268, 14);
+        c.fillRect(6 / this.game.player.camera.scale.x, 6 / this.game.player.camera.scale.x, 268 / this.game.player.camera.scale.x, 14 / this.game.player.camera.scale.x);
 
         var lifeSections = 15;
-        var lifeGap = 3;
-        var lifeSize = 268 / lifeSections - lifeGap + 0.18;
+        var lifeGap = 3 / this.game.player.camera.scale.x;
+        var lifeSize = 268 / this.game.player.camera.scale.x / lifeSections - lifeGap + 0.18 / this.game.player.camera.scale.x;
 
         for (var i = 0; i < lifeSections; i++) {
             c.fillStyle = 'rgba(154, 110, 45, 1)';
-            c.fillRect(6 + i * lifeSize + i * lifeGap, 7, lifeSize, 13);
+            c.fillRect(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap, 7 / this.game.player.camera.scale.x, lifeSize, 13 / this.game.player.camera.scale.x);
 
             c.strokeStyle = 'rgba(150, 148, 103, 1)';
-            c.lineWidth = 3;
+            c.lineWidth = 3 / this.game.player.camera.scale.x;
             c.beginPath();
-            c.moveTo(6 + i * lifeSize + i * lifeGap, 7);
-            c.lineTo(6 + i * lifeSize + i * lifeGap + lifeSize, 7);
+            c.moveTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap, 7 / this.game.player.camera.scale.x);
+            c.lineTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap + lifeSize, 7 / this.game.player.camera.scale.x);
             c.stroke();
 
             c.strokeStyle = 'rgba(122, 93, 50, 1)';
-            c.lineWidth = 2;
+            c.lineWidth = 2 / this.game.player.camera.scale.x;
             c.beginPath();
-            c.moveTo(6 + i * lifeSize + i * lifeGap, 19);
-            c.lineTo(6 + i * lifeSize + i * lifeGap + lifeSize, 19);
+            c.moveTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap, 19 / this.game.player.camera.scale.x);
+            c.lineTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap + lifeSize, 19 / this.game.player.camera.scale.x);
             c.stroke();
         }
 
         for (var i = 0; i < Math.ceil(this.game.player.hp / this.game.player.maxHP * lifeSections); i++) {
             c.fillStyle = 'rgba(221, 189, 62, 1)';
-            c.fillRect(6 + i * lifeSize + i * lifeGap, 7, lifeSize, 13);
+            c.fillRect(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap, 7 / this.game.player.camera.scale.x, lifeSize, 13 / this.game.player.camera.scale.x);
 
             c.strokeStyle = 'rgba(240, 239, 166, 1)';
-            c.lineWidth = 3;
+            c.lineWidth = 3 / this.game.player.camera.scale.x;
             c.beginPath();
-            c.moveTo(6 + i * lifeSize + i * lifeGap, 7);
-            c.lineTo(6 + i * lifeSize + i * lifeGap + lifeSize, 7);
+            c.moveTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap, 7 / this.game.player.camera.scale.x);
+            c.lineTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap + lifeSize, 7 / this.game.player.camera.scale.x);
             c.stroke();
 
             c.strokeStyle = 'rgba(205, 115, 61, 1)';
-            c.lineWidth = 2;
+            c.lineWidth = 2 / this.game.player.camera.scale.x;
             c.beginPath();
-            c.moveTo(6 + i * lifeSize + i * lifeGap, 19);
-            c.lineTo(6 + i * lifeSize + i * lifeGap + lifeSize, 19);
+            c.moveTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap, 19 / this.game.player.camera.scale.x);
+            c.lineTo(6 / this.game.player.camera.scale.x + i * lifeSize + i * lifeGap + lifeSize, 19 / this.game.player.camera.scale.x);
             c.stroke();
         }
 
         c.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-        c.lineWidth = 2;
+        c.lineWidth = 2 / this.game.player.camera.scale.x;
         c.beginPath();
-        c.roundRect(5, 5, this.lifebar.size.x - 10, this.lifebar.size.y - 10, 3);
+        c.roundRect(5 / this.game.player.camera.scale.x, 5 / this.game.player.camera.scale.x, this.lifebar.size.x - 10 / this.game.player.camera.scale.x, this.lifebar.size.y - 10 / this.game.player.camera.scale.x, 3 / this.game.player.camera.scale.x);
         c.stroke();
 
         c.restore();
