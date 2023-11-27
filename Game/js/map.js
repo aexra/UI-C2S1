@@ -75,7 +75,10 @@ export class Map {
             document.getElementById("codebreaker4"),
             document.getElementById("codebreaker5"),
             document.getElementById("codebreaker6"),
-            document.getElementById("codebreaker7")], 8, new Vec2(36000 + 54, 1682));
+            document.getElementById("codebreaker7")], 8, new Vec2(36000 + 54, 1682), new Vec2(80, 120));
+        this.codebreaker.onmouser = (s) => {
+            console.log("Draedon summoning dialog...");
+        };
         this.campfire = {
             position: new Vec2(),
         };
