@@ -83,9 +83,11 @@ window.addEventListener("load", (e) => {
 			this.isDraedonInitiated = true;
 
 			var beamSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/CodebreakerBeam.wav");
+			beamSound.volume = 0.2;
 			beamSound.play();
 			setTimeout(function(){
 				var teslaSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/TeslaCannonFire.wav");
+				teslaSound.volume = 0.2;
 				teslaSound.play();
 			  }, 1000)
 		}
