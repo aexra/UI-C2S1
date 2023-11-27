@@ -28,8 +28,8 @@ export class InputHandler {
         //     this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
         // });
         document.getElementById("canvas1").addEventListener("mousemove", (e) => {
-            this.mpx = e.clientX - game.canvasTranslated.x;
-            this.mpy = e.clientY - game.canvasTranslated.y;
+            this.mpx = e.clientX / this.game.player.camera.scale.x - game.canvasTranslated.x;
+            this.mpy = e.clientY / this.game.player.camera.scale.x - game.canvasTranslated.y;
         });
         document.body.addEventListener("mouseup", (e) => {
             this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);

@@ -171,6 +171,8 @@ export class Map {
     getRenderBorders() {
         var pos = this.game.player.camera.pos.copy();
         var size = this.game.player.camera.size.copy();
+        size.x /=  this.game.player.camera.scale.x;
+        size.y /=  this.game.player.camera.scale.y;
         
         var ibegin = new Vec2(Math.ceil(-pos.x / 18), Math.ceil(Math.abs(pos.y) / 18));
         var iend = new Vec2(Math.ceil((-pos.x + size.x) / 18), Math.ceil((Math.abs(pos.y) + size.y) / 18));
