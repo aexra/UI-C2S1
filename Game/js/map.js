@@ -79,12 +79,24 @@ export class Map {
         this.codebreaker.onmouser = (s) => {
             console.log("Draedon summoning dialog...");
         };
-        this.campfire = {
-            position: new Vec2(),
-        };
-        this.flamepot = {
-            position: new Vec2(),
-        };
+        this.flamepot = new AnimatedSprite([
+            document.getElementById("pot0"),
+            document.getElementById("pot1"),
+            document.getElementById("pot2"),
+            document.getElementById("pot3"),
+            document.getElementById("pot4"),
+            document.getElementById("pot5"),
+        ], 12, new Vec2(36000 - 205, 1700 + 14), new Vec2(38, 88));
+        this.campfire = new AnimatedSprite([
+            document.getElementById("campfire0"),
+            document.getElementById("campfire1"),
+            document.getElementById("campfire2"),
+            document.getElementById("campfire3"),
+            document.getElementById("campfire4"),
+            document.getElementById("campfire5"),
+            document.getElementById("campfire6"),
+            document.getElementById("campfire7"),
+        ], 12, new Vec2(36000 + 305, 1700 + 66), new Vec2(54, 42));
     }
     generateMap() {
         this.map = [];
@@ -117,6 +129,8 @@ export class Map {
         this.position.y = -this.game.cameraPos.y;
 
         this.codebreaker.update(input, deltaTime);
+        this.flamepot.update(input, deltaTime);
+        this.campfire.update(input, deltaTime);
     }
     draw(c) {
         c.save();
@@ -137,6 +151,8 @@ export class Map {
     }
     drawIncObjs(c) {
         this.codebreaker.draw(c);
+        this.flamepot.draw(c);
+        this.campfire.draw(c);
     }
     drawBackground(c) {
         for (var layer of this.layers) {
