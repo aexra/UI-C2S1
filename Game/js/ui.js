@@ -22,12 +22,23 @@ export class UI extends GameObject {
         };
     }
     update(input, deltaTime) {
-        this.position = new Vec2(-this.game.player.camera.pos.x, this.game.player.camera.pos.y);
+        this.position = new Vec2(-this.game.canvasTranslated.x, this.game.canvasTranslated.y);
+
+        this.size = new Vec2(this.game.canvasSize.x / this.game.player.camera.scale.x - this.margin.x * 2 / this.game.player.camera.scale.x, this.game.canvasSize.y / this.game.player.camera.scale.y - this.margin.y * 2 / this.game.player.camera.scale.y);
+        this.minimap = {
+            size: new Vec2(280 / this.game.player.camera.scale.x, 280 / this.game.player.camera.scale.y),
+            position: new Vec2(this.margin.x / this.game.player.camera.scale.x + this.size.x - 280 / this.game.player.camera.scale.x, this.margin.y / this.game.player.camera.scale.y + this.lifebar.size.y / this.game.player.camera.scale.y + this.gap.y / this.game.player.camera.scale.y),
+            scale: 280 / this.game.size.x,
+            border: document.getElementById("minimap"),
+        };
     }
     draw(c) {
         this.drawHotbar(c);
         this.drawLifebar(c);
         this.drawMinimap(c);
+
+        // c.fillStyle = "rgba(120, 0, 0, 1)";
+        // c.fillRect(this.position.x, -this.position.y, this.size.x, this.size.y);
     }
     drawHotbar(c) {
 
@@ -120,14 +131,14 @@ export class UI extends GameObject {
 
         // рисуем белую точку - игрока
         c.fillStyle = "rgba(255, 255, 255, 1)";
-        c.fillRect(this.position.x + this.minimap.position.x + this.game.player.position.x * this.minimap.scale - 2,
-            -this.position.y + this.minimap.position.y + this.game.player.position.y * this.minimap.scale - 2, 4, 4);
+        c.fillRect(this.position.x + this.minimap.position.x + this.game.player.position.x * this.minimap.scale / this.game.player.camera.scale.x - 2 / this.game.player.camera.scale.x,
+            -this.position.y + this.minimap.position.y + this.game.player.position.y * this.minimap.scale / this.game.player.camera.scale.x - 2 / this.game.player.camera.scale.x, 4 / this.game.player.camera.scale.x, 4 / this.game.player.camera.scale.x);
 
         // c.strokeStyle = "rgba(100, 100, 100, 1)";
         // c.lineWidth = 2;
         // c.strokeRect(-this.position.x + this.minimap.position.x - 2, -this.position.y + this.minimap.position.y - 2, this.minimap.size.x + 4, this.minimap.size.y + 4);
 
-        c.drawImage(this.minimap.border, this.position.x + this.minimap.position.x - 10, -this.position.y + this.minimap.position.y - 17, this.minimap.size.x + 30, this.minimap.size.y + 34)
+        c.drawImage(this.minimap.border, this.position.x + this.minimap.position.x - 10 / this.game.player.camera.scale.x, -this.position.y + this.minimap.position.y - 17 / this.game.player.camera.scale.x, this.minimap.size.x + 30 / this.game.player.camera.scale.x, this.minimap.size.y + 34 / this.game.player.camera.scale.x)
 
         c.restore();
     }

@@ -160,12 +160,12 @@ export class Map {
     drawBackground(c) {
         for (var layer of this.layers) {
             if (layer.id == "stars") {
-                c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
-                c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x + layer.size.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
+                c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x / this.game.player.camera.scale.x, layer.size.y / this.game.player.camera.scale.y);
+                c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x + layer.size.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x / this.game.player.camera.scale.x, layer.size.y / this.game.player.camera.scale.y);
                 continue;
             }
 
-            c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x, layer.size.y);
+            c.drawImage(layer.img, this.position.x * layer.k + layer.drawOffset.x, this.position.y * layer.k + layer.drawOffset.y, layer.size.x / this.game.player.camera.scale.x, layer.size.y / this.game.player.camera.scale.y);
         }
     }
     getRenderBorders() {

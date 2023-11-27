@@ -12,7 +12,8 @@ export class Player {
         this.image = document.getElementById("player");
         this.camera = {
             size: game.canvasSize,
-            pos: new Vec2()
+            pos: new Vec2(),
+            scale: new Vec2(1, 1),
         };
 
         this.direction = 0;
@@ -110,7 +111,7 @@ export class Player {
             acc.update(input, deltaTime);
         }
 
-        this.updateCamera();
+        this.updateCamera(input, deltaTime);
         this.translateCamera(this.game.canvasContext);
 
         // damage
@@ -167,8 +168,25 @@ export class Player {
     onHit() {
         console.log("player got hit, hp: ", this.hp);
     }
-    updateCamera() {
-        this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / 2 + this.size.x / 2), - (this.position.y - this.camera.size.y / 2 + this.size.y / 2));
+    updateCamera(input, deltaTime) {
+        if (input.keys.includes('-')) {
+            this.camera.scale.x -= 0.01;
+            this.camera.scale.y -= 0.01;
+        }
+        if (input.keys.includes('=')) {
+            this.camera.scale.x += 0.01;
+            this.camera.scale.y += 0.01;
+        }
+        if (this.camera.scale.x < 0.5) {
+            this.camera.scale.x = 0.5;
+            this.camera.scale.y = 0.5;
+        }
+        if (this.camera.scale.x > 10) {
+            this.camera.scale.x = 10;
+            this.camera.scale.y = 10;
+        }
+
+        this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / this.camera.scale.x / 2 + this.size.x / 2), - (this.position.y - this.camera.size.y / this.camera.scale.y / 2 + this.size.y / 2));
         var al = - this.game.canvasTranslated.x;
         var ar = - this.game.canvasTranslated.x + this.camera.size.x - this.game.size.x;
         var bt = - this.game.canvasTranslated.y;
@@ -224,7 +242,7 @@ export class Player {
     translateCamera(c) {
         c.setTransform(1,0,0,1,0,0);
         // если захочу сделать меняемый скейл, это делается здесь
-        // c.scale(0.8, 0.8);
+        c.scale(this.camera.scale.x, this.camera.scale.y);
         c.translate(this.game.canvasTranslated.x, this.game.canvasTranslated.y);
     }
     checkIncomingFloorCollision() {
