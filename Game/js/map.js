@@ -77,7 +77,10 @@ export class Map {
             document.getElementById("codebreaker6"),
             document.getElementById("codebreaker7")], 8, new Vec2(36000 + 54, 1682), new Vec2(80, 120));
         this.codebreaker.onmouser = (s) => {
+            if (game.isFightInitiated) return;
             console.log("Draedon summoning dialog...");
+
+            game.initiateFight();
         };
         this.flamepot = new AnimatedSprite([
             document.getElementById("pot0"),

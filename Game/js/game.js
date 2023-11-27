@@ -29,6 +29,8 @@ window.addEventListener("load", (e) => {
 			this.ui = new UI(this);
 			this.cameraPos = new Vec2();
 			this.canvasContext = ctx;
+
+			this.isFightInitiated = false;
 		}
 		update(deltaTime) {
 			this.player.update(this.input, deltaTime);
@@ -73,6 +75,18 @@ window.addEventListener("load", (e) => {
 		}
 		deleteParticleEmitter(emitter) {
 			this.particleEmitters.splice(this.particleEmitters.indexOf(emitter), 1);
+		}
+		initiateFight() {
+			this.isFightInitiated = true;
+
+			var beamSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/CodebreakerBeam.wav");
+			beamSound.play();
+			console.log("a1");
+			setTimeout(function(){
+				var teslaSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/TeslaCannonFire.wav");
+				teslaSound.play();
+				console.log("a2");
+			  }, 1000)
 		}
 	}
 
