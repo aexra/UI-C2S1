@@ -1,3 +1,4 @@
+import { AnimatedSprite } from "./animatedSprite.js";
 import { Sprite } from "./sprite.js";
 import { Vec2 } from "./vec2.js"
 import { Vec4 } from "./vec4.js";
@@ -65,6 +66,22 @@ export class Map {
         this.fillMap();
 
         this.renderOffset = 20;
+
+        this.codebreaker = new AnimatedSprite([
+            document.getElementById("codebreaker0"),
+            document.getElementById("codebreaker1"),
+            document.getElementById("codebreaker2"),
+            document.getElementById("codebreaker3"),
+            document.getElementById("codebreaker4"),
+            document.getElementById("codebreaker5"),
+            document.getElementById("codebreaker6"),
+            document.getElementById("codebreaker7")], 8, new Vec2(36000 + 54, 1682));
+        this.campfire = {
+            position: new Vec2(),
+        };
+        this.flamepot = {
+            position: new Vec2(),
+        };
     }
     generateMap() {
         this.map = [];
@@ -95,6 +112,8 @@ export class Map {
     update(input, deltaTime) {
         this.position.x = -this.game.cameraPos.x;
         this.position.y = -this.game.cameraPos.y;
+
+        this.codebreaker.update(input, deltaTime);
     }
     draw(c) {
         c.save();
@@ -107,8 +126,14 @@ export class Map {
 
         // draw platforms to stay on
         this.drawPlatforms(c);
+
+        // draw incollisionable objects like codebreaker or campfire
+        this.drawIncObjs(c);
         
         c.restore();
+    }
+    drawIncObjs(c) {
+        this.codebreaker.draw(c);
     }
     drawBackground(c) {
         for (var layer of this.layers) {

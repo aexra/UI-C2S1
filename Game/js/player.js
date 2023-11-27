@@ -8,7 +8,7 @@ export class Player {
     constructor(game) {
         this.game = game;
         this.size = new Vec2(36, 54);
-        this.position = new Vec2(100, 100);
+        this.position = new Vec2(36000, 1200);
         this.image = document.getElementById("player");
         this.camera = {
             size: game.canvasSize,
