@@ -14,7 +14,7 @@ export class NPC extends GameObject {
 
         this.image = null;
 
-        this.immunityInterval = 100;
+        this.immunityInterval = 150;
         this.immunityTimer = 0;
     }
     update(input, deltaTime) {
