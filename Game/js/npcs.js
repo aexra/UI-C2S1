@@ -53,5 +53,6 @@ export class Dummy extends NPC {
     }
     onHit() {
         this.state = states.hitted;
+        this.hittedAnimation.frameIdx = 0;
     }
 }
