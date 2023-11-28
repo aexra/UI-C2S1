@@ -49,10 +49,6 @@ export class Dummy extends NPC {
         if (this.immunityTimer >= this.immunityInterval) {
             this.immunityTimer = 0;
         }
-        if (this.immunityTimer == 0 && this.checkCollisions()) {
-            this.onHit();
-            this.immunityTimer++;
-        }
 
         if (this.state == states.hitted) {
             this.hittedAnimation.update(input, deltaTime);
@@ -75,20 +71,27 @@ export class Dummy extends NPC {
     drawDamageTaken(c) {
 
     }
-    checkCollisions() {
+    checkPojectilesCollisions() {
         for (var projectile of this.game.projectiles) {
             if (Collision.collideBox(this.position, this.size, 0, 
                 projectile.hitbox.position, 
                 projectile.hitbox.size, 
                 projectile.rotationAngleRad)) 
                 {
-                return true;
+                return projectile;
             }
         }
-        return false;
+        return null;
     }
-    onHit() {
+    onHit(damage) {
         this.state = states.hitted;
         this.hittedAnimation.frameIdx = 0;
+        this.game.createDI(this.position, damage);
+    }
+    hit(damage) {
+        if (this.immunityTimer == 0) {
+            this.onHit(damage);
+            this.immunityTimer++;
+        }
     }
 }

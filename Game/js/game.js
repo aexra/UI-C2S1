@@ -4,6 +4,7 @@ import { Map } from "./map.js"
 import { Vec2 } from "./vec2.js";
 import { ParticleEmitter } from "./particleEmitter.js";
 import { UI } from "./ui.js";
+import { DamageIndicator } from "./damageIndicator.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -20,16 +21,17 @@ window.addEventListener("load", (e) => {
 		constructor(size, canvasSize, ctx) {
 			this.size = size;
 			this.canvasSize = canvasSize;
+			this.canvasContext = ctx;
 			this.canvasTranslated = new Vec2();
 			this.projectiles = [];
 			this.particleEmitters = [];
+			this.damageIndicators = [];
+			this.npcs = [];
 			this.input = new InputHandler(this);
 			this.map = new Map(new Vec2(this.size.x, this.size.y), this);
 			this.player = new Player(this);
-			this.npcs = [];
 			this.ui = new UI(this);
 			this.cameraPos = new Vec2();
-			this.canvasContext = ctx;
 
 			this.isDraedonInitiated = false;
 			this.isFightInitiated = false;
@@ -46,6 +48,12 @@ window.addEventListener("load", (e) => {
 
 			for (let emitter of this.particleEmitters) {
 				emitter.update(deltaTime);
+			}
+
+			this.updateHits(this.input, deltaTime);
+
+			for (var di of this.damageIndicators) {
+				di.update(this.input, deltaTime);
 			}
 
 			this.map.update(this.input, deltaTime);
@@ -66,9 +74,21 @@ window.addEventListener("load", (e) => {
 				emitter.draw(context);
 			}
 
+			for (var di of this.damageIndicators) {
+				di.draw(context);
+			}
+
 			// this.map.drawShaders(context);
 
 			this.ui.draw(context);
+		}
+		updateHits(input, deltaTime) {
+			for (var npc of this.npcs) {
+				let p = npc.checkPojectilesCollisions();
+				if (p != null) {
+					npc.hit(p.baseDamage * p.damageMultiplier);
+				}
+			}
 		}
 		createParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter) {
 			var pe = new ParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter);
@@ -77,6 +97,16 @@ window.addEventListener("load", (e) => {
 		}
 		deleteParticleEmitter(emitter) {
 			this.particleEmitters.splice(this.particleEmitters.indexOf(emitter), 1);
+		}
+		createDI(origin, damage) {
+			var di = new DamageIndicator(this, origin, damage);
+			di.onfade = (s) => {
+				this.deleteDI(di);
+			};
+			this.damageIndicators.push(di);
+		}
+		deleteDI(di) {
+			this.damageIndicators.splice(this.damageIndicators.indexOf(di), 1);
 		}
 		initiateDraedon() {
 			this.isDraedonInitiated = true;

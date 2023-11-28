@@ -103,6 +103,7 @@ export class Map {
         ], 12, new Vec2(36000 + 305, 1700 + 63), new Vec2(54, 42));
         this.dummy = new Dummy(game);
         this.dummy.position = new Vec2(36000 + 505, 1700 + 52);
+        game.npcs.push(this.dummy);
     }
     generateMap() {
         this.map = [];
