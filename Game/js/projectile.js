@@ -20,6 +20,11 @@ export class Projectile {
         this.rotationAngleRad = this.initialAngleRad;
         this.position.x += this.spawnRadius * Math.cos(this.initialAngleRad);
         this.position.y += this.spawnRadius * Math.sin(this.initialAngleRad);
+
+        this.hitbox = {
+            position: this.position.copy(),
+            size: this.size.copy(),
+        };
     }
     update(input, deltaTime) {
 

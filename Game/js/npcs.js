@@ -1,6 +1,7 @@
 import { AnimatedSprite } from "./animatedSprite.js";
 import { NPC } from "./npc.js";
 import { Vec2 } from "./vec2.js";
+import { Collision } from "./misc.js";
 
 const states = {
     idle: 0,
@@ -11,6 +12,8 @@ export class Dummy extends NPC {
     constructor(game) {
         super(game);
         this.state = states.idle;
+
+        this.size = new Vec2(32, 48);
         
         this.idleFrame = document.getElementById("dummy0");
         this.hittedAnimation = new AnimatedSprite([
@@ -29,7 +32,7 @@ export class Dummy extends NPC {
             document.getElementById("dummy13"),
             document.getElementById("dummy14"),
             document.getElementById("dummy15"),
-        ], 22, this.position, new Vec2(32, 48));
+        ], 22, this.position, this.size);
         this.hittedAnimation.onend = (s) => {
             this.state = states.idle;
         };
@@ -39,13 +42,30 @@ export class Dummy extends NPC {
     update(input, deltaTime) {
         this.hp = this.maxhp;
         this.hittedAnimation.position = this.position;
-        if (input.keys.includes("]")) this.onHit();
+        
+        if (this.immunityTimer != 0) {
+            this.immunityTimer += deltaTime;
+        }
+        if (this.immunityTimer >= this.immunityInterval) {
+            this.immunityTimer = 0;
+        }
+        if (this.immunityTimer == 0 && this.checkCollisions()) {
+            this.onHit();
+            this.immunityTimer++;
+        }
+
         if (this.state == states.hitted) {
             this.hittedAnimation.update(input, deltaTime);
         }
     }
     draw(c) {
         this.drawNPC(c);
+        this.drawHitbox(c);
+
+        // to remove
+        for (var projectile of this.game.projectiles) {
+            projectile.drawHitbox(c);
+        }
     }
     drawNPC(c) {
         if (this.state == states.idle) {
@@ -59,6 +79,18 @@ export class Dummy extends NPC {
     }
     drawDamageTaken(c) {
 
+    }
+    checkCollisions() {
+        for (var projectile of this.game.projectiles) {
+            if (Collision.collideBox(this.position, this.size, 0, 
+                projectile.hitbox.position, 
+                projectile.hitbox.size, 
+                projectile.rotationAngleRad)) 
+                {
+                return true;
+            }
+        }
+        return false;
     }
     onHit() {
         this.state = states.hitted;

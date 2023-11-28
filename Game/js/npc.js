@@ -13,6 +13,9 @@ export class NPC extends GameObject {
         this.hp = this.maxhp;
 
         this.image = null;
+
+        this.immunityInterval = 100;
+        this.immunityTimer = 0;
     }
     update(input, deltaTime) {
 
@@ -21,12 +24,20 @@ export class NPC extends GameObject {
 
     }
     drawNPC(c) {
-        
+
     }
     drawHP(c) {
 
     }
     drawDamageTaken(c) {
 
+    }
+    drawHitbox(c) {
+        c.save();
+
+        c.fillStyle = "rgba(140, 0, 0, 0.4)";
+        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+
+        c.restore();
     }
 }

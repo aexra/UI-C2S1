@@ -38,6 +38,11 @@ export class TerraBeam extends Projectile {
             pe.position = this.position.copy().translate(new Vec2(Random.randi(-75, 75), Random.randi(-150, 150)));
             pe.emit();
         }
+
+        this.hitbox = {
+            position: this.position.copy(),
+            size: this.size.copy(),
+        };
     }
     update(input, deltaTime) {
         this.lifeTime -= deltaTime;
@@ -67,6 +72,8 @@ export class TerraBeam extends Projectile {
         for (let pe of this.pes) {
             pe.position.translate(delta);
         }
+
+        this.hitbox.position = Vec2.minus(this.position, new Vec2(this.size.x / 2, this.size.y / 2));
     }
     draw(context) {
         context.translate(this.position.x, this.position.y);
@@ -80,6 +87,18 @@ export class TerraBeam extends Projectile {
         context.globalAlpha = 1;
         context.rotate(-this.rotationAngleRad);
         context.translate(-this.position.x, -this.position.y);
+
+        // this.drawHitbox(context);
+    }
+    drawHitbox(context) {
+        context.translate(this.hitbox.position.x, this.hitbox.position.y);
+        context.translate(this.hitbox.size.x / 2, this.hitbox.size.y / 2);
+        context.rotate(this.rotationAngleRad);
+        context.fillStyle = "rgba(0, 0, 140, 0.4)";
+        context.fillRect(-this.hitbox.size.x / 2, -this.hitbox.size.y / 2, this.hitbox.size.x, this.hitbox.size.y);
+        context.rotate(-this.rotationAngleRad);
+        context.translate(-this.hitbox.size.x / 2, -this.hitbox.size.y / 2);
+        context.translate(-this.hitbox.position.x, -this.hitbox.position.y);
     }
 }
 
