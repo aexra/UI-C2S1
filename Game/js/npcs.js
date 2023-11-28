@@ -83,14 +83,14 @@ export class Dummy extends NPC {
         }
         return null;
     }
-    onHit(damage) {
+    onHit(damage, iscrit) {
         this.state = states.hitted;
         this.hittedAnimation.frameIdx = 0;
-        this.game.createDI(this.position, damage);
+        this.game.createDI(this.position, damage, iscrit);
     }
-    hit(damage) {
+    hit(damage, iscrit) {
         if (this.immunityTimer == 0) {
-            this.onHit(damage);
+            this.onHit(damage, iscrit);
             this.immunityTimer++;
         }
     }

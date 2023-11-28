@@ -11,11 +11,14 @@ export class DamageIndicator extends GameObject {
 
         this.text = damage.toString()
 
-        this.velocity = new Vec2(Random.randf(0, 0.5, 2), Random.randf(0, 0.5, 2));
-        this.direction = new Vec2(Random.randf(-1, 1, 2), Random.randf(-1, 1, 2));
+        this.iscrit = false;
+
+        this.velocity = new Vec2(Random.randf(0.2, 0.5, 2), Random.randf(0.4, 0.5, 2));
+        this.direction = new Vec2(Random.randf(-0.3, 0.3, 2), Random.randi(-1, 1) > 0? Random.randf(-1, -0.5, 2) : Random.randf(0.5, 1, 2));
         this.acceleration = 0.004;
 
         this.alpha = 1;
+        this.fontSize = 32;
         this.startfade = 800;
         this.lifetime = 1500;
         this.timer = 0;
@@ -31,6 +34,7 @@ export class DamageIndicator extends GameObject {
         this.timer += deltaTime;
         if (this.timer >= this.startfade) {
             this.alpha -= 1 / (this.lifetime - this.startfade) * deltaTime;
+            this.fontSize -= 0.1;
         }
         if (this.timer >= this.lifetime) {
             this.onfade();
@@ -43,9 +47,13 @@ export class DamageIndicator extends GameObject {
     }
     draw(c) {
         c.save();
-        c.fillStyle = "white";
         c.globalAlpha = this.alpha;
-        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        // c.fillStyle = "white";
+        // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.font = `${this.fontSize}px andy`;
+        c.fillStyle = this.iscrit? 'orangered' : 'orange';
+        c.textBaseline = 'top';
+        c.fillText(this.text, this.position.x, this.position.y);
         c.restore();
     }
 }

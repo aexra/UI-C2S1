@@ -138,7 +138,6 @@ export class Map {
         this.codebreaker.update(input, deltaTime);
         this.flamepot.update(input, deltaTime);
         this.campfire.update(input, deltaTime);
-        this.dummy.update(input, deltaTime);
     }
     draw(c) {
         c.save();
@@ -161,7 +160,6 @@ export class Map {
         this.codebreaker.draw(c);
         this.flamepot.draw(c);
         this.campfire.draw(c);
-        this.dummy.draw(c);
     }
     drawBackground(c) {
         for (var layer of this.layers) {

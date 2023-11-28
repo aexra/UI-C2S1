@@ -21,6 +21,8 @@ export class TerraBeam extends Projectile {
         this.lifeTime = this.maxLifeTime;
         this.alpha = 1;
 
+        this.baseDamage = 69;
+
         // эффекты
         this.pes = [];
         for (var i = 0; i < 3; i++) {

@@ -5,6 +5,7 @@ import { Vec2 } from "./vec2.js";
 import { ParticleEmitter } from "./particleEmitter.js";
 import { UI } from "./ui.js";
 import { DamageIndicator } from "./damageIndicator.js";
+import { Random } from "./misc.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -56,6 +57,10 @@ window.addEventListener("load", (e) => {
 				di.update(this.input, deltaTime);
 			}
 
+			for (var npc of this.npcs) {
+				npc.update(this.input, deltaTime);
+			}
+
 			this.map.update(this.input, deltaTime);
 			this.ui.update(this.input, deltaTime);
 		}
@@ -78,6 +83,10 @@ window.addEventListener("load", (e) => {
 				di.draw(context);
 			}
 
+			for (var npc of this.npcs) {
+				npc.draw(context);
+			}
+
 			// this.map.drawShaders(context);
 
 			this.ui.draw(context);
@@ -86,7 +95,9 @@ window.addEventListener("load", (e) => {
 			for (var npc of this.npcs) {
 				let p = npc.checkPojectilesCollisions();
 				if (p != null) {
-					npc.hit(p.baseDamage * p.damageMultiplier);
+					var iscrit = Random.randf(0, 100, 2) < 12? true : false;
+					var dmg = p.baseDamage * p.damageMultiplier * (iscrit? 2 : 1);
+					npc.hit(Random.randi(dmg - 10, dmg + 10), iscrit);
 				}
 			}
 		}
@@ -98,8 +109,9 @@ window.addEventListener("load", (e) => {
 		deleteParticleEmitter(emitter) {
 			this.particleEmitters.splice(this.particleEmitters.indexOf(emitter), 1);
 		}
-		createDI(origin, damage) {
+		createDI(origin, damage, iscrit) {
 			var di = new DamageIndicator(this, origin, damage);
+			di.iscrit = iscrit;
 			di.onfade = (s) => {
 				this.deleteDI(di);
 			};
