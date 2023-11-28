@@ -76,7 +76,7 @@ export class Map {
             document.getElementById("codebreaker4"),
             document.getElementById("codebreaker5"),
             document.getElementById("codebreaker6"),
-            document.getElementById("codebreaker7")], 8, new Vec2(36000 + 54, 1682), new Vec2(80, 120));
+            document.getElementById("codebreaker7")], 8, new Vec2(36000 + 54, 1680), new Vec2(80, 120));
         this.codebreaker.onmouser = (s) => {
             if (game.isDraedonInitiated) return;
             console.log("Draedon summoning dialog...");
@@ -100,9 +100,9 @@ export class Map {
             document.getElementById("campfire5"),
             document.getElementById("campfire6"),
             document.getElementById("campfire7"),
-        ], 12, new Vec2(36000 + 305, 1700 + 66), new Vec2(54, 42));
+        ], 12, new Vec2(36000 + 305, 1700 + 63), new Vec2(54, 42));
         this.dummy = new Dummy(game);
-        this.dummy.position = new Vec2(36000 + 505, 1700 + 54);
+        this.dummy.position = new Vec2(36000 + 505, 1700 + 52);
     }
     generateMap() {
         this.map = [];
