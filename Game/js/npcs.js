@@ -60,12 +60,7 @@ export class Dummy extends NPC {
     }
     draw(c) {
         this.drawNPC(c);
-        this.drawHitbox(c);
-
-        // to remove
-        for (var projectile of this.game.projectiles) {
-            projectile.drawHitbox(c);
-        }
+        // this.drawHitbox(c);
     }
     drawNPC(c) {
         if (this.state == states.idle) {
