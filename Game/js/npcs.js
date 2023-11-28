@@ -45,11 +45,20 @@ export class Dummy extends NPC {
         }
     }
     draw(c) {
+        this.drawNPC(c);
+    }
+    drawNPC(c) {
         if (this.state == states.idle) {
             c.drawImage(this.idleFrame, this.position.x, this.position.y);
         } else if (this.state == states.hitted) {
             this.hittedAnimation.draw(c);
         }
+    }
+    drawHP(c) {
+
+    }
+    drawDamageTaken(c) {
+
     }
     onHit() {
         this.state = states.hitted;

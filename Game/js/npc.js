@@ -20,4 +20,13 @@ export class NPC extends GameObject {
     draw(c) {
 
     }
+    drawNPC(c) {
+        
+    }
+    drawHP(c) {
+
+    }
+    drawDamageTaken(c) {
+
+    }
 }
