@@ -9,11 +9,20 @@ export class AnimatedSprite extends GameObject {
         this.position = pos;
         this.size = size;
         
+        this.skipFirstDelay = false;
+
         this.fps = fps;
         this.interval = 1000 / fps;
         this.timer = 0;
 
         this.frameIdx = 0;
+
+        this.onend = function(s){};
+    }
+    start() {
+        if (this.skipFirstDelay) {
+            this.timer = this.interval;
+        }
     }
     update(input, deltaTime) {
         this.timer += deltaTime;
@@ -39,6 +48,10 @@ export class AnimatedSprite extends GameObject {
     nextFrame() {
         if (this.frameIdx == this.images.length - 1) {
             this.frameIdx = 0;
+            if (this.skipFirstDelay) {
+                this.timer = this.interval;
+            }
+            this.onend(this);
         }
         else this.frameIdx++;
     }

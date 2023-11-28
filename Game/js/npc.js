@@ -3,6 +3,7 @@ import { Vec2 } from "./vec2.js";
 
 export class NPC extends GameObject {
     constructor(game) {
+        super();
         this.game = game;
 
         this.immortal = false;

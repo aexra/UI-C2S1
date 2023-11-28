@@ -1,4 +1,5 @@
 import { AnimatedSprite } from "./animatedSprite.js";
+import { Dummy } from "./npcs.js";
 import { Sprite } from "./sprite.js";
 import { Vec2 } from "./vec2.js"
 import { Vec4 } from "./vec4.js";
@@ -100,6 +101,8 @@ export class Map {
             document.getElementById("campfire6"),
             document.getElementById("campfire7"),
         ], 12, new Vec2(36000 + 305, 1700 + 66), new Vec2(54, 42));
+        this.dummy = new Dummy(game);
+        this.dummy.position = new Vec2(36000 + 505, 1700 + 54);
     }
     generateMap() {
         this.map = [];
@@ -134,6 +137,7 @@ export class Map {
         this.codebreaker.update(input, deltaTime);
         this.flamepot.update(input, deltaTime);
         this.campfire.update(input, deltaTime);
+        this.dummy.update(input, deltaTime);
     }
     draw(c) {
         c.save();
@@ -156,6 +160,7 @@ export class Map {
         this.codebreaker.draw(c);
         this.flamepot.draw(c);
         this.campfire.draw(c);
+        this.dummy.draw(c);
     }
     drawBackground(c) {
         for (var layer of this.layers) {

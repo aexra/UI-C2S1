@@ -1,21 +1,57 @@
 import { AnimatedSprite } from "./animatedSprite.js";
 import { NPC } from "./npc.js";
+import { Vec2 } from "./vec2.js";
 
 const states = {
-    0: idle,
-    1: hitted,
+    idle: 0,
+    hitted: 1,
 };
 
 export class Dummy extends NPC {
     constructor(game) {
         super(game);
-        this.states = "idle";
+        this.state = states.idle;
         
+        this.idleFrame = document.getElementById("dummy0");
+        this.hittedAnimation = new AnimatedSprite([
+            // document.getElementById("dummy1"),
+            // document.getElementById("dummy2"),
+            // document.getElementById("dummy3"),
+            // document.getElementById("dummy4"),
+            // document.getElementById("dummy5"),
+            // document.getElementById("dummy6"),
+            // document.getElementById("dummy7"),
+            // document.getElementById("dummy8"),
+            document.getElementById("dummy9"),
+            document.getElementById("dummy10"),
+            document.getElementById("dummy11"),
+            document.getElementById("dummy12"),
+            document.getElementById("dummy13"),
+            document.getElementById("dummy14"),
+            document.getElementById("dummy15"),
+        ], 22, this.position, new Vec2(32, 48));
+        this.hittedAnimation.onend = (s) => {
+            this.state = states.idle;
+        };
+        this.hittedAnimation.skipFirstDelay = true;
+        this.hittedAnimation.start();
     }
     update(input, deltaTime) {
         this.hp = this.maxhp;
+        this.hittedAnimation.position = this.position;
+        if (input.keys.includes("]")) this.onHit();
+        if (this.state == states.hitted) {
+            this.hittedAnimation.update(input, deltaTime);
+        }
     }
     draw(c) {
-
+        if (this.state == states.idle) {
+            c.drawImage(this.idleFrame, this.position.x, this.position.y);
+        } else if (this.state == states.hitted) {
+            this.hittedAnimation.draw(c);
+        }
+    }
+    onHit() {
+        this.state = states.hitted;
     }
 }
