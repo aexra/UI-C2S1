@@ -134,40 +134,40 @@ export class UI extends GameObject {
         // рисуем нпс
         var npcPointSide = 10;
         for (var npc of this.game.npcs) {
+            c.save();
             if (npc.minimaptag == 'thanatos') {
+                c.translate(
+                    this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x,
+                    -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x
+                );
+                c.rotate(npc.getRotation());
+                c.translate(
+                    - npcPointSide / this.game.player.camera.scale.x / 2,
+                    - npcPointSide / this.game.player.camera.scale.x / 2
+                );
                 if (npc.visualState == npc.visualStates.normal) {
-                    c.drawImage(
-                        npc.minimapicon.normal,
-                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
-                    );
+                    c.drawImage(npc.minimapicon.normal, 0, 0, npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x);
                 } else {
-                    c.drawImage(
-                        npc.minimapicon.normal,
-                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
-                    );
+                    c.drawImage(npc.minimapicon.normal, 0, 0, npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x);
                 }
             }
             if (npc.minimaptag == 'thanatos_segment') {
+                c.translate(
+                    this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x,
+                    -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x
+                );
+                c.rotate(npc.getRotation());
+                c.translate(
+                    - npcPointSide / this.game.player.camera.scale.x / 2,
+                    - npcPointSide / this.game.player.camera.scale.x / 2
+                );
                 if (npc.head.visualState == npc.head.visualStates.normal) {
-                    c.drawImage(
-                        npc.minimapicon.normal,
-                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
-                    );
+                    c.drawImage(npc.minimapicon.normal, 0, 0, npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x);
                 } else {
-                    c.drawImage(
-                        npc.minimapicon.normal,
-                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
-                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
-                    );
+                    c.drawImage(npc.minimapicon.normal, 0, 0, npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x);
                 }
             }
+            c.restore();
         }
 
         // рисуем белую точку - игрока
