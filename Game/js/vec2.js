@@ -24,6 +24,9 @@ export class Vec2 {
         if (this.x == to.x && this.y == to.y) return true;
         return false;
     }
+    length() {
+        return Math.sqrt(this.x*this.x + this.y*this.y);
+    }
     static minus(left, right) {
         return new Vec2(left.x - right.x, left.y - right.y);
     }

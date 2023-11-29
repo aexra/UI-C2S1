@@ -132,7 +132,7 @@ export class Thanatos extends NPC {
         this.switchTimer = 0;
 
         // VARIABLE FIELDS
-        this.velocity = new Vec2(0, 5);
+        this.velocity = new Vec2(0.6, 0);
 
         // OTHER SEGMENTS
         this.segments = [];
@@ -146,19 +146,24 @@ export class Thanatos extends NPC {
         for (var seg of this.segments) {
             game.npcs.push(seg);
         }
+        game.npcs.push(this);
 
         this.ai = new ThanatosAI(this);
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
         this.ai.update(input, deltaTime);
+        this.updatePosition(input, deltaTime);
+    }
+    updatePosition(input, deltaTime) {
+        this.position.translate(this.velocity);
     }
     draw(c) {
         c.save();
 
         c.translate(this.position.x, this.position.y);
 
-        // this.drawHead(c);
+        this.drawHead(c);
         this.drawHeadLine(c);
 
         c.restore();
@@ -168,7 +173,7 @@ export class Thanatos extends NPC {
         c.lineWidth = 2;
         c.beginPath();
         c.moveTo(0, 0);
-        c.lineTo(this.velocity.x * 50, this.velocity.y * 50);
+        c.lineTo(this.velocity.x, this.velocity.y);
         c.stroke();
     }
     drawHead(c) {
@@ -202,7 +207,7 @@ export class Thanatos extends NPC {
             default:
                 return;
         }
-        // TODO: posiotion calculation
+        // TODO: position calculation
         this.segments.push(segment);
     }
 }
@@ -226,10 +231,20 @@ class ThanatosBody1 extends NPC {
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
+        this.maxdist = 100;
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
         this.diff = Vec2.minus(this.next.position, this.position);
+        this.updatePosition(input, deltaTime);
+    }
+    updatePosition(input, deltaTime) {
+        if (this.diff.length() > this.maxdist) {
+            var alpha = Math.atan(this.diff.y / this.diff.x);
+            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha), this.maxdist * Math.sin(alpha));
+            var travel = Vec2.minus(this.diff, maxdistvector);
+            this.position.translate(travel);
+        }
     }
     draw(c) {
         c.save();
@@ -307,6 +322,7 @@ class ThanatosTail extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
+        console.log(this.getRotation() * 180 / Math.PI);
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
         c.restore();
     }

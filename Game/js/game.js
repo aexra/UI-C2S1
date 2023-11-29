@@ -34,6 +34,7 @@ window.addEventListener("load", (e) => {
 			this.player = new Player(this);
 			this.ui = new UI(this);
 			this.cameraPos = new Vec2();
+			this.thanatos = null;
 
 			this.isDraedonInitiated = false;
 			this.isFightInitiated = false;
@@ -137,7 +138,7 @@ window.addEventListener("load", (e) => {
 			}, 3000);
 		}
 		initiateFight() {
-			this.npcs.push(new Thanatos(this));
+			this.thanatos = new Thanatos(this);
 		}
 	}
 
