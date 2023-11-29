@@ -3,8 +3,9 @@ import { NPC } from "./npc.js";
 import { Vec2 } from "./vec2.js";
 import { Vec3 } from "./vec3.js";
 import { Collision } from "./misc.js";
+import { ThanatosAI } from "./ai.js";
 
-const states = {
+export const states = {
     idle: 0,
     hitted: 1,
     attack: 2,
@@ -145,9 +146,12 @@ export class Thanatos extends NPC {
         for (var seg of this.segments) {
             game.npcs.push(seg);
         }
+
+        this.ai = new ThanatosAI(this);
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
+        this.ai.update(input, deltaTime);
     }
     draw(c) {
         c.save();
