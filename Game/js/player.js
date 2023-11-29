@@ -188,9 +188,9 @@ export class Player {
 
         this.game.canvasTranslated = new Vec2(- (this.position.x - this.camera.size.x / this.camera.scale.x / 2 + this.size.x / 2), - (this.position.y - this.camera.size.y / this.camera.scale.y / 2 + this.size.y / 2));
         var al = - this.game.canvasTranslated.x;
-        var ar = - this.game.canvasTranslated.x + this.camera.size.x - this.game.size.x;
+        var ar = - this.game.canvasTranslated.x + this.camera.size.x / this.camera.scale.x - this.game.size.x;
         var bt = - this.game.canvasTranslated.y;
-        var bb =  - this.game.canvasTranslated.y + this.camera.size.y - this.game.size.y;
+        var bb =  - this.game.canvasTranslated.y + this.camera.size.y / this.camera.scale.y - this.game.size.y;
         if (al < 0) {
             this.game.canvasTranslated.x += al;
         }
