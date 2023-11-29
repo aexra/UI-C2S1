@@ -125,9 +125,9 @@ export class UI extends GameObject {
         c.fillStyle = "rgba(0, 220, 0, 1)";
         for (var i = 0; i < this.game.projectiles.length; i++) {
             c.fillRect(
-                this.position.x + this.minimap.position.x + this.game.projectiles[i].position.x * this.minimap.scale - 1,
-                -this.position.y + this.minimap.position.y + this.game.projectiles[i].position.y * this.minimap.scale - 1,
-                2, 2
+                this.position.x + this.minimap.position.x + this.game.projectiles[i].position.x * this.minimap.scale / this.game.player.camera.scale.x - 1 / this.game.player.camera.scale.x,
+                -this.position.y + this.minimap.position.y + this.game.projectiles[i].position.y * this.minimap.scale / this.game.player.camera.scale.x - 1 / this.game.player.camera.scale.x,
+                2 / this.game.player.camera.scale.x, 2 / this.game.player.camera.scale.x
             );
         }
 

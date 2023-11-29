@@ -137,7 +137,7 @@ export class Thanatos extends NPC {
 
         // OTHER SEGMENTS
         this.segments = [];
-        this.nsegments = 50;
+        this.nsegments = 102;
         for (var i = 0; i < this.nsegments; i += 2) {
             this.addSegment('body1');
             this.addSegment('body2');
