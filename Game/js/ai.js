@@ -7,7 +7,7 @@ export class ThanatosAI {
         this.game = head.game;
         this.segments = head.segments;
 
-        this.cursorChaseSpeed = 3;
+        this.cursorChaseSpeed = 4;
     }
     update(input, deltaTime) {
         switch(this.head.state) {

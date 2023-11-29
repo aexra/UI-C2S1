@@ -144,9 +144,10 @@ export class Thanatos extends NPC {
         }
         this.addSegment('tail');
         
-        for (var seg of this.segments) {
-            game.npcs.push(seg);
+        for (var i = this.segments.length - 1; i >= 0; i--) {
+            game.npcs.push(this.segments[i]);
         }
+
         game.npcs.push(this);
 
         this.ai = new ThanatosAI(this);
