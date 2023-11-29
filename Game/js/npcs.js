@@ -118,7 +118,7 @@ export class Thanatos extends NPC {
         this.initialRotation = Math.PI / 2;
         
         // BEHAVIOUR AND VISUAL STATES
-        this.state = states.still;
+        this.state = states.followCursor;
         this.visualStates = {
             normal: 0,
             buffed: 1,
@@ -137,7 +137,7 @@ export class Thanatos extends NPC {
 
         // OTHER SEGMENTS
         this.segments = [];
-        this.nsegments = 50;
+        this.nsegments = 20;
         for (var i = 0; i < this.nsegments; i += 2) {
             this.addSegment('body1');
             this.addSegment('body2');
@@ -190,7 +190,7 @@ export class Thanatos extends NPC {
 
     }
     getRotation() {
-        return Math.atan(this.velocity.y / this.velocity.x) + this.initialRotation + (this.velocity.y == 0 && this.velocity.x < 0? Math.PI : 0);
+        return Math.atan(this.velocity.y / this.velocity.x) + this.initialRotation + (this.velocity.x < 0? Math.PI : 0);
     }
     addSegment(type) {
         var segment = null;
@@ -242,7 +242,7 @@ class ThanatosBody1 extends NPC {
     updatePosition(input, deltaTime) {
         if (this.diff.length() > this.maxdist) {
             var alpha = Math.atan(this.diff.y / this.diff.x);
-            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha), this.maxdist * Math.sin(alpha));
+            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha) * (this.diff.x < 0? -1 : 1), this.maxdist * Math.sin(alpha) * (this.diff.x < 0? -1 : 1));
             var travel = Vec2.minus(this.diff, maxdistvector);
             this.position.translate(travel);
         }
@@ -255,7 +255,7 @@ class ThanatosBody1 extends NPC {
         c.restore();
     }
     getRotation() {
-        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.y == 0 && this.diff.x < 0? Math.PI : 0);
+        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
 }
 
@@ -288,8 +288,7 @@ class ThanatosBody2 extends NPC {
     updatePosition(input, deltaTime) {
         if (this.diff.length() > this.maxdist) {
             var alpha = Math.atan(this.diff.y / this.diff.x);
-            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha), this.maxdist * Math.sin(alpha));
-            var travel = Vec2.minus(this.diff, maxdistvector);
+            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha) * (this.diff.x < 0? -1 : 1), this.maxdist * Math.sin(alpha) * (this.diff.x < 0? -1 : 1));            var travel = Vec2.minus(this.diff, maxdistvector);
             this.position.translate(travel);
         }
     }
@@ -301,7 +300,7 @@ class ThanatosBody2 extends NPC {
         c.restore();
     }
     getRotation() {
-        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.y == 0 && this.diff.x < 0? Math.PI : 0);
+        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
 }
 
@@ -334,8 +333,7 @@ class ThanatosTail extends NPC {
     updatePosition(input, deltaTime) {
         if (this.diff.length() > this.maxdist) {
             var alpha = Math.atan(this.diff.y / this.diff.x);
-            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha), this.maxdist * Math.sin(alpha));
-            var travel = Vec2.minus(this.diff, maxdistvector);
+            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha) * (this.diff.x < 0? -1 : 1), this.maxdist * Math.sin(alpha) * (this.diff.x < 0? -1 : 1));            var travel = Vec2.minus(this.diff, maxdistvector);
             this.position.translate(travel);
         }
     }
@@ -343,11 +341,10 @@ class ThanatosTail extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
-        console.log(this.getRotation() * 180 / Math.PI);
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
         c.restore();
     }
     getRotation() {
-        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.y == 0 && this.diff.x < 0? Math.PI : 0);
+        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
 }
