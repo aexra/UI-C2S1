@@ -81,14 +81,14 @@ window.addEventListener("load", (e) => {
 				emitter.draw(context);
 			}
 
-			for (var di of this.damageIndicators) {
-				di.draw(context);
-			}
-
 			for (var npc of this.npcs) {
 				npc.draw(context);
 			}
-
+			
+			for (var di of this.damageIndicators) {
+				di.draw(context);
+			}
+			
 			// this.map.drawShaders(context);
 
 			this.ui.draw(context);

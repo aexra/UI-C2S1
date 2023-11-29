@@ -10,6 +10,7 @@ export const states = {
     hitted: 1,
     attack: 2,
     still: 3,
+    followCursor: 4,
 };
 
 export class Dummy extends NPC {
@@ -132,17 +133,17 @@ export class Thanatos extends NPC {
         this.switchTimer = 0;
 
         // VARIABLE FIELDS
-        this.velocity = new Vec2(0.6, 0);
+        this.velocity = new Vec2(0, 5);
 
         // OTHER SEGMENTS
         this.segments = [];
-        this.nsegments = 10;
+        this.nsegments = 50;
         for (var i = 0; i < this.nsegments; i += 2) {
             this.addSegment('body1');
             this.addSegment('body2');
         }
         this.addSegment('tail');
-
+        
         for (var seg of this.segments) {
             game.npcs.push(seg);
         }
@@ -231,7 +232,7 @@ class ThanatosBody1 extends NPC {
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
-        this.maxdist = 100;
+        this.maxdist = 80;
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
@@ -277,10 +278,20 @@ class ThanatosBody2 extends NPC {
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
+        this.maxdist = 80;
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
         this.diff = Vec2.minus(this.next.position, this.position);
+        this.updatePosition(input, deltaTime);
+    }
+    updatePosition(input, deltaTime) {
+        if (this.diff.length() > this.maxdist) {
+            var alpha = Math.atan(this.diff.y / this.diff.x);
+            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha), this.maxdist * Math.sin(alpha));
+            var travel = Vec2.minus(this.diff, maxdistvector);
+            this.position.translate(travel);
+        }
     }
     draw(c) {
         c.save();
@@ -313,10 +324,20 @@ class ThanatosTail extends NPC {
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
+        this.maxdist = 80;
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
         this.diff = Vec2.minus(this.next.position, this.position);
+        this.updatePosition(input, deltaTime);
+    }
+    updatePosition(input, deltaTime) {
+        if (this.diff.length() > this.maxdist) {
+            var alpha = Math.atan(this.diff.y / this.diff.x);
+            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha), this.maxdist * Math.sin(alpha));
+            var travel = Vec2.minus(this.diff, maxdistvector);
+            this.position.translate(travel);
+        }
     }
     draw(c) {
         c.save();
