@@ -6,6 +6,7 @@ import { ParticleEmitter } from "./particleEmitter.js";
 import { UI } from "./ui.js";
 import { DamageIndicator } from "./damageIndicator.js";
 import { Random } from "./misc.js";
+import { Thanatos } from "./npcs.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -131,6 +132,12 @@ window.addEventListener("load", (e) => {
 				teslaSound.volume = 0.2;
 				teslaSound.play();
 			  }, 1000)
+			setTimeout(() => {
+				this.initiateFight();
+			}, 1500);
+		}
+		initiateFight() {
+			this.npcs.push(new Thanatos(this));
 		}
 	}
 
