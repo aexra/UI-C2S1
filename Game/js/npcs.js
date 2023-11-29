@@ -133,7 +133,7 @@ export class Thanatos extends NPC {
         this.switchTimer = 0;
 
         // VARIABLE FIELDS
-        this.velocity = new Vec2(0, 5);
+        this.velocity = new Vec2();
 
         // OTHER SEGMENTS
         this.segments = [];
