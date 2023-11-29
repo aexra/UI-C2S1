@@ -179,7 +179,7 @@ export class Thanatos extends NPC {
         c.translate(this.position.x, this.position.y);
 
         this.drawHead(c);
-        this.drawHeadLine(c);
+        // this.drawHeadLine(c);
 
         c.restore();
     }
