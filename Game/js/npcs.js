@@ -139,7 +139,7 @@ export class Thanatos extends NPC {
             this.addSegment('body1');
             this.addSegment('body2');
         }
-        this.addSegment(game, 'tail', this.segments[this.segments.length - 1]);
+        this.addSegment('tail');
 
         for (var seg of this.segments) {
             game.npcs.push(seg);
@@ -188,7 +188,7 @@ export class Thanatos extends NPC {
     }
     addSegment(type) {
         var segment = null;
-        var next = this.segments.length == 0? this : this.segments[this.segments.length  - 1];
+        var next = this.segments.length == 0? this : this.segments[this.segments.length - 1];
         switch(type) {
             case 'body1':
                 segment = new ThanatosBody1(this.game, this, next);
