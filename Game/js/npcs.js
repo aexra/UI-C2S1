@@ -135,8 +135,26 @@ export class Thanatos extends NPC {
         }
     }
     draw(c) {
-        c.fillStyle = "red";
-        c.fillRect(this.position.x, this.position.y, 100, 100);
+        c.save();
+
+        c.translate(this.position.x, this.position.y);
+
+        this.drawHead(c);
+        this.drawHeadLine(c);
+
+        c.restore();
+    }
+    drawHeadLine(c) {
+        c.strokeStyle = "red";
+        c.lineWidth = 2;
+        c.beginPath();
+        c.moveTo(0, 0);
+        c.lineTo(600, 0);
+        c.stroke();
+    }
+    drawHead(c) {
+        c.fillStyle = 'white';
+        c.fillRect(- this.size.x / 2, - this.size.y / 2, this.size.x, this.size.y);
     }
 }
 
@@ -148,8 +166,8 @@ class ThanatosSegment extends NPC {
         this.size = new Vec2(80, 80)
     }
     draw(c) {
-        c.fillStyle = "blue";
-        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        // c.fillStyle = "blue";
+        // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
     }
 }
 
@@ -161,7 +179,7 @@ class ThanatosTail extends NPC {
         this.size = new Vec2(60, 60)
     }
     draw(c) {
-        c.fillStyle = "green";
-        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        // c.fillStyle = "green";
+        // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
     }
 }
