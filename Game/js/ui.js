@@ -131,6 +131,45 @@ export class UI extends GameObject {
             );
         }
 
+        // рисуем нпс
+        var npcPointSide = 10;
+        for (var npc of this.game.npcs) {
+            if (npc.minimaptag == 'thanatos') {
+                if (npc.visualState == npc.visualStates.normal) {
+                    c.drawImage(
+                        npc.minimapicon.normal,
+                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
+                    );
+                } else {
+                    c.drawImage(
+                        npc.minimapicon.normal,
+                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
+                    );
+                }
+            }
+            if (npc.minimaptag == 'thanatos_segment') {
+                if (npc.head.visualState == npc.head.visualStates.normal) {
+                    c.drawImage(
+                        npc.minimapicon.normal,
+                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
+                    );
+                } else {
+                    c.drawImage(
+                        npc.minimapicon.normal,
+                        this.position.x + this.minimap.position.x + npc.position.x * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        -this.position.y + this.minimap.position.y + npc.position.y * this.minimap.scale / this.game.player.camera.scale.x - npcPointSide / this.game.player.camera.scale.x / 2,
+                        npcPointSide / this.game.player.camera.scale.x, npcPointSide / this.game.player.camera.scale.x
+                    );
+                }
+            }
+        }
+
         // рисуем белую точку - игрока
         c.fillStyle = "rgba(255, 255, 255, 1)";
         c.fillRect(this.position.x + this.minimap.position.x + this.game.player.position.x * this.minimap.scale / this.game.player.camera.scale.x - 2 / this.game.player.camera.scale.x,

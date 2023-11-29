@@ -109,6 +109,7 @@ export class Thanatos extends NPC {
             normal: document.getElementById("thanatosNormalHeadIcon"),
             buffed: document.getElementById("thanatosBuffedHeadIcon"),
         };
+        this.minimaptag = 'thanatos';
         this.image = document.getElementById("thanatosHead");
         this.nframes = 5;
         this.frame = 0;
@@ -219,6 +220,7 @@ class ThanatosBody1 extends NPC {
             normal: document.getElementById("thanatosNormalBody1Icon"),
             buffed: document.getElementById("thanatosBuffedBody1Icon"),
         }
+        this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody1");
         this.nframes = 5;
         this.frame = 0;
@@ -249,6 +251,7 @@ class ThanatosBody2 extends NPC {
             normal: document.getElementById("thanatosNormalBody2Icon"),
             buffed: document.getElementById("thanatosBuffedBody2Icon"),
         }
+        this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody2");
         this.nframes = 5;
         this.frame = 0;
@@ -279,6 +282,7 @@ class ThanatosTail extends NPC {
             normal: document.getElementById("thanatosNormalTailIcon"),
             buffed: document.getElementById("thanatosBuffedTailIcon"),
         }
+        this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosTail");
         this.nframes = 5;
         this.frame = 0;
