@@ -19,12 +19,7 @@ export class NPC extends GameObject {
         this.immunityTimer = 0;
     }
     update(input, deltaTime) {
-        if (this.immunityTimer != 0) {
-            this.immunityTimer += deltaTime;
-        }
-        if (this.immunityTimer >= this.immunityInterval) {
-            this.immunityTimer = 0;
-        }
+        this.updateImmunity(input, deltaTime);
     }
     draw(c) {
 
@@ -65,6 +60,14 @@ export class NPC extends GameObject {
         if (this.immunityTimer == 0) {
             this.onHit(damage, iscrit);
             this.immunityTimer++;
+        }
+    }
+    updateImmunity(input, deltaTime) {
+        if (this.immunityTimer != 0) {
+            this.immunityTimer += deltaTime;
+        }
+        if (this.immunityTimer >= this.immunityInterval) {
+            this.immunityTimer = 0;
         }
     }
 }

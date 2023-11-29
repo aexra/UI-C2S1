@@ -169,7 +169,7 @@ export class Thanatos extends NPC {
         c.lineWidth = 2;
         c.beginPath();
         c.moveTo(0, 0);
-        c.lineTo(600, 0);
+        c.lineTo(this.velocity.x * 50, this.velocity.y * 50);
         c.stroke();
     }
     drawHead(c) {
@@ -225,6 +225,12 @@ class ThanatosBody1 extends NPC {
         this.nframes = 5;
         this.frame = 0;
         this.initialRotation = Math.PI / 2;
+
+        this.diff = new Vec2();
+    }
+    update(input, deltaTime) {
+        this.updateImmunity(input, deltaTime);
+        this.diff = Vec2.minus(this.next.position, this.position);
     }
     draw(c) {
         c.save();
@@ -234,8 +240,7 @@ class ThanatosBody1 extends NPC {
         c.restore();
     }
     getRotation() {
-        var diff = Vec2.minus(this.next.position, this.position);
-        return Math.atan(diff.y / diff.x) + this.initialRotation + (diff.y == 0 && diff.x < 0? Math.PI : 0);
+        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.y == 0 && this.diff.x < 0? Math.PI : 0);
     }
 }
 
@@ -256,6 +261,12 @@ class ThanatosBody2 extends NPC {
         this.nframes = 5;
         this.frame = 0;
         this.initialRotation = Math.PI / 2;
+
+        this.diff = new Vec2();
+    }
+    update(input, deltaTime) {
+        this.updateImmunity(input, deltaTime);
+        this.diff = Vec2.minus(this.next.position, this.position);
     }
     draw(c) {
         c.save();
@@ -265,8 +276,7 @@ class ThanatosBody2 extends NPC {
         c.restore();
     }
     getRotation() {
-        var diff = Vec2.minus(this.next.position, this.position);
-        return Math.atan(diff.y / diff.x) + this.initialRotation + (diff.y == 0 && diff.x < 0? Math.PI : 0);
+        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.y == 0 && this.diff.x < 0? Math.PI : 0);
     }
 }
 
@@ -287,6 +297,12 @@ class ThanatosTail extends NPC {
         this.nframes = 5;
         this.frame = 0;
         this.initialRotation = Math.PI / 2;
+
+        this.diff = new Vec2();
+    }
+    update(input, deltaTime) {
+        this.updateImmunity(input, deltaTime);
+        this.diff = Vec2.minus(this.next.position, this.position);
     }
     draw(c) {
         c.save();
@@ -296,7 +312,6 @@ class ThanatosTail extends NPC {
         c.restore();
     }
     getRotation() {
-        var diff = Vec2.minus(this.next.position, this.position);
-        return Math.atan(diff.y / diff.x) + this.initialRotation + (diff.y == 0 && diff.x < 0? Math.PI : 0);
+        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.y == 0 && this.diff.x < 0? Math.PI : 0);
     }
 }
