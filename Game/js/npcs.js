@@ -138,6 +138,7 @@ export class Thanatos extends NPC {
 
         // VARIABLE FIELDS
         this.velocity = new Vec2();
+        this.lastRotation = 0;
 
         // OTHER SEGMENTS
         this.segments = [];
@@ -213,7 +214,11 @@ export class Thanatos extends NPC {
         }
     }
     getRotation() {
-        return Math.atan(this.velocity.y / this.velocity.x) + this.initialRotation + (this.velocity.x < 0? Math.PI : 0);
+        if (this.lastRotation != 0 && this.velocity.x == 0 && this.velocity.y == 0) {
+            return this.segments[0].getRotation();
+        }
+        this.lastRotation = Math.atan(this.velocity.y / this.velocity.x) + this.initialRotation + (this.velocity.x < 0? Math.PI : 0);
+        return this.lastRotation;
     }
     addSegment(type) {
         var segment = null;
