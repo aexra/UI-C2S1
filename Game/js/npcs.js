@@ -158,7 +158,7 @@ export class Thanatos extends NPC {
 
         c.translate(this.position.x, this.position.y);
 
-        this.drawHead(c);
+        // this.drawHead(c);
         this.drawHeadLine(c);
 
         c.restore();
@@ -207,55 +207,88 @@ export class Thanatos extends NPC {
 }
 
 class ThanatosBody1 extends NPC {
-    constructor(game, head) {
+    constructor(game, head, next) {
         super(game);
         this.head = head;
+        this.next = next;
         this.position = head.position.copy();
-        this.size = new Vec2(80, 80)
+        this.size = new Vec2(148, 98)
 
         this.minimapicon = {
             normal: document.getElementById("thanatosNormalBody1Icon"),
             buffed: document.getElementById("thanatosBuffedBody1Icon"),
         }
+        this.image = document.getElementById("thanatosBody1");
+        this.nframes = 5;
+        this.frame = 0;
+        this.initialRotation = Math.PI / 2;
     }
     draw(c) {
-        // c.fillStyle = "blue";
-        // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.save();
+        c.translate(this.position.x, this.position.y);
+        c.rotate(this.getRotation());
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.restore();
+    }
+    getRotation() {
+        return 0;
     }
 }
 
 class ThanatosBody2 extends NPC {
-    constructor(game, head) {
+    constructor(game, head, next) {
         super(game);
         this.head = head;
+        this.next = next;
         this.position = head.position.copy();
-        this.size = new Vec2(80, 80)
+        this.size = new Vec2(136, 100)
 
         this.minimapicon = {
             normal: document.getElementById("thanatosNormalBody2Icon"),
             buffed: document.getElementById("thanatosBuffedBody2Icon"),
         }
+        this.image = document.getElementById("thanatosBody2");
+        this.nframes = 5;
+        this.frame = 0;
+        this.initialRotation = Math.PI / 2;
     }
     draw(c) {
-        // c.fillStyle = "blue";
-        // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.save();
+        c.translate(this.position.x, this.position.y);
+        c.rotate(this.getRotation());
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.restore();
+    }
+    getRotation() {
+        return 0;
     }
 }
 
 class ThanatosTail extends NPC {
-    constructor(game, head) {
+    constructor(game, head, next) {
         super(game);
         this.head = head;
+        this.next = next;
         this.position = head.position.copy();
-        this.size = new Vec2(60, 60)
+        this.size = new Vec2(84, 118)
 
         this.minimapicon = {
             normal: document.getElementById("thanatosNormalTailIcon"),
             buffed: document.getElementById("thanatosBuffedTailIcon"),
         }
+        this.image = document.getElementById("thanatosTail");
+        this.nframes = 5;
+        this.frame = 0;
+        this.initialRotation = Math.PI / 2;
     }
     draw(c) {
-        // c.fillStyle = "green";
-        // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.save();
+        c.translate(this.position.x, this.position.y);
+        c.rotate(this.getRotation());
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.restore();
+    }
+    getRotation() {
+        return 0;
     }
 }
