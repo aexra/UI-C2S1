@@ -132,6 +132,10 @@ export class Thanatos extends NPC {
         this.switchInterval = 1000 / this.fps;
         this.switchTimer = 0;
 
+        // HITSOUNDS COOLDOWN
+        this.hitsoundcd = 100;
+        this.hitsoundTimer = 0;
+
         // VARIABLE FIELDS
         this.velocity = new Vec2();
 
@@ -154,8 +158,17 @@ export class Thanatos extends NPC {
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
+        this.updateHitsounds(input, deltaTime);
         this.ai.update(input, deltaTime);
         this.updatePosition(input, deltaTime);
+    }
+    updateHitsounds(input, deltaTime) {
+        if (this.hitsoundTimer != 0) {
+            this.hitsoundTimer += deltaTime;
+            if (this.hitsoundTimer >= this.hitsoundcd) {
+                this.hitsoundTimer = 0;
+            }
+        }
     }
     updatePosition(input, deltaTime) {
         this.position.translate(this.velocity);
@@ -189,6 +202,15 @@ export class Thanatos extends NPC {
     }
     close() {
 
+    }
+    onHit(damage, iscrit) {
+        this.game.createDI(this.position, damage, iscrit);
+        if (this.hitsoundTimer == 0) {
+            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
+            hitsound.volume = 0.1;
+            hitsound.play();
+            this.hitsoundTimer++;
+        }
     }
     getRotation() {
         return Math.atan(this.velocity.y / this.velocity.x) + this.initialRotation + (this.velocity.x < 0? Math.PI : 0);
@@ -258,6 +280,15 @@ class ThanatosBody1 extends NPC {
     getRotation() {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
+    onHit(damage, iscrit) {
+        this.game.createDI(this.position, damage, iscrit);
+        if (this.head.hitsoundTimer == 0) {
+            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
+            hitsound.volume = 0.1;
+            hitsound.play();
+            this.head.hitsoundTimer++;
+        }
+    }
 }
 
 class ThanatosBody2 extends NPC {
@@ -303,6 +334,15 @@ class ThanatosBody2 extends NPC {
     getRotation() {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
+    onHit(damage, iscrit) {
+        this.game.createDI(this.position, damage, iscrit);
+        if (this.head.hitsoundTimer == 0) {
+            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
+            hitsound.volume = 0.1;
+            hitsound.play();
+            this.head.hitsoundTimer++;
+        }
+    }
 }
 
 class ThanatosTail extends NPC {
@@ -347,5 +387,14 @@ class ThanatosTail extends NPC {
     }
     getRotation() {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
+    }
+    onHit(damage, iscrit) {
+        this.game.createDI(this.position, damage, iscrit);
+        if (this.head.hitsoundTimer == 0) {
+            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
+            hitsound.volume = 0.1;
+            hitsound.play();
+            this.head.hitsoundTimer++;
+        }
     }
 }
