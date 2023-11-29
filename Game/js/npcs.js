@@ -232,7 +232,8 @@ class ThanatosBody1 extends NPC {
         c.restore();
     }
     getRotation() {
-        return 0;
+        var diff = Vec2.minus(this.next.position, this.position);
+        return Math.atan(diff.y / diff.x) + this.initialRotation + (diff.y == 0 && diff.x < 0? Math.PI : 0);
     }
 }
 
@@ -261,7 +262,8 @@ class ThanatosBody2 extends NPC {
         c.restore();
     }
     getRotation() {
-        return 0;
+        var diff = Vec2.minus(this.next.position, this.position);
+        return Math.atan(diff.y / diff.x) + this.initialRotation + (diff.y == 0 && diff.x < 0? Math.PI : 0);
     }
 }
 
@@ -290,6 +292,7 @@ class ThanatosTail extends NPC {
         c.restore();
     }
     getRotation() {
-        return 0;
+        var diff = Vec2.minus(this.next.position, this.position);
+        return Math.atan(diff.y / diff.x) + this.initialRotation + (diff.y == 0 && diff.x < 0? Math.PI : 0);
     }
 }
