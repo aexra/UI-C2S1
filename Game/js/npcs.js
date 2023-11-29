@@ -147,12 +147,7 @@ export class Thanatos extends NPC {
         }
     }
     update(input, deltaTime) {
-        if (this.immunityTimer != 0) {
-            this.immunityTimer += deltaTime;
-        }
-        if (this.immunityTimer >= this.immunityInterval) {
-            this.immunityTimer = 0;
-        }
+        this.updateImmunity(input, deltaTime);
     }
     draw(c) {
         c.save();
