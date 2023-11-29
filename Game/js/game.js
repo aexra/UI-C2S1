@@ -134,7 +134,7 @@ window.addEventListener("load", (e) => {
 			  }, 1000)
 			setTimeout(() => {
 				this.initiateFight();
-			}, 1500);
+			}, 3000);
 		}
 		initiateFight() {
 			this.npcs.push(new Thanatos(this));

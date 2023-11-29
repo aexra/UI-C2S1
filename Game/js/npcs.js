@@ -7,6 +7,8 @@ import { Collision } from "./misc.js";
 const states = {
     idle: 0,
     hitted: 1,
+    attack: 2,
+    still: 3,
 };
 
 export class Dummy extends NPC {
@@ -97,26 +99,47 @@ export class Dummy extends NPC {
 export class Thanatos extends NPC {
     constructor(game) {
         super(game);
-        this.size = new Vec2(100, 100);
+
+        // BASE PARAMETERS
+        this.size = new Vec2(104, 174);
         this.position = new Vec2(36000, 1700);
 
-        this.positionTrail = [];
+        // SPRITES
+        this.minimapicon = {
+            normal: document.getElementById("thanatosNormalHeadIcon"),
+            buffed: document.getElementById("thanatosBuffedHeadIcon"),
+        };
+        this.image = document.getElementById("thanatosHead");
+        this.nframes = 5;
+        this.frame = 0;
+        this.initialRotation = Math.PI / 2;
+        
+        // BEHAVIOUR AND VISUAL STATES
+        this.state = states.still;
+        this.visualStates = {
+            normal: 0,
+            buffed: 1,
+            switchingToNormal: 2,
+            switchingToBuffed: 3,
+        };
+        this.visualState = this.visualStates.normal;
+        
+        // PHASE SWITCH ANIMATION
+        this.fps = 4;
+        this.switchInterval = 1000 / this.fps;
+        this.switchTimer = 0;
+
+        // VARIABLE FIELDS
+        this.velocity = new Vec2(0, 5);
+
+        // OTHER SEGMENTS
         this.segments = [];
-        
-        for (var i = 0; i < 4; i++) {
-            var seg = new ThanatosSegment(game, this);
-
-            // сделать рассчет положения центра сегмента
-            seg.position = Vec2.concat(this.position, i == 0? new Vec2(this.size.x, 0) : new Vec2(seg.size.x * (i + 1), 0));
-
-            this.segments.push(seg);
+        this.nsegments = 10;
+        for (var i = 0; i < this.nsegments; i += 2) {
+            this.addSegment('body1');
+            this.addSegment('body2');
         }
-        
-        var tail = new ThanatosTail(game, this);
-        // same
-        tail.position.x += 100 + 80 * 4;
-
-        this.segments.push(tail);
+        this.addSegment('tail');
 
         for (var seg of this.segments) {
             game.npcs.push(seg);
@@ -128,10 +151,6 @@ export class Thanatos extends NPC {
         }
         if (this.immunityTimer >= this.immunityInterval) {
             this.immunityTimer = 0;
-        }
-
-        if (this.positionTrail.length > this.segments.length - 1) {
-            this.positionTrail.splice(this.positionTrail.length - 1, 1);
         }
     }
     draw(c) {
@@ -153,17 +172,69 @@ export class Thanatos extends NPC {
         c.stroke();
     }
     drawHead(c) {
-        c.fillStyle = 'white';
-        c.fillRect(- this.size.x / 2, - this.size.y / 2, this.size.x, this.size.y);
+        c.save();
+        c.rotate(this.getRotation());
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.restore();
+    }
+    open() {
+
+    }
+    close() {
+
+    }
+    getRotation() {
+        return Math.atan(this.velocity.y / this.velocity.x) + this.initialRotation + (this.velocity.y == 0 && this.velocity.x < 0? Math.PI : 0);
+    }
+    addSegment(type) {
+        var segment = null;
+        switch(type) {
+            case 'body1':
+                segment = new ThanatosBody1(this.game, this);
+                break;
+            case 'body2':
+                segment = new ThanatosBody2(this.game, this);
+                break;
+            case 'tail':
+                segment = new ThanatosTail(this.game, this);
+                break;
+            default:
+                return;
+        }
+        // TODO: posiotion calculation
+        this.segments.push(segment);
     }
 }
 
-class ThanatosSegment extends NPC {
+class ThanatosBody1 extends NPC {
     constructor(game, head) {
         super(game);
         this.head = head;
         this.position = head.position.copy();
         this.size = new Vec2(80, 80)
+
+        this.minimapicon = {
+            normal: document.getElementById("thanatosNormalBody1Icon"),
+            buffed: document.getElementById("thanatosBuffedBody1Icon"),
+        }
+    }
+    draw(c) {
+        // c.fillStyle = "blue";
+        // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+    }
+}
+
+class ThanatosBody2 extends NPC {
+    constructor(game, head) {
+        super(game);
+        this.head = head;
+        this.position = head.position.copy();
+        this.size = new Vec2(80, 80)
+
+        this.minimapicon = {
+            normal: document.getElementById("thanatosNormalBody2Icon"),
+            buffed: document.getElementById("thanatosBuffedBody2Icon"),
+        }
     }
     draw(c) {
         // c.fillStyle = "blue";
@@ -177,6 +248,11 @@ class ThanatosTail extends NPC {
         this.head = head;
         this.position = head.position.copy();
         this.size = new Vec2(60, 60)
+
+        this.minimapicon = {
+            normal: document.getElementById("thanatosNormalTailIcon"),
+            buffed: document.getElementById("thanatosBuffedTailIcon"),
+        }
     }
     draw(c) {
         // c.fillStyle = "green";
