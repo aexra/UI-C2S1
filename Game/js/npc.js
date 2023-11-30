@@ -33,11 +33,24 @@ export class NPC extends GameObject {
     drawDamageTaken(c) {
 
     }
+    getHitbox() {
+        if (this.hitbox) {
+            return this.hitbox;
+        } else {
+            return {
+                size: this.size.copy(),
+                position: this.position.copy(),
+            }
+        }
+        
+    }
     drawHitbox(c) {
         c.save();
 
+        c.globalAlpha = 1;
         c.fillStyle = "rgba(140, 0, 0, 0.4)";
-        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        var hb = this.getHitbox();
+        c.fillRect(hb.position.x, hb.position.y, hb.size.x, hb.size.y);
 
         c.restore();
     }

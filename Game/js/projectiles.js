@@ -42,8 +42,8 @@ export class TerraBeam extends Projectile {
         }
 
         this.hitbox = {
-            position: this.position.copy(),
-            size: this.size.copy(),
+            position: Vec2.minus(this.position, new Vec2(this.hitbox.size.x / 2, this.hitbox.size.y / 2)),
+            size: new Vec2(this.size.x - 70, this.size.y - 70),
         };
     }
     update(input, deltaTime) {
@@ -75,7 +75,7 @@ export class TerraBeam extends Projectile {
             pe.position.translate(delta);
         }
 
-        this.hitbox.position = Vec2.minus(this.position, new Vec2(this.size.x / 2, this.size.y / 2));
+        this.hitbox.position = Vec2.minus(this.position, new Vec2(this.hitbox.size.x / 2, this.hitbox.size.y / 2));
     }
     draw(context) {
         context.translate(this.position.x, this.position.y);
@@ -90,7 +90,7 @@ export class TerraBeam extends Projectile {
         context.rotate(-this.rotationAngleRad);
         context.translate(-this.position.x, -this.position.y);
 
-        // this.drawHitbox(context);
+        this.drawHitbox(context);
     }
     drawHitbox(context) {
         context.translate(this.hitbox.position.x, this.hitbox.position.y);

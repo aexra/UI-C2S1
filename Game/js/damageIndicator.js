@@ -12,6 +12,7 @@ export class DamageIndicator extends GameObject {
         this.text = damage.toString()
 
         this.iscrit = false;
+        this.type = null;
 
         this.velocity = new Vec2(Random.randf(0.2, 0.5, 2), Random.randf(0.4, 0.5, 2));
         this.direction = new Vec2(Random.randf(-0.3, 0.3, 2), Random.randi(-1, 1) > 0? Random.randf(-1, -0.5, 2) : Random.randf(0.5, 1, 2));
@@ -52,6 +53,13 @@ export class DamageIndicator extends GameObject {
         // c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         c.font = `${this.fontSize}px andy`;
         c.fillStyle = this.iscrit? 'orangered' : 'orange';
+        if (this.type != null) {
+            switch (this.type) {
+                case "shield":
+                    c.fillStyle = this.iscrit? 'rgba(100, 100, 220, 1)' : 'lightblue';
+                    break;
+            }
+        }
         c.textBaseline = 'top';
         c.fillText(this.text, this.position.x, this.position.y);
         c.restore();

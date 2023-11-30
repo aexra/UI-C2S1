@@ -119,6 +119,15 @@ window.addEventListener("load", (e) => {
 			};
 			this.damageIndicators.push(di);
 		}
+		createDI(origin, damage, iscrit, type) {
+			var di = new DamageIndicator(this, origin, damage);
+			di.iscrit = iscrit;
+			di.type = type;
+			di.onfade = (s) => {
+				this.deleteDI(di);
+			};
+			this.damageIndicators.push(di);
+		}
 		deleteDI(di) {
 			this.damageIndicators.splice(this.damageIndicators.indexOf(di), 1);
 		}

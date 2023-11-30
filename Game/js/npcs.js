@@ -2,7 +2,7 @@ import { AnimatedSprite } from "./animatedSprite.js";
 import { NPC } from "./npc.js";
 import { Vec2 } from "./vec2.js";
 import { Vec3 } from "./vec3.js";
-import { Collision } from "./misc.js";
+import { Collision, Random } from "./misc.js";
 import { ThanatosAI } from "./ai.js";
 
 export const states = {
@@ -43,6 +43,11 @@ export class Dummy extends NPC {
         };
         this.hittedAnimation.skipFirstDelay = true;
         this.hittedAnimation.start();
+
+        this.hitbox = {
+            size: Vec2.minus(this.size.copy(), new Vec2(10, 10)),
+            position: new Vec2(this.position.x - 5, this.position.y - 5),
+        };
     }
     update(input, deltaTime) {
         this.hp = this.maxhp;
@@ -61,7 +66,7 @@ export class Dummy extends NPC {
     }
     draw(c) {
         this.drawNPC(c);
-        // this.drawHitbox(c);
+        this.drawHitbox(c);
     }
     drawNPC(c) {
         if (this.state == states.idle) {
@@ -263,7 +268,9 @@ export class Thanatos extends NPC {
         this.visualState = this.visualStates.switchingToNormal;
     }
     onHit(damage, iscrit) {
-        this.game.createDI(this.position, damage, iscrit);
+        var type = this.visualState == this.visualStates.normal? "shield" : null;
+        damage = this.visualState == this.visualStates.normal? iscrit? 1 : 0 : damage;
+        this.game.createDI(this.position, damage, iscrit, type);
         if (this.hitsoundTimer == 0) {
             var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
             hitsound.volume = 0.1;
@@ -353,6 +360,7 @@ class ThanatosBody1 extends NPC {
             default:
                 this.drawVulnurable(c);
         }
+        this.drawHitbox(c);
         c.restore();
     }
     drawNormal(c) {
@@ -369,7 +377,9 @@ class ThanatosBody1 extends NPC {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
     onHit(damage, iscrit) {
-        this.game.createDI(this.position, damage, iscrit);
+        var type = this.head.visualState == this.head.visualStates.normal? "shield" : null;
+        damage = this.head.visualState == this.head.visualStates.normal? iscrit? 1 : 0 : damage;
+        this.game.createDI(this.position, damage, iscrit, type);
         if (this.head.hitsoundTimer == 0) {
             var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
             hitsound.volume = 0.1;
@@ -432,6 +442,7 @@ class ThanatosBody2 extends NPC {
             default:
                 this.drawVulnurable(c);
         }
+        this.drawHitbox(c);
         c.restore();
     }
     drawNormal(c) {
@@ -448,7 +459,9 @@ class ThanatosBody2 extends NPC {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
     onHit(damage, iscrit) {
-        this.game.createDI(this.position, damage, iscrit);
+        var type = this.head.visualState == this.head.visualStates.normal? "shield" : null;
+        damage = this.head.visualState == this.head.visualStates.normal? iscrit? 1 : 0 : damage;
+        this.game.createDI(this.position, damage, iscrit, type);
         if (this.head.hitsoundTimer == 0) {
             var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
             hitsound.volume = 0.1;
@@ -527,7 +540,9 @@ class ThanatosTail extends NPC {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
     }
     onHit(damage, iscrit) {
-        this.game.createDI(this.position, damage, iscrit);
+        var type = this.head.visualState == this.head.visualStates.normal? "shield" : null;
+        damage = this.head.visualState == this.head.visualStates.normal? iscrit? 1 : 0 : damage;
+        this.game.createDI(this.position, damage, iscrit, type);
         if (this.head.hitsoundTimer == 0) {
             var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
             hitsound.volume = 0.1;
