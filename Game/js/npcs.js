@@ -128,7 +128,7 @@ export class Thanatos extends NPC {
         this.visualState = this.visualStates.normal;
         
         // PHASE SWITCH ANIMATION
-        this.fps = 4;
+        this.fps = 12;
         this.switchInterval = 1000 / this.fps;
         this.switchTimer = 0;
 
@@ -160,10 +160,40 @@ export class Thanatos extends NPC {
         this.ai = new ThanatosAI(this);
     }
     update(input, deltaTime) {
+        if (input.keys.includes('k')) {
+            if (this.visualState == this.visualStates.normal) {
+                this.open();
+            } else if (this.visualState == this.visualStates.buffed) {
+                this.close();
+            }
+        }
         this.updateImmunity(input, deltaTime);
         this.updateHitsounds(input, deltaTime);
         this.ai.update(input, deltaTime);
         this.updatePosition(input, deltaTime);
+        this.updateVisual(input, deltaTime);
+    }
+    updateVisual(input, deltaTime) {
+        if (this.visualState == this.visualStates.switchingToBuffed) {
+            this.switchTimer += deltaTime;
+            if (this.switchTimer >= this.switchInterval) {
+                this.switchTimer = 0;
+                this.frame++;
+                if (this.frame == 4) {
+                    this.visualState = this.visualStates.buffed;
+                }
+            }
+        }
+        if (this.visualState == this.visualStates.switchingToNormal) {
+            this.switchTimer += deltaTime;
+            if (this.switchTimer >= this.switchInterval) {
+                this.switchTimer = 0;
+                this.frame--;
+                if (this.frame == 0) {
+                    this.visualState = this.visualStates.normal;
+                }
+            }
+        }
     }
     updateHitsounds(input, deltaTime) {
         if (this.hitsoundTimer != 0) {
@@ -197,19 +227,39 @@ export class Thanatos extends NPC {
     drawHead(c) {
         c.save();
         c.rotate(this.getRotation());
+        switch(this.visualState) {
+            case this.visualStates.normal:
+                this.drawNormal(c);
+                break;
+            case this.visualStates.buffed:
+                this.drawVulnurable(c);
+                break;
+            case this.visualStates.switchingToNormal:
+                this.drawVulnurable(c);
+                break;
+            case this.visualStates.switchingToBuffed:
+                this.drawNormal(c);
+                break;
+            default:
+                this.drawVulnurable(c);
+        }
+        c.restore();
+    }
+    drawNormal(c) {
         c.globalAlpha = this.alpha;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
         c.globalAlpha = this.shieldedAlpha;
-        // c.filter = "brightness(0) saturate(100%) invert(29%) sepia(99%) saturate(1018%) hue-rotate(182deg) brightness(99%) contrast(85%)";
-        // c.filter = "drop-shadow(0px 0px 40px red) invert(75%)";
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
-        c.restore();
+    }
+    drawVulnurable(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     open() {
-
+        this.visualState = this.visualStates.switchingToBuffed;
     }
     close() {
-
+        this.visualState = this.visualStates.switchingToNormal;
     }
     onHit(damage, iscrit) {
         this.game.createDI(this.position, damage, iscrit);
@@ -262,8 +312,7 @@ class ThanatosBody1 extends NPC {
         }
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody1");
-        this.nframes = 5;
-        this.frame = 0;
+        
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
@@ -286,11 +335,33 @@ class ThanatosBody1 extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
-        c.globalAlpha = this.head.alpha;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.head.shieldedAlpha;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+        switch(this.head.visualState) {
+            case this.head.visualStates.normal:
+                this.drawNormal(c);
+                break;
+            case this.head.visualStates.buffed:
+                this.drawVulnurable(c);
+                break;
+            case this.head.visualStates.switchingToNormal:
+                this.drawVulnurable(c);
+                break;
+            case this.head.visualStates.switchingToBuffed:
+                this.drawNormal(c);
+                break;
+            default:
+                this.drawVulnurable(c);
+        }
         c.restore();
+    }
+    drawNormal(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.shieldedAlpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+    }
+    drawVulnurable(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     getRotation() {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
@@ -320,8 +391,7 @@ class ThanatosBody2 extends NPC {
         }
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody2");
-        this.nframes = 5;
-        this.frame = 0;
+        
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
@@ -343,11 +413,33 @@ class ThanatosBody2 extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
-        c.globalAlpha = this.head.alpha;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.head.shieldedAlpha;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+        switch(this.head.visualState) {
+            case this.head.visualStates.normal:
+                this.drawNormal(c);
+                break;
+            case this.head.visualStates.buffed:
+                this.drawVulnurable(c);
+                break;
+            case this.head.visualStates.switchingToNormal:
+                this.drawVulnurable(c);
+                break;
+            case this.head.visualStates.switchingToBuffed:
+                this.drawNormal(c);
+                break;
+            default:
+                this.drawVulnurable(c);
+        }
         c.restore();
+    }
+    drawNormal(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.shieldedAlpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+    }
+    drawVulnurable(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     getRotation() {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
@@ -377,8 +469,7 @@ class ThanatosTail extends NPC {
         }
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosTail");
-        this.nframes = 5;
-        this.frame = 0;
+        
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
@@ -400,11 +491,33 @@ class ThanatosTail extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
-        c.globalAlpha = this.head.alpha;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.head.shieldedAlpha;;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+        switch(this.head.visualState) {
+            case this.head.visualStates.normal:
+                this.drawNormal(c);
+                break;
+            case this.head.visualStates.buffed:
+                this.drawVulnurable(c);
+                break;
+            case this.head.visualStates.switchingToNormal:
+                this.drawVulnurable(c);
+                break;
+            case this.head.visualStates.switchingToBuffed:
+                this.drawNormal(c);
+                break;
+            default:
+                this.drawVulnurable(c);
+        }
         c.restore();
+    }
+    drawNormal(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.shieldedAlpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+    }
+    drawVulnurable(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     getRotation() {
         return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
