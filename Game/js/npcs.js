@@ -113,6 +113,7 @@ export class Thanatos extends NPC {
         };
         this.minimaptag = 'thanatos';
         this.image = document.getElementById("thanatosHead");
+        this.shieldMask = document.getElementById("thanatosHeadShield");
         this.nframes = 5;
         this.frame = 0;
         this.initialRotation = Math.PI / 2;
@@ -139,8 +140,8 @@ export class Thanatos extends NPC {
         // VARIABLE FIELDS
         this.velocity = new Vec2();
         this.lastRotation = 0;
-        this.alpha = 0.6;
-        this.shieldedAlpha = 0.3;
+        this.alpha = 0.2;
+        this.shieldedAlpha = 0.2;
 
         // OTHER SEGMENTS
         this.segments = [];
@@ -249,10 +250,10 @@ export class Thanatos extends NPC {
         c.globalAlpha = this.alpha;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
         c.globalAlpha = this.shieldedAlpha;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
     }
     drawVulnurable(c) {
-        c.globalAlpha = this.alpha;
+        c.globalAlpha = 1;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     open() {
@@ -312,6 +313,7 @@ class ThanatosBody1 extends NPC {
         }
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody1");
+        this.shieldMask = document.getElementById("thanatosBody1Shield");
         
         this.initialRotation = Math.PI / 2;
 
@@ -354,13 +356,13 @@ class ThanatosBody1 extends NPC {
         c.restore();
     }
     drawNormal(c) {
-        c.globalAlpha = this.alpha;
+        c.globalAlpha = this.head.alpha;
         c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.shieldedAlpha;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+        c.globalAlpha = this.head.shieldedAlpha;
+        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
     }
     drawVulnurable(c) {
-        c.globalAlpha = this.alpha;
+        c.globalAlpha = 1;
         c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     getRotation() {
@@ -391,6 +393,7 @@ class ThanatosBody2 extends NPC {
         }
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody2");
+        this.shieldMask = document.getElementById("thanatosBody2Shield");
         
         this.initialRotation = Math.PI / 2;
 
@@ -432,13 +435,13 @@ class ThanatosBody2 extends NPC {
         c.restore();
     }
     drawNormal(c) {
-        c.globalAlpha = this.alpha;
+        c.globalAlpha = this.head.alpha;
         c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.shieldedAlpha;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+        c.globalAlpha = this.head.shieldedAlpha;
+        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
     }
     drawVulnurable(c) {
-        c.globalAlpha = this.alpha;
+        c.globalAlpha = 1;
         c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     getRotation() {
@@ -469,6 +472,7 @@ class ThanatosTail extends NPC {
         }
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosTail");
+        this.shieldMask = document.getElementById("thanatosTailShield");
         
         this.initialRotation = Math.PI / 2;
 
@@ -510,13 +514,13 @@ class ThanatosTail extends NPC {
         c.restore();
     }
     drawNormal(c) {
-        c.globalAlpha = this.alpha;
+        c.globalAlpha = this.head.alpha;
         c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.shieldedAlpha;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+        c.globalAlpha = this.head.shieldedAlpha;
+        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
     }
     drawVulnurable(c) {
-        c.globalAlpha = this.alpha;
+        c.globalAlpha = 1;
         c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
     getRotation() {
