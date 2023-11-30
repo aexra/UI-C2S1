@@ -139,10 +139,12 @@ export class Thanatos extends NPC {
         // VARIABLE FIELDS
         this.velocity = new Vec2();
         this.lastRotation = 0;
+        this.alpha = 0.6;
+        this.shieldedAlpha = 0.3;
 
         // OTHER SEGMENTS
         this.segments = [];
-        this.nsegments = 102;
+        this.nsegments = 60;
         for (var i = 0; i < this.nsegments; i += 2) {
             this.addSegment('body1');
             this.addSegment('body2');
@@ -195,7 +197,12 @@ export class Thanatos extends NPC {
     drawHead(c) {
         c.save();
         c.rotate(this.getRotation());
+        c.globalAlpha = this.alpha;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.shieldedAlpha;
+        // c.filter = "brightness(0) saturate(100%) invert(29%) sepia(99%) saturate(1018%) hue-rotate(182deg) brightness(99%) contrast(85%)";
+        // c.filter = "drop-shadow(0px 0px 40px red) invert(75%)";
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
         c.restore();
     }
     open() {
@@ -279,7 +286,10 @@ class ThanatosBody1 extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
+        c.globalAlpha = this.head.alpha;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.head.shieldedAlpha;
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
         c.restore();
     }
     getRotation() {
@@ -333,7 +343,10 @@ class ThanatosBody2 extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
+        c.globalAlpha = this.head.alpha;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.head.shieldedAlpha;
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
         c.restore();
     }
     getRotation() {
@@ -387,7 +400,10 @@ class ThanatosTail extends NPC {
         c.save();
         c.translate(this.position.x, this.position.y);
         c.rotate(this.getRotation());
+        c.globalAlpha = this.head.alpha;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.head.shieldedAlpha;;
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
         c.restore();
     }
     getRotation() {

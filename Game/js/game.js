@@ -135,7 +135,7 @@ window.addEventListener("load", (e) => {
 			  }, 1000)
 			setTimeout(() => {
 				this.initiateFight();
-			}, 3000);
+			}, 0);
 		}
 		initiateFight() {
 			this.thanatos = new Thanatos(this);
