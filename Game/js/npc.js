@@ -42,15 +42,15 @@ export class NPC extends GameObject {
                 position: this.position.copy(),
             }
         }
-        
     }
     drawHitbox(c) {
         c.save();
 
+        // c.setTransform(1,0,0,1,0,0);
         c.globalAlpha = 1;
         c.fillStyle = "rgba(140, 0, 0, 0.4)";
         var hb = this.getHitbox();
-        c.fillRect(hb.position.x, hb.position.y, hb.size.x, hb.size.y);
+        c.fillRect(hb.position.x - hb.size.x / 2, hb.position.y - hb.size.y / 2, hb.size.x, hb.size.y);
 
         c.restore();
     }

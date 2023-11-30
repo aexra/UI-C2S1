@@ -46,7 +46,7 @@ export class Dummy extends NPC {
 
         this.hitbox = {
             size: Vec2.minus(this.size.copy(), new Vec2(10, 10)),
-            position: new Vec2(this.position.x - 5, this.position.y - 5),
+            position: new Vec2(this.position.x + 5, this.position.y + 5),
         };
     }
     update(input, deltaTime) {
@@ -63,6 +63,11 @@ export class Dummy extends NPC {
         if (this.state == states.hitted) {
             this.hittedAnimation.update(input, deltaTime);
         }
+
+        this.updateHitbox(input, deltaTime);
+    }
+    updateHitbox(input, deltaTime) {
+        this.hitbox.position = new Vec2(this.position.x + 5, this.position.y + 5);
     }
     draw(c) {
         this.drawNPC(c);
@@ -150,7 +155,7 @@ export class Thanatos extends NPC {
 
         // OTHER SEGMENTS
         this.segments = [];
-        this.nsegments = 60;
+        this.nsegments = 10;
         for (var i = 0; i < this.nsegments; i += 2) {
             this.addSegment('body1');
             this.addSegment('body2');
@@ -219,6 +224,9 @@ export class Thanatos extends NPC {
 
         this.drawHead(c);
         // this.drawHeadLine(c);
+
+        c.translate(-this.position.x, -this.position.y);
+        this.drawHitbox(c);
 
         c.restore();
     }
