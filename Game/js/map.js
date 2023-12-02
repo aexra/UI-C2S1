@@ -1,4 +1,5 @@
 import { AnimatedSprite } from "./animatedSprite.js";
+import { Light } from "./light.js";
 import { Dummy } from "./npcs.js";
 import { Sprite } from "./sprite.js";
 import { Vec2 } from "./vec2.js"
@@ -83,6 +84,7 @@ export class Map {
 
             game.initiateDraedon();
         };
+        this.codebreaker.lights.push(new Light(this.codebreaker.position, 200));
         this.flamepot = new AnimatedSprite([
             document.getElementById("pot0"),
             document.getElementById("pot1"),
@@ -91,6 +93,7 @@ export class Map {
             document.getElementById("pot4"),
             document.getElementById("pot5"),
         ], 12, new Vec2(36000 - 205, 1758), new Vec2(38, 88));
+        this.flamepot.lights.push(new Light(this.flamepot.position, 200));
         this.campfire = new AnimatedSprite([
             document.getElementById("campfire0"),
             document.getElementById("campfire1"),
@@ -101,6 +104,7 @@ export class Map {
             document.getElementById("campfire6"),
             document.getElementById("campfire7"),
         ], 12, new Vec2(36000 + 305, 1786), new Vec2(54, 42));
+        this.campfire.lights.push(new Light(this.campfire.position, 200));
         this.dummy = new Dummy(game);
         this.dummy.position = new Vec2(36000 + 505, 1700 + 78);
         game.npcs.push(this.dummy);
@@ -271,6 +275,7 @@ export class Map {
         var real = this.getRenderBorders();
 
         this.lightUpLanterns(c, real);
+        this.lightUpObjects(c);
         this.lightUpProjectiles(c);
         this.lightUpNPCs(c);
         this.lightUpPlayer(c);
@@ -292,6 +297,13 @@ export class Map {
     lightUpProjectiles(c) {
         for (var p of this.game.projectiles) {
             for (var light of p.lights) {
+                this.drawLight(c, light);
+            }
+        }
+    }
+    lightUpObjects(c) {
+        for (var object of [this.codebreaker, this.flamepot, this.campfire]) {
+            for (var light of object.lights) {
                 this.drawLight(c, light);
             }
         }

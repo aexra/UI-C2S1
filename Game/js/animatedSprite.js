@@ -18,6 +18,8 @@ export class AnimatedSprite extends GameObject {
         this.frameIdx = 0;
 
         this.onend = function(s){};
+
+        this.lights = [];
     }
     start() {
         if (this.skipFirstDelay) {
