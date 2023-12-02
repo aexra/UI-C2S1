@@ -49,7 +49,7 @@ export class Player {
         this.immunityInterval = 1000;
         this.immunityTimer = 0;
 
-        this.lights = [new Light(this.position, 200)];
+        this.lights = [new Light(this.position, 100)];
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");

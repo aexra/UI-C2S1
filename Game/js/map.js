@@ -325,7 +325,7 @@ export class Map {
         
         var lx = dx,
             ly = dy,
-            innerRadius = 50,
+            innerRadius = 0,
             outerRadius = light.radius,
             radius = light.radius;
 
