@@ -269,26 +269,54 @@ export class Map {
         c.globalCompositeOperation = "destination-out";
 
         var real = this.getRenderBorders();
-        var realbegin = real.x;
-        var realend = real.y;
 
-        for (var y = realbegin.y; y < realend.y; y++) {
-            for (var x = realbegin.x; x < realend.x; x++) {
-                var tile = this.map[y][x];
-
-                if (tile == 2 || tile == 3) {
-                    this.drawLightSource(c, x, y);
-                }
-            }
-        }
-
-        
+        this.lightUpLanterns(c, real);
+        this.lightUpProjectiles(c);
 
         c.restore();
     }
-    drawLightSource(c, x, y) {
-        var dx = x + Math.ceil(this.game.player.camera.pos.x / 18);
-        var dy = y + Math.ceil(this.game.player.camera.pos.y / 18);
+    lightUpProjectiles(c) {
+        for (var p of this.game.projectiles) {
+            for (var light of p.lights) {
+                this.drawLight(c, light);
+            }
+        }
+    }
+    lightUpLanterns(c, real) {
+        for (var y = real.x.y; y < real.y.y; y++) {
+            for (var x = real.x.x; x < real.y.x; x++) {
+                var tile = this.map[y][x];
+
+                if (tile == 2 || tile == 3) {
+                    this.drawLightSource(c, new Vec2(x, y));
+                }
+            }
+        }
+    }
+    drawLight(c, light) {
+        var dx = light.position.x + this.game.player.camera.pos.x;
+        var dy = light.position.y + this.game.player.camera.pos.y;
+        
+        var lx = dx,
+            ly = dy,
+            innerRadius = 50,
+            outerRadius = light.radius,
+            radius = light.radius;
+
+        var gradient = c.createRadialGradient(lx, ly, innerRadius, lx, ly, outerRadius);
+        gradient.addColorStop(0, 'rgba(253, 244, 220, 0.7)');
+        gradient.addColorStop(1, 'rgba(253, 244, 220, 0)');
+
+        c.beginPath();
+
+        c.arc(lx, ly, radius, 0, 2 * Math.PI);
+
+        c.fillStyle = gradient;
+        c.fill();
+    }
+    drawLightSource(c, position) {
+        var dx = position.x + Math.ceil(this.game.player.camera.pos.x / 18);
+        var dy = position.y + Math.ceil(this.game.player.camera.pos.y / 18);
         
         var lx = dx * 18 + 10,
             ly = dy * 18,

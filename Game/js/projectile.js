@@ -1,3 +1,4 @@
+import { Light } from "./light.js";
 import { Vec2 } from "./vec2.js";
 
 export class Projectile {
@@ -25,9 +26,13 @@ export class Projectile {
             position: this.position.copy(),
             size: this.size.copy(),
         };
+
+        this.lights = [new Light(this.position, 360)];
     }
     update(input, deltaTime) {
-
+        for (var light of this.lights) {
+            light.posititon = this.position;
+        }
     }
     draw(context) {
         

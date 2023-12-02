@@ -76,6 +76,10 @@ export class TerraBeam extends Projectile {
         }
 
         this.hitbox.position = Vec2.minus(this.position, new Vec2(this.hitbox.size.x / 2, this.hitbox.size.y / 2));
+        
+        for (var light of this.lights) {
+            light.posititon = this.position;
+        }
     }
     draw(context) {
         context.translate(this.position.x, this.position.y);
