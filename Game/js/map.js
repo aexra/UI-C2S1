@@ -108,6 +108,12 @@ export class Map {
         this.dummy = new Dummy(game);
         this.dummy.position = new Vec2(36000 + 505, 1700 + 78);
         game.npcs.push(this.dummy);
+
+        // I need an extra canvas to draw shaders layer
+        this.buffercanvas = document.createElement('canvas');
+        this.buffercanvas.width = this.game.canvasSize.x;
+        this.buffercanvas.height = this.game.canvasSize.y;
+        this.buffercontext = this.buffercanvas.getContext("2d");
     }
     generateMap() {
         this.map = [];
@@ -249,16 +255,15 @@ export class Map {
         }
     }
     drawShaders(c) {
-        var offScreenCanvas = document.createElement('canvas');
-        offScreenCanvas.width = this.game.player.camera.size.x / this.game.player.camera.scale.x;
-        offScreenCanvas.height = this.game.player.camera.size.y / this.game.player.camera.scale.y;
-        var context = offScreenCanvas.getContext("2d");
+        this.buffercanvas.width = this.game.player.camera.size.x / this.game.player.camera.scale.x;
+        this.buffercanvas.height = this.game.player.camera.size.y / this.game.player.camera.scale.y;
+        this.buffercontext.clearRect(0, 0, this.buffercanvas.width, this.buffercanvas.height);
 
-        this.drawShadowMask(context);
-        this.drawLights(context);
+        this.drawShadowMask(this.buffercontext);
+        this.drawLights(this.buffercontext);
 
         // c.putImageData(context.getImageData(0, 0, this.game.player.camera.size.x, this.game.player.camera.size.y), 0, 0);
-        c.drawImage(offScreenCanvas, -this.game.player.camera.pos.x, -this.game.player.camera.pos.y);
+        c.drawImage(this.buffercanvas, -this.game.player.camera.pos.x, -this.game.player.camera.pos.y);
     }
     drawShadowMask(c) {
         c.save();
