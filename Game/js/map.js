@@ -259,14 +259,14 @@ export class Map {
     drawShadowMask(c) {
         c.save();
 
-        c.fillStyle = 'rgba(0, 0, 0, 0.4)';
+        c.fillStyle = 'rgba(0, 0, 0, 0.6)';
         c.fillRect(0, 0, this.game.player.camera.size.x / this.game.player.camera.scale.x, this.game.player.camera.size.y / this.game.player.camera.scale.y);
 
         c.restore();
     }
     drawLights(c) {
         c.save();
-        c.globalCompositeOperation = "lighter";
+        c.globalCompositeOperation = "destination-out";
 
         var real = this.getRenderBorders();
         var realbegin = real.x;
@@ -279,16 +279,15 @@ export class Map {
                 if (tile == 2 || tile == 3) {
                     var dx = x + Math.ceil(this.game.player.camera.pos.x / 18);
                     var dy = y + Math.ceil(this.game.player.camera.pos.y / 18);
-                    console.log(x, y, dx, dy);
                     
                     var lx = dx * 18 + 10,
                         ly = dy * 18,
-                        innerRadius = 0,
+                        innerRadius = 50,
                         outerRadius = 360,
                         radius = 360;
 
                     var gradient = c.createRadialGradient(lx, ly, innerRadius, lx, ly, outerRadius);
-                    gradient.addColorStop(0, 'rgba(253, 244, 220, 0.2)');
+                    gradient.addColorStop(0, 'rgba(253, 244, 220, 0.7)');
                     gradient.addColorStop(1, 'rgba(253, 244, 220, 0)');
 
                     c.beginPath();
