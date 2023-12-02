@@ -46,7 +46,7 @@ export class Dummy extends NPC {
 
         this.hitbox = {
             size: Vec2.minus(this.size.copy(), new Vec2(10, 10)),
-            position: new Vec2(this.position.x + 5, this.position.y + 5),
+            position: new Vec2(this.position.x, this.position.y),
         };
     }
     update(input, deltaTime) {
@@ -68,7 +68,7 @@ export class Dummy extends NPC {
         this.updateLights(input, deltaTime);
     }
     updateHitbox(input, deltaTime) {
-        this.hitbox.position = new Vec2(this.position.x + 5, this.position.y + 5);
+        this.hitbox.position = new Vec2(this.position.x, this.position.y);
     }
     draw(c) {
         this.drawNPC(c);
@@ -76,7 +76,7 @@ export class Dummy extends NPC {
     }
     drawNPC(c) {
         if (this.state == states.idle) {
-            c.drawImage(this.idleFrame, this.position.x, this.position.y);
+            c.drawImage(this.idleFrame, this.position.x - this.size.x / 2, this.position.y - this.size.y / 2);
         } else if (this.state == states.hitted) {
             this.hittedAnimation.draw(c);
         }

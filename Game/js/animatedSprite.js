@@ -31,15 +31,15 @@ export class AnimatedSprite extends GameObject {
             this.nextFrame();
         }
 
-        if (input.keys.includes("lmb") && (input.mpx >= this.position.x && input.mpx <= this.position.x + this.size.x) && (input.mpy >= this.position.y && input.mpy <= this.position.y + this.size.y)) {
+        if (input.keys.includes("lmb") && (input.mpx >= this.position.x - this.size.x / 2 && input.mpx <= this.position.x - this.size.x / 2 + this.size.x) && (input.mpy >= this.position.y - this.size.y / 2 && input.mpy <= this.position.y - this.size.y / 2 + this.size.y)) {
             this.onmousel(this);
         }
-        if (input.keys.includes("rmb") && (input.mpx >= this.position.x && input.mpx <= this.position.x + this.size.x) && (input.mpy >= this.position.y && input.mpy <= this.position.y + this.size.y)) {
+        if (input.keys.includes("rmb") && (input.mpx >= this.position.x - this.size.x / 2 && input.mpx <= this.position.x - this.size.x / 2 + this.size.x) && (input.mpy >= this.position.y - this.size.y / 2 && input.mpy <= this.position.y - this.size.y / 2 + this.size.y)) {
             this.onmouser(this);
         }
     }
     draw(c) {
-        c.drawImage(this.images[this.frameIdx], this.position.x, this.position.y, this.size.x, this.size.y);
+        c.drawImage(this.images[this.frameIdx], this.position.x - this.size.x / 2, this.position.y - this.size.y / 2, this.size.x, this.size.y);
     }
     setFPS(fps) {
         this.fps = fps;
