@@ -251,7 +251,7 @@ export class Map {
         var context = offScreenCanvas.getContext("2d");
 
         this.drawShadowMask(context);
-        // this.drawLights(context);
+        this.drawLights(context);
 
         // c.putImageData(context.getImageData(0, 0, this.game.player.camera.size.x, this.game.player.camera.size.y), 0, 0);
         c.drawImage(offScreenCanvas, -this.game.player.camera.pos.x, -this.game.player.camera.pos.y);
@@ -261,7 +261,6 @@ export class Map {
 
         c.fillStyle = 'rgba(0, 0, 0, 0.4)';
         c.fillRect(0, 0, this.game.player.camera.size.x / this.game.player.camera.scale.x, this.game.player.camera.size.y / this.game.player.camera.scale.y);
-        console.log(this.game.player.camera.size.x / this.game.player.camera.scale.x, this.game.player.camera.size.y / this.game.player.camera.scale.y);
 
         c.restore();
     }
@@ -278,10 +277,12 @@ export class Map {
                 var tile = this.map[y][x];
 
                 if (tile == 2 || tile == 3) {
+                    var dx = x + Math.ceil(this.game.player.camera.pos.x / 18);
+                    var dy = y + Math.ceil(this.game.player.camera.pos.y / 18);
+                    console.log(x, y, dx, dy);
                     
-
-                    var lx = x * 18 + 10,
-                        ly = y * 18,
+                    var lx = dx * 18 + 10,
+                        ly = dy * 18,
                         innerRadius = 0,
                         outerRadius = 360,
                         radius = 360;
