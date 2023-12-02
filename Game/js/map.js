@@ -259,7 +259,7 @@ export class Map {
     drawShadowMask(c) {
         c.save();
 
-        c.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        c.fillStyle = 'rgba(0, 0, 0, 0.7)';
         c.fillRect(0, 0, this.game.player.camera.size.x / this.game.player.camera.scale.x, this.game.player.camera.size.y / this.game.player.camera.scale.y);
 
         c.restore();
