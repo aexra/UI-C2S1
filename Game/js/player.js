@@ -3,6 +3,7 @@ import * as weapons from "./weapons.js"
 import { Vec2 } from "./vec2.js";
 import { Random } from "./misc.js";
 import { Vec4 } from "./vec4.js";
+import { Light } from "./light.js";
 
 export class Player {
     constructor(game) {
@@ -47,6 +48,8 @@ export class Player {
         this.hp = 720;
         this.immunityInterval = 1000;
         this.immunityTimer = 0;
+
+        this.lights = [new Light(this.position, 200)];
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
@@ -124,6 +127,8 @@ export class Player {
         if (input.keys.includes("j") || input.keys.includes("о")) {
             this.getDamage(50);
         }
+
+        this.updateLight(input, deltaTime);
     }
     draw(c) {
         // перемещение камеры
@@ -167,6 +172,11 @@ export class Player {
     }
     onHit() {
         console.log("player got hit, hp: ", this.hp);
+    }
+    updateLight(input, deltaTime) {
+        for (var light of this.lights) {
+            light.position = this.position;
+        }
     }
     updateCamera(input, deltaTime) {
         if (input.keys.includes('-')) {

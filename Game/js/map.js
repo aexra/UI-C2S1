@@ -259,7 +259,7 @@ export class Map {
     drawShadowMask(c) {
         c.save();
 
-        c.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        c.fillStyle = 'rgba(0, 0, 0, 0.9)';
         c.fillRect(0, 0, this.game.player.camera.size.x / this.game.player.camera.scale.x, this.game.player.camera.size.y / this.game.player.camera.scale.y);
 
         c.restore();
@@ -273,8 +273,14 @@ export class Map {
         this.lightUpLanterns(c, real);
         this.lightUpProjectiles(c);
         this.lightUpNPCs(c);
+        this.lightUpPlayer(c);
 
         c.restore();
+    }
+    lightUpPlayer(c) {
+        for (var light of this.game.player.lights) {
+            this.drawLight(c, light);
+        }
     }
     lightUpNPCs(c) {
         for (var npc of this.game.npcs) {
