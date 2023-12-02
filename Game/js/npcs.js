@@ -65,6 +65,7 @@ export class Dummy extends NPC {
         }
 
         this.updateHitbox(input, deltaTime);
+        this.updateLights(input, deltaTime);
     }
     updateHitbox(input, deltaTime) {
         this.hitbox.position = new Vec2(this.position.x + 5, this.position.y + 5);
@@ -183,6 +184,7 @@ export class Thanatos extends NPC {
         this.ai.update(input, deltaTime);
         this.updatePosition(input, deltaTime);
         this.updateVisual(input, deltaTime);
+        this.updateLights(input, deltaTime);
     }
     updateVisual(input, deltaTime) {
         if (this.visualState == this.visualStates.switchingToBuffed) {
@@ -339,6 +341,7 @@ class ThanatosBody1 extends NPC {
         this.updateImmunity(input, deltaTime);
         this.diff = Vec2.minus(this.next.position, this.position);
         this.updatePosition(input, deltaTime);
+        this.updateLights(input, deltaTime);
     }
     updatePosition(input, deltaTime) {
         if (this.diff.length() > this.maxdist) {
@@ -422,6 +425,7 @@ class ThanatosBody2 extends NPC {
         this.updateImmunity(input, deltaTime);
         this.diff = Vec2.minus(this.next.position, this.position);
         this.updatePosition(input, deltaTime);
+        this.updateLights(input, deltaTime);
     }
     updatePosition(input, deltaTime) {
         if (this.diff.length() > this.maxdist) {
@@ -504,6 +508,7 @@ class ThanatosTail extends NPC {
         this.updateImmunity(input, deltaTime);
         this.diff = Vec2.minus(this.next.position, this.position);
         this.updatePosition(input, deltaTime);
+        this.updateLights(input, deltaTime);
     }
     updatePosition(input, deltaTime) {
         if (this.diff.length() > this.maxdist) {

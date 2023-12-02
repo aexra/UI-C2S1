@@ -272,8 +272,16 @@ export class Map {
 
         this.lightUpLanterns(c, real);
         this.lightUpProjectiles(c);
+        this.lightUpNPCs(c);
 
         c.restore();
+    }
+    lightUpNPCs(c) {
+        for (var npc of this.game.npcs) {
+            for (var light of npc.lights) {
+                this.drawLight(c, light);
+            }
+        }
     }
     lightUpProjectiles(c) {
         for (var p of this.game.projectiles) {

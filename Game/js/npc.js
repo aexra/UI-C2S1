@@ -1,6 +1,7 @@
 import { GameObject } from "./gameObject.js";
 import { Vec2 } from "./vec2.js";
 import { Collision } from "./misc.js";
+import { Light } from "./light.js";
 
 export class NPC extends GameObject {
     constructor(game) {
@@ -17,9 +18,17 @@ export class NPC extends GameObject {
 
         this.immunityInterval = 150;
         this.immunityTimer = 0;
+
+        this.lights = [new Light(this.position, 200)];
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
+        this.updateLights(input, deltaTime);
+    }
+    updateLights(input, deltaTime) {
+        for (var light of this.lights) {
+            light.position = this.position;
+        }
     }
     draw(c) {
 
