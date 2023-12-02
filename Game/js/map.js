@@ -277,29 +277,34 @@ export class Map {
                 var tile = this.map[y][x];
 
                 if (tile == 2 || tile == 3) {
-                    var dx = x + Math.ceil(this.game.player.camera.pos.x / 18);
-                    var dy = y + Math.ceil(this.game.player.camera.pos.y / 18);
-                    
-                    var lx = dx * 18 + 10,
-                        ly = dy * 18,
-                        innerRadius = 50,
-                        outerRadius = 360,
-                        radius = 360;
-
-                    var gradient = c.createRadialGradient(lx, ly, innerRadius, lx, ly, outerRadius);
-                    gradient.addColorStop(0, 'rgba(253, 244, 220, 0.7)');
-                    gradient.addColorStop(1, 'rgba(253, 244, 220, 0)');
-
-                    c.beginPath();
-
-                    c.arc(lx, ly, radius, 0, 2 * Math.PI);
-
-                    c.fillStyle = gradient;
-                    c.fill();
+                    this.drawLightSource(c, x, y);
                 }
             }
         }
 
+        
+
         c.restore();
+    }
+    drawLightSource(c, x, y) {
+        var dx = x + Math.ceil(this.game.player.camera.pos.x / 18);
+        var dy = y + Math.ceil(this.game.player.camera.pos.y / 18);
+        
+        var lx = dx * 18 + 10,
+            ly = dy * 18,
+            innerRadius = 50,
+            outerRadius = 360,
+            radius = 360;
+
+        var gradient = c.createRadialGradient(lx, ly, innerRadius, lx, ly, outerRadius);
+        gradient.addColorStop(0, 'rgba(253, 244, 220, 0.7)');
+        gradient.addColorStop(1, 'rgba(253, 244, 220, 0)');
+
+        c.beginPath();
+
+        c.arc(lx, ly, radius, 0, 2 * Math.PI);
+
+        c.fillStyle = gradient;
+        c.fill();
     }
 }
