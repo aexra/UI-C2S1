@@ -89,7 +89,7 @@ window.addEventListener("load", (e) => {
 				di.draw(context);
 			}
 			
-			// this.map.drawShaders(context);
+			this.map.drawShaders(context);
 
 			this.ui.draw(context);
 		}

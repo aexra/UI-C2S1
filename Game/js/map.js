@@ -246,20 +246,22 @@ export class Map {
     }
     drawShaders(c) {
         var offScreenCanvas = document.createElement('canvas');
-        offScreenCanvas.width = this.game.canvasSize.x;
-        offScreenCanvas.height = this.game.canvasSize.y;
+        offScreenCanvas.width = this.game.player.camera.size.x / this.game.player.camera.scale.x;
+        offScreenCanvas.height = this.game.player.camera.size.y / this.game.player.camera.scale.y;
         var context = offScreenCanvas.getContext("2d");
 
         this.drawShadowMask(context);
-        this.drawLights(context);
+        // this.drawLights(context);
 
-        c.putImageData(context.getImageData(this.game.player.camera.pos.x, this.game.player.camera.pos.y, this.game.canvasSize.x, this.game.canvasSize.y), this.game.player.camera.pos.x, this.game.player.camera.pos.y);
+        // c.putImageData(context.getImageData(0, 0, this.game.player.camera.size.x, this.game.player.camera.size.y), 0, 0);
+        c.drawImage(offScreenCanvas, -this.game.player.camera.pos.x, -this.game.player.camera.pos.y);
     }
     drawShadowMask(c) {
         c.save();
 
-        c.fillStyle = 'rgba(0, 0, 0, 1)';
-        c.fillRect(0, 0, this.size.x, this.size.y);
+        c.fillStyle = 'rgba(0, 0, 0, 0.4)';
+        c.fillRect(0, 0, this.game.player.camera.size.x / this.game.player.camera.scale.x, this.game.player.camera.size.y / this.game.player.camera.scale.y);
+        console.log(this.game.player.camera.size.x / this.game.player.camera.scale.x, this.game.player.camera.size.y / this.game.player.camera.scale.y);
 
         c.restore();
     }
