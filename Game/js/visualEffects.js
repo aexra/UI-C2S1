@@ -97,6 +97,10 @@ export class ThanatosSpawnScreen extends VisualEffect {
         c.fillStyle = "#000";
         c.globalAlpha = this.alpha;
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.font = `50px andy`;
+        c.fillStyle = 'red';
+        c.textBaseline = 'top';
+        c.fillText("Exo 01: Thanatos", this.position.x + this.size.x / 2 - 170, this.position.y + this.size.y / 2);
         c.restore();
     }
 }
