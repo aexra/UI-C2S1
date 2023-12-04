@@ -163,10 +163,13 @@ window.addEventListener("load", (e) => {
 
 			new visuals.DraedonInitiatingBeam(this);
 
+			var game = this;
+
 			setTimeout(function(){
 				var teslaSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/TeslaCannonFire.wav");
 				teslaSound.volume = 0.05;
 				teslaSound.play();
+				new visuals.ThanatosSpawnScreen(game);
 			  }, 1000)
 			setTimeout(() => {
 				this.initiateFight();

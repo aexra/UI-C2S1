@@ -42,25 +42,61 @@ export class DraedonInitiatingBeam extends VisualEffect {
                 break;
             }
         }
-
-        // if (this.lifetimer <= this.keyframes[0].frame) {
-        //     this.size.x += (this.keyframes[0].width - this.size.x) / this.keyframes[0].frame * deltaTime;
-        // }
-        // else if (this.lifetimer <= this.keyframes[1].frame) {
-        //     this.size.x += this.keyframes[0].width / this.keyframes[0].frame * deltaTime;
-        // }
-        // else if (this.lifetimer <= this.keyframes[2].frame) {
-
-        // }
-        // else if (this.lifetimer <= this.keyframes[3].frame) {
-            
-        // }
     }
     draw(c) {
         c.save();
         c.fillStyle = "#fff";
         c.filter = "drop-shadow(0 0 50px #fff)";
         c.fillRect(this.topleft().x, this.topleft().y, this.size.x, this.size.y);
+        c.restore();
+    }
+}
+
+export class ThanatosSpawnScreen extends VisualEffect {
+    constructor(game) {
+        super(game);
+        this.lifetime = 2000;
+        
+        this.size = game.player.camera.size;
+        this.position = game.player.camera.pos.reverse();
+        
+        this.alpha = 0;
+
+        this.keyframes = [
+            {
+                frame: 200,
+                alpha: 1,
+                da: 1 - 0
+            },
+            {
+                frame: 1800,
+                alpha: 1,
+                da: 1 - 1
+            },
+            {
+                frame: 2000,
+                alpha: 0,
+                da: 0 - 1
+            }
+        ];
+    }
+    update(input, deltaTime) {
+        this.updateLifeTimer(input, deltaTime);
+        this.position = this.game.player.camera.pos.reverse();
+        this.size = this.game.player.camera.size.multiply(this.game.player.camera.scale.x);
+
+        for (var i = 0; i < this.keyframes.length; i++) {
+            if (this.lifetimer <= this.keyframes[i].frame) {
+                this.alpha += this.keyframes[i].da / (this.keyframes[i].frame - (i == 0? 0 : this.keyframes[i-1].frame)) * deltaTime;
+                break;
+            }
+        }
+    }
+    draw(c) {
+        c.save();
+        c.fillStyle = "#fff";
+        c.globalAlpha = this.alpha;
+        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         c.restore();
     }
 }

@@ -35,6 +35,16 @@ export class Vec2 {
         this.y = ry;
         return this;
     }
+    multiply(what) {
+        this.x *= what;
+        this.y *= what;
+        return this;
+    }
+    reverse() {
+        this.x = -this.x;
+        this.y = -this.y;
+        return this;
+    }
     static minus(left, right) {
         return new Vec2(left.x - right.x, left.y - right.y);
     }
