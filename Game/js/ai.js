@@ -7,9 +7,9 @@ export class ThanatosAI {
         this.game = head.game;
         this.segments = head.segments;
 
-        this.maxAngleSpeed = 0.5;
+        this.maxAngleSpeed = 1;
 
-        this.cursorChaseSpeed = 12;
+        this.cursorChaseSpeed = 1;
         this.chaseSpeed = 11;
     }
     update(input, deltaTime) {
@@ -29,6 +29,13 @@ export class ThanatosAI {
         this.head.state = state;
     }
     rotateTo(diff, alpha) {
+        console.log(alpha);
+        if (this.head.direction + alpha < 0) {
+            alpha = Math.max(this.head.direction + alpha, -this.maxAngleSpeed + this.head.direction);
+        } else {
+            alpha = Math.min(this.head.direction + alpha, this.maxAngleSpeed + this.head.direction);
+        }
+        this.head.direction = alpha;
         this.head.directionalVector = new Vec2(Math.cos(alpha) * (diff.x < 0? -1 : 1), Math.sin(alpha) * (diff.x < 0? -1 : 1));
     }
     updateIdle(input, deltaTime) {
@@ -40,8 +47,8 @@ export class ThanatosAI {
     updateChaseCursor(input, deltaTime) {
         var diff = Vec2.minus(new Vec2(input.mpx, input.mpy), this.head.position);
         var alpha = Math.atan(diff.y / diff.x)
-        // this.head.velocity = new Vec2(Math.cos(alpha) * Math.min(Math.abs(diff.x), this.cursorChaseSpeed) * (diff.x < 0? -1 : 1), Math.sin(alpha) * Math.min(Math.abs(diff.y), this.cursorChaseSpeed) * (diff.x < 0? -1 : 1));
-        this.rotateTo(diff, alpha);
+        console.log(alpha);
+        if (alpha) this.rotateTo(diff, alpha);
         this.head.velocity = Math.min(diff.length(), this.cursorChaseSpeed);
     }
 }

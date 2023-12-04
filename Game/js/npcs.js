@@ -139,7 +139,8 @@ export class Thanatos extends NPC {
 
         // VARIABLE FIELDS
         this.velocity = 0; // number
-        this.directionalVector = new Vec2();
+        this.directionalVector = new Vec2(); // vec2
+        this.direction = 0; // rad
         this.lastRotation = 0;
         this.alpha = 0.2;
         this.shieldedAlpha = 0.2;

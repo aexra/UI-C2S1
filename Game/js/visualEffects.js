@@ -57,7 +57,7 @@ export class ThanatosSpawnScreen extends VisualEffect {
         super(game);
         this.lifetime = 2000;
         
-        this.size = game.player.camera.size;
+        this.size = game.player.camera.size.copy();
         this.position = game.player.camera.pos.reverse();
         
         this.alpha = 0;
@@ -79,8 +79,8 @@ export class ThanatosSpawnScreen extends VisualEffect {
     }
     update(input, deltaTime) {
         this.updateLifeTimer(input, deltaTime);
-        this.position = this.game.player.camera.pos.reverse();
-        this.size = this.game.player.camera.size.multiply(this.game.player.camera.scale.x);
+        this.position = this.game.player.camera.pos.copy().reverse();
+        this.size = this.game.player.camera.size.copy().multiply(1 / this.game.player.camera.scale.x);
 
         for (var i = 0; i < this.keyframes.length; i++) {
             if (this.lifetimer <= this.keyframes[i].frame) {
