@@ -7,6 +7,7 @@ import { UI } from "./ui.js";
 import { DamageIndicator } from "./damageIndicator.js";
 import { Random } from "./misc.js";
 import { Thanatos } from "./npcs.js";
+import { VisualEffect } from "./visualEffect.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -29,6 +30,7 @@ window.addEventListener("load", (e) => {
 			this.particleEmitters = [];
 			this.damageIndicators = [];
 			this.npcs = [];
+			this.visualEffects = [];
 			this.input = new InputHandler(this);
 			this.map = new Map(new Vec2(this.size.x, this.size.y), this);
 			this.player = new Player(this);
@@ -64,6 +66,9 @@ window.addEventListener("load", (e) => {
 			}
 
 			this.map.update(this.input, deltaTime);
+
+			this.updateVisualEffects(this.input, deltaTime);
+
 			this.ui.update(this.input, deltaTime);
 		}
 		draw(context) {
@@ -91,6 +96,8 @@ window.addEventListener("load", (e) => {
 			
 			this.map.drawShaders(context);
 
+			this.drawVisualEffects(context);
+
 			this.ui.draw(context);
 		}
 		updateHits(input, deltaTime) {
@@ -101,6 +108,16 @@ window.addEventListener("load", (e) => {
 					var dmg = p.baseDamage * p.damageMultiplier * (iscrit? 2 : 1);
 					npc.hit(Random.randi(dmg - 10, dmg + 10), iscrit);
 				}
+			}
+		}
+		updateVisualEffects(input, deltaTime) {
+			for (var ve of this.visualEffects) {
+				ve.update(input, deltaTime);
+			}
+		}
+		drawVisualEffects(c) {
+			for (var ve of this.visualEffects) {
+				ve.draw(c);
 			}
 		}
 		createParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter) {
@@ -131,12 +148,21 @@ window.addEventListener("load", (e) => {
 		deleteDI(di) {
 			this.damageIndicators.splice(this.damageIndicators.indexOf(di), 1);
 		}
+		pushVE(ve) {
+			this.visualEffects.push(ve);
+		}
+		deleteVE(ve) {
+			this.visualEffects.splice(this.visualEffects.indexOf(ve), 1);
+		}
 		initiateDraedon() {
 			this.isDraedonInitiated = true;
 
 			var beamSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/CodebreakerBeam.wav");
 			beamSound.volume = 0.05;
 			beamSound.play();
+
+			
+
 			setTimeout(function(){
 				var teslaSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/TeslaCannonFire.wav");
 				teslaSound.volume = 0.05;
@@ -144,7 +170,7 @@ window.addEventListener("load", (e) => {
 			  }, 1000)
 			setTimeout(() => {
 				this.initiateFight();
-			}, 0);
+			}, 5000);
 		}
 		initiateFight() {
 			this.thanatos = new Thanatos(this);
