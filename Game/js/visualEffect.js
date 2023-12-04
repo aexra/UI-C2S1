@@ -1,6 +1,6 @@
+import { GameObject } from "./gameObject.js";
 
-
-export class VisualEffect {
+export class VisualEffect extends GameObject {
     constructor(game) {
         this.game = game;
 
