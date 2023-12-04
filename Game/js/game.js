@@ -165,15 +165,17 @@ window.addEventListener("load", (e) => {
 
 			var game = this;
 
-			setTimeout(function(){
+			setTimeout(() => {
 				var teslaSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/TeslaCannonFire.wav");
 				teslaSound.volume = 0.05;
 				teslaSound.play();
-				new visuals.ThanatosSpawnScreen(game);
 			  }, 1000)
 			setTimeout(() => {
+				new visuals.ThanatosSpawnScreen(game);
+			}, 3000);
+			setTimeout(() => {
 				this.initiateFight();
-			}, 5000);
+			}, 6000);
 		}
 		initiateFight() {
 			this.thanatos = new Thanatos(this);

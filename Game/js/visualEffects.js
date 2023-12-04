@@ -94,7 +94,7 @@ export class ThanatosSpawnScreen extends VisualEffect {
     }
     draw(c) {
         c.save();
-        c.fillStyle = "#fff";
+        c.fillStyle = "#000";
         c.globalAlpha = this.alpha;
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         c.restore();
