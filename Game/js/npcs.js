@@ -103,7 +103,7 @@ export class Thanatos extends NPC {
 
         // BASE PARAMETERS
         this.size = new Vec2(104, 174);
-        this.position = new Vec2(36000, 1700);
+        this.position = new Vec2(36000, 0);
 
         // SPRITES
         this.minimapicon = {

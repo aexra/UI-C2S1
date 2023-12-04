@@ -178,9 +178,10 @@ window.addEventListener("load", (e) => {
 				var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
 				introSound.volume = 0.06;
 				introSound.play();
+				this.initiateFight();
 			}, 3000);
 			setTimeout(() => {
-				this.initiateFight();
+				// this.initiateFight();
 				// var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
 				// introSound.volume = 0.06;
 				// introSound.play();
