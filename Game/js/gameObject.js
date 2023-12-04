@@ -16,4 +16,7 @@ export class GameObject {
         this.position.translateTo(to);
         return this;
     }
+    topleft() {
+        return new Vec2(this.position.x - this.size.x / 2, this.position.y - this.size.y / 2);
+    }
 }

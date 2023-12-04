@@ -7,7 +7,7 @@ import { UI } from "./ui.js";
 import { DamageIndicator } from "./damageIndicator.js";
 import { Random } from "./misc.js";
 import { Thanatos } from "./npcs.js";
-import { VisualEffect } from "./visualEffect.js";
+import * as visuals from "./visualEffects.js";
 
 window.addEventListener("load", (e) => {
 	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
@@ -161,7 +161,7 @@ window.addEventListener("load", (e) => {
 			beamSound.volume = 0.05;
 			beamSound.play();
 
-			
+			new visuals.DraedonInitiatingBeam(this);
 
 			setTimeout(function(){
 				var teslaSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/TeslaCannonFire.wav");
