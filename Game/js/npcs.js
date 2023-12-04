@@ -84,18 +84,6 @@ export class Dummy extends NPC {
     drawHP(c) {
 
     }
-    checkPojectilesCollisions() {
-        for (var projectile of this.game.projectiles) {
-            if (Collision.collideBox(this.position, this.size, 0, 
-                projectile.hitbox.position, 
-                projectile.hitbox.size, 
-                projectile.rotationAngleRad)) 
-                {
-                return projectile;
-            }
-        }
-        return null;
-    }
     onHit(damage, iscrit) {
         this.state = states.hitted;
         this.hittedAnimation.frameIdx = 0;
@@ -156,7 +144,7 @@ export class Thanatos extends NPC {
 
         // OTHER SEGMENTS
         this.segments = [];
-        this.nsegments = 10;
+        this.nsegments = 102;
         for (var i = 0; i < this.nsegments; i += 2) {
             this.addSegment('body1');
             this.addSegment('body2');

@@ -19,6 +19,7 @@ export class Vec2 {
     add(what) {
         this.x += what.x;
         this.y += what.y;
+        return this;
     }
     equal(to) {
         if (this.x == to.x && this.y == to.y) return true;
@@ -26,6 +27,13 @@ export class Vec2 {
     }
     length() {
         return Math.sqrt(this.x*this.x + this.y*this.y);
+    }
+    rotate(rad) {
+        var rx = this.x * Math.cos(rad) - this.y * Math.sin(rad);
+        var ry = this.y * Math.cos(rad) + this.x * Math.sin(rad);
+        this.x = rx;
+        this.y = ry;
+        return this;
     }
     static minus(left, right) {
         return new Vec2(left.x - right.x, left.y - right.y);

@@ -1,3 +1,5 @@
+import { Vec2 } from "./vec2.js";
+
 export class Random {
     static randi(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -12,45 +14,86 @@ export class Random {
 }
 
 export class Collision {
-    static collideBox(p1, s1, p2, s2) {
-        if (p1.x > p2.x + s2.x || p1.x + s1.x < p2.x || p1.y > p2.y + s2.y || p1.y + s1.y < p2.y) return false;
+    static collideBox(center1, size1, center2, size2) {
+        const halfWidth1 = size1.x / 2;
+        const halfHeight1 = size1.y / 2;
+        const halfWidth2 = size2.x / 2;
+        const halfHeight2 = size2.y / 2;
+
+        const left1 = center1.x - halfWidth1;
+        const right1 = center1.x + halfWidth1;
+        const top1 = center1.y - halfHeight1;
+        const bottom1 = center1.y + halfHeight1;
+
+        const left2 = center2.x - halfWidth2;
+        const right2 = center2.x + halfWidth2;
+        const top2 = center2.y - halfHeight2;
+        const bottom2 = center2.y + halfHeight2;
+
+        if (left1 > right2 || right1 < left2 || top1 > bottom2 || bottom1 < top2) {
+            return false;
+        }
+
         return true;
     }
-    static collideBox(p1, s1, r1, p2, s2, r2) {
-        // Распаковываем значения квадратов
-        var x1 = p1.x;
-        var y1 = p1.y;
-        var width1 = s1.x;
-        var height1 = s1.y;
-        var rotation1 = r1;
-        var x2 = p2.x;
-        var y2 = p2.y;
-        var width2 = s2.x;
-        var height2 = s2.y;
-        var rotation2 = r2;
+    // static collideBox(c1, s1, r1, c2, s2, r2) {
+    //     function areRectanglesIntersecting(center1, size1, angle1, center2, size2, angle2) {
+    //         function rotatePoint(x, y, angle) {
+    //             const cosAngle = Math.cos(angle);
+    //             const sinAngle = Math.sin(angle);
+    //             const newX = x * cosAngle - y * sinAngle;
+    //             const newY = x * sinAngle + y * cosAngle;
+    //             return { x: newX, y: newY };
+    //         }
+        
+    //         function isPointInsideRectangle(point, center, size, angle) {
+    //             const rotatedPoint = rotatePoint(point.x - center.x, point.y - center.y, -angle);
+    //             const halfWidth = size.width / 2;
+    //             const halfHeight = size.height / 2;
+    //             return (
+    //                 rotatedPoint.x >= -halfWidth &&
+    //                 rotatedPoint.x <= halfWidth &&
+    //                 rotatedPoint.y >= -halfHeight &&
+    //                 rotatedPoint.y <= halfHeight
+    //             );
+    //         }
+        
+    //         const halfWidth1 = size1.width / 2;
+    //         const halfHeight1 = size1.height / 2;
+    //         const halfWidth2 = size2.width / 2;
+    //         const halfHeight2 = size2.height / 2;
+        
+    //         const corners1 = [
+    //             { x: center1.x - halfWidth1, y: center1.y - halfHeight1 },
+    //             { x: center1.x + halfWidth1, y: center1.y - halfHeight1 },
+    //             { x: center1.x + halfWidth1, y: center1.y + halfHeight1 },
+    //             { x: center1.x - halfWidth1, y: center1.y + halfHeight1 },
+    //         ];
+        
+    //         const corners2 = [
+    //             { x: center2.x - halfWidth2, y: center2.y - halfHeight2 },
+    //             { x: center2.x + halfWidth2, y: center2.y - halfHeight2 },
+    //             { x: center2.x + halfWidth2, y: center2.y + halfHeight2 },
+    //             { x: center2.x - halfWidth2, y: center2.y + halfHeight2 },
+    //         ];
+        
+    //         for (const corner of corners1) {
+    //             if (isPointInsideRectangle(corner, center2, size2, angle2)) {
+    //                 return true;
+    //             }
+    //         }
+        
+    //         for (const corner of corners2) {
+    //             if (isPointInsideRectangle(corner, center1, size1, angle1)) {
+    //                 return true;
+    //             }
+    //         }
+        
+    //         return false;
+    //     }
 
-        // Сдвигаем квадраты в начало координат
-        let centerX1 = x1;
-        let centerY1 = y1;
-        let centerX2 = x2;
-        let centerY2 = y2;
-        // Изменяем поворот квадратов на противоположный
-        rotation1 = -rotation1;
-        rotation2 = -rotation2;
-        // Поворачиваем квадраты относительно центра координат
-        let rotatedX1 = (x1 - centerX1) * Math.cos(rotation1) - (y1 - centerY1) * Math.sin(rotation1) + centerX1;
-        let rotatedY1 = (x1 - centerX1) * Math.sin(rotation1) + (y1 - centerY1) * Math.cos(rotation1) + centerY1;
-        let rotatedX2 = (x2 - centerX2) * Math.cos(rotation2) - (y2 - centerY2) * Math.sin(rotation2) + centerX2;
-        let rotatedY2 = (x2 - centerX2) * Math.sin(rotation2) + (y2 - centerY2) * Math.cos(rotation2) + centerY2;
-        // Проверяем пересечение повернутых квадратов
-        if (
-            rotatedX1 < rotatedX2 + width2 &&
-            rotatedX1 + width1 > rotatedX2 &&
-            rotatedY1 < rotatedY2 + height2 &&
-            rotatedY1 + height1 > rotatedY2
-        ) {
-            return true;
-        }
-        return false;
-    }
+    //     var result = areRectanglesIntersecting(c1, s1, r1, c2, s2, r2);
+    //     console.log(result)
+    //     return result;
+    // }
 }

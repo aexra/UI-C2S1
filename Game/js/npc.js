@@ -65,10 +65,15 @@ export class NPC extends GameObject {
     }
     checkPojectilesCollisions() {
         for (var projectile of this.game.projectiles) {
-            if (Collision.collideBox(this.position, this.size, 0, 
-                projectile.hitbox.position, 
-                projectile.hitbox.size, 
-                projectile.rotationAngleRad)) 
+            if (Vec2.minus(this.position, projectile.position).length() >= 400) continue;
+            if (
+                Collision.collideBox(
+                    this.position, 
+                    this.size, 
+                    projectile.hitbox.position, 
+                    projectile.hitbox.size
+                )
+                ) 
                 {
                 return projectile;
             }
