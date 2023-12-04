@@ -327,7 +327,7 @@ export class Map {
     drawLight(c, light) {
         var dx = light.position.x + this.game.player.camera.pos.x;
         var dy = light.position.y + this.game.player.camera.pos.y;
-        
+
         var lx = dx,
             ly = dy,
             innerRadius = 0,

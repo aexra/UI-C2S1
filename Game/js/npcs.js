@@ -11,6 +11,7 @@ export const states = {
     attack: 2,
     still: 3,
     followCursor: 4,
+    chasePlayer: 5,
 };
 
 export class Dummy extends NPC {
@@ -103,7 +104,7 @@ export class Thanatos extends NPC {
 
         // BASE PARAMETERS
         this.size = new Vec2(104, 174);
-        this.position = new Vec2(36000, 0);
+        this.position = new Vec2(36000, 1000);
 
         // SPRITES
         this.minimapicon = {
@@ -137,7 +138,8 @@ export class Thanatos extends NPC {
         this.hitsoundTimer = 0;
 
         // VARIABLE FIELDS
-        this.velocity = new Vec2();
+        this.velocity = 0; // number
+        this.directionalVector = new Vec2();
         this.lastRotation = 0;
         this.alpha = 0.2;
         this.shieldedAlpha = 0.2;
@@ -205,7 +207,7 @@ export class Thanatos extends NPC {
         }
     }
     updatePosition(input, deltaTime) {
-        this.position.translate(this.velocity);
+        this.position.translate(this.directionalVector.multiply(this.velocity));
     }
     draw(c) {
         c.save();
@@ -277,10 +279,10 @@ export class Thanatos extends NPC {
         }
     }
     getRotation() {
-        if (this.lastRotation != 0 && this.velocity.x == 0 && this.velocity.y == 0) {
+        if (this.lastRotation != 0 && this.directionalVector.x == 0 && this.directionalVector.y == 0) {
             return this.segments[0].getRotation();
         }
-        this.lastRotation = Math.atan(this.velocity.y / this.velocity.x) + this.initialRotation + (this.velocity.x < 0? Math.PI : 0);
+        this.lastRotation = Math.atan(this.directionalVector.y / this.directionalVector.x) + this.initialRotation + (this.directionalVector.x < 0? Math.PI : 0);
         return this.lastRotation;
     }
     addSegment(type) {
