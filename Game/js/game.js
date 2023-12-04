@@ -67,9 +67,9 @@ window.addEventListener("load", (e) => {
 
 			this.map.update(this.input, deltaTime);
 
-			this.updateVisualEffects(this.input, deltaTime);
-
 			this.ui.update(this.input, deltaTime);
+			
+			this.updateVisualEffects(this.input, deltaTime);
 		}
 		draw(context) {
 			context.clearRect(0, 0, this.size.x, this.size.y);
@@ -96,9 +96,9 @@ window.addEventListener("load", (e) => {
 			
 			this.map.drawShaders(context);
 
-			this.drawVisualEffects(context);
-
 			this.ui.draw(context);
+			
+			this.drawVisualEffects(context);
 		}
 		updateHits(input, deltaTime) {
 			for (var npc of this.npcs) {
@@ -172,9 +172,18 @@ window.addEventListener("load", (e) => {
 			  }, 1000)
 			setTimeout(() => {
 				new visuals.ThanatosSpawnScreen(game);
+				// var introSound = new Audio("../resources/game/npcs/sounds/exo_intro.ogg");
+				// introSound.volume = 0.1;
+				// introSound.play();
+				var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
+				introSound.volume = 0.06;
+				introSound.play();
 			}, 3000);
 			setTimeout(() => {
 				this.initiateFight();
+				// var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
+				// introSound.volume = 0.06;
+				// introSound.play();
 			}, 6000);
 		}
 		initiateFight() {

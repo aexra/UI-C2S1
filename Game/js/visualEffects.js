@@ -12,12 +12,12 @@ export class DraedonInitiatingBeam extends VisualEffect {
 
         this.keyframes = [
             {
-                frame: 800,
+                frame: 1000,
                 width: 50,
                 dw: 50
             },
             {
-                frame: 1000,
+                frame: 1200,
                 width: 200,
                 dw: 200 - 50
             },
@@ -64,19 +64,16 @@ export class ThanatosSpawnScreen extends VisualEffect {
 
         this.keyframes = [
             {
-                frame: 200,
-                alpha: 1,
-                da: 1 - 0
+                frame: 100,
+                da: 0.7
             },
             {
-                frame: 1800,
-                alpha: 1,
-                da: 1 - 1
+                frame: 1900,
+                da: 0
             },
             {
                 frame: 2000,
-                alpha: 0,
-                da: 0 - 1
+                da: -0.7
             }
         ];
     }
