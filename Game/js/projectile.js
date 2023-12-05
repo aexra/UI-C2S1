@@ -18,10 +18,11 @@ export class Projectile {
         this.spawnRadius = 100;
 
         this.initialAngleRad = -Math.atan((this.position.y - this.initialpos.y) / (this.initialpos.x - this.position.x)) + (this.initialpos.x < this.position.x? Math.PI : 0);
+        this.initialDirection = new Vec2(Math.cos(this.initialAngleRad), Math.sin(this.initialAngleRad));
         this.rotationAngleRad = this.initialAngleRad;
         this.position.x += this.spawnRadius * Math.cos(this.initialAngleRad);
         this.position.y += this.spawnRadius * Math.sin(this.initialAngleRad);
-
+        // console.log(this.initialAngleRad);
         this.hitbox = {
             position: this.position.copy(),
             size: this.size.copy(),

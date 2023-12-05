@@ -66,8 +66,8 @@ export class TerraBeam extends Projectile {
 
         // рассчитываем перемещение
         this.speed = Math.max(this.speed + this.acceleration * deltaTime, 0);
-        this.position.x += this.speed * Math.cos(this.initialAngleRad);
-        this.position.y += this.speed * Math.sin(this.initialAngleRad);
+        this.position.x += this.speed * this.initialDirection.x;
+        this.position.y += this.speed * this.initialDirection.y;
 
         delta = Vec2.minus(this.position, delta);
 
