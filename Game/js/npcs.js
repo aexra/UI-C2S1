@@ -65,7 +65,7 @@ export class Dummy extends NPC {
             this.hittedAnimation.update(input, deltaTime);
         }
 
-        this.updateHitbox(input, deltaTime);
+        // this.updateHitbox(input, deltaTime);
         this.updateLights(input, deltaTime);
     }
     updateHitbox(input, deltaTime) {
