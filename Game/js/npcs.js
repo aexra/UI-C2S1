@@ -65,7 +65,7 @@ export class Dummy extends NPC {
             this.hittedAnimation.update(input, deltaTime);
         }
 
-        // this.updateHitbox(input, deltaTime);
+        this.updateHitbox(input, deltaTime);
         this.updateLights(input, deltaTime);
     }
     updateHitbox(input, deltaTime) {
@@ -73,7 +73,7 @@ export class Dummy extends NPC {
     }
     draw(c) {
         this.drawNPC(c);
-        this.drawHitbox(c);
+        // this.drawHitbox(c);
     }
     drawNPC(c) {
         if (this.state == states.idle) {
