@@ -7,7 +7,7 @@ export class ThanatosAI {
         this.game = head.game;
         this.segments = head.segments;
 
-        this.maxStirAngle = 0.05;
+        this.maxStirAngle = 0.02;
         this.maxStirSpeed = 4;
 
         this.cursorChaseSpeed = 8;
@@ -71,7 +71,7 @@ export class ThanatosAI {
 
     }
     updateChasePlayer(input, deltaTime) {
-
+        this.followPoint(this.game.player.position);
     }
     updateChaseCursor(input, deltaTime) {
         this.followPoint(new Vec2(input.mpx, input.mpy));

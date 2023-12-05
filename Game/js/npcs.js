@@ -119,7 +119,7 @@ export class Thanatos extends NPC {
         this.initialRotation = Math.PI / 2;
         
         // BEHAVIOUR AND VISUAL STATES
-        this.state = states.followCursor;
+        this.state = states.chasePlayer;
         this.visualStates = {
             normal: 0,
             buffed: 1,
@@ -219,7 +219,7 @@ export class Thanatos extends NPC {
         // this.drawHeadLine(c);
 
         c.translate(-this.position.x, -this.position.y);
-        this.drawHitbox(c);
+        // this.drawHitbox(c);
 
         c.restore();
     }
