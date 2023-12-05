@@ -7,7 +7,7 @@ export class ThanatosAI {
         this.game = head.game;
         this.segments = head.segments;
 
-        this.maxStirAngle = 0.1;
+        this.maxStirAngle = 0.05;
         this.maxStirSpeed = 4;
 
         this.cursorChaseSpeed = 8;
@@ -29,10 +29,43 @@ export class ThanatosAI {
     switch(state) {
         this.head.state = state;
     }
-    rotateTo(diff, alpha) {
+    followPoint(p) {
+        var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
+
+        var angle = Math.atan(diff.y / Math.abs(diff.x));
+        angle += diff.x < 0? Math.PI - angle * 2 : 0;
+
+        this.head.velocity = Math.min(diff.length(), this.cursorChaseSpeed);
         
-        this.head.direction = alpha;
-        this.head.directionalVector = new Vec2(Math.cos(alpha), Math.sin(alpha));
+        if (angle) this.rotateTo(diff, angle);
+    }
+    rotateTo(diff, angle) {
+        var dangle = angle - this.head.direction;
+
+        if (dangle < 0) {
+            if (dangle < -Math.PI) {
+                angle = Math.PI * 2 + angle;
+            }
+            var dangle = angle - this.head.direction;
+        } else {
+            if (dangle > Math.PI) {
+                angle = Math.PI * 2 - angle;
+            }
+            var dangle = angle - this.head.direction;
+        }
+
+        if (dangle < 0) {
+            if (dangle < -this.maxStirAngle) {
+                angle += -this.maxStirAngle-dangle;
+            }
+        } else {
+            if (dangle > this.maxStirAngle) {
+                angle -= dangle-this.maxStirAngle;
+            }
+        }
+
+        this.head.direction = angle - Math.floor(angle / (Math.PI * 2)) * Math.PI * 2;
+        this.head.directionalVector = new Vec2(Math.cos(angle), Math.sin(angle));
     }
     updateIdle(input, deltaTime) {
 
@@ -41,15 +74,6 @@ export class ThanatosAI {
 
     }
     updateChaseCursor(input, deltaTime) {
-        var diff = Vec2.minus(new Vec2(input.mpx, input.mpy), this.head.position);
-
-        var alpha = Math.atan(diff.y / Math.abs(diff.x));
-        alpha += diff.x < 0? Math.PI - alpha * 2 : 0;
-        console.log(alpha);
-
-        if (alpha) this.rotateTo(diff, alpha);
-
-
-        this.head.velocity = Math.min(diff.length(), this.cursorChaseSpeed);
+        this.followPoint(new Vec2(input.mpx, input.mpy));
     }
 }
