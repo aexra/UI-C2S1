@@ -10,7 +10,6 @@ export class ThanatosAI {
         this.maxStirAngle = 0.02;
         this.maxStirSpeed = 4;
 
-        this.cursorChaseSpeed = 8;
         this.chaseSpeed = 11;
     }
     update(input, deltaTime) {
@@ -35,7 +34,7 @@ export class ThanatosAI {
         var angle = Math.atan(diff.y / Math.abs(diff.x));
         angle += diff.x < 0? Math.PI - angle * 2 : 0;
 
-        this.head.velocity = Math.min(diff.length(), this.cursorChaseSpeed);
+        this.head.velocity = Math.min(diff.length(), this.chaseSpeed);
         
         if (angle) this.rotateTo(diff, angle);
     }
