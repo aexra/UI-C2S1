@@ -11,6 +11,11 @@ export class ThanatosAI {
         this.maxStirSpeed = 4;
 
         this.chaseSpeed = 11;
+
+        this.attackStates = {
+            
+        };
+        this.attackState = null;
     }
     update(input, deltaTime) {
         switch(this.head.state) {

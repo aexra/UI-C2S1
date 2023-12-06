@@ -98,7 +98,144 @@ export class Dummy extends NPC {
     }
 }
 
-export class Thanatos extends NPC {
+export class ThanatosSegment extends NPC {
+    constructor(game) {
+        super(game);
+
+        this.visualStates = {
+            normal: 0,
+            buffed: 1,
+            switchingToNormal: 2,
+            switchingToBuffed: 3,
+            transparent: 4,
+        };
+        this.visualState = this.visualStates.normal;
+
+        // PHASE SWITCH ANIMATION
+        this.fps = 12;
+        this.switchInterval = 1000 / this.fps;
+        this.switchTimer = 0;
+        this.nframes = 5;
+        this.frame = 0;
+
+        this.alpha = 0.1;
+        this.shieldedAlpha = 0.1;
+    }
+    open() {
+        this.visualState = this.visualStates.switchingToBuffed;
+    }
+    close() {
+        this.visualState = this.visualStates.switchingToNormal;
+    }
+    draw(c) {
+        c.save();
+        c.translate(this.position.x, this.position.y);
+        c.rotate(this.getRotation());
+        switch(this.visualState) {
+            case this.visualStates.normal:
+                this.drawNormal(c);
+                break;
+            case this.visualStates.buffed:
+                this.drawVulnurable(c);
+                break;
+            case this.visualStates.switchingToNormal:
+                this.drawVulnurable(c);
+                break;
+            case this.visualStates.switchingToBuffed:
+                this.drawNormal(c);
+                break;
+            case this.visualStates.transparent:
+                this.drawTransparent(c);
+                break;
+            default:
+                this.drawVulnurable(c);
+        }
+        c.restore();
+    }
+    updateVisual(input, deltaTime) {
+        if (this.visualState == this.visualStates.switchingToBuffed) {
+            this.switchTimer += deltaTime;
+            if (this.switchTimer >= this.switchInterval) {
+                this.switchTimer = 0;
+                this.frame++;
+                if (this.frame == 4) {
+                    this.visualState = this.visualStates.buffed;
+                }
+            }
+        }
+        if (this.visualState == this.visualStates.switchingToNormal) {
+            this.switchTimer += deltaTime;
+            if (this.switchTimer >= this.switchInterval) {
+                this.switchTimer = 0;
+                this.frame--;
+                if (this.frame == 0) {
+                    this.visualState = this.visualStates.normal;
+                }
+            }
+        }
+    }
+    drawNormal(c) {
+        c.globalAlpha = 0.8;
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+    }
+    drawTransparent(c) {
+        c.globalAlpha = this.alpha;
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = this.shieldedAlpha;
+        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
+    }
+    drawVulnurable(c) {
+        c.globalAlpha = 0.8;
+        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+    }
+}
+
+export class ThanatosChildSegment extends ThanatosSegment {
+    constructor(game, head, next) {
+        super(game);
+        this.head = head;
+        this.next = next;
+        this.position = head.position.copy();
+        
+        this.initialRotation = Math.PI / 2;
+
+        this.diff = new Vec2();
+        this.maxdist = 80;
+    }
+    update(input, deltaTime) {
+        this.updateImmunity(input, deltaTime);
+        this.updatePosition(input, deltaTime);
+        this.updateVisual(input, deltaTime);
+        this.updateLights(input, deltaTime);
+    }
+    updatePosition(input, deltaTime) {
+        this.diff = Vec2.minus(this.next.position, this.position);
+        if (this.diff.length() > this.maxdist) {
+            this.diff = Vec2.minus(this.next.position, this.position);
+            var alpha = Math.atan(this.diff.y / this.diff.x);
+            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha) * (this.diff.x < 0? -1 : 1), this.maxdist * Math.sin(alpha) * (this.diff.x < 0? -1 : 1));
+            var travel = Vec2.minus(this.diff, maxdistvector);
+            this.position.translate(travel);
+        }
+    }
+    getRotation() {
+        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
+    }
+    onHit(damage, iscrit) {
+        if (this.visualState == this.visualStates.normal) return;
+        var type = this.visualState == this.visualStates.transparent? "shield" : null;
+        damage = this.visualState == this.visualStates.transparent? iscrit? 1 : 0 : damage;
+        this.game.createDI(this.position, damage, iscrit, type);
+        if (this.head.hitsoundTimer == 0) {
+            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
+            hitsound.volume = 0.1;
+            hitsound.play();
+            this.head.hitsoundTimer++;
+        }
+    }
+}
+
+export class Thanatos extends ThanatosSegment {
     constructor(game) {
         super(game);
 
@@ -114,24 +251,10 @@ export class Thanatos extends NPC {
         this.minimaptag = 'thanatos';
         this.image = document.getElementById("thanatosHead");
         this.shieldMask = document.getElementById("thanatosHeadShield");
-        this.nframes = 5;
-        this.frame = 0;
         this.initialRotation = Math.PI / 2;
         
         // BEHAVIOUR AND VISUAL STATES
         this.state = states.chasePlayer;
-        this.visualStates = {
-            normal: 0,
-            buffed: 1,
-            switchingToNormal: 2,
-            switchingToBuffed: 3,
-        };
-        this.visualState = this.visualStates.normal;
-        
-        // PHASE SWITCH ANIMATION
-        this.fps = 12;
-        this.switchInterval = 1000 / this.fps;
-        this.switchTimer = 0;
 
         // HITSOUNDS COOLDOWN
         this.hitsoundcd = 100;
@@ -142,8 +265,6 @@ export class Thanatos extends NPC {
         this.directionalVector = new Vec2(); // vec2
         this.direction = 0; // rad
         this.lastRotation = 0;
-        this.alpha = 0.2;
-        this.shieldedAlpha = 0.2;
 
         // OTHER SEGMENTS
         this.segments = [];
@@ -176,28 +297,6 @@ export class Thanatos extends NPC {
         this.updatePosition(input, deltaTime);
         this.updateVisual(input, deltaTime);
         this.updateLights(input, deltaTime);
-    }
-    updateVisual(input, deltaTime) {
-        if (this.visualState == this.visualStates.switchingToBuffed) {
-            this.switchTimer += deltaTime;
-            if (this.switchTimer >= this.switchInterval) {
-                this.switchTimer = 0;
-                this.frame++;
-                if (this.frame == 4) {
-                    this.visualState = this.visualStates.buffed;
-                }
-            }
-        }
-        if (this.visualState == this.visualStates.switchingToNormal) {
-            this.switchTimer += deltaTime;
-            if (this.switchTimer >= this.switchInterval) {
-                this.switchTimer = 0;
-                this.frame--;
-                if (this.frame == 0) {
-                    this.visualState = this.visualStates.normal;
-                }
-            }
-        }
     }
     updateHitsounds(input, deltaTime) {
         if (this.hitsoundTimer != 0) {
@@ -247,30 +346,18 @@ export class Thanatos extends NPC {
             case this.visualStates.switchingToBuffed:
                 this.drawNormal(c);
                 break;
+            case this.visualStates.transparent:
+                this.drawTransparent(c);
+                break;
             default:
                 this.drawVulnurable(c);
         }
         c.restore();
     }
-    drawNormal(c) {
-        c.globalAlpha = this.alpha;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.shieldedAlpha;
-        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
-    }
-    drawVulnurable(c) {
-        c.globalAlpha = 1;
-        c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-    }
-    open() {
-        this.visualState = this.visualStates.switchingToBuffed;
-    }
-    close() {
-        this.visualState = this.visualStates.switchingToNormal;
-    }
     onHit(damage, iscrit) {
-        var type = this.visualState == this.visualStates.normal? "shield" : null;
-        damage = this.visualState == this.visualStates.normal? iscrit? 1 : 0 : damage;
+        if (this.visualState == this.visualStates.normal) return;
+        var type = this.visualState == this.visualStates.transparent? "shield" : null;
+        damage = this.visualState == this.visualStates.transparent? iscrit? 1 : 0 : damage;
         this.game.createDI(this.position, damage, iscrit, type);
         if (this.hitsoundTimer == 0) {
             var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
@@ -307,12 +394,9 @@ export class Thanatos extends NPC {
     }
 }
 
-class ThanatosBody1 extends NPC {
+class ThanatosBody1 extends ThanatosChildSegment {
     constructor(game, head, next) {
-        super(game);
-        this.head = head;
-        this.next = next;
-        this.position = head.position.copy();
+        super(game, head, next);
         this.size = new Vec2(148, 98)
 
         this.minimapicon = {
@@ -322,81 +406,12 @@ class ThanatosBody1 extends NPC {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody1");
         this.shieldMask = document.getElementById("thanatosBody1Shield");
-        
-        this.initialRotation = Math.PI / 2;
-
-        this.diff = new Vec2();
-        this.maxdist = 80;
-    }
-    update(input, deltaTime) {
-        this.updateImmunity(input, deltaTime);
-        this.diff = Vec2.minus(this.next.position, this.position);
-        this.updatePosition(input, deltaTime);
-        this.updateLights(input, deltaTime);
-    }
-    updatePosition(input, deltaTime) {
-        if (this.diff.length() > this.maxdist) {
-            var alpha = Math.atan(this.diff.y / this.diff.x);
-            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha) * (this.diff.x < 0? -1 : 1), this.maxdist * Math.sin(alpha) * (this.diff.x < 0? -1 : 1));
-            var travel = Vec2.minus(this.diff, maxdistvector);
-            this.position.translate(travel);
-        }
-    }
-    draw(c) {
-        c.save();
-        c.translate(this.position.x, this.position.y);
-        c.rotate(this.getRotation());
-        switch(this.head.visualState) {
-            case this.head.visualStates.normal:
-                this.drawNormal(c);
-                break;
-            case this.head.visualStates.buffed:
-                this.drawVulnurable(c);
-                break;
-            case this.head.visualStates.switchingToNormal:
-                this.drawVulnurable(c);
-                break;
-            case this.head.visualStates.switchingToBuffed:
-                this.drawNormal(c);
-                break;
-            default:
-                this.drawVulnurable(c);
-        }
-        this.drawHitbox(c);
-        c.restore();
-    }
-    drawNormal(c) {
-        c.globalAlpha = this.head.alpha;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.head.shieldedAlpha;
-        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
-    }
-    drawVulnurable(c) {
-        c.globalAlpha = 1;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-    }
-    getRotation() {
-        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
-    }
-    onHit(damage, iscrit) {
-        var type = this.head.visualState == this.head.visualStates.normal? "shield" : null;
-        damage = this.head.visualState == this.head.visualStates.normal? iscrit? 1 : 0 : damage;
-        this.game.createDI(this.position, damage, iscrit, type);
-        if (this.head.hitsoundTimer == 0) {
-            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
-            hitsound.volume = 0.1;
-            hitsound.play();
-            this.head.hitsoundTimer++;
-        }
     }
 }
 
-class ThanatosBody2 extends NPC {
+class ThanatosBody2 extends ThanatosChildSegment {
     constructor(game, head, next) {
-        super(game);
-        this.head = head;
-        this.next = next;
-        this.position = head.position.copy();
+        super(game, head, next);
         this.size = new Vec2(136, 100)
 
         this.minimapicon = {
@@ -406,80 +421,12 @@ class ThanatosBody2 extends NPC {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody2");
         this.shieldMask = document.getElementById("thanatosBody2Shield");
-        
-        this.initialRotation = Math.PI / 2;
-
-        this.diff = new Vec2();
-        this.maxdist = 80;
-    }
-    update(input, deltaTime) {
-        this.updateImmunity(input, deltaTime);
-        this.diff = Vec2.minus(this.next.position, this.position);
-        this.updatePosition(input, deltaTime);
-        this.updateLights(input, deltaTime);
-    }
-    updatePosition(input, deltaTime) {
-        if (this.diff.length() > this.maxdist) {
-            var alpha = Math.atan(this.diff.y / this.diff.x);
-            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha) * (this.diff.x < 0? -1 : 1), this.maxdist * Math.sin(alpha) * (this.diff.x < 0? -1 : 1));            var travel = Vec2.minus(this.diff, maxdistvector);
-            this.position.translate(travel);
-        }
-    }
-    draw(c) {
-        c.save();
-        c.translate(this.position.x, this.position.y);
-        c.rotate(this.getRotation());
-        switch(this.head.visualState) {
-            case this.head.visualStates.normal:
-                this.drawNormal(c);
-                break;
-            case this.head.visualStates.buffed:
-                this.drawVulnurable(c);
-                break;
-            case this.head.visualStates.switchingToNormal:
-                this.drawVulnurable(c);
-                break;
-            case this.head.visualStates.switchingToBuffed:
-                this.drawNormal(c);
-                break;
-            default:
-                this.drawVulnurable(c);
-        }
-        this.drawHitbox(c);
-        c.restore();
-    }
-    drawNormal(c) {
-        c.globalAlpha = this.head.alpha;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.head.shieldedAlpha;
-        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
-    }
-    drawVulnurable(c) {
-        c.globalAlpha = 1;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-    }
-    getRotation() {
-        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
-    }
-    onHit(damage, iscrit) {
-        var type = this.head.visualState == this.head.visualStates.normal? "shield" : null;
-        damage = this.head.visualState == this.head.visualStates.normal? iscrit? 1 : 0 : damage;
-        this.game.createDI(this.position, damage, iscrit, type);
-        if (this.head.hitsoundTimer == 0) {
-            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
-            hitsound.volume = 0.1;
-            hitsound.play();
-            this.head.hitsoundTimer++;
-        }
     }
 }
 
-class ThanatosTail extends NPC {
+class ThanatosTail extends ThanatosChildSegment {
     constructor(game, head, next) {
-        super(game);
-        this.head = head;
-        this.next = next;
-        this.position = head.position.copy();
+        super(game, head, next);
         this.size = new Vec2(84, 118)
 
         this.minimapicon = {
@@ -489,69 +436,5 @@ class ThanatosTail extends NPC {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosTail");
         this.shieldMask = document.getElementById("thanatosTailShield");
-        
-        this.initialRotation = Math.PI / 2;
-
-        this.diff = new Vec2();
-        this.maxdist = 80;
-    }
-    update(input, deltaTime) {
-        this.updateImmunity(input, deltaTime);
-        this.diff = Vec2.minus(this.next.position, this.position);
-        this.updatePosition(input, deltaTime);
-        this.updateLights(input, deltaTime);
-    }
-    updatePosition(input, deltaTime) {
-        if (this.diff.length() > this.maxdist) {
-            var alpha = Math.atan(this.diff.y / this.diff.x);
-            var maxdistvector = new Vec2(this.maxdist * Math.cos(alpha) * (this.diff.x < 0? -1 : 1), this.maxdist * Math.sin(alpha) * (this.diff.x < 0? -1 : 1));            var travel = Vec2.minus(this.diff, maxdistvector);
-            this.position.translate(travel);
-        }
-    }
-    draw(c) {
-        c.save();
-        c.translate(this.position.x, this.position.y);
-        c.rotate(this.getRotation());
-        switch(this.head.visualState) {
-            case this.head.visualStates.normal:
-                this.drawNormal(c);
-                break;
-            case this.head.visualStates.buffed:
-                this.drawVulnurable(c);
-                break;
-            case this.head.visualStates.switchingToNormal:
-                this.drawVulnurable(c);
-                break;
-            case this.head.visualStates.switchingToBuffed:
-                this.drawNormal(c);
-                break;
-            default:
-                this.drawVulnurable(c);
-        }
-        c.restore();
-    }
-    drawNormal(c) {
-        c.globalAlpha = this.head.alpha;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-        c.globalAlpha = this.head.shieldedAlpha;
-        c.drawImage(this.shieldMask, 0, 0 * this.size.y, this.size.x, this.size.y, -this.size.x * 1.5 / 2, -this.size.y * 1.5 / 2, this.size.x * 1.5, this.size.y * 1.5);
-    }
-    drawVulnurable(c) {
-        c.globalAlpha = 1;
-        c.drawImage(this.image, 0, this.head.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-    }
-    getRotation() {
-        return Math.atan(this.diff.y / this.diff.x) + this.initialRotation + (this.diff.x < 0? Math.PI : 0);
-    }
-    onHit(damage, iscrit) {
-        var type = this.head.visualState == this.head.visualStates.normal? "shield" : null;
-        damage = this.head.visualState == this.head.visualStates.normal? iscrit? 1 : 0 : damage;
-        this.game.createDI(this.position, damage, iscrit, type);
-        if (this.head.hitsoundTimer == 0) {
-            var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
-            hitsound.volume = 0.1;
-            hitsound.play();
-            this.head.hitsoundTimer++;
-        }
     }
 }
