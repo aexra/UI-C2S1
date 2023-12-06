@@ -4,6 +4,7 @@ import { Vec2 } from "./vec2.js";
 import { Vec3 } from "./vec3.js";
 import { Collision, Random } from "./misc.js";
 import { ThanatosAI } from "./ai.js";
+import { SpriteSheet } from "./spritesheet.js";
 
 export const states = {
     idle: 0,
@@ -177,6 +178,8 @@ export class ThanatosSegment extends NPC {
     drawNormal(c) {
         c.globalAlpha = 0.8;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        c.globalAlpha = 1;
+        this.glowSpriteSheet.draw(c, new Vec2(-this.size.x / 2, -this.size.y / 2), this.frame);
     }
     drawTransparent(c) {
         c.globalAlpha = this.alpha;
@@ -261,6 +264,7 @@ export class Thanatos extends ThanatosSegment {
         this.minimaptag = 'thanatos';
         this.image = document.getElementById("thanatosHead");
         this.shieldMask = document.getElementById("thanatosHeadShield");
+        this.glowSpriteSheet = new SpriteSheet("thanatosHeadGlow", this.size.copy());
         this.initialRotation = Math.PI / 2;
         
         // BEHAVIOUR AND VISUAL STATES
@@ -421,6 +425,7 @@ class ThanatosBody1 extends ThanatosChildSegment {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody1");
         this.shieldMask = document.getElementById("thanatosBody1Shield");
+        this.glowSpriteSheet = new SpriteSheet("thanatosBody1Glow", this.size.copy());
 
         this.collisionDamage = 100;
     }
@@ -438,6 +443,7 @@ class ThanatosBody2 extends ThanatosChildSegment {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody2");
         this.shieldMask = document.getElementById("thanatosBody2Shield");
+        this.glowSpriteSheet = new SpriteSheet("thanatosBody2Glow", this.size.copy());
 
         this.collisionDamage = 100;
     }
@@ -455,6 +461,7 @@ class ThanatosTail extends ThanatosChildSegment {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosTail");
         this.shieldMask = document.getElementById("thanatosTailShield");
+        this.glowSpriteSheet = new SpriteSheet("thanatosTailGlow", this.size.copy());
 
         this.collisionDamage = 100;
     }

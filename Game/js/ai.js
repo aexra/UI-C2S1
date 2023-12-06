@@ -10,7 +10,7 @@ export class ThanatosAI {
         this.maxStirAngle = 0.02;
         this.maxStirSpeed = 4;
 
-        this.chaseSpeed = 11;
+        this.chaseSpeed = 18;
 
         this.attackStates = {
             
