@@ -152,6 +152,7 @@ export class ThanatosSegment extends NPC {
                 this.drawVulnurable(c);
         }
         c.restore();
+        // this.drawHitbox(c);
     }
     updateVisual(input, deltaTime) {
         if (this.visualState == this.visualStates.switchingToBuffed) {
@@ -337,7 +338,7 @@ export class Thanatos extends ThanatosSegment {
         // this.drawHeadLine(c);
 
         c.translate(-this.position.x, -this.position.y);
-        this.drawHitbox(c);
+        // this.drawHitbox(c);
 
         c.restore();
     }
