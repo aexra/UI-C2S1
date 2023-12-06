@@ -20,6 +20,8 @@ export class NPC extends GameObject {
         this.immunityTimer = 0;
 
         this.lights = [new Light(this.position, 200)];
+
+        this.collisionDamage = 0;
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);

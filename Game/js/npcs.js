@@ -188,6 +188,16 @@ export class ThanatosSegment extends NPC {
         c.globalAlpha = 0.8;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
+    getHitbox() {
+        if (this.hitbox) {
+            return this.hitbox;
+        } else {
+            return {
+                size: new Vec2(130, 130),
+                position: this.position.copy(),
+            }
+        }
+    }
 }
 
 export class ThanatosChildSegment extends ThanatosSegment {
@@ -323,7 +333,7 @@ export class Thanatos extends ThanatosSegment {
         // this.drawHeadLine(c);
 
         c.translate(-this.position.x, -this.position.y);
-        // this.drawHitbox(c);
+        this.drawHitbox(c);
 
         c.restore();
     }

@@ -5,7 +5,7 @@ import { Vec2 } from "./vec2.js";
 import { ParticleEmitter } from "./particleEmitter.js";
 import { UI } from "./ui.js";
 import { DamageIndicator } from "./damageIndicator.js";
-import { Random } from "./misc.js";
+import { Collision, Random } from "./misc.js";
 import { Thanatos } from "./npcs.js";
 import * as visuals from "./visualEffects.js";
 
@@ -56,6 +56,7 @@ window.addEventListener("load", (e) => {
 			}
 
 			this.updateHits(this.input, deltaTime);
+			this.updateNPCtoPlayerCollisions(this.input, deltaTime);
 
 			for (var di of this.damageIndicators) {
 				di.update(this.input, deltaTime);
@@ -107,6 +108,19 @@ window.addEventListener("load", (e) => {
 					var iscrit = Random.randf(0, 100, 2) < 12? true : false;
 					var dmg = p.baseDamage * p.damageMultiplier * (iscrit? 2 : 1);
 					npc.hit(Random.randi(dmg - 10, dmg + 10), iscrit);
+				}
+			}
+		}
+		updateNPCtoPlayerCollisions(input, deltaTime) {
+			for (var npc of this.npcs) {
+				if (Collision.collideBox(
+					this.player.hitbox.position.copy().add(new Vec2(this.player.hitbox.size.x / 2, this.player.hitbox.size.y / 2)), 
+					this.player.hitbox.size,
+					npc.getHitbox().position,
+					npc.getHitbox().size
+				)) {
+					this.player.getDamage(npc.collisionDamage);
+					return;
 				}
 			}
 		}

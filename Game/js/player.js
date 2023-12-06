@@ -50,6 +50,11 @@ export class Player {
         this.immunityTimer = 0;
 
         this.lights = [new Light(this.position, 100)];
+
+        this.hitbox = {
+            position: this.position,
+            size: Vec2.minus(this.size, new Vec2(4, 4)),
+        };
     }
     update(input, deltaTime) {
         let left = input.keys.includes("a");
@@ -144,6 +149,10 @@ export class Player {
 
         // это границы игрока
         // this.drawPlayerBorders(c);
+
+        // это его хитбокс
+        // this.drawHitbox(c);
+
         c.restore();
 
         c.save();
@@ -167,11 +176,11 @@ export class Player {
             this.immunityTimer = 1;
             this.hp -= amount;
 
-            this.onHit();
+            this.onHit(amount);
         }
     }
-    onHit() {
-        console.log("player got hit, hp: ", this.hp);
+    onHit(amount) {
+        console.log("player got hit with", amount,", hp: ", this.hp);
     }
     updateLight(input, deltaTime) {
         for (var light of this.lights) {
@@ -242,6 +251,12 @@ export class Player {
         c.translate(this.rotation * this.position.x, this.position.y);
         c.fillRect(0, 0, this.rotation * this.size.x, this.size.y);
         c.translate(this.rotation * -this.position.x, -this.position.y);
+    }
+    drawHitbox(c) {
+        c.fillStyle = 'rgba(140, 0, 0, 0.8)';
+        c.translate(this.rotation * this.hitbox.position.x, this.hitbox.position.y);
+        c.fillRect(0, 0, this.rotation * this.hitbox.size.x, this.hitbox.size.y);
+        c.translate(this.rotation * -this.hitbox.position.x, -this.hitbox.position.y);
     }
     drawCharacter(c) {
         c.scale(this.rotation, 1);
