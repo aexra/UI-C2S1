@@ -102,7 +102,7 @@ window.addEventListener("load", (e) => {
 		}
 		updateHits(input, deltaTime) {
 			for (var npc of this.npcs) {
-				let p = npc.checkPojectilesCollisions();
+				var p = npc.checkPojectilesCollisions();
 				if (p != null) {
 					var iscrit = Random.randf(0, 100, 2) < 12? true : false;
 					var dmg = p.baseDamage * p.damageMultiplier * (iscrit? 2 : 1);
