@@ -281,6 +281,11 @@ export class Thanatos extends ThanatosSegment {
 
         game.npcs.push(this);
 
+        // game values
+        this.maxHP = 17000000;
+        this.hp = this.maxHP;
+        this.collisionDamage = 250;
+
         this.ai = new ThanatosAI(this);
     }
     update(input, deltaTime) {
@@ -406,6 +411,8 @@ class ThanatosBody1 extends ThanatosChildSegment {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody1");
         this.shieldMask = document.getElementById("thanatosBody1Shield");
+
+        this.collisionDamage = 100;
     }
 }
 
@@ -421,6 +428,8 @@ class ThanatosBody2 extends ThanatosChildSegment {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosBody2");
         this.shieldMask = document.getElementById("thanatosBody2Shield");
+
+        this.collisionDamage = 100;
     }
 }
 
@@ -436,5 +445,7 @@ class ThanatosTail extends ThanatosChildSegment {
         this.minimaptag = 'thanatos_segment';
         this.image = document.getElementById("thanatosTail");
         this.shieldMask = document.getElementById("thanatosTailShield");
+
+        this.collisionDamage = 100;
     }
 }
