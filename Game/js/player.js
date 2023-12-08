@@ -18,11 +18,12 @@ export class Player {
         };
 
         this.direction = 0;
-        this.speed = 0;
         this.velocity = 0;
 
         this.maxSpeed = 10;
         this.loseSpeed = 0.2;
+        this.dropToMax = 0.6;
+        this.oppositeSpeed = 0.4;
         this.acceleration = 0.07;
 
         this.gravity = 0.1;
@@ -66,23 +67,29 @@ export class Player {
         if (right) this.direction++;
 
         // рассчитываем скорость по X
-        if (this.direction !== 0) {
-
-            // если игрок резко меняет направление движения
-            if (left && this.velocity / Math.abs(this.velocity) > 0 || right && this.velocity / Math.abs(this.velocity) < 0) {
-                this.speed = 0;
-                this.velocity = 0;
-                return;
+        if (this.direction != 0) {
+            if (this.direction * (Math.abs(this.velocity) / this.velocity) < 0) {
+                this.velocity += this.direction * this.oppositeSpeed;
+            } else {
+                this.velocity += this.direction * this.acceleration;
             }
-
-            // простое движение
-            this.speed += Math.min(this.acceleration, this.maxSpeed-this.speed);
-            this.velocity = this.speed * this.direction;
+        } else {
+            if (this.velocity != 0) {
+                var decrement = -Math.abs(this.velocity) / this.velocity * this.loseSpeed;
+                if (decrement < 0) {
+                    this.velocity = Math.max(0, this.velocity + decrement);
+                } else {
+                    this.velocity = Math.min(0, this.velocity + decrement);
+                }
+            }
         }
-        else {
-            // потеря скорости при отсутствии тяги (нажатых клавиш)
-            this.speed -= Math.min(this.loseSpeed, this.speed);
-            this.velocity = this.velocity > 0? this.speed : -this.speed;
+        
+        // смещаем до максимальной
+        if (this.velocity < -this.maxSpeed) {
+            this.velocity += this.dropToMax;
+        }
+        if (this.velocity > this.maxSpeed) {
+            this.velocity -= this.dropToMax;
         }
 
         // рассчитываем скорость по Y
@@ -90,14 +97,8 @@ export class Player {
         if (this.velocityY > 0) this.velocityY = Math.min(this.maxVY * this.gravityMultiplier, this.velocityY);
 
         // применяем перемещение по X
-        if (this.velocity < 0) {
-            input.mpx += -(this.position.x - Math.max(0, this.position.x - this.speed));
-            this.position.x = Math.max(0, this.position.x - this.speed);
-        }
-        else if (this.velocity > 0) {
-            input.mpx += this.position.x - Math.max(0, this.position.x - this.speed);
-            this.position.x = Math.min(this.game.size.x - this.size.x, this.position.x + this.speed);
-        }
+        input.mpx += this.velocity;
+        this.position.x += this.velocity;
 
         this.rotation = this.direction === 0? this.rotation : this.direction;
 

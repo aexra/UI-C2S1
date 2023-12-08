@@ -237,11 +237,47 @@ export class NormalityRelocator {
 export class EvasionScarf extends Accessory {
     constructor(player) {
         super(player);
+
+        this.boost = 14;
+        this.oppositeBoost = 20;
+
+        this.dashInterval = 2;
+        this.dashTimer = 0;
+
         this.player.game.input.addEventListener('doubleTap', (key) => {
-            this.tryDash();
+            this.tryDash(key);
         });
     }
-    tryDash() {
-        console.log("*dash*");
+    update(input, deltaTime) {
+        if (this.dashTimer != 0) {
+            this.dashTimer += deltaTime;
+            if (this.dashTimer >= this.dashInterval) {
+                this.dashTimer = 0;
+            }
+        }
+    }
+    tryDash(key) {
+        if (this.dashTimer == 0) {
+            this.dashTimer++;
+
+            console.log(this.player.velocity);
+
+            if (key == "a" || key == "ф") {
+                if (this.player.velocity > 0) {
+                    this.player.velocity -= this.oppositeBoost;
+                } else {
+                    this.player.velocity -= this.boost;
+                }
+            }
+            if (key == "d" || key == "в") {
+                if (this.player.velocity > 0) {
+                    this.player.velocity += this.boost;
+                } else {
+                    this.player.velocity += this.oppositeBoost;
+                }
+            }
+
+            console.log(this.player.velocity);
+        }
     }
 }
