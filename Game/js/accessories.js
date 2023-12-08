@@ -241,7 +241,8 @@ export class EvasionScarf extends Accessory {
         this.boost = 14;
         this.oppositeBoost = 20;
 
-        this.dashInterval = 2;
+        this.dashInterval = 1600;
+        this.immortalInterval = 300;
         this.dashTimer = 0;
 
         this.player.game.input.addEventListener('doubleTap', (key) => {
@@ -251,6 +252,9 @@ export class EvasionScarf extends Accessory {
     update(input, deltaTime) {
         if (this.dashTimer != 0) {
             this.dashTimer += deltaTime;
+            if (this.dashTimer >= this.immortalInterval) {
+                this.player.immortal = false;
+            }
             if (this.dashTimer >= this.dashInterval) {
                 this.dashTimer = 0;
             }
@@ -259,25 +263,24 @@ export class EvasionScarf extends Accessory {
     tryDash(key) {
         if (this.dashTimer == 0) {
             this.dashTimer++;
-
-            console.log(this.player.velocity);
-
-            if (key == "a" || key == "ф") {
-                if (this.player.velocity > 0) {
-                    this.player.velocity -= this.oppositeBoost;
-                } else {
-                    this.player.velocity -= this.boost;
-                }
+            this.player.immortal = true;
+            this.dashFromKey(key);
+        }
+    }
+    dashFromKey(key) {
+        if (key == "a" || key == "ф") {
+            if (this.player.velocity > 0) {
+                this.player.velocity -= this.oppositeBoost;
+            } else {
+                this.player.velocity -= this.boost;
             }
-            if (key == "d" || key == "в") {
-                if (this.player.velocity > 0) {
-                    this.player.velocity += this.boost;
-                } else {
-                    this.player.velocity += this.oppositeBoost;
-                }
+        }
+        if (key == "d" || key == "в") {
+            if (this.player.velocity > 0) {
+                this.player.velocity += this.boost;
+            } else {
+                this.player.velocity += this.oppositeBoost;
             }
-
-            console.log(this.player.velocity);
         }
     }
 }

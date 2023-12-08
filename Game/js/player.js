@@ -50,6 +50,7 @@ export class Player {
         this.hp = 720;
         this.immunityInterval = 1000;
         this.immunityTimer = 0;
+        this.immortal = false;
 
         this.lights = [new Light(this.position, 100)];
 

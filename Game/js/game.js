@@ -112,6 +112,7 @@ window.addEventListener("load", (e) => {
 			}
 		}
 		updateNPCtoPlayerCollisions(input, deltaTime) {
+			if (this.player.immortal) { return; }
 			for (var npc of this.npcs) {
 				if (Collision.collideBox(
 					this.player.hitbox.position.copy().add(new Vec2(this.player.hitbox.size.x / 2, this.player.hitbox.size.y / 2)), 
