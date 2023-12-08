@@ -13,16 +13,14 @@ export class InputHandler {
 
         };
         this.eventListeners = {
-            'dd': []
+            'doubleTap': []
         };
 
         window.addEventListener("keydown", (e) => {
             let key = e.key === 'ф'? 'a' : e.key === 'в'? 'd' : e.key === 'ц'? 'w' : e.key === 'ы'? 's' : e.key;
             if (this.keysTimespamps[key] && Date.now() - this.keysTimespamps[key] <= this.doubleTapInterval && !(this.keys.includes(key))) {
-                if (this.eventListeners[key]) {
-                    for (var event in this.eventListeners[key]) {
-                        event();
-                    }
+                for (var event of this.eventListeners['doubleTap']) {
+                    event(key);
                 }
             }
             this.keysTimespamps[key] = Date.now();

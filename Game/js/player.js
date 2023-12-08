@@ -33,6 +33,7 @@ export class Player {
         this.accessories = [
             new accessories.NebulaWings(this),
             new accessories.NormalityRelocator(this),
+            new accessories.EvasionScarf(this),
         ];
 
         this.rotation = 1;

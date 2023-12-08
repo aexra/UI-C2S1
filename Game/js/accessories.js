@@ -1,6 +1,18 @@
 import { Vec2 } from "./vec2.js";
 import { Random } from "./misc.js";
 
+class Accessory {
+    constructor(player) {
+        this.player = player;
+    }
+    update(input, deltaTime) {
+
+    }
+    draw(c) {
+
+    }
+}
+
 class Wings {
     constructor(player) {
         this.player = player;
@@ -219,5 +231,17 @@ export class NormalityRelocator {
     }
     draw() {
 
+    }
+}
+
+export class EvasionScarf extends Accessory {
+    constructor(player) {
+        super(player);
+        this.player.game.input.addEventListener('doubleTap', (key) => {
+            this.tryDash();
+        });
+    }
+    tryDash() {
+        console.log("*dash*");
     }
 }
