@@ -8,8 +8,24 @@ export class InputHandler {
         this.game = game;
         this.lastPlayerToMouseDistance = new Vec2();
 
+        this.doubleTapInterval = 200;
+        this.keysTimespamps = {
+
+        };
+        this.eventListeners = {
+            'dd': []
+        };
+
         window.addEventListener("keydown", (e) => {
             let key = e.key === 'ф'? 'a' : e.key === 'в'? 'd' : e.key === 'ц'? 'w' : e.key === 'ы'? 's' : e.key;
+            if (this.keysTimespamps[key] && Date.now() - this.keysTimespamps[key] <= this.doubleTapInterval && !(this.keys.includes(key))) {
+                if (this.eventListeners[key]) {
+                    for (var event in this.eventListeners[key]) {
+                        event();
+                    }
+                }
+            }
+            this.keysTimespamps[key] = Date.now();
             if (this.keys.indexOf(key) === -1) {
                 this.keys.push(key);
             }
@@ -34,5 +50,8 @@ export class InputHandler {
         document.body.addEventListener("mouseup", (e) => {
             this.keys.splice(this.keys.indexOf(e.button === 0? "lmb" : e.button === 2? "rmb" : "undefinedMouseButton"), 1);
         });
+    }
+    addEventListener(event, f) {
+        this.eventListeners[event].push(f);
     }
 }
