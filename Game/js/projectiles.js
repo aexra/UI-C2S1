@@ -50,6 +50,9 @@ export class TerraBeam extends Projectile {
         this.lifeTime -= deltaTime;
         this.alpha -=  1 / this.maxLifeTime * deltaTime;
 
+        for (var light of this.lights) {
+            light.intensity = this.alpha;
+        }
         for (let pe of this.pes) {
             pe.color.alpha = this.alpha;
         }
