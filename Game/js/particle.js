@@ -74,7 +74,8 @@ export class Particle extends GameObject {
         }
 
         // костыль
-        if (Vec2.minus(this.emitter.game.player.position, this.position).length() > 60) {
+        if (Vec2.minus(new Vec2(this.emitter.game.player.position.x + this.emitter.game.player.size.x / 2, this.emitter.game.player.position.y + this.emitter.game.player.size.y / 2), this.position)
+        .length() > 30) {
             for (var light of this.lights) {
                 light.intensity = 1;
             }
