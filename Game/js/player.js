@@ -183,7 +183,8 @@ export class Player {
         }
     }
     onHit(amount) {
-        console.log("player got hit with", amount,", hp: ", this.hp);
+        if (amount == 0) return;
+        this.game.createDI(new Vec2(this.position.x + this.size.x / 2, this.position.y + this.size.y / 2), amount, false, "player");
     }
     updateLight(input, deltaTime) {
         for (var light of this.lights) {

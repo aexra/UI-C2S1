@@ -58,6 +58,9 @@ export class DamageIndicator extends GameObject {
                 case "shield":
                     c.fillStyle = this.iscrit? 'rgba(100, 100, 220, 1)' : 'lightblue';
                     break;
+                case "player":
+                    c.fillStyle = "red";
+                    break;
             }
         }
         c.textBaseline = 'top';
