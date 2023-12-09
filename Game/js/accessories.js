@@ -245,29 +245,48 @@ export class EvasionScarf extends Accessory {
         this.boost = 14;
         this.oppositeBoost = 20;
 
-        this.dashInterval = 1600;
-        this.immortalInterval = 300;
+        this.dashInterval = 700;
+        this.immortalInterval = 200;
         this.dashTimer = 0;
 
         this.player.game.input.addEventListener('doubleTap', (key) => {
             this.tryDash(key);
         });
+
+        this.pe = player.game.createParticleEmitter();
+        this.pe.setFrequency(50);
+        this.pe.lifeTime = new Vec2(1, 1);
+        this.pe.particleSize = new Vec2(15, 15);
+        this.pe.shape = document.getElementById("redParticle");
+        this.pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+        this.pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+        this.pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+        this.pe.angle = 0;
+        this.pe.lightParticles = true;
+        this.pe.rotationSpeed = 0.2;
+        this.pe.particleGravityModifier = 0.2;
     }
     update(input, deltaTime) {
         if (this.dashTimer != 0) {
             this.dashTimer += deltaTime;
             if (this.dashTimer >= this.immortalInterval) {
                 this.player.immortal = false;
+                this.pe.stop();
             }
             if (this.dashTimer >= this.dashInterval) {
                 this.dashTimer = 0;
             }
         }
+        this.pe.position = new Vec2(
+            this.player.position.x + this.player.size.x / 2,
+            this.player.position.y + this.player.size.y,
+        );
     }
     tryDash(key) {
         if (this.dashTimer == 0) {
             this.dashTimer++;
             this.player.immortal = true;
+            this.pe.emit();
             this.dashFromKey(key);
         }
     }
