@@ -254,7 +254,7 @@ export class EvasionScarf extends Accessory {
         });
 
         this.pe = player.game.createParticleEmitter();
-        this.pe.setFrequency(50);
+        this.pe.setFrequency(100);
         this.pe.lifeTime = new Vec2(1, 1);
         this.pe.particleSize = new Vec2(15, 15);
         this.pe.shape = document.getElementById("redParticle");
