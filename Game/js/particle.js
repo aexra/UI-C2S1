@@ -82,16 +82,17 @@ export class Particle extends GameObject {
         c.fillStyle = `rgba(${this.color.x}, ${this.color.y}, ${this.color.z}, ${this.alpha})`;
         c.filter = this.filter;
         c.globalAlpha = this.alpha;
+        c.translate(this.position.x, this.position.y);
         if (this.shape === null) {
-            c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+            c.fillRect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
         } else {
             if (this.nframes !== 1) {
-                c.drawImage(this.shape, 0, this.frameSize.y * this.frame, this.frameSize.x, this.frameSize.y, this.position.x, this.position.y, this.size.x, this.size.y);
+                c.drawImage(this.shape, 0, this.frameSize.y * this.frame, this.frameSize.x, this.frameSize.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
             } else {
                 if (this.frameCropPos !== null) {
-                    c.drawImage(this.shape, this.frameCropPos.x, this.frameCropPos.y, this.frameCropSize.x, this.frameCropSize.y, this.position.x, this.position.y, this.size.x, this.size.y);
+                    c.drawImage(this.shape, this.frameCropPos.x, this.frameCropPos.y, this.frameCropSize.x, this.frameCropSize.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
                 } else {
-                    c.drawImage(this.shape, this.position.x, this.position.y, this.size.x, this.size.y);
+                    c.drawImage(this.shape, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
                 }
             }
         }
