@@ -284,6 +284,7 @@ export class Map {
         this.lightUpProjectiles(c);
         this.lightUpNPCs(c);
         this.lightUpPlayer(c);
+        this.lightUpParticles(c);
 
         c.restore();
     }
@@ -324,6 +325,15 @@ export class Map {
             }
         }
     }
+    lightUpParticles(c) {
+        for (var pe of this.game.particleEmitters) {
+            for (var particle of pe.particles) {
+                for (var light of particle.lights) {
+                    this.drawLight(c, light);
+                }
+            }
+        }
+    }
     drawLight(c, light) {
         var dx = light.position.x + this.game.player.camera.pos.x;
         var dy = light.position.y + this.game.player.camera.pos.y;
@@ -335,7 +345,7 @@ export class Map {
             radius = light.radius;
 
         var gradient = c.createRadialGradient(lx, ly, innerRadius, lx, ly, outerRadius);
-        gradient.addColorStop(0, 'rgba(253, 244, 220, 0.7)');
+        gradient.addColorStop(0, `rgba(253, 244, 220, ${light.intensity})`);
         gradient.addColorStop(1, 'rgba(253, 244, 220, 0)');
 
         c.beginPath();

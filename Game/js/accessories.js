@@ -42,6 +42,7 @@ class Wings {
         this.pe1.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
         this.pe1.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
         this.pe1.angle = 90;
+        this.pe1.lightParticles = true;
         this.pe1.position = this.player.position.copy();
 
         this.pe2 = player.game.createParticleEmitter();
@@ -53,6 +54,7 @@ class Wings {
         this.pe2.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
         this.pe2.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
         this.pe2.angle = 90;
+        this.pe2.lightParticles = true;
         this.pe2.position = Vec2.concat(this.player.position.copy(), new Vec2(-10, 10));
     }
     update(input, deltaTime) {

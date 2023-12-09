@@ -5,8 +5,9 @@ import { Random } from "./misc.js";
 import { GameObject } from "./gameObject.js";
 
 export class ParticleEmitter extends GameObject {
-    constructor() {
+    constructor(game) {
         super();
+        this.game = game;
         this.d = new Vec2();
         this.frequency = 2;
         this.lifeTime = new Vec2(0.1, 1);
@@ -18,6 +19,7 @@ export class ParticleEmitter extends GameObject {
         this.particleGravityModifier = 1;
         this.acceleration = 0;
         this.filter = 'none';
+        this.lightParticles = false;
 
         // это любое изображение, которое будет использовано в качестве частицы
         // filter будет изменять его цвет
@@ -83,7 +85,7 @@ export class ParticleEmitter extends GameObject {
         var velocity = new Vec2(boost * Math.cos(angle), boost * Math.sin(angle));
         this.acceleration = new Vec2(this.acceleration *= Math.cos(angle), this.acceleration *= Math.sin(angle));
         
-        var particle = new Particle();
+        var particle = new Particle(this.lightParticles);
         particle.emitter = this;
         particle.position = this.position.copy();
         particle.size = this.particleSize.copy(); 

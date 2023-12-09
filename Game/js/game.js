@@ -135,8 +135,8 @@ window.addEventListener("load", (e) => {
 				ve.draw(c);
 			}
 		}
-		createParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter) {
-			var pe = new ParticleEmitter(position, d, f, t, r, dir, ps, pc, pv, pg, filter);
+		createParticleEmitter() {
+			var pe = new ParticleEmitter(this);
 			this.particleEmitters.push(pe);
 			return pe;
 		}

@@ -1,11 +1,12 @@
+import { GameObject } from "./gameObject.js";
+import { Light } from "./light.js";
 import { Vec2 } from "./vec2.js";
 import { Vec4 } from "./vec4.js";
 
-export class Particle {
-    constructor() {
+export class Particle extends GameObject {
+    constructor(lighted=false) {
+        super();
         this.emitter = null;
-        this.position = new Vec2();
-        this.size = new Vec2();
         this.color = new Vec4();
         this.velocity = new Vec2();
         this.gravityMod = 1;
@@ -13,6 +14,11 @@ export class Particle {
         this.acceleration = new Vec2();
         this.filter = 'none';
         this.shape = null;
+        
+        this.lights = [];
+        if (lighted) {
+            this.lights.push(new Light(this.position, 14, 0));
+        }
 
         this.nframes = 1;
         this.frameSize = new Vec2();
@@ -58,6 +64,18 @@ export class Particle {
         
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
+
+        // lights
+        for (var light of this.lights) {
+            light.position = this.position.copy();
+        }
+
+        // костыль
+        if (Vec2.minus(this.emitter.game.player.position, this.position).length() > 60) {
+            for (var light of this.lights) {
+                light.intensity = 1;
+            }
+        }
     }
     draw(c) {
         c.save();
