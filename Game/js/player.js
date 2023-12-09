@@ -47,7 +47,6 @@ export class Player {
 
         this.maxHP = 1000;
         this.hp = this.maxHP;
-        this.hp = 720;
         this.immunityInterval = 1000;
         this.immunityTimer = 0;
         this.immortal = false;
