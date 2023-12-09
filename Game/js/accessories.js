@@ -36,25 +36,27 @@ class Wings {
         this.pe1 = player.game.createParticleEmitter();
         this.pe1.setFrequency(10);
         this.pe1.lifeTime = new Vec2(1, 1);
-        this.pe1.particleSize = new Vec2(14, 14);
+        this.pe1.particleSize = new Vec2(15, 15);
         this.pe1.shape = document.getElementById("shadowFlame");
         this.pe1.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
         this.pe1.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
         this.pe1.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
         this.pe1.angle = 90;
         this.pe1.lightParticles = true;
+        this.pe1.rotationSpeed = 0.1;
         this.pe1.position = this.player.position.copy();
 
         this.pe2 = player.game.createParticleEmitter();
         this.pe2.setFrequency(10);
         this.pe2.lifeTime = new Vec2(1, 1);
-        this.pe2.particleSize = new Vec2(14, 14);
+        this.pe2.particleSize = new Vec2(15, 15);
         this.pe2.shape = document.getElementById("shadowFlame");
         this.pe2.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
         this.pe2.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
         this.pe2.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
         this.pe2.angle = 90;
         this.pe2.lightParticles = true;
+        this.pe2.rotationSpeed = 0.1;
         this.pe2.position = Vec2.concat(this.player.position.copy(), new Vec2(-10, 10));
     }
     update(input, deltaTime) {

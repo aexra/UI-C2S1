@@ -20,6 +20,7 @@ export class ParticleEmitter extends GameObject {
         this.acceleration = 0;
         this.filter = 'none';
         this.lightParticles = false;
+        this.rotationSpeed = 0;
 
         // это любое изображение, которое будет использовано в качестве частицы
         // filter будет изменять его цвет
@@ -97,6 +98,8 @@ export class ParticleEmitter extends GameObject {
         particle.filter = this.filter;
         particle.shape = this.shape;
         particle.setFrames(this.nframes, this.frameSize, this.fps);
+        particle.rotationSpeed = this.rotationSpeed;
+
         if (this.frames.length !== 0) particle.setFrameCrop(this.frames[Random.randi(0, this.frames.length - 1)]);
         this.particles.push(particle);
     }
