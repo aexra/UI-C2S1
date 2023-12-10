@@ -101,6 +101,16 @@ function toggleInfoPopup() {
 	}
 }
 
+function openProfilePopup() {
+	
+}
+function closeProfilePopup() {
+
+}
+function toggleProfilePopup() {
+
+}
+
 function openScoresPopup() {
 	onPopupOpened();
 	scores_popup.classList.add("page-visible");

@@ -150,11 +150,36 @@ body {
 	height: 100%;
 	width: 100%;
 }
+
 .header > .right-container > button#info-btn > img {
 	rotate: 180deg;
 }
 
-#main-menu {	display: flex;
+.header > .right-container > button#profile-btn {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+
+	width: auto;
+	padding-left: 12;
+	padding-right: 10;
+}
+.header > .right-container > button#profile-btn > img {
+	height: 48px;
+	width: 38px;
+	transform: scale(0.8, 0.8);
+}
+.header > .right-container > button#profile-btn > span {
+	font-size: 24px;
+	font-family: 'Jost', sans-serif;
+}
+
+
+
+#main-menu {	
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
