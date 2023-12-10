@@ -20,8 +20,14 @@ export class BossHPIndicator extends GameObject {
         this.progressPosition = new Vec2(200 / this.ui.game.player.camera.scale.x, -40 / this.ui.game.player.camera.scale.y);
     }
     draw(c) {
+        this.drawProgressBar(c);
+        this.drawPercentageBar(c);
+    }
+    drawProgressBar(c) {
         c.fillStyle = "red";
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+    }
+    drawPercentageBar(c) {
         c.fillstyle = "yellow";
         c.fillRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
     }
