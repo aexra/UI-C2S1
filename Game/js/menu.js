@@ -51,6 +51,7 @@ window.onload = function() {
 	});
 
 	fillScoresTable();
+	loadUsername();
 }
 
 function fillScoresTable() {
@@ -242,4 +243,11 @@ function applyNewUsername() {
 	document.getElementById("name-span").innerHTML = name;
 	sessionStorage.setItem("username", name);
 	closeAllPopups();
+}
+function loadUsername() {
+	var name = sessionStorage.getItem("username");
+	if (name) {
+		document.getElementById("name-span").innerHTML = name;
+		document.getElementById("name-input").value = name;
+	}
 }
