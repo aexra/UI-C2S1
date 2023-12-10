@@ -284,6 +284,7 @@ export class EvasionScarf extends Accessory {
     }
     tryDash(key) {
         if (this.dashTimer == 0) {
+            if (this.player.hp <= 0) return;
             this.dashTimer++;
             this.player.immortal = true;
             this.pe.emit();

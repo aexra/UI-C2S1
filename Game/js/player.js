@@ -59,6 +59,10 @@ export class Player {
         };
     }
     update(input, deltaTime) {
+        if (this.hp <= 0) {
+            return;
+        };
+
         let left = input.keys.includes("a");
         let right = input.keys.includes("d");
 
@@ -131,13 +135,11 @@ export class Player {
                 this.immunityTimer = 0;
             }
         }
-        if (input.keys.includes("j") || input.keys.includes("о")) {
-            this.getDamage(50);
-        }
 
         this.updateLight(input, deltaTime);
     }
     draw(c) {
+        if (this.hp <= 0) return;
         // перемещение камеры
         // this.translateCamera(c);
         // console.log(this.game.canvasSize);
