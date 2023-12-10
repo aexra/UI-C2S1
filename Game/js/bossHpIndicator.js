@@ -12,6 +12,8 @@ export class BossHPIndicator extends GameObject {
         this.progressPosition = new Vec2(140, -40);
 
         this.onUIPosition = new Vec2(ui.size.x - this.indicatorSize.x - 60, ui.size.y - this.indicatorSize.y);
+
+        this.gradient = null;
     }
     update(input, deltaTime) {
         this.position = new Vec2(this.ui.position.x + this.onUIPosition.x / this.ui.game.player.camera.scale.x, -this.ui.position.y + this.onUIPosition.y / this.ui.game.player.camera.scale.y);
@@ -20,11 +22,17 @@ export class BossHPIndicator extends GameObject {
         this.progressPosition = new Vec2(140 / this.ui.game.player.camera.scale.x, -40 / this.ui.game.player.camera.scale.y);
     }
     draw(c) {
+        this.gradient = c.createLinearGradient(this.position.x, this.position.y + this.size.y, this.position.x + this.size.x, this.position.y);
+        this.gradient.addColorStop(0, "rgb(158, 34, 47)");
+        this.gradient.addColorStop(0.5, "rgb(221, 53, 67)");
+        this.gradient.addColorStop(1, "rgb(158, 34, 47)");
+
         this.drawProgressBar(c);
         this.drawPercentageBar(c);
         this.drawBossArc(c);
     }
     drawProgressBar(c) {
+        // this is box
         c.fillStyle = "rgb(48, 28, 8)";
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         c.strokeStyle = "rgb(71, 45, 13)";
@@ -33,6 +41,18 @@ export class BossHPIndicator extends GameObject {
         c.lineWidth = 3 / this.ui.game.player.camera.scale.x;
         c.strokeStyle = "rgb(196, 160, 99)";
         c.strokeRect(this.position.x, this.position.y, this.size.x, this.size.y);
+
+        // this is remaining hp box
+        c.fillStyle = this.gradient;
+        c.fillRect(
+            this.position.x + 4 / this.ui.game.player.camera.scale.x, 
+            this.position.y + 4 / this.ui.game.player.camera.scale.x,
+            this.size.x - 8 / this.ui.game.player.camera.scale.x, 
+            this.size.y - 8 / this.ui.game.player.camera.scale.x
+        );
+
+        // this is caret
+
     }
     drawPercentageBar(c) {
         c.fillStyle = "rgb(48, 28, 8)";
