@@ -62,6 +62,7 @@ export class ThanatosSpawnScreen extends VisualEffect {
         this.center = new Vec2(this.position.x + this.size.x / 2, this.position.y + this.size.y / 2);
         
         this.alpha = 0;
+        this.progress = 0;
 
         this.keyframes = [
             {
@@ -240,6 +241,8 @@ export class ThanatosSpawnScreen extends VisualEffect {
                 break;
             }
         }
+
+        this.progress = this.lifetimer / this.lifetime;
     }
     draw(c) {
         c.save();
@@ -250,7 +253,8 @@ export class ThanatosSpawnScreen extends VisualEffect {
         c.globalAlpha = 1;
         c.font = `50px andy`;
         c.textBaseline = 'top';
-        c.fillStyle = 'red';
+        c.filter = `drop-shadow(0 0 ${this.progress * 20}px #fff)`;
+        c.fillStyle = this.getFontColor();
         c.fillText(this.getCurrentFrame().text1, this.center.x - this.text1SizeX / 2, this.position.y + this.size.y / 2);
         c.fillText(this.getCurrentFrame().text2, this.center.x - this.text2SizeX / 2, this.position.y + this.size.y / 2 + 100);
         
@@ -262,5 +266,8 @@ export class ThanatosSpawnScreen extends VisualEffect {
                 return this.keyframes[i];
             }
         }
+    }
+    getFontColor() {
+        return `rgba(${29 * (this.progress * 6 + 1)}, ${105 * (this.progress * 3 + 1)}, ${158 * (this.progress + 1)}, 1)`;
     }
 }
