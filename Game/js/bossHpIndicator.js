@@ -28,41 +28,41 @@ export class BossHPIndicator extends GameObject {
         c.fillStyle = "rgb(48, 28, 8)";
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
         c.strokeStyle = "rgb(71, 45, 13)";
-        c.lineWidth = 5;
+        c.lineWidth = 5 / this.ui.game.player.camera.scale.x;
         c.strokeRect(this.position.x, this.position.y, this.size.x, this.size.y);
-        c.lineWidth = 3;
+        c.lineWidth = 3 / this.ui.game.player.camera.scale.x;
         c.strokeStyle = "rgb(196, 160, 99)";
         c.strokeRect(this.position.x, this.position.y, this.size.x, this.size.y);
     }
     drawPercentageBar(c) {
-        // c.fillstyle = "yellow";
-        // c.fillRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
         c.fillStyle = "rgb(48, 28, 8)";
         c.fillRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
         c.strokeStyle = "rgb(71, 45, 13)";
-        c.lineWidth = 5;
+        c.lineWidth = 5 / this.ui.game.player.camera.scale.x;
         c.strokeRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
-        c.lineWidth = 3;
+        c.lineWidth = 3 / this.ui.game.player.camera.scale.x;
         c.strokeStyle = "rgb(196, 160, 99)";
         c.strokeRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
     }
     drawBossArc(c) {
         c.fillStyle = "rgb(40, 2, 17)";
         c.strokeStyle = "rgb(71, 45, 13)";
-        c.lineWidth = 5;
+        c.lineWidth = 5 / this.ui.game.player.camera.scale.x;
+
+        var radius = 50 / this.ui.game.player.camera.scale.x;
 
         c.beginPath();
-        c.arc(this.position.x + this.size.x, this.position.y, 50, 0, 2 * Math.PI);
+        c.arc(this.position.x + this.size.x, this.position.y, radius, 0, 2 * Math.PI);
         c.fill();
         
         c.beginPath();
-        c.arc(this.position.x + this.size.x, this.position.y, 50, 0, 2 * Math.PI);
+        c.arc(this.position.x + this.size.x, this.position.y, radius, 0, 2 * Math.PI);
         c.stroke();
 
         c.strokeStyle = "rgb(196, 160, 99)";
-        c.lineWidth = 3;
+        c.lineWidth = 3 / this.ui.game.player.camera.scale.x;
         c.beginPath();
-        c.arc(this.position.x + this.size.x, this.position.y, 50, 0, 2 * Math.PI);
+        c.arc(this.position.x + this.size.x, this.position.y, radius, 0, 2 * Math.PI);
         c.stroke();
     }
 }
