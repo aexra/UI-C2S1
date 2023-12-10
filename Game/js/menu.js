@@ -61,14 +61,25 @@ function fillScoresTable() {
 	
 	for (const digit of [1, 2, 3, 4]) {
 		const table = digit == 1? table1 : digit == 2? table2 : digit == 3? table3 : table4;
+		const header = document.getElementById(`scores-header-${digit == 1? "easy" : digit == 2? "medium" : digit == 3? "hard" : "godmode"}`);
 		const recordsString = localStorage.getItem(`levelRecords${digit}`);
 		
 		if (!recordsString || recordsString == "") {
 			table.style.display = 'none';
+			header.style.display = 'none';
 			continue;
 		}
 		
 		const records = parseRecordsString(recordsString);
+		var inner = '<tr><th>№</th><th>Player</th><th>Score</th><th>Date</th><th>Duration</th>'
+
+		var count = 1;
+		for (var record of records) {
+			inner += `<tr><td>${count}</td><td>${record.username}</td><td>${record.score}</td><td>${record.date}</td><td>${record.duration}</td></tr>`;
+			count++;
+		}
+
+		table.innerHTML = inner;
 	}
 }
 function parseRecordsString(str) {
@@ -109,8 +120,8 @@ function parseRecordString(str) {
 	ary.push(tmp);
 	return {
 		username: ary[0],
-		date: ary[1],
-		score: ary[2],
+		score: ary[1],
+		date: ary[2],
 		duration: ary[3],
 	};;
 }
@@ -122,6 +133,9 @@ function count(str, c) {
 		}
 	}
 	return count;
+}
+function swap(ary, a, b) {
+	[ary[a], ary[b] = ary[b], ary[a]];
 }
 
 function onPlayClicked() {
