@@ -72,12 +72,13 @@ function fillScoresTable() {
 		}
 		
 		const records = parseRecordsString(recordsString);
+		sortScores(records);
 		var inner = '<tr><th>№</th><th>Player</th><th>Date</th><th>Score</th><th>Duration</th>'
 
-		var count = 1;
+		var k = 1;
 		for (var record of records) {
-			inner += `<tr><td>${count}</td><td>${record.username}</td><td>${record.score}</td><td>${record.date}</td><td>${record.duration}</td></tr>`;
-			count++;
+			inner += `<tr><td>${k}</td><td>${record.username}</td><td>${record.date}</td><td>${record.score}</td><td>${record.duration}</td></tr>`;
+			k++;
 		}
 
 		table.innerHTML = inner;
@@ -121,22 +122,34 @@ function parseRecordString(str) {
 	ary.push(tmp);
 	return {
 		username: ary[0],
-		score: ary[1],
-		date: ary[2],
+		date: ary[1],
+		score: ary[2],
 		duration: ary[3],
-	};;
+	};
 }
 function count(str, c) {
-	var count = 0;
+	var k = 0;
 	for (var i = 0; i < str.length; i++) {
 		if (str[i] == c) {
-			count++;
+			k++;
 		}
 	}
-	return count;
+	return k;
 }
 function swap(ary, a, b) {
-	[ary[a], ary[b] = ary[b], ary[a]];
+	[ary[a], ary[b]] = [ary[b], ary[a]];
+}
+function sortScores(scores) {
+	var sorted = false;
+	while (!sorted) {
+		sorted = true;
+		for (var i = 0; i < scores.length - 1; i++) {
+			if (parseInt(scores[i].score) < parseInt(scores[i+1].score)) {
+				swap(scores, i, i+1);
+				sorted = false;
+			}
+		}
+	}
 }
 
 function onPlayClicked() {
