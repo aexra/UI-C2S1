@@ -22,6 +22,7 @@ export class BossHPIndicator extends GameObject {
     draw(c) {
         this.drawProgressBar(c);
         this.drawPercentageBar(c);
+        this.drawBossArc(c);
     }
     drawProgressBar(c) {
         c.fillStyle = "red";
@@ -30,5 +31,8 @@ export class BossHPIndicator extends GameObject {
     drawPercentageBar(c) {
         c.fillstyle = "yellow";
         c.fillRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
+    }
+    drawBossArc(c) {
+
     }
 }
