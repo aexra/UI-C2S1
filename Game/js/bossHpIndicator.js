@@ -7,7 +7,7 @@ export class BossHPIndicator extends GameObject {
         this.ui = ui;
         this.npc = npc;
 
-        this.indicatorSize = new Vec2(300, 50);
+        this.indicatorSize = new Vec2(300, 40);
         this.progressSize = new Vec2(160, 40);
         this.progressPosition = new Vec2(140, -40);
 
@@ -25,8 +25,14 @@ export class BossHPIndicator extends GameObject {
         this.drawBossArc(c);
     }
     drawProgressBar(c) {
-        c.fillStyle = "red";
+        c.fillStyle = "rgb(48, 28, 8)";
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.strokeStyle = "rgb(71, 45, 13)";
+        c.lineWidth = 5;
+        c.strokeRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.lineWidth = 3;
+        c.strokeStyle = "rgb(196, 160, 99)";
+        c.strokeRect(this.position.x, this.position.y, this.size.x, this.size.y);
     }
     drawPercentageBar(c) {
         // c.fillstyle = "yellow";
@@ -35,6 +41,9 @@ export class BossHPIndicator extends GameObject {
         c.fillRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
         c.strokeStyle = "rgb(71, 45, 13)";
         c.lineWidth = 5;
+        c.strokeRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
+        c.lineWidth = 3;
+        c.strokeStyle = "rgb(196, 160, 99)";
         c.strokeRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
     }
     drawBossArc(c) {
