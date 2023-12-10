@@ -246,7 +246,7 @@ export class EvasionScarf extends Accessory {
         this.oppositeBoost = 20;
 
         this.dashInterval = 700;
-        this.immortalInterval = 200;
+        this.immortalInterval = this.calcImmortalFrames();
         this.dashTimer = 0;
 
         this.player.game.input.addEventListener('doubleTap', (key) => {
@@ -305,6 +305,20 @@ export class EvasionScarf extends Accessory {
             } else {
                 this.player.velocity += this.oppositeBoost;
             }
+        }
+    }
+    calcImmortalFrames() {
+        switch(this.player.game.level) {
+            case 1:
+                return 500;
+            case 2:
+                return 400;
+            case 3:
+                return 300;
+            case 4:
+                return 200;
+            default:
+                return 300;
         }
     }
 }

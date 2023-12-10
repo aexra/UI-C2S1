@@ -18,7 +18,7 @@ window.addEventListener("load", (e) => {
 
 	class Game {
 		constructor(size, canvasSize, ctx) {
-			this.level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
+			this.level = parseInt(sessionStorage.getItem("diff")[3]); // this is int (1..4)
 			setLevelBanner(this.level);
 
 			this.size = size;
