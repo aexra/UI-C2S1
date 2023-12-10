@@ -224,8 +224,8 @@ export class ThanatosSpawnScreen extends VisualEffect {
 
         this.text1 = "THE PERFECT ANNIHALATOR";
         this.text2 = "THANATOS";
-        this.text1SizeX = 700;
-        this.text2SizeX = 300;
+        this.text1SizeX = 610;
+        this.text2SizeX = 220;
     }
     update(input, deltaTime) {
         this.updateLifeTimer(input, deltaTime);
@@ -246,11 +246,11 @@ export class ThanatosSpawnScreen extends VisualEffect {
         c.fillStyle = "#000";
         c.globalAlpha = this.alpha;
         c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
-        c.font = `50px andy`;
-        c.fillStyle = 'red';
-        c.textBaseline = 'top';
-
+        
         c.globalAlpha = 1;
+        c.font = `50px andy`;
+        c.textBaseline = 'top';
+        c.fillStyle = 'red';
         c.fillText(this.getCurrentFrame().text1, this.center.x - this.text1SizeX / 2, this.position.y + this.size.y / 2);
         c.fillText(this.getCurrentFrame().text2, this.center.x - this.text2SizeX / 2, this.position.y + this.size.y / 2 + 100);
         
