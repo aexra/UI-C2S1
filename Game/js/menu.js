@@ -142,11 +142,17 @@ function toggleScoresPopup() {
 	}
 }
 
-
 function onLevelClicked(args) {
 	saveDifficulty(args);
 	window.open("../html/game.html")
 }
 function saveDifficulty(args) {
 	sessionStorage.setItem("diff", args.id);
+}
+
+function applyNewUsername() {
+	var name = document.getElementById("name-input").value;
+	document.getElementById("name-span").innerHTML = name;
+	sessionStorage.setItem("username", name);
+	closeAllPopups();
 }

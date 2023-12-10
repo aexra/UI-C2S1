@@ -18,7 +18,7 @@
 		<div class="header">
 			<div class="right-container">
 				<button id="profile-btn">
-					<span>Log in</span>
+					<span id="name-span">Log in</span>
 					<img src="../resources/main/artwork/profile-btn-icon.svg" alt="">
 				</button>
 				<button id="info-btn">
@@ -147,9 +147,9 @@
 		<div id="profile-popup" class="profile-popup">
 			<span>Enter your name</span>
 			<div class="nice-rounded-rect">
-				<input type="text" class="name">
+				<input type="text" class="name" id="name-input" placeholder="username">
 			</div>
-			<button>
+			<button onclick="applyNewUsername()">
 				<span>apply</span>
 			</button>
 		</div>
