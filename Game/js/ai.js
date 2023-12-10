@@ -16,6 +16,8 @@ export class ThanatosAI {
             
         };
         this.attackState = null;
+
+        this.head.openHeadAndRandomSegments();
     }
     update(input, deltaTime) {
         switch(this.head.state) {

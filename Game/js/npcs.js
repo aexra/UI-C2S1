@@ -386,6 +386,23 @@ export class Thanatos extends ThanatosSegment {
             this.hitsoundTimer++;
         }
     }
+    openHeadAndRandomSegments(nseg=30) {
+        this.open();
+        this.openRandomSegments(nseg);
+    }
+    openRandomSegments(nseg=30) {
+        var toOpen = [];
+        for (var i = 0; i < nseg; i++) {
+            var randi = Random.randi(1, this.nsegments);
+            while (toOpen.includes(randi)) {
+                randi = Random.randi(1, this.nsegments);
+            }
+            toOpen.push(randi);
+        }
+        for (var iseg of toOpen) {
+            this.segments[iseg].open();
+        }
+    }
     getRotation() {
         if (this.lastRotation != 0 && this.directionalVector.x == 0 && this.directionalVector.y == 0) {
             return this.segments[0].getRotation();

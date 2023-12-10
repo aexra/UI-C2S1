@@ -60,6 +60,8 @@ export class Player {
     }
     update(input, deltaTime) {
         if (this.hp <= 0) {
+            this.accessories[0].pe1.stop();
+            this.accessories[0].pe2.stop();
             return;
         };
 
