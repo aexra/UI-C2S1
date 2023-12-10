@@ -188,6 +188,7 @@ function closeAllPopups() {
 	closeProfilePopup();
 	closeScoresPopup();
 	closeOptionsPopup();
+	closeErrorPopup();
 }
 
 function onPopupOpened() {
