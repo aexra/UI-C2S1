@@ -235,11 +235,10 @@ h2 {
 	border-radius: 15px;
 	box-shadow: 0 0 10px black;
 
-	/* background: url("../resources/main/artwork/triangles.jpg"); */
-	/* background-attachment: fixed; */
-
-	/* backdrop-filter: brightness(0.3); */
-	background-color: #242229;
+	/* background-color: #242229; */
+	background: url("../resources/main/artwork/jungle.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% auto;
 
 	transition: all 0.3s ease;
 
@@ -255,7 +254,7 @@ h2 {
 	width: 100%;
 	height: 100%;
 
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: 15px;
 }
 .profile-popup > .nice-rounded-rect > input {
@@ -278,10 +277,12 @@ h2 {
 	z-index: 1;
 }
 .profile-popup > .nice-rounded-rect > input:hover {
-	border: 2px solid #5B5B5B;
+	border: 2px solid transparent;
+	/* border: 2px solid #5B5B5B; */
 }
 .profile-popup > .nice-rounded-rect > input:focus {
-	border: 2px solid #ee3399;
+	border: 2px solid transparent;
+	/* border: 2px solid #ee3399; */
 }
 .profile-popup > .nice-rounded-rect:hover {
 	box-shadow: 0 0 20px black;
