@@ -321,10 +321,34 @@ h2 {
 .options-popup > .container {
 	display: flex;
 	flex-direction: column;
-	align-items: start;
+	align-items: center;
 	justify-content: left;
 
 	margin-bottom: 30px;
+}
+.options-popup > .container > button {
+	width: 90%;
+	height: 32px;
+
+	border: 0;
+	border-radius: 10px;
+	background: linear-gradient(0.1turn, #6644cc, #ee3399);
+	box-shadow: 0 0 10px black;
+
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.options-popup > .container > button:hover {
+	box-shadow: 0 0 20px black;
+}
+.options-popup > .container > button:active {
+	box-shadow: 0 0 50px black;
+	filter: brightness(1.1);
+}
+.options-popup > .container > button > span {
+	font-family: 'Jost', sans-serif;
+	font-size: 20px;
+	color: #fff;
 }
 
 #main-menu {	

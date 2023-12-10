@@ -51,7 +51,6 @@ window.onload = function() {
 		click.play();
 	});
 
-	fillScoresTable();
 	loadUsername();
 }
 
@@ -217,6 +216,7 @@ function toggleProfilePopup() {
 
 function openScoresPopup() {
 	onPopupOpened();
+	fillScoresTable();
 	scores_popup.classList.add("page-visible");
 }
 function closeScoresPopup() {
@@ -269,4 +269,8 @@ function loadUsername() {
 		document.getElementById("name-span").innerHTML = name;
 		document.getElementById("name-input").value = name;
 	}
+}
+
+function clearLocalStorage() {
+	localStorage.clear();
 }
