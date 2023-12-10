@@ -215,6 +215,11 @@ export class ThanatosChildSegment extends ThanatosSegment {
 
         this.diff = new Vec2();
         this.maxdist = 80;
+
+        this.collisionDamage = 
+            game.level == 4? 100 :
+            game.level == 3? 80 :
+            game.level == 2? 60 : 20;
     }
     update(input, deltaTime) {
         this.updateImmunity(input, deltaTime);
@@ -299,7 +304,10 @@ export class Thanatos extends ThanatosSegment {
         // game values
         this.maxHP = 17000000;
         this.hp = this.maxHP;
-        this.collisionDamage = 250;
+        this.collisionDamage = 
+            game.level == 4? 250 :
+            game.level == 3? 200 :
+            game.level == 2? 100 : 50;
 
         this.ai = new ThanatosAI(this);
     }
@@ -444,8 +452,6 @@ class ThanatosBody1 extends ThanatosChildSegment {
         this.image = document.getElementById("thanatosBody1");
         this.shieldMask = document.getElementById("thanatosBody1Shield");
         this.glowSpriteSheet = new SpriteSheet("thanatosBody1Glow", this.size.copy());
-
-        this.collisionDamage = 100;
     }
 }
 
@@ -462,8 +468,6 @@ class ThanatosBody2 extends ThanatosChildSegment {
         this.image = document.getElementById("thanatosBody2");
         this.shieldMask = document.getElementById("thanatosBody2Shield");
         this.glowSpriteSheet = new SpriteSheet("thanatosBody2Glow", this.size.copy());
-
-        this.collisionDamage = 100;
     }
 }
 
@@ -480,7 +484,5 @@ class ThanatosTail extends ThanatosChildSegment {
         this.image = document.getElementById("thanatosTail");
         this.shieldMask = document.getElementById("thanatosTailShield");
         this.glowSpriteSheet = new SpriteSheet("thanatosTailGlow", this.size.copy());
-
-        this.collisionDamage = 100;
     }
 }
