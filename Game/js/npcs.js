@@ -303,7 +303,7 @@ export class Thanatos extends ThanatosSegment {
         game.npcs.push(this);
 
         // game values
-        this.maxHP = 17000000;
+        this.maxHP = 100000;
         this.hp = this.maxHP;
         this.collisionDamage = 
             game.level == 4? 250 :
