@@ -1,6 +1,7 @@
 const main_menu = document.getElementById("main-menu");
 const menu_mask = document.getElementById("menu-darken-mask");
 const info_popup = document.getElementById("about-project-page");
+const profile_popup = document.getElementById("profile-popup");
 const scores_popup = document.getElementById("scores-page");
 const header = document.getElementsByClassName("header")[0];
 
@@ -22,6 +23,11 @@ window.onload = function() {
 	document.getElementById("info-btn").onclick = (e) => {
 		click.play();
 		toggleInfoPopup();
+	};
+
+	document.getElementById("profile-btn").onclick = (e) => {
+		click.play();
+		toggleProfilePopup();
 	};
 
 	document.getElementById("scores").onclick = (e) => {
@@ -73,6 +79,7 @@ function menuBrightnessOut() {
 function closeAllPopups() {
 	closeLevels();
 	closeInfoPopup();
+	closeProfilePopup();
 	closeScoresPopup();
 }
 
@@ -102,13 +109,20 @@ function toggleInfoPopup() {
 }
 
 function openProfilePopup() {
-	
+	onPopupOpened();
+	profile_popup.classList.add("profile-visible");
 }
 function closeProfilePopup() {
-
+	onPopupClosed();
+	profile_popup.classList.remove("profile-visible");
 }
 function toggleProfilePopup() {
-
+	if (profile_popup.classList.contains("profile-visible")) {
+		closeProfilePopup();
+	}
+	else {
+		openProfilePopup();
+	}
 }
 
 function openScoresPopup() {

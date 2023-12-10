@@ -176,6 +176,31 @@ body {
 	font-family: 'Jost', sans-serif;
 }
 
+.profile-popup {
+	position: absolute;
+
+	top: -280;
+	right: 0;
+
+	height: 280px;
+	width: 460px;
+
+	background-color: rgb(46, 44, 53);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	transition: all 0.2s ease;
+
+	box-shadow: 0 0 20px black;
+
+	z-index: 5;
+}
+.profile-visible {
+	top: 50;
+}
+
 
 
 #main-menu {	
