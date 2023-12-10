@@ -12,8 +12,6 @@ export class BossHPIndicator extends GameObject {
         this.progressPosition = new Vec2(140, -40);
 
         this.onUIPosition = new Vec2(ui.size.x - this.indicatorSize.x - 60, ui.size.y - this.indicatorSize.y);
-
-        this.gradient = null;
     }
     update(input, deltaTime) {
         this.position = new Vec2(this.ui.position.x + this.onUIPosition.x / this.ui.game.player.camera.scale.x, -this.ui.position.y + this.onUIPosition.y / this.ui.game.player.camera.scale.y);
@@ -22,11 +20,6 @@ export class BossHPIndicator extends GameObject {
         this.progressPosition = new Vec2(140 / this.ui.game.player.camera.scale.x, -40 / this.ui.game.player.camera.scale.y);
     }
     draw(c) {
-        this.gradient = c.createLinearGradient(this.position.x, this.position.y + this.size.y, this.position.x + this.size.x, this.position.y);
-        this.gradient.addColorStop(0, "rgb(158, 34, 47)");
-        this.gradient.addColorStop(0.5, "rgb(221, 53, 67)");
-        this.gradient.addColorStop(1, "rgb(158, 34, 47)");
-
         this.drawProgressBar(c);
         this.drawPercentageBar(c);
         this.drawBossArc(c);
@@ -43,8 +36,12 @@ export class BossHPIndicator extends GameObject {
         c.strokeRect(this.position.x, this.position.y, this.size.x, this.size.y);
 
         // this is remaining hp box
+        var gradient = c.createLinearGradient(this.position.x, this.position.y + this.size.y, this.position.x + this.size.x, this.position.y);
+        gradient.addColorStop(0, "rgb(158, 34, 47)");
+        gradient.addColorStop(0.5, "rgb(221, 53, 67)");
+        gradient.addColorStop(1, "rgb(158, 34, 47)");
         var kremain = this.npc.hp / this.npc.maxHP;
-        c.fillStyle = this.gradient;
+        c.fillStyle = gradient;
         c.fillRect(
             this.position.x + 4 / this.ui.game.player.camera.scale.x + this.size.x * (1 - kremain), 
             this.position.y + 4 / this.ui.game.player.camera.scale.x,
@@ -53,7 +50,30 @@ export class BossHPIndicator extends GameObject {
         );
 
         // this is caret
-
+        gradient = c.createLinearGradient(
+            this.position.x,
+            this.position.y,
+            this.position.x,
+            this.position.y + this.size.y
+        );
+        gradient.addColorStop(0, "rgb(104, 56, 0)");
+        gradient.addColorStop(0.3, "rgb(255, 218, 161)");
+        gradient.addColorStop(1, "rgb(104, 56, 0)");
+        c.fillStyle = gradient;
+        c.fillRect(
+            this.position.x + 4 / this.ui.game.player.camera.scale.x + this.size.x * (1 - kremain), 
+            this.position.y + 4 / this.ui.game.player.camera.scale.x,
+            this.size.x / 24, 
+            this.size.y - 8 / this.ui.game.player.camera.scale.x
+        );
+        c.strokeStyle = "rgb(71, 45, 13)";
+        c.lineWidth = 2 / this.ui.game.player.camera.scale.x;
+        c.strokeRect(
+            this.position.x + 4 / this.ui.game.player.camera.scale.x + this.size.x * (1 - kremain), 
+            this.position.y + 4 / this.ui.game.player.camera.scale.x,
+            this.size.x / 24, 
+            this.size.y - 8 / this.ui.game.player.camera.scale.x
+        );
     }
     drawPercentageBar(c) {
         c.fillStyle = "rgb(48, 28, 8)";
