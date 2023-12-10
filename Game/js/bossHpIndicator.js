@@ -43,11 +43,12 @@ export class BossHPIndicator extends GameObject {
         c.strokeRect(this.position.x, this.position.y, this.size.x, this.size.y);
 
         // this is remaining hp box
+        var kremain = this.npc.hp / this.npc.maxHP;
         c.fillStyle = this.gradient;
         c.fillRect(
-            this.position.x + 4 / this.ui.game.player.camera.scale.x, 
+            this.position.x + 4 / this.ui.game.player.camera.scale.x + this.size.x * (1 - kremain), 
             this.position.y + 4 / this.ui.game.player.camera.scale.x,
-            this.size.x - 8 / this.ui.game.player.camera.scale.x, 
+            this.size.x * kremain - 8 / this.ui.game.player.camera.scale.x, 
             this.size.y - 8 / this.ui.game.player.camera.scale.x
         );
 
