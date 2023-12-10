@@ -39,8 +39,20 @@ window.addEventListener("load", (e) => {
 
 			this.isDraedonInitiated = false;
 			this.isFightInitiated = false;
+
+			this.fightTimer = 0;
+			this.score = 0;
+
+			// for (const [key, value] of Object.entries(localStorage)) {
+			// 	console.log(key, value);
+			// }
+
+			this.saveRecord();
 		}
 		update(deltaTime) {
+			if (this.isFightInitiated) {
+				this.fightTimer += deltaTime;
+			}
 			this.player.update(this.input, deltaTime);
 			// console.log(this.player.position);
 			// console.log(1 / (deltaTime / 1000));
@@ -99,6 +111,28 @@ window.addEventListener("load", (e) => {
 			this.ui.draw(context);
 			
 			this.drawVisualEffects(context);
+
+			// level1: "{player;date;score;duration},{player;date;score;duration}"
+		}
+		saveRecord() {
+			var thisLevelRecordsString = localStorage.getItem(`levelRecords${this.level}`);
+			if (!thisLevelRecordsString) thisLevelRecordsString = "";
+			thisLevelRecordsString += this.getRecordString() + ',';
+			localStorage.setItem(`levelRecords${this.level}`, thisLevelRecordsString);
+			console.log(thisLevelRecordsString);
+		}
+		getRecordString() {
+			const username = sessionStorage.getItem('username');
+			const dateString = this.getDateString();
+
+			return `{${username};${dateString};${this.score};${this.fightTimer}}`;
+		}
+		getDateString() {
+			var today = new Date();
+			var dd = String(today.getDate()).padStart(2, '0');
+			var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+			var yyyy = today.getFullYear();
+			return `${dd}.${mm}.${yyyy}`;
 		}
 		updateHits(input, deltaTime) {
 			for (var npc of this.npcs) {
