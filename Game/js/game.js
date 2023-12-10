@@ -203,6 +203,7 @@ window.addEventListener("load", (e) => {
 		}
 		initiateFight() {
 			this.thanatos = new Thanatos(this);
+			this.ui.addBossLifeBar(this.thanatos);
 		}
 	}
 

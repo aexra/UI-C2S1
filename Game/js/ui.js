@@ -1,3 +1,4 @@
+import { BossHPIndicator } from "./bossHpIndicator.js";
 import { GameObject } from "./gameObject.js";
 import { Vec2 } from "./vec2.js";
 
@@ -20,6 +21,8 @@ export class UI extends GameObject {
             scale: 280 / game.size.x,
             border: document.getElementById("minimap"),
         };
+
+        this.bossLifeBar = null;
     }
     update(input, deltaTime) {
         this.position = new Vec2(-this.game.canvasTranslated.x, this.game.canvasTranslated.y);
@@ -36,11 +39,18 @@ export class UI extends GameObject {
             border: document.getElementById("minimap"),
         };
 
+        if (this.bossLifeBar != null) {
+            this.bossLifeBar.update(input, deltaTime);
+        }
     }
     draw(c) {
         this.drawHotbar(c);
         this.drawLifebar(c);
         this.drawMinimap(c);
+
+        if (this.bossLifeBar != null) {
+            this.bossLifeBar.draw(c);
+        }
     }
     drawHotbar(c) {
 
@@ -182,5 +192,8 @@ export class UI extends GameObject {
         c.drawImage(this.minimap.border, this.position.x + this.minimap.position.x - 10 / this.game.player.camera.scale.x, -this.position.y + this.minimap.position.y - 17 / this.game.player.camera.scale.x, this.minimap.size.x + 30 / this.game.player.camera.scale.x, this.minimap.size.y + 34 / this.game.player.camera.scale.x)
 
         c.restore();
+    }
+    addBossLifeBar(npc) {
+        this.bossLifeBar = new BossHPIndicator(this, npc);
     }
 }
