@@ -251,6 +251,7 @@ export class ThanatosChildSegment extends ThanatosSegment {
             hitsound.play();
             this.head.hitsoundTimer++;
         }
+        this.head.hp -= damage;
     }
 }
 

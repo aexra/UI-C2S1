@@ -84,6 +84,7 @@ export class NPC extends GameObject {
     }
     onHit(damage, iscrit) {
         this.game.createDI(this.position, damage, iscrit);
+        this.hp -= damage;
     }
     hit(damage, iscrit) {
         if (this.immunityTimer == 0) {

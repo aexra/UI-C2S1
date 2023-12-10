@@ -43,6 +43,15 @@ export class BossHPIndicator extends GameObject {
         c.lineWidth = 3 / this.ui.game.player.camera.scale.x;
         c.strokeStyle = "rgb(196, 160, 99)";
         c.strokeRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
+    
+        c.font = `32px andy`;
+        c.textBaseline = 'top';
+        c.fillStyle = 'rgb(196, 160, 99)';
+        c.fillText(
+            `${(this.npc.hp / this.npc.maxHP * 100).toPrecision(4)}%`, 
+            this.position.x + this.progressPosition.x + 10 / this.ui.game.player.camera.scale.x, 
+            this.position.y + this.progressPosition.y + 6 / this.ui.game.player.camera.scale.x
+        );
     }
     drawBossArc(c) {
         c.fillStyle = "rgb(40, 2, 17)";
