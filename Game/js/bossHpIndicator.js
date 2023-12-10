@@ -65,7 +65,7 @@ export class BossHPIndicator extends GameObject {
         c.strokeStyle = "rgb(196, 160, 99)";
         c.strokeRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
     
-        c.font = `32px andy`;
+        c.font = `${32 / this.ui.game.player.camera.scale.x}px andy`;
         c.textBaseline = 'top';
         c.fillStyle = 'rgb(196, 160, 99)';
         c.fillText(
