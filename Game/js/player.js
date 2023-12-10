@@ -50,6 +50,7 @@ export class Player {
         this.immunityInterval = 1000;
         this.immunityTimer = 0;
         this.immortal = false;
+        this.dead = false;
 
         this.lights = [new Light(this.position, 100)];
 
@@ -59,9 +60,9 @@ export class Player {
         };
     }
     update(input, deltaTime) {
+        if (this.dead) return;
         if (this.hp <= 0) {
-            this.accessories[0].pe1.stop();
-            this.accessories[0].pe2.stop();
+            this.onDeath();
             return;
         };
 
@@ -300,5 +301,12 @@ export class Player {
         }
         return 3;
     }
+    onDeath() {
+        this.dead = true;
 
+        this.accessories[0].pe1.stop();
+        this.accessories[0].pe2.stop();
+
+        this.game.saveRecord();
+    }
 }

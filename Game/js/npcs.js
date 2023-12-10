@@ -313,13 +313,7 @@ export class Thanatos extends ThanatosSegment {
         this.ai = new ThanatosAI(this);
     }
     update(input, deltaTime) {
-        if (input.keys.includes('k')) {
-            if (this.visualState == this.visualStates.normal) {
-                this.open();
-            } else if (this.visualState == this.visualStates.buffed) {
-                this.close();
-            }
-        }
+        this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
         this.updateImmunity(input, deltaTime);
         this.updateHitsounds(input, deltaTime);
         this.ai.update(input, deltaTime);

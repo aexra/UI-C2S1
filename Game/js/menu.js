@@ -71,7 +71,7 @@ function fillScoresTable() {
 		}
 		
 		const records = parseRecordsString(recordsString);
-		var inner = '<tr><th>№</th><th>Player</th><th>Score</th><th>Date</th><th>Duration</th>'
+		var inner = '<tr><th>№</th><th>Player</th><th>Date</th><th>Score</th><th>Duration</th>'
 
 		var count = 1;
 		for (var record of records) {

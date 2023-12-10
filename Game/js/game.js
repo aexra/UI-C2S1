@@ -42,10 +42,6 @@ window.addEventListener("load", (e) => {
 
 			this.fightTimer = 0;
 			this.score = 0;
-
-			// for (const [key, value] of Object.entries(localStorage)) {
-			// 	console.log(key, value);
-			// }
 		}
 		update(deltaTime) {
 			if (this.isFightInitiated) {
@@ -122,8 +118,9 @@ window.addEventListener("load", (e) => {
 		getRecordString() {
 			const username = sessionStorage.getItem('username');
 			const dateString = this.getDateString();
+			const time = this.getDurationString();
 
-			return `{${username};${dateString};${this.score};${this.fightTimer}}`;
+			return `{${username};${dateString};${this.score};${time}}`;
 		}
 		getDateString() {
 			var today = new Date();
@@ -131,6 +128,14 @@ window.addEventListener("load", (e) => {
 			var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 			var yyyy = today.getFullYear();
 			return `${dd}.${mm}.${yyyy}`;
+		}
+		getDurationString() {
+			const seconds = Math.floor(this.fightTimer / 1000);
+			if (Math.floor(seconds / 3600) == 0) {
+				return `${seconds}s`;
+			} else {
+				return `${Math.floor(seconds / 3600)}m ${seconds % 3600}s`;
+			}
 		}
 		updateHits(input, deltaTime) {
 			for (var npc of this.npcs) {
@@ -234,6 +239,7 @@ window.addEventListener("load", (e) => {
 			}, 6000);
 		}
 		initiateFight() {
+			this.isFightInitiated = true;
 			this.thanatos = new Thanatos(this);
 			this.ui.addBossLifeBar(this.thanatos);
 		}
