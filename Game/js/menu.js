@@ -17,6 +17,9 @@ hover_extra.volume = 0.2;
 var click = new Audio("../resources/main/music/click.ogg");
 click.volume = 0.1;
 
+var error = new Audio("../resources/main/music/error.mp3");
+error.volume = 0.1;
+
 window.onload = function() {
 	document.getElementById("menu-darken-mask").onclick = (e) => {
 		hover_extra.play();
@@ -276,8 +279,9 @@ function saveDifficulty(args) {
 	sessionStorage.setItem("diff", args.id);
 }
 
-function showErrorMessage(error) {
-	error_msg.innerHTML = error;
+function showErrorMessage(msg) {
+	error_msg.innerHTML = msg;
+	error.play();
 	openErrorPopup();
 }
 
