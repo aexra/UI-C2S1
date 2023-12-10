@@ -64,5 +64,13 @@ export class BossHPIndicator extends GameObject {
         c.beginPath();
         c.arc(this.position.x + this.size.x, this.position.y, radius, 0, 2 * Math.PI);
         c.stroke();
+
+        c.drawImage(
+            this.npc.minimapicon.normal, 
+            this.position.x + this.size.x - radius / 2 - 3 / this.ui.game.player.camera.scale.x, 
+            this.position.y - radius / 2 - 6 / this.ui.game.player.camera.scale.x, 
+            38 * 1.5 / this.ui.game.player.camera.scale.x, 
+            42 * 1.5 / this.ui.game.player.camera.scale.x
+        );
     }
 }
