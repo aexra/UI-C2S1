@@ -211,11 +211,41 @@ body {
 	border-radius: 15px;
 	box-shadow: 0 0 10px black;
 
-	background: url("../resources/main/artwork/triangles.jpg");
-	background-attachment: fixed;
+	/* background: url("../resources/main/artwork/triangles.jpg"); */
+	/* background-attachment: fixed; */
 
-	filter: brightness(0.3);
+	/* backdrop-filter: brightness(0.3); */
+	background-color: #242229;
+
 	transition: all 0.3s ease;
+
+	padding: 10px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.profile-popup > .nice-rounded-rect > input {
+	width: 90%;
+	height: 40%;
+	color: #fff;
+	background-color: transparent;
+	border: 2px solid transparent;
+	border-radius: 20px;
+	text-align: center;
+	outline: none;
+
+	font-family: 'Outfit', sans-serif;
+	
+	font-size: 20px;
+
+	transition: all 0.2s ease;
+}
+.profile-popup > .nice-rounded-rect > input:hover {
+	border: 2px solid #5B5B5B;
+}
+.profile-popup > .nice-rounded-rect > input:focus {
+	border: 2px solid #ee3399;
 }
 .profile-popup > .nice-rounded-rect:hover {
 	box-shadow: 0 0 20px black;
@@ -239,6 +269,7 @@ body {
 }
 .profile-popup > button:hover {
 	box-shadow: 0 0 20px black;
+	cursor: pointer;
 }
 .profile-visible {
 	top: 50;
