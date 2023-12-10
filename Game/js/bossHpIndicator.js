@@ -8,16 +8,16 @@ export class BossHPIndicator extends GameObject {
         this.npc = npc;
 
         this.indicatorSize = new Vec2(300, 40);
-        this.progressSize = new Vec2(160, 40);
-        this.progressPosition = new Vec2(140, -40);
+        this.progressSize = new Vec2(160, 30);
+        this.progressPosition = new Vec2(140, -30);
 
         this.onUIPosition = new Vec2(ui.size.x - this.indicatorSize.x - 60, ui.size.y - this.indicatorSize.y);
     }
     update(input, deltaTime) {
         this.position = new Vec2(this.ui.position.x + this.onUIPosition.x / this.ui.game.player.camera.scale.x, -this.ui.position.y + this.onUIPosition.y / this.ui.game.player.camera.scale.y);
         this.size = new Vec2(this.indicatorSize.x / this.ui.game.player.camera.scale.x, this.indicatorSize.y / this.ui.game.player.camera.scale.y);
-        this.progressSize = new Vec2(160 / this.ui.game.player.camera.scale.x, 40 / this.ui.game.player.camera.scale.y);
-        this.progressPosition = new Vec2(140 / this.ui.game.player.camera.scale.x, -40 / this.ui.game.player.camera.scale.y);
+        this.progressSize = new Vec2(160 / this.ui.game.player.camera.scale.x, 30 / this.ui.game.player.camera.scale.y);
+        this.progressPosition = new Vec2(140 / this.ui.game.player.camera.scale.x, -30 / this.ui.game.player.camera.scale.y);
     }
     draw(c) {
         this.drawProgressBar(c);
@@ -85,7 +85,7 @@ export class BossHPIndicator extends GameObject {
         c.strokeStyle = "rgb(196, 160, 99)";
         c.strokeRect(this.position.x + this.progressPosition.x, this.position.y + this.progressPosition.y, this.progressSize.x, this.progressSize.y);
     
-        c.font = `${32 / this.ui.game.player.camera.scale.x}px andy`;
+        c.font = `${24 / this.ui.game.player.camera.scale.x}px andy`;
         c.textBaseline = 'top';
         c.fillStyle = 'rgb(196, 160, 99)';
         c.fillText(
@@ -102,23 +102,23 @@ export class BossHPIndicator extends GameObject {
         var radius = 50 / this.ui.game.player.camera.scale.x;
 
         c.beginPath();
-        c.arc(this.position.x + this.size.x, this.position.y, radius, 0, 2 * Math.PI);
+        c.arc(this.position.x + this.size.x, this.position.y + 4 / this.ui.game.player.camera.scale.x, radius, 0, 2 * Math.PI);
         c.fill();
         
         c.beginPath();
-        c.arc(this.position.x + this.size.x, this.position.y, radius, 0, 2 * Math.PI);
+        c.arc(this.position.x + this.size.x, this.position.y + 4 / this.ui.game.player.camera.scale.x, radius, 0, 2 * Math.PI);
         c.stroke();
 
         c.strokeStyle = "rgb(196, 160, 99)";
         c.lineWidth = 3 / this.ui.game.player.camera.scale.x;
         c.beginPath();
-        c.arc(this.position.x + this.size.x, this.position.y, radius, 0, 2 * Math.PI);
+        c.arc(this.position.x + this.size.x, this.position.y + 4 / this.ui.game.player.camera.scale.x, radius, 0, 2 * Math.PI);
         c.stroke();
 
         c.drawImage(
             this.npc.minimapicon.normal, 
             this.position.x + this.size.x - radius / 2 - 3 / this.ui.game.player.camera.scale.x, 
-            this.position.y - radius / 2 - 6 / this.ui.game.player.camera.scale.x, 
+            this.position.y - radius / 2 - 2 / this.ui.game.player.camera.scale.x, 
             38 * 1.5 / this.ui.game.player.camera.scale.x, 
             42 * 1.5 / this.ui.game.player.camera.scale.x
         );
