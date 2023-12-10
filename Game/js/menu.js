@@ -2,6 +2,7 @@ const main_menu = document.getElementById("main-menu");
 const menu_mask = document.getElementById("menu-darken-mask");
 const info_popup = document.getElementById("about-project-page");
 const profile_popup = document.getElementById("profile-popup");
+const options_popup = document.getElementById("options-popup");
 const scores_popup = document.getElementById("scores-page");
 const header = document.getElementsByClassName("header")[0];
 
@@ -169,6 +170,7 @@ function closeAllPopups() {
 	closeInfoPopup();
 	closeProfilePopup();
 	closeScoresPopup();
+	closeOptionsPopup();
 }
 
 function onPopupOpened() {
@@ -227,6 +229,23 @@ function toggleScoresPopup() {
 	}
 	else {
 		openScoresPopup();
+	}
+}
+
+function openOptionsPopup() {
+	onPopupOpened();
+	options_popup.classList.add("options-visible");
+}
+function closeOptionsPopup() {
+	onPopupClosed();
+	options_popup.classList.remove("options-visible");
+}
+function toggleOptionsPopup() {
+	if (options_popup.classList.contains("options-visible")) {
+		closeOptionsPopup();
+	}
+	else {
+		openOptionsPopup();
 	}
 }
 

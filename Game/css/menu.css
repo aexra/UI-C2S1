@@ -282,12 +282,19 @@ body {
 	position: absolute;
 
 	top: 50px;
-	left: 0px;
+	left: -400px;
 
 	width: 400px;
-	height: 100%;
+	height: calc(100% - 50px);
 
-	background-color: lime;
+	background-color: #2e2c35;
+	box-shadow: 0 0 20px black;
+
+	z-index: 5;
+	transition: all 0.2s ease;
+}
+.options-visible {
+	left: 0;
 }
 
 #main-menu {	
