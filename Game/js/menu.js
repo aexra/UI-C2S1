@@ -265,8 +265,8 @@ function toggleOptionsPopup() {
 }
 
 function onLevelClicked(args) {
-	if (!sessionStorage.getItem("username")) {
-		showErrorMessage("You must Log In first to play!");
+	if (!sessionStorage.getItem("username") || sessionStorage.getItem("username") == "") {
+		showErrorMessage("You must log in first to play!");
 		return;
 	}
 	saveDifficulty(args);
@@ -282,17 +282,25 @@ function showErrorMessage(error) {
 }
 
 function openErrorPopup() {
+	onPopupOpened();
 	error_popup.classList.add("error-visible");
 }
 function closeErrorPopup() {
+	onPopupClosed();
+	click.play();
 	error_popup.classList.remove("error-visible");
 }
 
 function applyNewUsername() {
+	click.play();
+	closeAllPopups();
 	var name = document.getElementById("name-input").value;
+	if (!name || name == "") {
+		showErrorMessage("Name must contain letters!");
+		return;
+	}
 	document.getElementById("name-span").innerHTML = name;
 	sessionStorage.setItem("username", name);
-	closeAllPopups();
 }
 function loadUsername() {
 	var name = sessionStorage.getItem("username");
@@ -303,5 +311,6 @@ function loadUsername() {
 }
 
 function clearLocalStorage() {
+	click.play();
 	localStorage.clear();
 }
