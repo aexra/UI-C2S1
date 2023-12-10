@@ -46,8 +46,6 @@ window.addEventListener("load", (e) => {
 			// for (const [key, value] of Object.entries(localStorage)) {
 			// 	console.log(key, value);
 			// }
-
-			this.saveRecord();
 		}
 		update(deltaTime) {
 			if (this.isFightInitiated) {

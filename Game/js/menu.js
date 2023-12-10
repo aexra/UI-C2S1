@@ -49,6 +49,79 @@ window.onload = function() {
 	document.getElementById("main-menu-icon").addEventListener("click", (e) => {
 		click.play();
 	});
+
+	fillScoresTable();
+}
+
+function fillScoresTable() {
+	const table1 = document.getElementById('scores-table-easy');
+	const table2 = document.getElementById('scores-table-medium');
+	const table3 = document.getElementById('scores-table-hard');
+	const table4 = document.getElementById('scores-table-godmode');
+	
+	for (const digit of [1, 2, 3, 4]) {
+		const table = digit == 1? table1 : digit == 2? table2 : digit == 3? table3 : table4;
+		const recordsString = localStorage.getItem(`levelRecords${digit}`);
+		
+		if (!recordsString || recordsString == "") {
+			table.style.display = 'none';
+			continue;
+		}
+		
+		const records = parseRecordsString(recordsString);
+	}
+}
+function parseRecordsString(str) {
+	var records = [];
+	var currentString = "";
+	var opened = false;
+	for (var i = 0; i < str.length; i++) {
+		if (opened) {
+			if (str[i] == '}') {
+				opened = false;
+				var record = parseRecordString(currentString);
+				if (record) records.push(record);
+				currentString = "";
+			} else {
+				currentString += str[i];
+			}
+		} else {
+			if (str[i] == '{') {
+				opened = true;
+			}
+		}
+	}
+	return records;
+}
+function parseRecordString(str) {
+	if (count(str, ';') != 3) return null;
+
+	var ary = [];
+	var tmp = "";
+	for (var i = 0; i < str.length; i++) {
+		if (str[i] == ';') {
+			ary.push(tmp);
+			tmp = "";
+		} else {
+			tmp += str[i];
+		}
+	}
+	ary.push(tmp);
+	return {
+		username: ary[0],
+		date: ary[1],
+		score: ary[2],
+		duration: ary[3],
+	};;
+}
+function count(str, c) {
+	var count = 0;
+	for (var i = 0; i < str.length; i++) {
+		if (str[i] == c) {
+			count++;
+		}
+	}
+	return count;
 }
 
 function onPlayClicked() {

@@ -455,6 +455,15 @@ body {
 
 	border-bottom: 1px solid #fefefe;
 }
+.page > .container > h2 {
+	font-size: 28px;
+	font-family: 'Outfit', 'Rubik', sans-serif;
+	color: hotpink;
+
+	width: 100%;
+
+	border-bottom: 1px solid #686868;
+}
 .page > .container > p {
 	font-size: 20px;
 	font-family: 'Outfit', 'Rubik', sans-serif;
