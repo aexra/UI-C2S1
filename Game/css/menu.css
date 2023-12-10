@@ -236,7 +236,9 @@ h2 {
 	box-shadow: 0 0 10px black;
 
 	/* background-color: #242229; */
-	background: url("../resources/main/artwork/jungle.jpg");
+	/* background: url("../resources/main/artwork/jungle.jpg"); */
+	/* background: url("../resources/main/artwork/cultists.png"); */
+	background: url("../resources/main/artwork/hallow-chaos.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 
