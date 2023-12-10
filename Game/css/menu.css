@@ -227,6 +227,8 @@ h2 {
 	color: #fff;
 }
 .profile-popup > .nice-rounded-rect {
+	position: relative;
+
 	width: 80%;
 	height: 50%;
 
@@ -247,6 +249,15 @@ h2 {
 	flex-direction: column;
 	align-items: center;
 }
+.profile-popup > .nice-rounded-rect > .mask {
+	position: absolute;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 15px;
+}
 .profile-popup > .nice-rounded-rect > input {
 	width: 90%;
 	height: 40%;
@@ -256,12 +267,15 @@ h2 {
 	border-radius: 20px;
 	text-align: center;
 	outline: none;
+	margin-top: auto;
 
 	font-family: 'Outfit', sans-serif;
 	
 	font-size: 20px;
 
 	transition: all 0.2s ease;
+
+	z-index: 1;
 }
 .profile-popup > .nice-rounded-rect > input:hover {
 	border: 2px solid #5B5B5B;
