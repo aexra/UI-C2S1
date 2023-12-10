@@ -10,10 +10,6 @@ import { Thanatos } from "./npcs.js";
 import * as visuals from "./visualEffects.js";
 
 window.addEventListener("load", (e) => {
-	const level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
-
-	setLevelBanner(level);
-
 	const canvas = document.getElementById("canvas1");
 	const ctx = canvas.getContext("2d");
 
@@ -22,6 +18,9 @@ window.addEventListener("load", (e) => {
 
 	class Game {
 		constructor(size, canvasSize, ctx) {
+			this.level = sessionStorage.getItem("diff")[3]; // this is int (1..4)
+			setLevelBanner(this.level);
+
 			this.size = size;
 			this.canvasSize = canvasSize;
 			this.canvasContext = ctx;
