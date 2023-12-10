@@ -3,6 +3,8 @@ const menu_mask = document.getElementById("menu-darken-mask");
 const info_popup = document.getElementById("about-project-page");
 const profile_popup = document.getElementById("profile-popup");
 const options_popup = document.getElementById("options-popup");
+const error_popup = document.getElementById("error-popup");
+const error_msg = document.getElementById("error-msg");
 const scores_popup = document.getElementById("scores-page");
 const header = document.getElementsByClassName("header")[0];
 
@@ -263,11 +265,27 @@ function toggleOptionsPopup() {
 }
 
 function onLevelClicked(args) {
+	if (!sessionStorage.getItem("username")) {
+		showErrorMessage("You must Log In first to play!");
+		return;
+	}
 	saveDifficulty(args);
 	window.open("../html/game.html")
 }
 function saveDifficulty(args) {
 	sessionStorage.setItem("diff", args.id);
+}
+
+function showErrorMessage(error) {
+	error_msg.innerHTML = error;
+	openErrorPopup();
+}
+
+function openErrorPopup() {
+	error_popup.classList.add("error-visible");
+}
+function closeErrorPopup() {
+	error_popup.classList.remove("error-visible");
 }
 
 function applyNewUsername() {
