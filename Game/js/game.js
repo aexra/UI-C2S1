@@ -249,7 +249,7 @@ window.addEventListener("load", (e) => {
 	const game = new Game(new Vec2(72000, 72000), new Vec2(canvas.width, canvas.height), ctx);
 	let lastTime = 0;
 
-	setTimeout(() => {
+	setInterval(() => {
 		game.timerObject.innerHTML = game.getDurationString();
 	}, 1000);
 
