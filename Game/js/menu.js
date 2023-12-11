@@ -11,8 +11,14 @@ const header = document.getElementsByClassName("header")[0];
 var hover = new Audio("../resources/main/music/hover.ogg");
 hover.volume = 0.2;
 
+var quiet_hover = new Audio("../resources/main/music/hover.ogg");
+quiet_hover.volume = 0.05;
+
 var hover_extra = new Audio("../resources/main/music/hover-extra.ogg");
 hover_extra.volume = 0.2;
+
+var quiet_hover_extra = new Audio("../resources/main/music/hover-extra.ogg");
+quiet_hover_extra.volume = 0.05;
 
 var click = new Audio("../resources/main/music/click.ogg");
 click.volume = 0.1;
@@ -59,6 +65,8 @@ window.onload = function() {
 	document.getElementById("main-menu-icon").addEventListener("click", (e) => {
 		click.play();
 	});
+
+	applySettingsButtonsAudio();
 
 	loadUsername();
 	loadAudioVolumesToSliders();
@@ -384,4 +392,22 @@ function loadAudioVolumesToSliders() {
 	sfx_slider.value = audio.sfx * 100;
 	updateSliderProgress(music_slider);
 	updateSliderProgress(sfx_slider);
+}
+
+function applySettingsButtonsAudio() {
+	for (const btn of document.getElementsByClassName("option-btn")) {
+		btn.addEventListener("mouseenter", (e) => {
+			quiet_hover.play();
+		});
+	}
+	for (const slider of document.getElementsByClassName("options-slider")) {
+		slider.addEventListener("mouseenter", (e) => {
+			quiet_hover.play();
+		});
+	}
+	for (const slider of document.getElementsByClassName("options-slider")) {
+		slider.addEventListener("input", (e) => {
+			quiet_hover_extra.play();
+		});
+	}
 }
