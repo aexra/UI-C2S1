@@ -336,6 +336,7 @@ export class Thanatos extends ThanatosSegment {
             this.sound.volume = Config.audio.sfx;
             this.sound.play();
             this.velocity = 1;
+            this.game.introSound.pause();
             return;
         }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
