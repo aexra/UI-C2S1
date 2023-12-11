@@ -25,7 +25,7 @@ export class Default extends AIState {
     update(input, deltaTime) {
         this.ai.followPoint(this.initialFollowPoint);
 
-        if (this.npc.position.equal(this.initialFollowPoint)) {
+        if (Vec2.minus(this.npc.position, this.initialFollowPoint).length() <= 300) {
             this.ai.switch("chase");
         }
     }
@@ -83,15 +83,15 @@ export class ChainDashAttack extends AIState {
         this.dashCount = 0;
         this.dashesPerPhase = 7;
         this.dashDistance = 2000;
-        this.minDistanceToDash = 500;
+        this.minDistanceToDash = 800;
 
-        this.dashSpeed = 32;
+        this.dashSpeed = 40;
         this.dashStirAngle = 0;
         
-        this.stirSpeed = 20;
+        this.stirSpeed = 24;
         this.stirStirAngle = 0.03;
 
-        this.chaseSpeed = 24;
+        this.chaseSpeed = 30;
         this.chaseStirAngle = 0.01;
 
         this.states = {
