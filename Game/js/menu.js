@@ -86,8 +86,8 @@ function styleSliders() {
 	for (var slider of document.getElementsByClassName("options-slider")) {
 		slider.oninput = (e) => {
 			updateSliderProgress(e.target);
+			updateSliderTooltip(e.target);
 		};
-		updateSliderProgress(slider);
 	}
 
 	document.getElementById("audio-music-range").addEventListener("input", (e) => {
@@ -98,11 +98,6 @@ function styleSliders() {
 		localStorage.setItem("sfx-volume", e.target.value / 100);
 		applyAudioVolume();
 	});
-}
-
-function updateSliderProgress(slider) {
-	var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
-	slider.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)';
 }
 
 function fillScoresTable() {
@@ -388,10 +383,27 @@ function loadAudioVolumesToSliders() {
 	const audio = getAudioVolume();
 	const music_slider = document.getElementById("audio-music-range");
 	const sfx_slider = document.getElementById("audio-sfx-range");
-	music_slider.value = audio.music * 100;
-	sfx_slider.value = audio.sfx * 100;
+	
+	const music_value = audio.music * 100;
+	const sfx_value = audio.sfx * 100;
+
+	music_slider.value = music_value;
+	sfx_slider.value = sfx_value;
+
+	updateSliderTooltip(music_slider);
+	updateSliderTooltip(sfx_slider);
+
 	updateSliderProgress(music_slider);
 	updateSliderProgress(sfx_slider);
+}
+
+function updateSliderProgress(slider) {
+	var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
+	slider.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)';
+}
+
+function updateSliderTooltip(slider) {
+	slider.parentElement.querySelector(".slider-tooltip").innerHTML = slider.value;
 }
 
 function applySettingsButtonsAudio() {

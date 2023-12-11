@@ -397,7 +397,16 @@ h2 {
 
 	width: 90%;
 }
-.options-popup > .container > .range > span {
+.options-popup > .container > .range > .text-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+}
+.options-popup > .container > .range > .text-wrapper > span.slider-tooltip {
+	margin-left: auto;
+	font-size: 16px;
+}
+.options-popup > .container > .range > .text-wrapper > span {
 	font-family: 'Jost', sans-serif;
 	font-size: 22px;
 	color: #fff;
@@ -432,9 +441,6 @@ h2 {
 }
 .options-popup > .container > .range > input[type="range"]::-webkit-slider-thumb:active {
 	background-color: #ffbbdd;
-}
-.options-popup > .container > .range > span.slider-tooltip {
-
 }
 
 
