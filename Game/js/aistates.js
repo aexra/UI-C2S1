@@ -10,6 +10,9 @@ class AIState {
     update(input, deltaTime) {
 
     }
+    onSwitch() {
+        
+    }
 }
 
 export class Idle extends AIState {

@@ -26,6 +26,7 @@ export class ThanatosAI {
     }
     switch(state) {
         this.state = states[state];
+        this.state.onSwitch();
     }
     followPoint(p) {
         var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
