@@ -81,7 +81,7 @@ export class ChainDashAttack extends AIState {
         super(ai);
 
         this.dashCount = 0;
-        this.dashDistance = 500;
+        this.dashDistance = 1500;
         this.minDistanceToDash = 200;
 
         this.dashSpeed = 20;
@@ -108,25 +108,31 @@ export class ChainDashAttack extends AIState {
     }
     updateState(input, deltaTime) {
         if (this.state != this.states.dash) {
-            if (this.ai.getAngleToPoint(this.player.position) > 0) {
+            if (Math.abs(this.ai.getAngleFromHeadToPoint(this.player.position)) > 0.2) {
                 this.state = this.states.stir;
                 return;
             } else {
                 this.state = this.states.chase;
             }
         } else {
-            if (this.npc.position.equal(this.aimpos)) {
+            if (Vec2.minus(this.npc.position, this.aimpos).length() < 300) {
                 this.state = this.states.stir;
+                this.aimpos = null;
+            } else {
+                // console.log(Vec2.minus(this.npc.position, this.aimpos).length());
             }
             return;
         }
-        if (Vec2.minus(this.player.position, this.npc.position) < this.minDistanceToDash) {
+        if (Vec2.minus(this.player.position, this.npc.position).length() < this.minDistanceToDash) {
             this.state = this.states.dash;
             this.aimpos = this.calcAimPos();
+            // console.log(this.aimpos);
         }
     }
     calcAimPos() {
         var angle = this.ai.getAngleToPoint(this.player.position);
+        if (!angle) return this.npc.direction;
+        console.log(angle);
         return new Vec2(
             this.npc.position.x + Math.cos(angle) * this.dashDistance,
             this.npc.position.y + Math.sin(angle) * this.dashDistance

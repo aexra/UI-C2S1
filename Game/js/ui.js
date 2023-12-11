@@ -185,6 +185,17 @@ export class UI extends GameObject {
         c.fillRect(this.position.x + this.minimap.position.x + this.game.player.position.x * this.minimap.scale / this.game.player.camera.scale.x - 2 / this.game.player.camera.scale.x,
             -this.position.y + this.minimap.position.y + this.game.player.position.y * this.minimap.scale / this.game.player.camera.scale.x - 2 / this.game.player.camera.scale.x, 4 / this.game.player.camera.scale.x, 4 / this.game.player.camera.scale.x);
 
+
+        if (this.game.thanatos) {
+            if (this.game.thanatos.ai.state.aimpos) {
+                var pos = this.game.thanatos.ai.state.aimpos;
+                c.fillStyle = "rgba(0, 0, 255, 1)";
+                c.fillRect(this.position.x + this.minimap.position.x + pos.x * this.minimap.scale / this.game.player.camera.scale.x - 2 / this.game.player.camera.scale.x,
+                    -this.position.y + this.minimap.position.y + pos.y * this.minimap.scale / this.game.player.camera.scale.x - 2 / this.game.player.camera.scale.x, 4 / this.game.player.camera.scale.x, 4 / this.game.player.camera.scale.x);        
+            }
+        }
+
+        
         // c.strokeStyle = "rgba(100, 100, 100, 1)";
         // c.lineWidth = 2;
         // c.strokeRect(-this.position.x + this.minimap.position.x - 2, -this.position.y + this.minimap.position.y - 2, this.minimap.size.x + 4, this.minimap.size.y + 4);

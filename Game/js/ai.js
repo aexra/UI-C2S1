@@ -35,12 +35,16 @@ export class ThanatosAI {
 
         return angle;
     }
+    getAngleFromHeadToPoint(p) {
+        return this.getAngleToPoint(p) - this.head.direction;
+    }
     followPoint(p, speed=14, maxStirAngle=0.02) {
         var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
 
         var angle = this.getAngleToPoint(p);
 
         this.head.velocity = Math.min(diff.length(), speed);
+        // this.head.velocity = speed;
         
         if (angle) this.rotateTo(diff, angle, maxStirAngle);
     }
