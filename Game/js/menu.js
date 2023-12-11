@@ -400,6 +400,11 @@ function applySettingsButtonsAudio() {
 			quiet_hover.play();
 		});
 	}
+	for (const btn of document.getElementsByClassName("option-btn")) {
+		btn.addEventListener("click", (e) => {
+			click.play();
+		});
+	}
 	for (const slider of document.getElementsByClassName("options-slider")) {
 		slider.addEventListener("mouseenter", (e) => {
 			quiet_hover.play();
