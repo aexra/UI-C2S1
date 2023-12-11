@@ -357,6 +357,10 @@ export class Thanatos extends ThanatosSegment {
                     this.game.deleteParticleEmitter(this.segments[i].death_pe);
                     this.game.npcs.splice(this.game.npcs.indexOf(this.segments[i]), 1);
                 }
+                setTimeout(() => {
+                    var element = document.getElementById("victory-screen");
+                    element.classList.add("screen-visible");
+                }, 1000);
             }
             return;
         }

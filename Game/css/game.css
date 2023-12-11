@@ -213,3 +213,70 @@ footer > button#inputs {
 .panel-visible {
 	top: calc(50% - 200px - 10px);
 }
+
+.end-screen {
+	opacity: 0;
+	pointer-events: none;
+}
+.screen-visible {
+	opacity: 1;
+}
+#victory-screen {
+	position: absolute;
+
+	height: calc(100% - 50px);
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+
+	background-color: rgba(0, 0, 0, 0.6);
+
+	transition: all 0.5s ease;
+}
+#victory-screen > span {
+	color: #fff;
+
+	font-size: 22px;
+	font-family: 'andy', sans-serif;
+}
+#victory-screen > span.title {
+	color: #8ADE2E;
+}
+#victory-screen > span > b.scorebox {
+	color: #fff;
+	text-decoration: underline;
+}
+
+#defeat-screen {
+	position: absolute;
+
+	height: calc(100% - 50px);
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+
+	background-color: rgba(0, 0, 0, 0.6);
+
+	transition: all 0.5s ease;
+}
+#defeat-screen > span {
+	color: #fff;
+
+	font-size: 22px;
+	font-family: 'andy', sans-serif;
+}
+#defeat-screen > span.title {
+	color: #ce0f0f;
+}
+#defeat-screen > span > b.scorebox {
+	color: #fff;
+	text-decoration: underline;
+}
