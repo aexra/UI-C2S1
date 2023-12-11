@@ -148,3 +148,20 @@ footer > button#inputs {
 .lvl4 {
 	background: black;
 }
+
+.key-bindings-panel {
+	position: absolute;
+
+	top: -400px;
+	width: 700px;
+	height: 400px;
+
+	left: calc(50% - 350px);
+
+	background-color: #3636FF;
+
+	transition: all 0.3s ease;
+}
+.panel-visible {
+	top: 0;
+}
