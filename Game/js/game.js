@@ -114,7 +114,6 @@ window.addEventListener("load", (e) => {
 			if (!thisLevelRecordsString) thisLevelRecordsString = "";
 			thisLevelRecordsString += this.getRecordString() + ',';
 			localStorage.setItem(`levelRecords${this.level}`, thisLevelRecordsString);
-			console.log(thisLevelRecordsString);
 		}
 		getRecordString() {
 			const username = sessionStorage.getItem('username');

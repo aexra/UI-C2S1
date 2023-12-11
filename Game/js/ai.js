@@ -1,5 +1,6 @@
 import { Vec2 } from './vec2.js';
 import * as AIStates from './aistates.js';
+import { Random } from './misc.js';
 
 export class ThanatosAI {
     constructor(head) {
@@ -13,11 +14,14 @@ export class ThanatosAI {
         this.chaseSpeed = 18;
 
         this.states = {
+            "default": new AIStates.Default(this),
             "idle": new AIStates.Idle(this),
             "chase": new AIStates.Chase(this),
             "chaseCursor": new AIStates.ChaseCursor(this),
+            "chainDashAttack": new AIStates.ChainDashAttack(this),
         };
-        this.state = this.states["chase"];
+        this.state = null;
+        this.switch("default");
 
         this.head.openHeadAndRandomSegments();
     }
@@ -25,7 +29,7 @@ export class ThanatosAI {
         this.state.update(input, deltaTime);
     }
     switch(state) {
-        this.state = states[state];
+        this.state = this.states[state];
         this.state.onSwitch();
     }
     followPoint(p) {
@@ -65,5 +69,11 @@ export class ThanatosAI {
 
         this.head.direction = angle - Math.floor(angle / (Math.PI * 2)) * Math.PI * 2;
         this.head.directionalVector = new Vec2(Math.cos(angle), Math.sin(angle));
+    }
+    setRandomAttackState() {
+        var attacks = [
+            "chainDashAttack",
+        ];
+        this.switch(attacks[Random.randi(0, attacks.length - 1)]);
     }
 }
