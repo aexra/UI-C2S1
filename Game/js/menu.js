@@ -20,6 +20,8 @@ click.volume = 0.1;
 var error = new Audio("../resources/main/music/error.mp3");
 error.volume = 0.1;
 
+applyAudioVolume();
+
 window.onload = function() {
 	styleSliders();
 
@@ -83,9 +85,11 @@ function styleSliders() {
 
 	document.getElementById("audio-music-range").addEventListener("input", (e) => {
 		localStorage.setItem("music-volume", e.target.value);
+		applyAudioVolume();
 	});
 	document.getElementById("audio-sfx-range").addEventListener("input", (e) => {
 		localStorage.setItem("sfx-volume", e.target.value);
+		applyAudioVolume();
 	});
 }
 
