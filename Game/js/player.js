@@ -332,6 +332,11 @@ export class Player {
 
         this.death_pe.emit();
 
+        this.game.isFightInitiated = false;
+        for (var box of document.getElementsByClassName("scorebox")) {
+            box.innerHTML = this.game.score;
+        }
+        document.getElementById("defeat-screen").classList.add("screen-visible");
         this.game.saveRecord();
     }
 }
