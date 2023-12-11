@@ -375,6 +375,7 @@ export class Thanatos extends ThanatosSegment {
                 seg.emitDeathPE();
             }
             new ThanatosDeathScreen(this.game);
+            this.game.isFightInitiated = false;
             return;
         }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
