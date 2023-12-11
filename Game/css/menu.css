@@ -349,11 +349,18 @@ h2 {
 
 	border: 0;
 	border-radius: 10px;
-	background: linear-gradient(0.1turn, #6644cc, #ee3399);
+	background: black;
 	box-shadow: 0 0 10px black;
 
 	cursor: pointer;
 	transition: all 0.3s ease;
+
+	margin-bottom: 15px;
+}
+.options-popup > .container > button#log-out-btn {
+	background: linear-gradient(0.1turn, #6644cc, #ee3399);
+}.options-popup > .container > button#clear-local-storage-btn {
+	background: linear-gradient(0.1turn, #6d0e0e, #ff1717);
 }
 .options-popup > .container > button:hover {
 	box-shadow: 0 0 20px black;

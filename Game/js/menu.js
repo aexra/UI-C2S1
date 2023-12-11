@@ -61,6 +61,16 @@ window.onload = function() {
 	loadUsername();
 }
 
+function onLogOutPressed() {
+	click.play();
+	logOut();
+}
+
+function logOut() {
+	sessionStorage.setItem("username", "");
+	loadUsername();
+}
+
 function styleSliders() {
 	for (var slider of document.getElementsByClassName("options-slider")) {
 		slider.oninput = (e) => {
@@ -325,6 +335,9 @@ function loadUsername() {
 	if (name) {
 		document.getElementById("name-span").innerHTML = name;
 		document.getElementById("name-input").value = name;
+	} else {
+		document.getElementById("name-span").innerHTML = "Log in";
+		document.getElementById("name-input").value = "";
 	}
 }
 

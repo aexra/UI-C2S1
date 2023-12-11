@@ -127,6 +127,7 @@
 		</div>
 		<div class="options-popup" id="options-popup">
 			<div class="container">
+				<!-- AUDIO -->
 				<h1>Audio</h1>
 				<div class="range">
 					<span>Music</span>
@@ -136,8 +137,12 @@
 					<span>SFX</span>
 					<input type="range" name="" class="options-slider" id="audio-sfx-range" min="0" max="100" value="10">
 				</div>
+				<!-- MISC -->
 				<h1>Misc</h1>
-				<button id="clearLocalStorageBtn" onclick="clearLocalStorage()">
+				<button id="log-out-btn" onclick="onLogOutPressed()">
+					<span>Log Out</span>
+				</button>
+				<button id="clear-local-storage-btn" onclick="clearLocalStorage()">
 					<span>Clear Local Storage</span>
 				</button>
 			</div>
