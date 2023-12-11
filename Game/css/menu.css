@@ -425,14 +425,18 @@ h2 {
 
 	transition: all 0.1s ease;
 }
-.options-popup > .container > .range > input[type="range"]:hover::-webkit-slider-thumb {
+.options-popup > .container > .range > input[type="range"]::-webkit-slider-thumb:hover {
 	height: 14px;
 	margin-top: -4px;
 	background-color: #ff8dc6;
 }
-.options-popup > .container > .range > input[type="range"]:active::-webkit-slider-thumb {
+.options-popup > .container > .range > input[type="range"]::-webkit-slider-thumb:active {
 	background-color: #ffbbdd;
 }
+.options-popup > .container > .range > span.slider-tooltip {
+
+}
+
 
 #main-menu {	
 	display: flex;
