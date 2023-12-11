@@ -352,3 +352,18 @@ function clearLocalStorage() {
 	click.play();
 	localStorage.clear();
 }
+
+function getAudioVolume() {
+	return {
+		music: localStorage.getItem("music-volume") / 100 ?? 0.1,
+		sfx: localStorage.getItem("sfx-volume") / 100 ?? 0.1,
+	};
+}
+
+function applyAudioVolume() {
+	const sfx = getAudioVolume().sfx;
+	hover.volume = sfx;
+	hover_extra.volume = sfx;
+	click.volume = sfx;
+	error.volume = sfx;
+}
