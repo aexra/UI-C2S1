@@ -109,7 +109,7 @@ export class ChainDashAttack extends AIState {
     }
     updateState(input, deltaTime) {
         if (this.state != this.states.dash) {
-            if (Math.abs(this.ai.getAngleFromHeadToPoint(this.player.position)) > 0.1) {
+            if (Math.abs(this.ai.getAngleFromHeadToPoint(this.player.position)) > 0.2) {
                 this.state = this.states.stir;
                 return;
             } else {
