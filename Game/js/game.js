@@ -228,7 +228,7 @@ window.addEventListener("load", (e) => {
 				// introSound.volume = 0.1;
 				// introSound.play();
 				var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
-				introSound.volume = Config.audio.sfx;
+				introSound.volume = Config.audio.music;
 				introSound.play();
 				this.initiateFight();
 			}, 3000);
