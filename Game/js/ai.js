@@ -27,11 +27,18 @@ export class ThanatosAI {
         this.state = new this.states[state](this);
         this.state.onSwitch();
     }
-    followPoint(p, speed=14, maxStirAngle=0.02) {
+    getAngleToPoint(p) {
         var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
 
         var angle = Math.atan(diff.y / Math.abs(diff.x));
         angle += diff.x < 0? Math.PI - angle * 2 : 0;
+
+        return angle;
+    }
+    followPoint(p, speed=14, maxStirAngle=0.02) {
+        var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
+
+        var angle = this.getAngleToPoint(p);
 
         this.head.velocity = Math.min(diff.length(), speed);
         
