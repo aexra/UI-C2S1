@@ -39,10 +39,34 @@ footer {
 	align-items: center;
 	justify-content: center;
 }
-footer > span#timer {
+footer > span {
 	font-size: 32px;
 	font-family: 'Outfit', sans-serif;
 	color: white;
+
+	padding: 0 20px 0 20px;
+}
+footer > button {
+	height: 30px;
+	width: 150px;
+
+	border: 2px solid rgb(73, 73, 73);
+	border-radius: 3px 3px 0 0;
+	background-color: #252526;
+	color: white;
+	box-shadow: 0 2px 10px black;
+
+	transition: all 0.2s ease;
+	cursor: pointer;
+}
+footer > button:hover {
+	transform: translateY(2px);
+	background-color: #4b4d53;
+	border: 2px solid rgb(143, 143, 143);
+}
+footer > button#inputs {
+	position: absolute;
+	left: 0;
 }
 
 .game-resource {
