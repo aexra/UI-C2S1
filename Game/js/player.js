@@ -1,7 +1,7 @@
 import * as accessories from "./accessories.js";
 import * as weapons from "./weapons.js"
 import { Vec2 } from "./vec2.js";
-import { Random } from "./misc.js";
+import { Config, Random } from "./misc.js";
 import { Vec4 } from "./vec4.js";
 import { Light } from "./light.js";
 
@@ -306,6 +306,10 @@ export class Player {
 
         this.accessories[0].pe1.stop();
         this.accessories[0].pe2.stop();
+
+        var sound = new Audio("../resources/game/player/death.wav");
+        sound.volume = Config.audio.sfx;
+        sound.play();
 
         this.game.saveRecord();
     }
