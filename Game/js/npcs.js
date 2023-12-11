@@ -310,7 +310,9 @@ export class Thanatos extends ThanatosSegment {
         game.npcs.push(this);
 
         // game values
-        this.maxHP = 100000;
+        this.maxHP = game.level == 4? 100000 :
+            game.level == 3? 80000 : 
+            game.level == 2? 50000 : 35000;
         this.hp = this.maxHP;
         this.collisionDamage = 
             game.level == 4? 250 :
@@ -318,8 +320,22 @@ export class Thanatos extends ThanatosSegment {
             game.level == 2? 100 : 50;
 
         this.ai = new ThanatosAI(this);
+
+        this.dead = false;
     }
     update(input, deltaTime) {
+        if (this.dead) {
+            this.hp = 0;
+            this.velocity = Math.max(0, this.velocity - 2 * deltaTime);
+            return;
+        }
+        if (this.hp <= 0) {
+            this.dead = true;
+            this.sound = new Audio("../resources/game/npcs/sounds/thanatos/death.ogg");
+            this.sound.volume = Config.audio.sfx;
+            this.sound.play();
+            return;
+        }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
         this.updateImmunity(input, deltaTime);
         this.updateHitsounds(input, deltaTime);
@@ -397,11 +413,11 @@ export class Thanatos extends ThanatosSegment {
         }
         this.hp -= damage;
     }
-    openHeadAndRandomSegments(nseg=20) {
+    openHeadAndRandomSegments(nseg=this.game.level == 4? 20 : this.game.level == 3? 23 : this.game.level == 2? 26 : 30) {
         this.open();
         this.openRandomSegments(nseg);
     }
-    openRandomSegments(nseg=20) {
+    openRandomSegments(nseg=this.game.level == 4? 20 : this.game.level == 3? 23 : this.game.level == 2? 26 : 30) {
         var toOpen = [];
         for (var i = 0; i < nseg; i++) {
             var randi = Random.randi(1, this.nsegments);

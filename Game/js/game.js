@@ -44,6 +44,8 @@ window.addEventListener("load", (e) => {
 
 			this.fightTimer = 0;
 			this.score = 0;
+
+			this.introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
 		}
 		update(deltaTime) {
 			if (this.isFightInitiated) {
@@ -227,17 +229,10 @@ window.addEventListener("load", (e) => {
 				// var introSound = new Audio("../resources/game/npcs/sounds/exo_intro.ogg");
 				// introSound.volume = 0.1;
 				// introSound.play();
-				var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
-				introSound.volume = Config.audio.music;
-				introSound.play();
+				this.introSound.volume = Config.audio.music;
+				this.introSound.play();
 				this.initiateFight();
 			}, 3000);
-			setTimeout(() => {
-				// this.initiateFight();
-				// var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
-				// introSound.volume = 0.06;
-				// introSound.play();
-			}, 6000);
 		}
 		initiateFight() {
 			this.isFightInitiated = true;
