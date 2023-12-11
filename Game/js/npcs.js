@@ -2,7 +2,7 @@ import { AnimatedSprite } from "./animatedSprite.js";
 import { NPC } from "./npc.js";
 import { Vec2 } from "./vec2.js";
 import { Vec3 } from "./vec3.js";
-import { Collision, Random } from "./misc.js";
+import { Collision, Config, Random } from "./misc.js";
 import { ThanatosAI } from "./ai.js";
 import { SpriteSheet } from "./spritesheet.js";
 
@@ -247,7 +247,7 @@ export class ThanatosChildSegment extends ThanatosSegment {
         this.game.createDI(this.position, damage, iscrit, type);
         if (this.head.hitsoundTimer == 0) {
             var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
-            hitsound.volume = 0.1;
+            hitsound.volume = Config.audio.sfx;
             hitsound.play();
             this.head.hitsoundTimer++;
         }
@@ -384,7 +384,7 @@ export class Thanatos extends ThanatosSegment {
         this.game.createDI(this.position, damage, iscrit, type);
         if (this.hitsoundTimer == 0) {
             var hitsound = new Audio("../resources/game/npcs/thanatos/hit.wav");
-            hitsound.volume = 0.1;
+            hitsound.volume = Config.audio.sfx;
             hitsound.play();
             this.hitsoundTimer++;
         }

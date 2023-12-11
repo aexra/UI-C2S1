@@ -1,5 +1,5 @@
 import { Vec2 } from "./vec2.js";
-import { Random } from "./misc.js";
+import { Random, Config } from "./misc.js";
 
 class Accessory {
     constructor(player) {
@@ -164,7 +164,7 @@ export class NormalityRelocator {
         this.pathpes = [];
 
         this.sound = new Audio("../resources/game/accessories/relocator.wav");
-        this.sound.volume = 0.2;
+        this.sound.volume = Config.audio.sfx;
         this.sound.playbackRate = 1.4;
     }
     update(input, deltaTime) {

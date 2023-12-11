@@ -84,11 +84,11 @@ function styleSliders() {
 	}
 
 	document.getElementById("audio-music-range").addEventListener("input", (e) => {
-		localStorage.setItem("music-volume", e.target.value);
+		localStorage.setItem("music-volume", e.target.value / 100);
 		applyAudioVolume();
 	});
 	document.getElementById("audio-sfx-range").addEventListener("input", (e) => {
-		localStorage.setItem("sfx-volume", e.target.value);
+		localStorage.setItem("sfx-volume", e.target.value / 100);
 		applyAudioVolume();
 	});
 }
@@ -359,8 +359,8 @@ function clearLocalStorage() {
 
 function getAudioVolume() {
 	return {
-		music: localStorage.getItem("music-volume") / 100 ?? 0.1,
-		sfx: localStorage.getItem("sfx-volume") / 100 ?? 0.1,
+		music: localStorage.getItem("music-volume") ?? 0.1,
+		sfx: localStorage.getItem("sfx-volume") ?? 0.1,
 	};
 }
 

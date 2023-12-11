@@ -1,6 +1,7 @@
 import { MeleeWeapon, RangedWeapon, MagicWeapon, SummonerWeapon } from "./weaponTypes.js"
 import * as projectiles from "./projectiles.js"
 import { Vec2 } from "./vec2.js";
+import { Config } from "./misc.js";
 
 // MELEE WEAPONS
 
@@ -22,10 +23,10 @@ export class TerraBlade extends MeleeWeapon {
     onFire(input, deltaTime) {
         this.player.game.projectiles.push(new projectiles.TerraBeam(this, input.mpx, input.mpy));
         let meleeSound = new Audio("../resources/game/weapons/melee/melee.wav");
-        meleeSound.volume = 0.01;
+        meleeSound.volume = Config.audio.sfx;
         meleeSound.play();
         let sound = new Audio("../resources/game/weapons/melee/terrablade/terrablade.wav");
-        sound.volume = 0.05;
+        sound.volume = Config.audio.sfx;
         sound.play();
     }
 }

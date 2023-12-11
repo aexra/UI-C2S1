@@ -97,3 +97,16 @@ export class Collision {
     //     return result;
     // }
 }
+
+export class Config {
+    static audio = {
+        music: 0.1,
+        sfx: 0.1,
+    };
+    static load() {
+        this.audio = {
+            music: localStorage.getItem("music-volume") ?? 0.1,
+            sfx: localStorage.getItem("sfx-volume") ?? 0.1,
+        };
+    }
+}

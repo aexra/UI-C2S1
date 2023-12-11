@@ -1,4 +1,5 @@
 import { Weapon } from "./weapon.js"
+import { Config } from "./misc.js";
 
 export class MeleeWeapon extends Weapon {
     constructor(player) {
@@ -47,6 +48,7 @@ export class MeleeWeapon extends Weapon {
     }
     onFire() {
         let meleeSound = new Audio("../resources/game/weapons/melee/melee.wav");
+        meleeSound.volume = Config.audio.sfx;
         meleeSound.play();
     }
 }

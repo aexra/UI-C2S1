@@ -5,7 +5,7 @@ import { Vec2 } from "./vec2.js";
 import { ParticleEmitter } from "./particleEmitter.js";
 import { UI } from "./ui.js";
 import { DamageIndicator } from "./damageIndicator.js";
-import { Collision, Random } from "./misc.js";
+import { Collision, Random, Config } from "./misc.js";
 import { Thanatos } from "./npcs.js";
 import * as visuals from "./visualEffects.js";
 
@@ -20,6 +20,7 @@ window.addEventListener("load", (e) => {
 		constructor(size, canvasSize, ctx) {
 			this.level = parseInt(sessionStorage.getItem("diff")[3]); // this is int (1..4)
 			setLevelBanner(this.level);
+			Config.load();
 
 			this.size = size;
 			this.canvasSize = canvasSize;
@@ -209,7 +210,7 @@ window.addEventListener("load", (e) => {
 			this.isDraedonInitiated = true;
 
 			var beamSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/CodebreakerBeam.wav");
-			beamSound.volume = 0.05;
+			beamSound.volume = Config.audio.sfx;
 			beamSound.play();
 
 			new visuals.DraedonInitiatingBeam(this);
@@ -218,7 +219,7 @@ window.addEventListener("load", (e) => {
 
 			setTimeout(() => {
 				var teslaSound = new Audio("../resources/game/tilesets/incollisionable/codebreaker/TeslaCannonFire.wav");
-				teslaSound.volume = 0.05;
+				teslaSound.volume = Config.audio.sfx;
 				teslaSound.play();
 			  }, 1000)
 			setTimeout(() => {
@@ -227,7 +228,7 @@ window.addEventListener("load", (e) => {
 				// introSound.volume = 0.1;
 				// introSound.play();
 				var introSound = new Audio("../resources/game/npcs/sounds/exo_theme.mp3");
-				introSound.volume = 0.06;
+				introSound.volume = Config.audio.sfx;
 				introSound.play();
 				this.initiateFight();
 			}, 3000);
