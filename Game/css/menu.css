@@ -386,9 +386,10 @@ h2 {
 	background: transparent;
 	cursor: pointer;
 	width: 100%;
+	border-radius: 20px;
 }
 .options-popup > .container > .range > input[type="range"]::-webkit-slider-runnable-track {
-	background: #515151;
+	/* background: #515151; */
   	height: 6px;
 	border-radius: 20px;
 }

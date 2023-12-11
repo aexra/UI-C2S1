@@ -62,14 +62,14 @@ window.onload = function() {
 }
 
 function styleSliders() {
-	// for (var slider of document.getElementsByClassName("options-slider")) {
-	// 	slider.oninput = (e) => {
-	// 		var value = (e.target.value-e.target.min)/(e.target.max-e.target.min)*100;
-	// 		e.target.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
-	// 	};
-	// 	var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
-	// 	slider.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
-	// }
+	for (var slider of document.getElementsByClassName("options-slider")) {
+		slider.oninput = (e) => {
+			var value = (e.target.value-e.target.min)/(e.target.max-e.target.min)*100;
+			e.target.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)'
+		};
+		var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
+		slider.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)'
+	}
 }
 
 function fillScoresTable() {
