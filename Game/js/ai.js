@@ -31,7 +31,7 @@ export class ThanatosAI {
         var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
 
         var angle = Math.atan(diff.y / Math.abs(diff.x));
-        angle += diff.x < 0? Math.PI - angle * 2 : 0;
+        angle += diff.x < 0? diff.y > 0? Math.PI - angle * 2 : -Math.PI - angle * 2 : 0;
 
         return angle;
     }
