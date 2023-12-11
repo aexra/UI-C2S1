@@ -102,6 +102,9 @@ export class ChainDashAttack extends AIState {
         this.state = this.states.chase;
 
         this.aimpos = null;
+
+        this.transitionSound = new Audio("../resources/game/npcs/sounds/thanatos/thanatos_transition.ogg");
+        this.transitionSound.volume = Config.audio.sfx;
     }
     update(input, deltaTime) {
         this.updateState(input, deltaTime);
@@ -156,5 +159,6 @@ export class ChainDashAttack extends AIState {
     }
     onSwitch() {
         console.log("chainDashAttack");
+        this.transitionSound.play();
     }
 }
