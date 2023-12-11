@@ -261,10 +261,13 @@ export class EvasionScarf extends Accessory {
         this.pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
         this.pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
         this.pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+        // this.pe.angle = 360;
         this.pe.angle = 0;
         this.pe.lightParticles = true;
         this.pe.rotationSpeed = 0.2;
         this.pe.particleGravityModifier = 0.2;
+        // this.pe.perEmission = 20;
+        // this.pe.particleInitialSpeed = new Vec2(1, 1)
     }
     update(input, deltaTime) {
         if (this.dashTimer != 0) {

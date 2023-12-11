@@ -58,6 +58,25 @@ export class Player {
             position: this.position,
             size: Vec2.minus(this.size, new Vec2(4, 4)),
         };
+
+        this.death_pe = this.game.createParticleEmitter();
+        this.death_pe.perEmission = 20;
+        this.death_pe.lifeTime = new Vec2(1, 1);
+        this.death_pe.particleSize = new Vec2(15, 15);
+        this.death_pe.shape = document.getElementById("redParticle");
+        this.death_pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+        this.death_pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+        this.death_pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+        this.death_pe.angle = 360;
+        this.death_pe.lightParticles = true;
+        this.death_pe.rotationSpeed = 0.2;
+        this.death_pe.particleGravityModifier = 10;
+        this.death_pe.particleInitialSpeed = new Vec2(2, 2)
+        this.death_pe.setFrequency(20);
+        this.death_pe.onemit = (s) => {
+            console.log("da");
+            s.stop();
+        };
     }
     update(input, deltaTime) {
         if (this.dead) return;
@@ -65,7 +84,7 @@ export class Player {
             this.onDeath();
             return;
         };
-
+        if (input.keys.includes("u")) this.death_pe.emit();
         let left = input.keys.includes("a");
         let right = input.keys.includes("d");
 
@@ -140,6 +159,7 @@ export class Player {
         }
 
         this.updateLight(input, deltaTime);
+        this.death_pe.position = this.position.copy().add(this.size.copy().multiply(0.5));
     }
     draw(c) {
         if (this.hp <= 0) return;
@@ -310,6 +330,8 @@ export class Player {
         var sound = new Audio("../resources/game/player/death.wav");
         sound.volume = Config.audio.sfx;
         sound.play();
+
+        this.death_pe.emit();
 
         this.game.saveRecord();
     }

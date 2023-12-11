@@ -21,6 +21,7 @@ export class ParticleEmitter extends GameObject {
         this.filter = 'none';
         this.lightParticles = false;
         this.rotationSpeed = 0;
+        this.perEmission = 1;
 
         // это любое изображение, которое будет использовано в качестве частицы
         // filter будет изменять его цвет
@@ -55,7 +56,9 @@ export class ParticleEmitter extends GameObject {
             this.timer += deltaTime;
             if (this.emitting && this.timer > this.interval) {
                 this.timer = 0;
-                this.createParticle();
+                for (var i = 0; i < this.perEmission; i++) {
+                    this.createParticle();
+                }
                 this.onemit(this);
                 // this.stop();
             }
