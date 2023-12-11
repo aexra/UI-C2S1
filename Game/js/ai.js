@@ -8,9 +8,6 @@ export class ThanatosAI {
         this.game = head.game;
         this.segments = head.segments;
 
-        this.maxStirAngle = 0.02;
-        this.maxStirSpeed = 4;
-
         this.states = {
             "default": AIStates.Default,
             "idle": AIStates.Idle,
@@ -30,7 +27,7 @@ export class ThanatosAI {
         this.state = new this.states[state](this);
         this.state.onSwitch();
     }
-    followPoint(p, speed=14) {
+    followPoint(p, speed=14, maxStirAngle=0.02) {
         var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
 
         var angle = Math.atan(diff.y / Math.abs(diff.x));
@@ -38,9 +35,9 @@ export class ThanatosAI {
 
         this.head.velocity = Math.min(diff.length(), speed);
         
-        if (angle) this.rotateTo(diff, angle);
+        if (angle) this.rotateTo(diff, angle, maxStirAngle);
     }
-    rotateTo(diff, angle) {
+    rotateTo(diff, angle, maxStirAngle=0.02) {
         var dangle = angle - this.head.direction;
 
         if (dangle < 0) {
@@ -56,12 +53,12 @@ export class ThanatosAI {
         }
 
         if (dangle < 0) {
-            if (dangle < -this.maxStirAngle) {
-                angle += -this.maxStirAngle-dangle;
+            if (dangle < -maxStirAngle) {
+                angle += -maxStirAngle-dangle;
             }
         } else {
-            if (dangle > this.maxStirAngle) {
-                angle -= dangle-this.maxStirAngle;
+            if (dangle > maxStirAngle) {
+                angle -= dangle-maxStirAngle;
             }
         }
 

@@ -82,6 +82,13 @@ export class ChainDashAttack extends AIState {
 
         this.dashCount = 0;
         this.dashSpeed = 20;
+        this.dashStirAngle = 0;
+        
+        this.stirSpeed = 2;
+        this.stirStirAngle = 0.1;
+
+        this.chaseSpeed = 14;
+        this.chaseStirAngle = 0.03;
     }
     update(input, deltaTime) {
         this.ai.followPoint(this.player.position);
