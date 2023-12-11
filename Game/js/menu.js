@@ -377,6 +377,8 @@ function applyAudioVolume() {
 	hover_extra.volume = sfx;
 	click.volume = sfx;
 	error.volume = sfx;
+	quiet_hover.volume = sfx;
+	quiet_hover_extra.volume = sfx;
 }
 
 function loadAudioVolumesToSliders() {
