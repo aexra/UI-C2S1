@@ -214,7 +214,7 @@ export class ThanatosChildSegment extends ThanatosSegment {
         this.initialRotation = Math.PI / 2;
 
         this.diff = new Vec2();
-        this.maxdist = 80;
+        this.maxdist = 50;
 
         this.collisionDamage = 
             game.level == 4? 100 :

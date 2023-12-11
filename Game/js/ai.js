@@ -16,7 +16,7 @@ export class ThanatosAI {
             "chainDashAttack": AIStates.ChainDashAttack,
         };
         this.state = null;
-        this.switch("default");
+        this.switch("chainDashAttack");
 
         this.head.openHeadAndRandomSegments();
     }
