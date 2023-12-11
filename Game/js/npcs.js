@@ -395,6 +395,7 @@ export class Thanatos extends ThanatosSegment {
             hitsound.play();
             this.hitsoundTimer++;
         }
+        this.hp -= damage;
     }
     openHeadAndRandomSegments(nseg=20) {
         this.open();

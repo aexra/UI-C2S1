@@ -19,6 +19,7 @@ window.addEventListener("load", (e) => {
 	class Game {
 		constructor(size, canvasSize, ctx) {
 			this.level = parseInt(sessionStorage.getItem("diff")[3]); // this is int (1..4)
+			this.timerObject = document.getElementById("timer");
 			setLevelBanner(this.level);
 			Config.load();
 
@@ -131,10 +132,10 @@ window.addEventListener("load", (e) => {
 		}
 		getDurationString() {
 			const seconds = Math.floor(this.fightTimer / 1000);
-			if (Math.floor(seconds / 3600) == 0) {
+			if (Math.floor(seconds / 60) == 0) {
 				return `${seconds}s`;
 			} else {
-				return `${Math.floor(seconds / 3600)}m ${seconds % 3600}s`;
+				return `${Math.floor(seconds / 60)}m ${seconds % 60}s`;
 			}
 		}
 		updateHits(input, deltaTime) {
@@ -247,6 +248,10 @@ window.addEventListener("load", (e) => {
 
 	const game = new Game(new Vec2(72000, 72000), new Vec2(canvas.width, canvas.height), ctx);
 	let lastTime = 0;
+
+	setTimeout(() => {
+		game.timerObject.innerHTML = game.getDurationString();
+	}, 1000);
 
 	function animate(timeStamp) {
 		const deltaTime = timeStamp - lastTime;
