@@ -11,8 +11,6 @@ export class ThanatosAI {
         this.maxStirAngle = 0.02;
         this.maxStirSpeed = 4;
 
-        this.chaseSpeed = 18;
-
         this.states = {
             "default": AIStates.Default,
             "idle": AIStates.Idle,
@@ -32,13 +30,13 @@ export class ThanatosAI {
         this.state = new this.states[state](this);
         this.state.onSwitch();
     }
-    followPoint(p) {
+    followPoint(p, speed=14) {
         var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
 
         var angle = Math.atan(diff.y / Math.abs(diff.x));
         angle += diff.x < 0? Math.PI - angle * 2 : 0;
 
-        this.head.velocity = Math.min(diff.length(), this.chaseSpeed);
+        this.head.velocity = Math.min(diff.length(), speed);
         
         if (angle) this.rotateTo(diff, angle);
     }

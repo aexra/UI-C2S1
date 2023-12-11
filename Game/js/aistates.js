@@ -80,7 +80,8 @@ export class ChainDashAttack extends AIState {
     constructor(ai) {
         super(ai);
 
-        
+        this.dashCount = 0;
+        this.dashSpeed = 20;
     }
     update(input, deltaTime) {
         this.ai.followPoint(this.player.position);
