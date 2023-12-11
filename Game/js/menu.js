@@ -21,6 +21,8 @@ var error = new Audio("../resources/main/music/error.mp3");
 error.volume = 0.1;
 
 window.onload = function() {
+	styleSliders();
+
 	document.getElementById("menu-darken-mask").onclick = (e) => {
 		hover_extra.play();
 		closeAllPopups();
@@ -57,6 +59,17 @@ window.onload = function() {
 	});
 
 	loadUsername();
+}
+
+function styleSliders() {
+	// for (var slider of document.getElementsByClassName("options-slider")) {
+	// 	slider.oninput = (e) => {
+	// 		var value = (e.target.value-e.target.min)/(e.target.max-e.target.min)*100;
+	// 		e.target.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
+	// 	};
+	// 	var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
+	// 	slider.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
+	// }
 }
 
 function fillScoresTable() {
