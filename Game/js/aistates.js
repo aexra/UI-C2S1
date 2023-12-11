@@ -120,7 +120,7 @@ export class ChainDashAttack extends AIState {
                 this.state = this.states.chase;
             }
         } else {
-            if (Vec2.minus(this.npc.position, this.aimpos).length() < 300) {
+            if (Vec2.minus(this.npc.position, this.aimpos).length() < 500) {
                 // dash stop
                 this.state = this.states.stir;
                 this.aimpos = null;
