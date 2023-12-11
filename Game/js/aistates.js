@@ -81,6 +81,7 @@ export class ChainDashAttack extends AIState {
         super(ai);
 
         this.dashCount = 0;
+        
         this.dashSpeed = 20;
         this.dashStirAngle = 0;
         
