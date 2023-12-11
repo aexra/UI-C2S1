@@ -249,9 +249,7 @@ window.addEventListener("load", (e) => {
 	const game = new Game(new Vec2(72000, 72000), new Vec2(canvas.width, canvas.height), ctx);
 	let lastTime = 0;
 
-	setInterval(() => {
-		game.timerObject.innerHTML = game.getDurationString();
-	}, 1000);
+	manageHTML(game);
 
 	function animate(timeStamp) {
 		const deltaTime = timeStamp - lastTime;
@@ -262,6 +260,28 @@ window.addEventListener("load", (e) => {
 	}
 	animate(0);
 });
+
+function manageHTML(game) {
+	setTimerInterval(game);
+	manageKeybindingsButton();
+}
+
+function setTimerInterval(game) {
+	setInterval(() => {
+		game.timerObject.innerHTML = game.getDurationString();
+	}, 1000);
+}
+
+function manageKeybindingsButton() {
+	document.getElementById("inputs").onclick = (e) => {
+		var panel = document.getElementById("key-bindings-panel");
+		if (panel.classList.contains("panel-visible")) {
+			panel.classList.remove("panel-visible");
+		} else {
+			panel.classList.add("panel-visible");
+		}
+	};
+}
 
 function setLevelBanner(level) {
 	document.getElementById("level-banner").classList.add("lvl" + level);
