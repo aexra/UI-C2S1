@@ -123,10 +123,17 @@ export class ThanatosSegment extends NPC {
         this.shieldedAlpha = 0.1;
     }
     open() {
-        this.visualState = this.visualStates.switchingToBuffed;
+        if (this.visualState == this.visualStates.normal) {
+            this.visualState = this.visualStates.switchingToBuffed;
+        }
     }
     close() {
-        this.visualState = this.visualStates.switchingToNormal;
+        if (this.visualState == this.visualStates.buffed) {
+            this.visualState = this.visualStates.switchingToNormal;
+        }
+    }
+    immune() {
+        this.visualState = this.visualStates.transparent;
     }
     draw(c) {
         c.save();
@@ -389,11 +396,11 @@ export class Thanatos extends ThanatosSegment {
             this.hitsoundTimer++;
         }
     }
-    openHeadAndRandomSegments(nseg=30) {
+    openHeadAndRandomSegments(nseg=20) {
         this.open();
         this.openRandomSegments(nseg);
     }
-    openRandomSegments(nseg=30) {
+    openRandomSegments(nseg=20) {
         var toOpen = [];
         for (var i = 0; i < nseg; i++) {
             var randi = Random.randi(1, this.nsegments);
@@ -402,8 +409,24 @@ export class Thanatos extends ThanatosSegment {
             }
             toOpen.push(randi);
         }
+        this.closeAllSegments();
         for (var iseg of toOpen) {
             this.segments[iseg].open();
+        }
+    }
+    openAllSegments() {
+        for (var seg of this.segments) {
+            seg.open();
+        }
+    }
+    closeAllSegments() {
+        for (var seg of this.segments) {
+            seg.close();
+        }
+    }
+    immuneAllSegments() {
+        for (var seg of this.segments) {
+            seg.immune();
         }
     }
     getRotation() {

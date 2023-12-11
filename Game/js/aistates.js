@@ -61,6 +61,7 @@ export class Chase extends AIState {
     }
     onSwitch() {
         console.log("chase");
+        this.npc.openHeadAndRandomSegments();
     }
 }
 
@@ -160,5 +161,6 @@ export class ChainDashAttack extends AIState {
     onSwitch() {
         console.log("chainDashAttack");
         this.transitionSound.play();
+        this.npc.closeAllSegments();
     }
 }
