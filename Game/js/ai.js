@@ -1,5 +1,5 @@
-import { states } from './npcs.js'
 import { Vec2 } from './vec2.js';
+import * as AIStates from './aistates.js';
 
 export class ThanatosAI {
     constructor(head) {
@@ -12,28 +12,20 @@ export class ThanatosAI {
 
         this.chaseSpeed = 18;
 
-        this.attackStates = {
-            
+        this.states = {
+            "idle": new AIStates.Idle(this),
+            "chase": new AIStates.Chase(this),
+            "chaseCursor": new AIStates.ChaseCursor(this),
         };
-        this.attackState = null;
+        this.state = this.states["chase"];
 
         this.head.openHeadAndRandomSegments();
     }
     update(input, deltaTime) {
-        switch(this.head.state) {
-            case states.idle:
-                this.updateIdle(input, deltaTime);
-                break;
-            case states.followCursor:
-                this.updateChaseCursor(input, deltaTime);
-                break;
-            case states.chasePlayer:
-                this.updateChasePlayer(input, deltaTime);
-                break;
-        }
+        this.state.update(input, deltaTime);
     }
     switch(state) {
-        this.head.state = state;
+        this.state = states[state];
     }
     followPoint(p) {
         var diff = Vec2.minus(new Vec2(p.x, p.y), this.head.position);
@@ -72,14 +64,5 @@ export class ThanatosAI {
 
         this.head.direction = angle - Math.floor(angle / (Math.PI * 2)) * Math.PI * 2;
         this.head.directionalVector = new Vec2(Math.cos(angle), Math.sin(angle));
-    }
-    updateIdle(input, deltaTime) {
-
-    }
-    updateChasePlayer(input, deltaTime) {
-        this.followPoint(this.game.player.position);
-    }
-    updateChaseCursor(input, deltaTime) {
-        this.followPoint(new Vec2(input.mpx, input.mpy));
     }
 }
