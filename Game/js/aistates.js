@@ -20,7 +20,7 @@ export class Default extends AIState {
     constructor(ai) {
         super(ai);
 
-        this.initialFollowPoint = new Vec2(38000, 2000);
+        this.initialFollowPoint = new Vec2(36000, 3000);
     }
     update(input, deltaTime) {
         this.ai.followPoint(this.initialFollowPoint);
@@ -47,7 +47,7 @@ export class Chase extends AIState {
     constructor(ai) {
         super(ai);
 
-        this.chasingInterval = 10000;
+        this.chasingInterval = 6000;
         this.chasingTimer = 0;
     }
     update(input, deltaTime) {
@@ -81,6 +81,7 @@ export class ChainDashAttack extends AIState {
         super(ai);
 
         this.dashCount = 0;
+        this.dashesPerPhase = 7;
         this.dashDistance = 2000;
         this.minDistanceToDash = 500;
 
@@ -119,7 +120,7 @@ export class ChainDashAttack extends AIState {
                 // dash stop
                 this.state = this.states.stir;
                 this.aimpos = null;
-                this.ai.switch("chase");
+                if (this.dashCount >= this.dashesPerPhase) this.ai.switch("chase");
             }
             return;
         }
