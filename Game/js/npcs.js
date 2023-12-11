@@ -312,7 +312,7 @@ export class Thanatos extends ThanatosSegment {
         // game values
         this.maxHP = game.level == 4? 100000 :
             game.level == 3? 80000 : 
-            game.level == 2? 50000 : 35000;
+            game.level == 2? 50000 : 1000;
         this.hp = this.maxHP;
         this.collisionDamage = 
             game.level == 4? 250 :
@@ -326,7 +326,8 @@ export class Thanatos extends ThanatosSegment {
     update(input, deltaTime) {
         if (this.dead) {
             this.hp = 0;
-            this.velocity = Math.max(0, this.velocity - 2 * deltaTime);
+            this.velocity = Math.max(0, this.velocity - 0.00001 * deltaTime);
+            this.updatePosition(input, deltaTime);
             return;
         }
         if (this.hp <= 0) {
@@ -334,6 +335,7 @@ export class Thanatos extends ThanatosSegment {
             this.sound = new Audio("../resources/game/npcs/sounds/thanatos/death.ogg");
             this.sound.volume = Config.audio.sfx;
             this.sound.play();
+            this.velocity = 1;
             return;
         }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
