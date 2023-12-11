@@ -61,6 +61,7 @@ window.onload = function() {
 	});
 
 	loadUsername();
+	loadAudioVolumesToSliders();
 }
 
 function onLogOutPressed() {
@@ -76,11 +77,9 @@ function logOut() {
 function styleSliders() {
 	for (var slider of document.getElementsByClassName("options-slider")) {
 		slider.oninput = (e) => {
-			var value = (e.target.value-e.target.min)/(e.target.max-e.target.min)*100;
-			e.target.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)'
+			updateSliderProgress(e.target);
 		};
-		var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
-		slider.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)'
+		updateSliderProgress(slider);
 	}
 
 	document.getElementById("audio-music-range").addEventListener("input", (e) => {
@@ -91,6 +90,11 @@ function styleSliders() {
 		localStorage.setItem("sfx-volume", e.target.value / 100);
 		applyAudioVolume();
 	});
+}
+
+function updateSliderProgress(slider) {
+	var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
+	slider.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)';
 }
 
 function fillScoresTable() {
@@ -370,4 +374,14 @@ function applyAudioVolume() {
 	hover_extra.volume = sfx;
 	click.volume = sfx;
 	error.volume = sfx;
+}
+
+function loadAudioVolumesToSliders() {
+	const audio = getAudioVolume();
+	const music_slider = document.getElementById("audio-music-range");
+	const sfx_slider = document.getElementById("audio-sfx-range");
+	music_slider.value = audio.music * 100;
+	sfx_slider.value = audio.sfx * 100;
+	updateSliderProgress(music_slider);
+	updateSliderProgress(sfx_slider);
 }
