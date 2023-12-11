@@ -74,7 +74,6 @@ export class Player {
         this.death_pe.particleInitialSpeed = new Vec2(2, 2)
         this.death_pe.setFrequency(20);
         this.death_pe.onemit = (s) => {
-            console.log("da");
             s.stop();
         };
     }

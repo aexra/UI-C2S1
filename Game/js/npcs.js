@@ -121,6 +121,21 @@ export class ThanatosSegment extends NPC {
 
         this.alpha = 0.1;
         this.shieldedAlpha = 0.1;
+
+        this.death_pe = this.game.createParticleEmitter();
+        this.death_pe.perEmission = 20;
+        this.death_pe.lifeTime = new Vec2(1, 1);
+        this.death_pe.particleSize = new Vec2(15, 15);
+        this.death_pe.shape = document.getElementById("flareParticle");
+        this.death_pe.addFrameCrop(new Vec2(0, 0), new Vec2(10, 10));
+        this.death_pe.addFrameCrop(new Vec2(0, 10), new Vec2(10, 10));
+        this.death_pe.addFrameCrop(new Vec2(0, 20), new Vec2(10, 10));
+        this.death_pe.angle = 360;
+        this.death_pe.lightParticles = true;
+        this.death_pe.rotationSpeed = 0.2;
+        this.death_pe.particleGravityModifier = 0.2;
+        this.death_pe.particleInitialSpeed = new Vec2(2, 2)
+        this.death_pe.setFrequency(2);
     }
     open() {
         if (this.visualState == this.visualStates.normal) {
@@ -182,6 +197,7 @@ export class ThanatosSegment extends NPC {
                 }
             }
         }
+        this.death_pe.position = this.position.copy();
     }
     drawNormal(c) {
         c.globalAlpha = 0.8;
@@ -198,6 +214,9 @@ export class ThanatosSegment extends NPC {
     drawVulnurable(c) {
         c.globalAlpha = 0.8;
         c.drawImage(this.image, 0, this.frame * this.size.y, this.size.x, this.size.y, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+    }
+    emitDeathPE() {
+        this.death_pe.emit();
     }
     getHitbox() {
         if (this.hitbox) {
@@ -337,6 +356,9 @@ export class Thanatos extends ThanatosSegment {
             this.sound.play();
             this.velocity = 1;
             this.game.introSound.pause();
+            for (const seg of this.segments) {
+                seg.emitDeathPE();
+            }
             return;
         }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
