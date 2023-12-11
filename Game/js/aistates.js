@@ -79,6 +79,8 @@ export class ChaseCursor extends AIState {
 export class ChainDashAttack extends AIState {
     constructor(ai) {
         super(ai);
+
+        
     }
     update(input, deltaTime) {
         this.ai.followPoint(this.player.position);

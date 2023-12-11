@@ -14,11 +14,11 @@ export class ThanatosAI {
         this.chaseSpeed = 18;
 
         this.states = {
-            "default": new AIStates.Default(this),
-            "idle": new AIStates.Idle(this),
-            "chase": new AIStates.Chase(this),
-            "chaseCursor": new AIStates.ChaseCursor(this),
-            "chainDashAttack": new AIStates.ChainDashAttack(this),
+            "default": AIStates.Default,
+            "idle": AIStates.Idle,
+            "chase": AIStates.Chase,
+            "chaseCursor": AIStates.ChaseCursor,
+            "chainDashAttack": AIStates.ChainDashAttack,
         };
         this.state = null;
         this.switch("default");
@@ -29,7 +29,7 @@ export class ThanatosAI {
         this.state.update(input, deltaTime);
     }
     switch(state) {
-        this.state = this.states[state];
+        this.state = new this.states[state](this);
         this.state.onSwitch();
     }
     followPoint(p) {
