@@ -380,6 +380,7 @@ export class Thanatos extends ThanatosSegment {
             for (var box of document.getElementsByClassName("scorebox")) {
                 box.innerHTML = this.game.score;
             }
+            this.game.saveRecord();
             return;
         }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
