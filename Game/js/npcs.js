@@ -366,6 +366,7 @@ export class Thanatos extends ThanatosSegment {
         }
         if (this.hp <= 0) {
             this.dead = true;
+            this.game.score = 100;
             this.sound = new Audio("../resources/game/npcs/sounds/thanatos/death.ogg");
             this.sound.volume = Config.audio.sfx;
             this.sound.play();
@@ -376,6 +377,9 @@ export class Thanatos extends ThanatosSegment {
             }
             new ThanatosDeathScreen(this.game);
             this.game.isFightInitiated = false;
+            for (var box of document.getElementsByClassName("scorebox")) {
+                box.innerHTML = this.game.score;
+            }
             return;
         }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));
