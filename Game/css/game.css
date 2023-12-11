@@ -49,6 +49,7 @@ footer > span {
 button.btn {
 	height: 30px;
 	padding: 0 10px 0 10px;
+	width: 40px;
 
 	border: 2px solid rgb(110, 110, 110);
 	border-radius: 3px 3px 0 0;
@@ -193,7 +194,6 @@ footer > button#inputs {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	align-items: center;
 	height: 100%;
 	gap: 20px;
 }
@@ -211,4 +211,8 @@ footer > button#inputs {
 }
 .panel-visible {
 	top: calc(50% - 200px - 10px);
+}
+
+#inputs {
+	width: 150px;
 }
