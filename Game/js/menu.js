@@ -80,6 +80,13 @@ function styleSliders() {
 		var value = (slider.value-slider.min)/(slider.max-slider.min)*100;
 		slider.style.background = 'linear-gradient(to right, #ff69b4 0%, #ff69b4 ' + value + '%, #515151 ' + value + '%, #515151 100%)'
 	}
+
+	document.getElementById("audio-music-range").addEventListener("input", (e) => {
+		localStorage.setItem("music-volume", e.target.value);
+	});
+	document.getElementById("audio-sfx-range").addEventListener("input", (e) => {
+		localStorage.setItem("sfx-volume", e.target.value);
+	});
 }
 
 function fillScoresTable() {
