@@ -5,6 +5,7 @@ import { Vec3 } from "./vec3.js";
 import { Collision, Config, Random } from "./misc.js";
 import { ThanatosAI } from "./ai.js";
 import { SpriteSheet } from "./spritesheet.js";
+import { ThanatosDeathScreen } from "./visualEffects.js";
 
 export const states = {
     idle: 0,
@@ -134,7 +135,7 @@ export class ThanatosSegment extends NPC {
         this.death_pe.lightParticles = true;
         this.death_pe.rotationSpeed = 0.2;
         this.death_pe.particleGravityModifier = 0.2;
-        this.death_pe.particleInitialSpeed = new Vec2(2, 2)
+        this.death_pe.particleInitialSpeed = new Vec2(10, 10)
         this.death_pe.setFrequency(2);
     }
     open() {
@@ -341,12 +342,22 @@ export class Thanatos extends ThanatosSegment {
         this.ai = new ThanatosAI(this);
 
         this.dead = false;
+        this.deathingInterval = 3500;
+        this.deathingTimer = 0;
     }
     update(input, deltaTime) {
         if (this.dead) {
             this.hp = 0;
             this.velocity = Math.max(0, this.velocity - 0.00001 * deltaTime);
             this.updatePosition(input, deltaTime);
+            this.deathingTimer += deltaTime;
+            if (this.deathingTimer >= this.deathingInterval) {
+                this.game.deleteParticleEmitter(this.death_pe);
+                for (var i = this.nsegments - 1; i >= 0; i--) {
+                    this.game.deleteParticleEmitter(this.segments[i].death_pe);
+                    this.game.npcs.splice(this.game.npcs.indexOf(this.segments[i]), 1);
+                }
+            }
             return;
         }
         if (this.hp <= 0) {
@@ -359,6 +370,7 @@ export class Thanatos extends ThanatosSegment {
             for (const seg of this.segments) {
                 seg.emitDeathPE();
             }
+            new ThanatosDeathScreen(this.game);
             return;
         }
         this.game.score = (Math.floor((1 - this.hp / this.maxHP) * 100));

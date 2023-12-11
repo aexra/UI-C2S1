@@ -272,3 +272,52 @@ export class ThanatosSpawnScreen extends VisualEffect {
         return `rgba(${29 * (this.progress * 6 + 1)}, ${105 * (this.progress * 3 + 1)}, ${158 * (this.progress + 1)}, 1)`;
     }
 }
+
+export class ThanatosDeathScreen extends VisualEffect {
+    constructor(game) {
+        super(game);
+        this.lifetime = 5000;
+        
+        this.size = game.player.camera.size.copy();
+        this.position = game.player.camera.pos.reverse();
+        this.center = new Vec2(this.position.x + this.size.x / 2, this.position.y + this.size.y / 2);
+        
+        this.keyframes = [
+            {
+                frame: 500,
+                da: 1
+            },
+            {
+                frame: 3500,
+                da: 0
+            },
+            {
+                frame: 4000,
+                da: -1
+            },
+        ];
+
+        this.alpha = 0;
+    }
+    update(input, deltaTime) {
+        this.updateLifeTimer(input, deltaTime);
+        this.position = this.game.player.camera.pos.copy().reverse();
+        this.size = this.game.player.camera.size.copy().multiply(1 / this.game.player.camera.scale.x);
+        this.center = new Vec2(this.position.x + this.size.x / 2, this.position.y + this.size.y / 2);
+
+        for (var i = 0; i < this.keyframes.length; i++) {
+            if (this.lifetimer <= this.keyframes[i].frame) {
+                this.alpha += this.keyframes[i].da / (this.keyframes[i].frame - (i == 0? 0 : this.keyframes[i-1].frame)) * deltaTime;
+                if (this.alpha < 0) this.alpha = 0;
+                break;
+            }
+        }
+    }
+    draw(c) {
+        c.save();
+        c.fillStyle = "#fff";
+        c.globalAlpha = this.alpha;
+        c.fillRect(this.position.x, this.position.y, this.size.x, this.size.y);
+        c.restore();
+    }
+}
