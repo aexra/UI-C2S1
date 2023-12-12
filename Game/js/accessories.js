@@ -158,6 +158,7 @@ export class NormalityRelocator {
         this.pe.angle = 360;
         this.pe.particleInitialSpeed = new Vec2(2, 2);
         this.pe.position = this.player.position.copy();
+        this.pe.lightParticles = true;
 
         this.pesgap = 20;
         this.verticalpesgap = 4;
@@ -207,6 +208,7 @@ export class NormalityRelocator {
                         this.player.game.deleteParticleEmitter(s);
                         this.pathpes.splice(this.pathpes.indexOf(pe), 1);
                     };
+                    pe.lightParticles = true;
                     pe.emit();
 
                     this.pathpes.push(pe);
