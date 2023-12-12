@@ -137,6 +137,8 @@ export class Player {
             this.position.y = this.getNearestFloorCoordinate() - this.size.y;
             this.velocityY = 0;
         }
+        if (this.position.y < 0) this.position.y = 0;
+        else if (this.position.y + this.size.y > this.game.map.size.y) this.position.y = this.game.map.size.y - this.size.y;
 
         if (this.selectedItem !== null) {
             this.selectedItem.update(input, deltaTime);
