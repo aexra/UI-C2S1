@@ -4,6 +4,9 @@ Here I tried to recreate the fight with [Thanatos](https://infernummod.wiki.gg/w
 # If you want to try this out
 As I use [ES6 Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) you must run the menu.html from a live server. I suggest using VSCode's Live Server extension.
 
+# Gameplay
+https://youtu.be/ZkvDTrI3lCU
+
 # Main menu screenshots (for 11.12.2023, must be updated soon)
 ![image](https://github.com/aexra/UI-C2S1/assets/121866384/cd16016b-b5a7-40da-9bcb-7abfa28fa898)
 ![image](https://github.com/aexra/UI-C2S1/assets/121866384/b534df13-5db8-4edb-bbb1-7947e582581a)
