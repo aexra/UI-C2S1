@@ -2,7 +2,7 @@
 Here I tried to recreate the fight with [Thanatos](https://infernummod.wiki.gg/wiki/Exo_Mechs) from [Terraria](https://store.steampowered.com/app/105600/Terraria/) [Calamity mod](https://calamitymod.wiki.gg/wiki/Calamity_Mod_Wiki) with [Infernum](https://infernummod.wiki.gg/wiki/Infernum_Mod_Wiki) DLC.
 
 # If you want to try this out
-As I use [ES6 Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) you must run the menu.html from a live server. I suggest using VSCode's Live Server extension.
+As I use [ES6 Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) you must run the menu.html from a live server. I recommend using VSCode's Live Server extension.
 
 # Gameplay
 https://youtu.be/ZkvDTrI3lCU
