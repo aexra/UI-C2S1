@@ -4,14 +4,17 @@
 ## SCREENSHOTS
 
 "Welcome page"
+
 ![shop-welcome](https://github.com/aexra/UI-C2S1/assets/121866384/f7cb44ec-8a33-42ce-b618-7fb5637ca0aa)
 ![shop-desc](https://github.com/aexra/UI-C2S1/assets/121866384/89988cc0-a618-4228-ada5-06c76abda7b1)
 ![project](https://github.com/aexra/UI-C2S1/assets/121866384/21367143-610b-42f3-8447-636cc79123cf)
 
 "Main page" with news and best offers
-![image](https://github.com/aexra/UI-C2S1/assets/121866384/c4766ee4-a04f-468e-b67a-6a2a9bc187b8)
-![image](https://github.com/aexra/UI-C2S1/assets/121866384/fc8a6862-143a-43f9-9d97-23fbaedcdae6)
-![image](https://github.com/aexra/UI-C2S1/assets/121866384/dc2ce82a-f19c-4b00-a613-319429cad863)
+
+![image](https://github.com/aexra/UI-C2S1/assets/121866384/50443571-4ed7-4651-b976-2d891c7ac19f)
+![image](https://github.com/aexra/UI-C2S1/assets/121866384/158eb0d6-4d06-4256-8fb8-e77ed607e080)
+![image](https://github.com/aexra/UI-C2S1/assets/121866384/f12917fa-0f1d-4e99-ac26-c7c82769eccf)
+![image](https://github.com/aexra/UI-C2S1/assets/121866384/c24565d4-b5b7-472a-aa17-3d402b55f4f1)
 
 ## VIDEOCLIPS
 
